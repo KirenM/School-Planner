@@ -4,23 +4,13 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="theme-color" content="#1F3D2B" />
-
 <title>Homeroom</title>
-
 <link rel="icon" href="data:," />
-
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-<link
-  href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
-  rel="stylesheet"
-/>
-
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
-
 :root{
   --ink:#1C1B19;
   --ink-soft:#6B675D;
@@ -28,1983 +18,413 @@
   --paper-deep:#EDEAE1;
   --card:#FFFFFF;
   --line:#DBD5C6;
-
   --green:#1F3D2B;
   --green-pale:#E4EBE3;
   --gold:#F2B705;
-
   --danger:#A83232;
   --danger-pale:#F3E0DE;
-
   --radius-sm:9px;
   --radius-md:14px;
   --radius-lg:22px;
-
-  --shadow-card:
-    0 1px 2px rgba(28,27,25,.06),
-    0 6px 16px rgba(28,27,25,.05);
-
-  --shadow-modal:
-    0 20px 60px rgba(28,27,25,.35);
-
+  --shadow-card:0 1px 2px rgba(28,27,25,.06),0 6px 16px rgba(28,27,25,.05);
+  --shadow-modal:0 20px 60px rgba(28,27,25,.35);
   --font-display:'Fraunces',serif;
   --font-body:'Inter',system-ui,sans-serif;
   --font-mono:'Space Mono',monospace;
 }
-
-*{
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  margin:0;
-  background:var(--paper);
-  color:var(--ink);
-  font-family:var(--font-body);
-  line-height:1.45;
-  -webkit-font-smoothing:antialiased;
-}
-
-h1,
-h2,
-h3{
-  margin:0;
-  font-family:var(--font-display);
-}
-
-button,
-input,
-select,
-textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-.hidden{
-  display:none !important;
-}
-
-:focus-visible{
-  outline:2px solid var(--green);
-  outline-offset:2px;
-}
-
-.wrap{
-  width:100%;
-  max-width:1120px;
-  margin:0 auto;
-  padding:0 24px;
-}
-
-
-/* =========================================================
-   AUTH
-   ========================================================= */
-
-.auth-screen{
-  min-height:100vh;
-
-  display:grid;
-  grid-template-columns:minmax(0,1.15fr) minmax(430px,.85fr);
-}
-
-.auth-hero{
-  min-height:100vh;
-
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-
-  padding:54px 64px;
-
-  background:var(--green);
-  color:#fff;
-}
-
-.auth-brand{
-  font-family:var(--font-display);
-  font-size:38px;
-  font-weight:600;
-}
-
-.auth-hero-main h1{
-  max-width:700px;
-
-  font-size:clamp(56px,6vw,88px);
-  line-height:.98;
-  letter-spacing:-.04em;
-  font-weight:500;
-}
-
-.auth-hero-main p{
-  max-width:610px;
-
-  margin:28px 0 0;
-
-  color:rgba(255,255,255,.7);
-
-  font-size:19px;
-}
-
-.auth-hero-foot{
-  color:rgba(255,255,255,.42);
-
-  font-family:var(--font-mono);
-  font-size:10px;
-
-  text-transform:uppercase;
-  letter-spacing:.08em;
-}
-
-.auth-panel{
-  min-height:100vh;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:44px;
-}
-
-.auth-box{
-  width:100%;
-  max-width:460px;
-}
-
-.auth-box h2{
-  font-size:38px;
-}
-
-.auth-subtitle{
-  margin:8px 0 28px;
-
-  color:var(--ink-soft);
-
-  font-size:17px;
-}
-
-.auth-tabs{
-  display:flex;
-
-  margin-bottom:28px;
-  padding:4px;
-
-  background:var(--paper-deep);
-
-  border-radius:999px;
-}
-
-.auth-tab{
-  flex:1;
-
-  border:0;
-  border-radius:999px;
-
-  padding:11px;
-
-  background:transparent;
-  color:var(--ink-soft);
-
-  font-weight:700;
-}
-
-.auth-tab.active{
-  background:#fff;
-  color:var(--green);
-
-  box-shadow:var(--shadow-card);
-}
-
-.auth-message{
-  min-height:20px;
-
-  margin:-2px 0 12px;
-
-  color:var(--ink-soft);
-
-  font-size:12px;
-}
-
-.auth-message.error{
-  color:var(--danger);
-}
-
-.auth-submit{
-  width:100%;
-  justify-content:center;
-}
-
-.auth-foot{
-  margin-top:22px;
-
-  color:var(--ink-soft);
-
-  text-align:center;
-  font-size:12px;
-}
-
-
-/* =========================================================
-   HEADER
-   ========================================================= */
-
-.app-header{
-  position:sticky;
-  top:0;
-  z-index:50;
-
-  background:var(--green);
-  color:#fff;
-
-  border-bottom:1px solid rgba(0,0,0,.12);
-}
-
-.app-header .wrap{
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-
-  gap:16px;
-  align-items:center;
-
-  padding-top:14px;
-  padding-bottom:14px;
-}
-
-.brand-title{
-  font-family:var(--font-display);
-  font-size:26px;
-  font-weight:600;
-}
-
-.brand-sub{
-  margin-top:2px;
-
-  color:rgba(255,255,255,.7);
-
-  font-family:var(--font-mono);
-  font-size:10px;
-
-  text-transform:uppercase;
-  letter-spacing:.07em;
-}
-
-.top-tabs{
-  display:flex;
-  gap:4px;
-
-  padding:4px;
-
-  background:rgba(255,255,255,.1);
-
-  border-radius:999px;
-}
-
-.top-tab{
-  padding:9px 18px;
-
-  background:transparent;
-  color:rgba(255,255,255,.72);
-
-  border:0;
-  border-radius:999px;
-
-  font-size:13px;
-  font-weight:700;
-}
-
-.top-tab.active{
-  background:#fff;
-  color:var(--green);
-}
-
-.header-actions{
-  display:flex;
-  justify-content:flex-end;
-  align-items:center;
-  gap:8px;
-}
-
-.account-button{
-  display:flex;
-  align-items:center;
-  gap:8px;
-
-  padding:4px 11px 4px 4px;
-
-  background:rgba(255,255,255,.08);
-  color:#fff;
-
-  border:1px solid rgba(255,255,255,.3);
-  border-radius:999px;
-}
-
-.avatar{
-  width:31px;
-  height:31px;
-
-  display:grid;
-  place-items:center;
-
-  background:var(--gold);
-  color:var(--ink);
-
-  border-radius:50%;
-
-  font-family:var(--font-display);
-  font-weight:700;
-}
-
-.account-name{
-  max-width:120px;
-
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-
-  font-size:12px;
-  font-weight:700;
-}
-
-
-/* =========================================================
-   BUTTONS
-   ========================================================= */
-
-.btn{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-
-  padding:11px 18px;
-
-  border:0;
-  border-radius:999px;
-
-  font-size:14px;
-  font-weight:700;
-}
-
-.btn-primary{
-  background:var(--gold);
-  color:var(--ink);
-}
-
-.btn-green{
-  background:var(--green);
-  color:#fff;
-}
-
-.btn-ghost{
-  background:transparent;
-  color:var(--ink-soft);
-
-  border:1px solid var(--line);
-}
-
-.btn-danger{
-  background:var(--danger-pale);
-  color:var(--danger);
-}
-
-.btn-outline-light{
-  background:rgba(255,255,255,.08);
-  color:#fff;
-
-  border:1px solid rgba(255,255,255,.35);
-}
-
-
-/* =========================================================
-   MAIN
-   ========================================================= */
-
-main{
-  padding-bottom:80px;
-}
-
-.section{
-  margin-top:40px;
-}
-
-.section-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:baseline;
-  gap:12px;
-
-  margin-bottom:14px;
-
-  flex-wrap:wrap;
-}
-
-.section-title{
-  font-size:22px;
-  font-weight:600;
-}
-
-.section-note{
-  color:var(--ink-soft);
-
-  font-family:var(--font-mono);
-  font-size:10px;
-
-  text-transform:uppercase;
-  letter-spacing:.06em;
-}
-
-
-/* =========================================================
-   DEADLINES
-   ========================================================= */
-
-.deadline-shell{
-  padding:18px;
-
-  background:var(--card);
-
-  border:1px solid var(--line);
-  border-radius:var(--radius-lg);
-
-  box-shadow:var(--shadow-card);
-}
-
-.deadline-grid{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-
-  gap:12px;
-}
-
-.deadline-card{
-  min-height:130px;
-
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-
-  padding:14px;
-
-  background:var(--paper);
-
-  border:1px solid var(--line);
-  border-top:4px solid var(--accent,#8A8578);
-  border-radius:var(--radius-md);
-
-  text-align:left;
-}
-
-.deadline-class{
-  color:var(--accent);
-
-  font-family:var(--font-mono);
-  font-size:10px;
-  font-weight:700;
-
-  text-transform:uppercase;
-}
-
-.deadline-title{
-  font-family:var(--font-display);
-  font-size:16px;
-  font-weight:600;
-}
-
-.deadline-meta{
-  margin-top:auto;
-
-  color:var(--ink-soft);
-
-  font-family:var(--font-mono);
-  font-size:10px;
-}
-
-.deadline-badge{
-  align-self:flex-start;
-
-  padding:4px 8px;
-
-  border-radius:999px;
-
-  font-family:var(--font-mono);
-  font-size:9px;
-  font-weight:700;
-}
-
-.deadline-badge.urgent{
-  background:var(--danger-pale);
-  color:var(--danger);
-}
-
-.deadline-badge.soon{
-  background:#FBF1C9;
-  color:#745B00;
-}
-
-.deadline-badge.ok{
-  background:var(--green-pale);
-  color:var(--green);
-}
-
-
-/* =========================================================
-   CLASSES
-   ========================================================= */
-
-.classes-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
-
-  gap:14px;
-}
-
-.class-card{
-  min-height:96px;
-
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-
-  padding:16px;
-
-  background:var(--card);
-
-  border:0;
-  border-left:7px solid var(--accent);
-  border-radius:var(--radius-md);
-
-  box-shadow:var(--shadow-card);
-
-  text-align:left;
-
-  transition:.15s transform;
-}
-
-.class-card:hover{
-  transform:translateY(-2px);
-}
-
-.class-name{
-  font-family:var(--font-display);
-  font-size:17px;
-  font-weight:600;
-}
-
-.class-meta{
-  display:flex;
-  justify-content:space-between;
-
-  margin-top:auto;
-
-  color:var(--ink-soft);
-
-  font-family:var(--font-mono);
-  font-size:10px;
-
-  text-transform:uppercase;
-}
-
-.pill-count{
-  padding:3px 8px;
-
-  background:var(--paper-deep);
-
-  border-radius:999px;
-
-  font-weight:700;
-}
-
-.pill-count.has-items{
-  background:var(--accent);
-  color:#fff;
-}
-
-
-/* =========================================================
-   FILTERS + TASKS
-   ========================================================= */
-
-.filter-tabs{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-}
-
-.tab-btn{
-  padding:8px 15px;
-
-  background:var(--paper-deep);
-  color:var(--ink-soft);
-
-  border:0;
-  border-radius:999px;
-
-  font-size:13px;
-  font-weight:600;
-}
-
-.tab-btn.active{
-  background:var(--green);
-  color:#fff;
-}
-
-.task-list,
-.class-modal-list{
-  display:flex;
-  flex-direction:column;
-  gap:9px;
-}
-
-.task-list{
-  margin-top:16px;
-}
-
-.task-row{
-  display:grid;
-  grid-template-columns:auto 1fr auto;
-
-  gap:12px;
-  align-items:center;
-
-  padding:12px 14px;
-
-  background:var(--card);
-
-  border-left:4px solid var(--accent,#8A8578);
-  border-radius:var(--radius-sm);
-
-  box-shadow:var(--shadow-card);
-}
-
-.task-main{
-  min-width:0;
-  cursor:pointer;
-}
-
-.task-title{
-  font-size:14.5px;
-  font-weight:600;
-}
-
-.task-meta{
-  margin-top:2px;
-
-  color:var(--ink-soft);
-
-  font-family:var(--font-mono);
-  font-size:10px;
-
-  text-transform:uppercase;
-}
-
-.type-badge{
-  display:inline-block;
-
-  margin-left:4px;
-  padding:2px 6px;
-
-  background:var(--paper-deep);
-
-  border-radius:5px;
-
-  font-size:9px;
-  font-weight:700;
-}
-
-.check{
-  width:21px;
-  height:21px;
-
-  display:grid;
-  place-items:center;
-
-  padding:0;
-
-  background:#fff;
-
-  border:2px solid var(--line);
-  border-radius:50%;
-}
-
-.check svg{
-  width:12px;
-  height:12px;
-
-  opacity:0;
-}
-
-.task-row.done{
-  opacity:.58;
-}
-
-.task-row.done .task-title{
-  text-decoration:line-through;
-  text-decoration-thickness:1.5px;
-}
-
-.task-row.done .check{
-  background:var(--green);
-  border-color:var(--green);
-}
-
-.task-row.done .check svg{
-  opacity:1;
-}
-
-.item-dot{
-  width:10px;
-  height:10px;
-
-  margin:0 5px;
-
-  background:var(--accent);
-
-  border-radius:50%;
-}
-
-.icon-btn{
-  width:30px;
-  height:30px;
-
-  display:grid;
-  place-items:center;
-
-  padding:0;
-
-  background:transparent;
-  color:var(--ink-soft);
-
-  border:0;
-  border-radius:50%;
-}
-
-.icon-btn:hover{
-  background:var(--paper-deep);
-}
-
-.empty-state{
-  padding:38px 20px;
-
-  background:var(--card);
-  color:var(--ink-soft);
-
-  border:1.5px dashed var(--line);
-  border-radius:var(--radius-md);
-
-  text-align:center;
-}
-
-.empty-state strong{
-  display:block;
-
-  margin-bottom:4px;
-
-  color:var(--ink);
-
-  font-family:var(--font-display);
-  font-size:17px;
-}
-
-
-/* =========================================================
-   CALENDAR
-   ========================================================= */
-
-.calendar-shell{
-  overflow:hidden;
-
-  margin-top:20px;
-
-  background:var(--card);
-
-  border:1px solid var(--line);
-  border-radius:var(--radius-lg);
-
-  box-shadow:var(--shadow-card);
-}
-
-.calendar-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-
-  padding:18px 20px;
-
-  border-bottom:1px solid var(--line);
-}
-
-.month-title{
-  font-family:var(--font-display);
-  font-size:24px;
-  font-weight:600;
-}
-
-.cal-controls{
-  display:flex;
-  gap:7px;
-}
-
-.cal-btn{
-  padding:8px 11px;
-
-  background:var(--paper);
-
-  border:1px solid var(--line);
-  border-radius:9px;
-
-  font-weight:700;
-}
-
-.calendar-week,
-.calendar-grid{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-}
-
-.calendar-week{
-  background:var(--paper-deep);
-}
-
-.week-label{
-  padding:8px;
-
-  color:var(--ink-soft);
-
-  text-align:center;
-
-  font-family:var(--font-mono);
-  font-size:9px;
-}
-
-.day-cell{
-  min-height:126px;
-
-  padding:7px;
-
-  background:#fff;
-
-  border-right:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-}
-
-.day-cell:nth-child(7n){
-  border-right:0;
-}
-
-.day-cell.other{
-  background:#FAF9F6;
-}
-
-.day-num{
-  width:26px;
-  height:26px;
-
-  display:grid;
-  place-items:center;
-
-  color:var(--ink-soft);
-
-  border-radius:8px;
-
-  font-family:var(--font-mono);
-  font-size:10px;
-}
-
-.day-cell.today .day-num{
-  background:var(--green);
-  color:#fff;
-}
-
-.cal-event{
-  display:block;
-
-  width:100%;
-
-  margin-top:4px;
-
-  overflow:hidden;
-
-  padding:5px 6px;
-
-  background:#f7f7f5;
-
-  border:0;
-  border-left:3px solid var(--event-color);
-  border-radius:7px;
-
-  text-align:left;
-
-  font-size:10px;
-
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-.calendar-legend{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-
-  padding:12px 18px;
-
-  color:var(--ink-soft);
-
-  font-family:var(--font-mono);
-  font-size:10px;
-}
-
-.legend-item{
-  display:flex;
-  align-items:center;
-  gap:5px;
-}
-
-.legend-dot{
-  width:8px;
-  height:8px;
-
-  border-radius:50%;
-}
-
-
-/* =========================================================
-   MODALS
-   ========================================================= */
-
-.modal-overlay{
-  position:fixed;
-  inset:0;
-  z-index:100;
-
-  display:none;
-  align-items:center;
-  justify-content:center;
-
-  padding:20px;
-
-  background:rgba(28,27,25,.55);
-
-  backdrop-filter:blur(3px);
-}
-
-.modal-overlay.open{
-  display:flex;
-}
-
-.modal-box{
-  position:relative;
-
-  width:100%;
-  max-width:520px;
-  max-height:90vh;
-
-  overflow-y:auto;
-
-  padding:26px;
-
-  background:var(--card);
-
-  border-radius:var(--radius-lg);
-
-  box-shadow:var(--shadow-modal);
-}
-
-.modal-box.wide{
-  max-width:720px;
-}
-
-.modal-close{
-  position:absolute;
-  top:16px;
-  right:16px;
-
-  width:30px;
-  height:30px;
-
-  display:grid;
-  place-items:center;
-
-  padding:0;
-
-  background:var(--paper-deep);
-  color:var(--ink-soft);
-
-  border:0;
-  border-radius:50%;
-}
-
-.modal-title{
-  padding-right:40px;
-
-  font-size:22px;
-}
-
-.modal-accent-bar{
-  width:52px;
-  height:6px;
-
-  margin:8px 0 18px;
-
-  background:var(--green);
-
-  border-radius:999px;
-}
-
-
-/* =========================================================
-   FORMS
-   ========================================================= */
-
-.field{
-  margin-bottom:15px;
-}
-
-.field label{
-  display:block;
-
-  margin-bottom:6px;
-
-  color:var(--ink-soft);
-
-  font-family:var(--font-mono);
-  font-size:10px;
-  font-weight:700;
-
-  text-transform:uppercase;
-  letter-spacing:.06em;
-}
-
-.field input[type=text],
-.field input[type=email],
-.field input[type=password],
-.field input[type=date],
-.field input[type=time],
-.field select,
-.field textarea{
-  width:100%;
-
-  padding:11px 12px;
-
-  background:var(--paper);
-  color:var(--ink);
-
-  border:1.5px solid var(--line);
-  border-radius:var(--radius-sm);
-
-  font-size:14px;
-}
-
-.field textarea{
-  min-height:90px;
-
-  resize:vertical;
-}
-
-.field-row{
-  display:flex;
-  gap:12px;
-}
-
-.field-row .field{
-  flex:1;
-}
-
-.type-toggle{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-
-  gap:8px;
-}
-
-.type-toggle button{
-  padding:9px 5px;
-
-  background:var(--paper);
-  color:var(--ink-soft);
-
-  border:1.5px solid var(--line);
-  border-radius:var(--radius-sm);
-
-  font-size:12px;
-  font-weight:600;
-}
-
-.type-toggle button.active{
-  background:var(--green-pale);
-  color:var(--green);
-
-  border-color:var(--green);
-}
-
-.form-actions{
-  display:flex;
-  justify-content:space-between;
-
-  gap:10px;
-
-  margin-top:8px;
-}
-
-.action-right{
-  display:flex;
-  gap:10px;
-}
-
-
-/* =========================================================
-   WEEKDAY PICKER
-   ========================================================= */
-
-.weekday-picker{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-
-  gap:7px;
-}
-
-.weekday-picker button{
-  height:40px;
-
-  background:var(--paper);
-  color:var(--ink-soft);
-
-  border:1.5px solid var(--line);
-  border-radius:10px;
-
-  font-size:12px;
-  font-weight:700;
-}
-
-.weekday-picker button.active{
-  background:var(--green);
-  color:#fff;
-
-  border-color:var(--green);
-}
-
-
-/* =========================================================
-   LOCATION
-   ========================================================= */
-
-.location-box{
-  padding:12px;
-
-  background:var(--paper);
-
-  border:1px solid var(--line);
-  border-radius:var(--radius-sm);
-}
-
-.location-actions{
-  display:flex;
-  gap:8px;
-
-  margin-top:8px;
-}
-
-.mini-btn{
-  padding:7px 10px;
-
-  background:var(--paper-deep);
-  color:var(--ink);
-
-  border:0;
-  border-radius:999px;
-
-  font-size:11px;
-  font-weight:700;
-}
-
-
-/* =========================================================
-   SETTINGS
-   ========================================================= */
-
-.settings-section{
-  padding:16px 0;
-
-  border-top:1px solid var(--line);
-}
-
-.settings-section:first-child{
-  border-top:0;
-}
-
-.settings-title{
-  font-family:var(--font-display);
-  font-size:18px;
-  font-weight:600;
-}
-
-.settings-copy{
-  margin:3px 0 12px;
-
-  color:var(--ink-soft);
-
-  font-size:12px;
-}
-
-.color-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-
-  gap:10px;
-}
-
-.color-card{
-  padding:10px;
-
-  background:var(--paper);
-
-  border:1px solid var(--line);
-  border-radius:10px;
-}
-
-.color-card input{
-  width:100%;
-  height:38px;
-
-  background:transparent;
-
-  border:0;
-}
-
-.editor-list{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.editor-row{
-  display:grid;
-  grid-template-columns:38px 1fr auto;
-
-  gap:8px;
-  align-items:center;
-}
-
-.editor-row input[type=color]{
-  width:38px;
-  height:38px;
-
-  background:transparent;
-
-  border:0;
-}
-
-.editor-row input[type=text]{
-  width:100%;
-
-  padding:9px;
-
-  background:var(--paper);
-
-  border:1px solid var(--line);
-  border-radius:8px;
-}
-
-.add-inline{
-  width:100%;
-
-  margin-top:8px;
-  padding:9px;
-
-  background:transparent;
-  color:var(--green);
-
-  border:1px dashed var(--line);
-  border-radius:9px;
-
-  font-weight:700;
-}
-
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
-.sync-line{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-
-  margin-top:5px;
-
-  color:var(--ink-soft);
-
-  font-family:var(--font-mono);
-  font-size:10px;
-}
-
-.sync-dot{
-  width:7px;
-  height:7px;
-
-  background:#569B65;
-
-  border-radius:50%;
-}
-
-footer{
-  padding:30px 20px 40px;
-
-  color:var(--ink-soft);
-
-  text-align:center;
-
-  font-family:var(--font-mono);
-  font-size:10px;
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media(max-width:900px){
-
-  .deadline-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-}
-
-@media(max-width:760px){
-
-  .auth-screen{
-    grid-template-columns:1fr;
-  }
-
-  .auth-hero{
-    min-height:320px;
-
-    padding:32px 24px;
-  }
-
-  .auth-hero-main h1{
-    font-size:48px;
-  }
-
-  .auth-panel{
-    min-height:auto;
-
-    padding:42px 22px;
-  }
-
-  .auth-hero-foot{
-    display:none;
-  }
-
-}
-
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);line-height:1.45;-webkit-font-smoothing:antialiased}
+h1,h2,h3{margin:0;font-family:var(--font-display)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* AUTH */
+.auth-screen{min-height:100vh;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(430px,.85fr)}
+.auth-hero{min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:54px 64px;background:var(--green);color:#fff}
+.auth-brand{font-family:var(--font-display);font-size:38px;font-weight:600}
+.auth-hero-main h1{max-width:700px;font-size:clamp(56px,6vw,88px);line-height:.98;letter-spacing:-.04em;font-weight:500}
+.auth-hero-main p{max-width:610px;margin:28px 0 0;color:rgba(255,255,255,.7);font-size:19px}
+.auth-hero-foot{color:rgba(255,255,255,.42);font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em}
+.auth-panel{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:44px}
+.auth-box{width:100%;max-width:460px}
+.auth-box h2{font-size:38px}
+.auth-subtitle{margin:8px 0 28px;color:var(--ink-soft);font-size:17px}
+.auth-tabs{display:flex;margin-bottom:28px;padding:4px;background:var(--paper-deep);border-radius:999px}
+.auth-tab{flex:1;border:0;border-radius:999px;padding:11px;background:transparent;color:var(--ink-soft);font-weight:700}
+.auth-tab.active{background:#fff;color:var(--green);box-shadow:var(--shadow-card)}
+.auth-message{min-height:20px;margin:-2px 0 12px;color:var(--ink-soft);font-size:12px}
+.auth-message.error{color:var(--danger)}
+.auth-submit{width:100%;justify-content:center}
+.auth-foot{margin-top:20px;text-align:center}
+.auth-link{border:0;background:transparent;color:var(--ink);text-decoration:underline;text-underline-offset:3px;font-size:12px;padding:4px 8px}
+
+/* HEADER */
+.app-header{position:sticky;top:0;z-index:50;background:var(--green);color:#fff;border-bottom:1px solid rgba(0,0,0,.12)}
+.app-header .wrap{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;padding-top:14px;padding-bottom:14px}
+.brand-title{font-family:var(--font-display);font-size:26px;font-weight:600}
+.brand-sub{margin-top:2px;color:rgba(255,255,255,.7);font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.07em}
+.top-tabs{display:flex;gap:4px;padding:4px;background:rgba(255,255,255,.1);border-radius:999px}
+.top-tab{padding:9px 18px;background:transparent;color:rgba(255,255,255,.72);border:0;border-radius:999px;font-size:13px;font-weight:700}
+.top-tab.active{background:#fff;color:var(--green)}
+.header-actions{display:flex;justify-content:flex-end;align-items:center;gap:8px}
+.account-button{display:flex;align-items:center;gap:8px;padding:4px 11px 4px 4px;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:999px}
+.avatar{width:31px;height:31px;display:grid;place-items:center;background:var(--gold);color:var(--ink);border-radius:50%;font-family:var(--font-display);font-weight:700}
+.account-name{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;font-weight:700}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border:0;border-radius:999px;font-size:14px;font-weight:700}
+.btn-primary{background:var(--gold);color:var(--ink)}
+.btn-green{background:var(--green);color:#fff}
+.btn-ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--line)}
+.btn-danger{background:var(--danger-pale);color:var(--danger)}
+.btn-outline-light{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.35)}
+
+/* MAIN */
+main{padding-bottom:80px}
+.section{margin-top:40px}
+.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.section-title{font-size:22px;font-weight:600;color:var(--ink)}
+.section-note{color:var(--ink-soft);font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em}
+
+/* DEADLINES */
+.deadline-shell{padding:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-card)}
+.deadline-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.deadline-card{min-height:130px;display:flex;flex-direction:column;gap:8px;padding:14px;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-top:4px solid var(--accent,#8A8578);border-radius:var(--radius-md);text-align:left}
+.deadline-card.done{opacity:.58}
+.deadline-card.done .deadline-title{text-decoration:line-through;text-decoration-thickness:1.5px}
+.deadline-class{color:var(--ink);font-family:var(--font-mono);font-size:10px;font-weight:700;text-transform:uppercase}
+.deadline-title{font-family:var(--font-display);font-size:16px;font-weight:600;color:var(--ink)}
+.deadline-meta{margin-top:auto;color:var(--ink-soft);font-family:var(--font-mono);font-size:10px}
+.deadline-badge{align-self:flex-start;padding:4px 8px;border-radius:999px;font-family:var(--font-mono);font-size:9px;font-weight:700}
+.deadline-badge.urgent{background:var(--danger-pale);color:var(--danger)}
+.deadline-badge.soon{background:#FBF1C9;color:#745B00}
+.deadline-badge.ok{background:var(--green-pale);color:var(--green)}
+.deadline-badge.done{background:var(--paper-deep);color:var(--ink-soft)}
+
+/* CLASSES */
+.classes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.class-card{min-height:96px;display:flex;flex-direction:column;gap:6px;padding:16px;background:var(--card);color:var(--ink);border:0;border-left:7px solid var(--accent);border-radius:var(--radius-md);box-shadow:var(--shadow-card);text-align:left;transition:.15s transform}
+.class-card:hover{transform:translateY(-2px)}
+.class-name{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--ink)}
+.class-meta{display:flex;justify-content:space-between;gap:8px;margin-top:auto;color:var(--ink);font-family:var(--font-mono);font-size:10px;text-transform:uppercase}
+.pill-count{padding:3px 8px;background:var(--paper-deep);color:var(--ink-soft);border-radius:999px;font-weight:700;white-space:nowrap}
+.pill-count.has-items{background:var(--accent);color:#fff}
+
+/* FILTERS + TASKS */
+.filter-tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab-btn{padding:8px 15px;background:var(--paper-deep);color:var(--ink-soft);border:0;border-radius:999px;font-size:13px;font-weight:600}
+.tab-btn.active{background:var(--green);color:#fff}
+.task-list,.class-modal-list{display:flex;flex-direction:column;gap:9px}
+.task-list{margin-top:16px}
+.task-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 14px;background:var(--card);color:var(--ink);border-left:4px solid var(--accent,#8A8578);border-radius:var(--radius-sm);box-shadow:var(--shadow-card)}
+.task-main{min-width:0;cursor:pointer;color:var(--ink)}
+.task-title{font-size:14.5px;font-weight:600;color:var(--ink)}
+.task-meta{margin-top:2px;color:var(--ink-soft);font-family:var(--font-mono);font-size:10px;text-transform:uppercase}
+.type-badge{display:inline-block;margin-left:4px;padding:2px 6px;background:var(--paper-deep);border-radius:5px;font-size:9px;font-weight:700}
+.check{width:21px;height:21px;display:grid;place-items:center;padding:0;background:#fff;border:2px solid var(--line);border-radius:50%}
+.check svg{width:12px;height:12px;opacity:0}
+.task-row.done{opacity:.58}
+.task-row.done .task-title{text-decoration:line-through;text-decoration-thickness:1.5px}
+.task-row.done .check{background:var(--green);border-color:var(--green)}
+.task-row.done .check svg{opacity:1}
+.item-dot{width:10px;height:10px;margin:0 5px;background:var(--accent);border-radius:50%}
+.icon-btn{width:30px;height:30px;display:grid;place-items:center;padding:0;background:transparent;color:var(--ink-soft);border:0;border-radius:50%}
+.icon-btn:hover{background:var(--paper-deep)}
+.empty-state{padding:38px 20px;background:var(--card);color:var(--ink-soft);border:1.5px dashed var(--line);border-radius:var(--radius-md);text-align:center}
+.empty-state strong{display:block;margin-bottom:4px;color:var(--ink);font-family:var(--font-display);font-size:17px}
+
+/* CALENDAR */
+.calendar-shell{overflow:hidden;margin-top:20px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-card)}
+.calendar-head{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}
+.month-title{font-family:var(--font-display);font-size:24px;font-weight:600;color:var(--ink)}
+.cal-controls{display:flex;gap:7px}
+.cal-btn{padding:8px 11px;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:9px;font-weight:700}
+.calendar-week,.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr)}
+.calendar-week{background:var(--paper-deep)}
+.week-label{padding:8px;color:var(--ink-soft);text-align:center;font-family:var(--font-mono);font-size:9px}
+.day-cell{min-height:126px;padding:7px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.day-cell:nth-child(7n){border-right:0}
+.day-cell.other{background:#FAF9F6}
+.day-num{width:26px;height:26px;display:grid;place-items:center;color:var(--ink-soft);border-radius:8px;font-family:var(--font-mono);font-size:10px}
+.day-cell.today .day-num{background:var(--green);color:#fff}
+.cal-event{display:block;width:100%;margin-top:4px;overflow:hidden;padding:5px 6px;background:#f7f7f5;color:var(--ink);border:0;border-left:3px solid var(--event-color);border-radius:7px;text-align:left;font-size:10px;text-overflow:ellipsis;white-space:nowrap}
+.calendar-legend{display:flex;gap:12px;flex-wrap:wrap;padding:12px 18px;color:var(--ink-soft);font-family:var(--font-mono);font-size:10px}
+.legend-item{display:flex;align-items:center;gap:5px}
+.legend-dot{width:8px;height:8px;border-radius:50%}
+
+/* MODALS */
+.modal-overlay{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(28,27,25,.55);backdrop-filter:blur(3px)}
+.modal-overlay.open{display:flex}
+.modal-box{position:relative;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;padding:26px;background:var(--card);border-radius:var(--radius-lg);box-shadow:var(--shadow-modal)}
+.modal-box.wide{max-width:720px}
+.modal-close{position:absolute;top:16px;right:16px;width:30px;height:30px;display:grid;place-items:center;padding:0;background:var(--paper-deep);color:var(--ink-soft);border:0;border-radius:50%}
+.modal-title{padding-right:40px;font-size:22px;color:var(--ink)}
+.modal-accent-bar{width:52px;height:6px;margin:8px 0 18px;background:var(--green);border-radius:999px}
+
+/* FORMS */
+.field{margin-bottom:15px}
+.field label{display:block;margin-bottom:6px;color:var(--ink-soft);font-family:var(--font-mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.field input[type=text],.field input[type=email],.field input[type=password],.field input[type=date],.field input[type=time],.field select,.field textarea{width:100%;padding:11px 12px;background:var(--paper);color:var(--ink);border:1.5px solid var(--line);border-radius:var(--radius-sm);font-size:14px}
+.field textarea{min-height:90px;resize:vertical}
+.field-row{display:flex;gap:12px}
+.field-row .field{flex:1}
+.type-toggle{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.type-toggle button{padding:9px 5px;background:var(--paper);color:var(--ink-soft);border:1.5px solid var(--line);border-radius:var(--radius-sm);font-size:12px;font-weight:600}
+.type-toggle button.active{background:var(--green-pale);color:var(--green);border-color:var(--green)}
+.form-actions{display:flex;justify-content:space-between;gap:10px;margin-top:8px}
+.action-right{display:flex;gap:10px}
+.helper-text{margin-top:6px;color:var(--ink-soft);font-size:11px}
+
+/* WEEKDAY PICKER */
+.weekday-picker{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}
+.weekday-picker button{height:40px;background:var(--paper);color:var(--ink-soft);border:1.5px solid var(--line);border-radius:10px;font-size:12px;font-weight:700}
+.weekday-picker button.active{background:var(--green);color:#fff;border-color:var(--green)}
+
+/* LOCATION */
+.location-box{padding:12px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-sm)}
+.location-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.mini-btn{padding:7px 10px;background:var(--paper-deep);color:var(--ink);border:0;border-radius:999px;font-size:11px;font-weight:700}
+
+/* SETTINGS */
+.settings-section{padding:16px 0;border-top:1px solid var(--line)}
+.settings-section:first-child{border-top:0}
+.settings-title{font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--ink)}
+.settings-copy{margin:3px 0 12px;color:var(--ink-soft);font-size:12px}
+.color-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.color-card{padding:10px;background:var(--paper);border:1px solid var(--line);border-radius:10px}
+.color-card input{width:100%;height:38px;background:transparent;border:0}
+.editor-list{display:flex;flex-direction:column;gap:8px}
+.editor-row{display:grid;grid-template-columns:38px 1fr auto;gap:8px;align-items:center}
+.editor-row input[type=color]{width:38px;height:38px;background:transparent;border:0}
+.editor-row input[type=text]{width:100%;padding:9px;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:8px}
+.add-inline{width:100%;margin-top:8px;padding:9px;background:transparent;color:var(--green);border:1px dashed var(--line);border-radius:9px;font-weight:700}
+
+/* DELETE SERIES */
+.choice-stack{display:flex;flex-direction:column;gap:9px;margin-top:16px}
+.choice-btn{width:100%;padding:13px 14px;text-align:left;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:12px;font-weight:700}
+.choice-btn small{display:block;margin-top:2px;color:var(--ink-soft);font-weight:500}
+.choice-btn.danger{background:var(--danger-pale);color:var(--danger);border-color:#e4c3c0}
+
+/* FOOTER */
+.sync-line{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:5px;color:var(--ink-soft);font-family:var(--font-mono);font-size:10px}
+.sync-dot{width:7px;height:7px;background:#569B65;border-radius:50%}
+footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-family:var(--font-mono);font-size:10px}
+
+@media(max-width:900px){.deadline-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.auth-screen{grid-template-columns:1fr}.auth-hero{min-height:320px;padding:32px 24px}.auth-hero-main h1{font-size:48px}.auth-panel{min-height:auto;padding:42px 22px}.auth-hero-foot{display:none}}
 @media(max-width:640px){
-
-  .wrap{
-    padding:0 16px;
-  }
-
-  .app-header .wrap{
-    grid-template-columns:1fr auto;
-  }
-
-  .top-tabs{
-    grid-column:1/-1;
-    grid-row:2;
-
-    width:100%;
-  }
-
-  .top-tab{
-    flex:1;
-  }
-
-  .header-actions{
-    grid-column:2;
-    grid-row:1;
-  }
-
-  .account-name,
-  .btn-label{
-    display:none;
-  }
-
-  .account-button{
-    padding-right:4px;
-  }
-
-  .deadline-grid{
-    grid-template-columns:1fr;
-  }
-
-  .field-row{
-    flex-direction:column;
-
-    gap:0;
-  }
-
-  .type-toggle{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .color-grid{
-    grid-template-columns:1fr;
-  }
-
-  .day-cell{
-    min-height:90px;
-
-    padding:4px;
-  }
-
-  .cal-event{
-    min-height:9px;
-
-    font-size:0;
-  }
-
+  .wrap{padding:0 16px}
+  .app-header .wrap{grid-template-columns:1fr auto}
+  .top-tabs{grid-column:1/-1;grid-row:2;width:100%}
+  .top-tab{flex:1}
+  .header-actions{grid-column:2;grid-row:1}
+  .account-name,.btn-label{display:none}
+  .account-button{padding-right:4px}
+  .deadline-grid{grid-template-columns:1fr}
+  .field-row{flex-direction:column;gap:0}
+  .type-toggle{grid-template-columns:repeat(2,1fr)}
+  .color-grid{grid-template-columns:1fr}
+  .day-cell{min-height:90px;padding:4px}
+  .cal-event{min-height:9px;font-size:0}
+  .cal-event::after{content:'';display:block;width:6px;height:6px;background:var(--event-color);border-radius:50%}
 }
-
 </style>
 </head>
-
-
 <body>
 
-
-<!-- =======================================================
-     AUTH SCREEN
-     ======================================================= -->
-
-<section
-  class="auth-screen"
-  id="authScreen"
->
-
+<section class="auth-screen" id="authScreen">
   <div class="auth-hero">
-
-    <div class="auth-brand">
-      Homeroom
-    </div>
-
+    <div class="auth-brand">Homeroom</div>
     <div class="auth-hero-main">
-
-      <h1>
-        School,<br />
-        organized.
-      </h1>
-
-      <p>
-        Assignments, deadlines, activities and your calendar
-        in one quiet place.
-      </p>
-
+      <h1>School,<br />organized.</h1>
+      <p>Assignments, deadlines, activities and your calendar in one quiet place.</p>
     </div>
-
-    <div class="auth-hero-foot">
-      Your planner follows you between devices
-    </div>
-
+    <div class="auth-hero-foot">Your planner follows you between devices</div>
   </div>
-
 
   <div class="auth-panel">
-
     <div class="auth-box">
-
-      <h2 id="authTitle">
-        Welcome back
-      </h2>
-
-      <div
-        class="auth-subtitle"
-        id="authSubtitle"
-      >
-        Sign in to open your planner.
-      </div>
+      <h2 id="authTitle">Welcome back</h2>
+      <div class="auth-subtitle" id="authSubtitle">Sign in to open your planner.</div>
 
       <div class="auth-tabs">
-
-        <button
-          class="auth-tab active"
-          id="signInTab"
-          type="button"
-        >
-          Sign in
-        </button>
-
-        <button
-          class="auth-tab"
-          id="signUpTab"
-          type="button"
-        >
-          Create account
-        </button>
-
+        <button class="auth-tab active" id="signInTab" type="button">Sign in</button>
+        <button class="auth-tab" id="signUpTab" type="button">Create account</button>
       </div>
-
 
       <form id="authForm">
-
-        <div
-          class="field hidden"
-          id="nameField"
-        >
-
-          <label for="authName">
-            Name
-          </label>
-
-          <input
-            id="authName"
-            type="text"
-            autocomplete="name"
-            placeholder="Your name"
-          />
-
+        <div class="field hidden" id="nameField">
+          <label for="authName">Name</label>
+          <input id="authName" type="text" autocomplete="name" placeholder="Your name" />
         </div>
-
 
         <div class="field">
-
-          <label for="authEmail">
-            Email
-          </label>
-
-          <input
-            id="authEmail"
-            type="email"
-            autocomplete="email"
-            required
-            placeholder="you@example.com"
-          />
-
+          <label for="authEmail">Email</label>
+          <input id="authEmail" type="email" autocomplete="email" required placeholder="you@example.com" />
         </div>
-
 
         <div class="field">
-
-          <label for="authPassword">
-            Password
-          </label>
-
-          <input
-            id="authPassword"
-            type="password"
-            autocomplete="current-password"
-            minlength="6"
-            required
-            placeholder="••••••••"
-          />
-
+          <label for="authPassword">Password</label>
+          <input id="authPassword" type="password" autocomplete="current-password" minlength="6" required placeholder="••••••••" />
         </div>
 
-
-        <div
-          class="auth-message"
-          id="authMessage"
-        ></div>
-
-
-        <button
-          class="btn btn-green auth-submit"
-          id="authSubmit"
-          type="submit"
-        >
-          Sign in
-        </button>
-
+        <div class="auth-message" id="authMessage"></div>
+        <button class="btn btn-green auth-submit" id="authSubmit" type="submit">Sign in</button>
       </form>
 
-
       <div class="auth-foot">
-        Your planner data is private to your account.
+        <button class="auth-link" id="forgotPasswordButton" type="button">Forgot password?</button>
       </div>
-
     </div>
-
   </div>
-
 </section>
 
-
-<!-- =======================================================
-     APP
-     ======================================================= -->
-
-<div
-  class="hidden"
-  id="app"
->
-
-
-<header class="app-header">
-
-  <div class="wrap">
-
-    <div>
-
-      <div class="brand-title">
-        Homeroom
+<div class="hidden" id="app">
+  <header class="app-header">
+    <div class="wrap">
+      <div>
+        <div class="brand-title">Homeroom</div>
+        <div class="brand-sub" id="todayLabel">—</div>
       </div>
 
-      <div
-        class="brand-sub"
-        id="todayLabel"
-      >
-        —
+      <nav class="top-tabs">
+        <button class="top-tab active" data-view="planner">Planner</button>
+        <button class="top-tab" data-view="calendar">Calendar</button>
+      </nav>
+
+      <div class="header-actions">
+        <button class="account-button" id="accountButton">
+          <span class="avatar" id="headerAvatar">H</span>
+          <span class="account-name" id="headerName">Account</span>
+        </button>
+
+        <button class="btn btn-outline-light" id="settingsButton">⚙</button>
+
+        <button class="btn btn-primary" id="addButton">
+          +
+          <span class="btn-label">Add</span>
+        </button>
       </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div id="plannerView">
+
+      <section class="section">
+        <div class="section-head">
+          <h2 class="section-title">Upcoming Deadlines</h2>
+          <div class="section-note">Next 7 days</div>
+        </div>
+
+        <div class="deadline-shell">
+          <div class="deadline-grid" id="deadlineGrid"></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2 class="section-title">Your Classes</h2>
+          <div class="section-note">Tap a class to view its work</div>
+        </div>
+
+        <div class="classes-grid" id="classesGrid"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2 class="section-title">Everything</h2>
+
+          <div class="filter-tabs" id="filterTabs">
+            <button class="tab-btn active" data-filter="all">All</button>
+            <button class="tab-btn" data-filter="assignment">Assignments</button>
+            <button class="tab-btn" data-filter="deadline">Deadlines</button>
+            <button class="tab-btn" data-filter="reminder">Reminders</button>
+            <button class="tab-btn" data-filter="activity">Activities</button>
+          </div>
+        </div>
+
+        <div class="task-list" id="taskList"></div>
+      </section>
 
     </div>
 
+    <div class="hidden" id="calendarView">
 
-    <nav class="top-tabs">
+      <section class="section">
 
-      <button
-        class="top-tab active"
-        data-view="planner"
-      >
-        Planner
-      </button>
-
-      <button
-        class="top-tab"
-        data-view="calendar"
-      >
-        Calendar
-      </button>
-
-    </nav>
-
-
-    <div class="header-actions">
-
-      <button
-        class="account-button"
-        id="accountButton"
-      >
-
-        <span
-          class="avatar"
-          id="headerAvatar"
-        >
-          H
-        </span>
-
-        <span
-          class="account-name"
-          id="headerName"
-        >
-          Account
-        </span>
-
-      </button>
-
-
-      <button
-        class="btn btn-outline-light"
-        id="settingsButton"
-      >
-        ⚙
-      </button>
-
-
-      <button
-        class="btn btn-primary"
-        id="addButton"
-      >
-        +
-
-        <span class="btn-label">
-          Add
-        </span>
-      </button>
-
-    </div>
-
-  </div>
-
-</header>
-
-
-<main class="wrap">
-
-
-  <!-- =====================================================
-       PLANNER
-       ===================================================== -->
-
-  <div id="plannerView">
-
-
-    <section class="section">
-
-      <div class="section-head">
-
-        <h2 class="section-title">
-          Upcoming Deadlines
-        </h2>
-
-        <div class="section-note">
-          Next 7 days
+        <div class="section-head">
+          <h2 class="section-title">Calendar</h2>
+          <div class="section-note">Synced from Planner</div>
         </div>
 
-      </div>
+        <div class="calendar-shell">
 
+          <div class="calendar-head">
 
-      <div class="deadline-shell">
+            <div class="month-title" id="monthTitle"></div>
 
-        <div
-          class="deadline-grid"
-          id="deadlineGrid"
-        ></div>
-
-      </div>
-
-    </section>
-
-
-    <section class="section">
-
-      <div class="section-head">
-
-        <h2 class="section-title">
-          Your Classes
-        </h2>
-
-        <div class="section-note">
-          Tap a class to view its work
-        </div>
-
-      </div>
-
-
-      <div
-        class="classes-grid"
-        id="classesGrid"
-      ></div>
-
-    </section>
-
-
-    <section class="section">
-
-      <div class="section-head">
-
-        <h2 class="section-title">
-          Everything
-        </h2>
-
-
-        <div
-          class="filter-tabs"
-          id="filterTabs"
-        >
-
-          <button
-            class="tab-btn active"
-            data-filter="all"
-          >
-            All
-          </button>
-
-          <button
-            class="tab-btn"
-            data-filter="assignment"
-          >
-            Assignments
-          </button>
-
-          <button
-            class="tab-btn"
-            data-filter="deadline"
-          >
-            Deadlines
-          </button>
-
-          <button
-            class="tab-btn"
-            data-filter="reminder"
-          >
-            Reminders
-          </button>
-
-          <button
-            class="tab-btn"
-            data-filter="activity"
-          >
-            Activities
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <div
-        class="task-list"
-        id="taskList"
-      ></div>
-
-    </section>
-
-
-  </div>
-
-
-  <!-- =====================================================
-       CALENDAR
-       ===================================================== -->
-
-  <div
-    class="hidden"
-    id="calendarView"
-  >
-
-    <section class="section">
-
-      <div class="section-head">
-
-        <h2 class="section-title">
-          Calendar
-        </h2>
-
-        <div class="section-note">
-          Synced from Planner
-        </div>
-
-      </div>
-
-
-      <div class="calendar-shell">
-
-        <div class="calendar-head">
-
-          <div
-            class="month-title"
-            id="monthTitle"
-          ></div>
-
-
-          <div class="cal-controls">
-
-            <button
-              class="cal-btn"
-              id="todayButton"
-            >
-              Today
-            </button>
-
-            <button
-              class="cal-btn"
-              id="prevMonth"
-            >
-              ‹
-            </button>
-
-            <button
-              class="cal-btn"
-              id="nextMonth"
-            >
-              ›
-            </button>
+            <div class="cal-controls">
+              <button class="cal-btn" id="todayButton">Today</button>
+              <button class="cal-btn" id="prevMonth">‹</button>
+              <button class="cal-btn" id="nextMonth">›</button>
+            </div>
 
           </div>
 
+          <div class="calendar-week">
+            <div class="week-label">Sun</div>
+            <div class="week-label">Mon</div>
+            <div class="week-label">Tue</div>
+            <div class="week-label">Wed</div>
+            <div class="week-label">Thu</div>
+            <div class="week-label">Fri</div>
+            <div class="week-label">Sat</div>
+          </div>
+
+          <div class="calendar-grid" id="calendarGrid"></div>
+          <div class="calendar-legend" id="calendarLegend"></div>
+
         </div>
 
+      </section>
 
-        <div class="calendar-week">
+    </div>
 
-          <div class="week-label">Sun</div>
-          <div class="week-label">Mon</div>
-          <div class="week-label">Tue</div>
-          <div class="week-label">Wed</div>
-          <div class="week-label">Thu</div>
-          <div class="week-label">Fri</div>
-          <div class="week-label">Sat</div>
+  </main>
 
-        </div>
+  <footer>
 
+    <span id="footerEmail"></span>
 
-        <div
-          class="calendar-grid"
-          id="calendarGrid"
-        ></div>
+    <div class="sync-line">
+      <span class="sync-dot"></span>
+      <span id="syncStatus">Synced</span>
+    </div>
 
-
-        <div
-          class="calendar-legend"
-          id="calendarLegend"
-        ></div>
-
-      </div>
-
-    </section>
-
-  </div>
-
-
-</main>
-
-
-<footer>
-
-  <span id="footerEmail"></span>
-
-  <div class="sync-line">
-
-    <span class="sync-dot"></span>
-
-    <span id="syncStatus">
-      Synced
-    </span>
-
-  </div>
-
-</footer>
-
+  </footer>
 
 </div>
 
+<!-- ITEM MODAL -->
 
-<!-- =======================================================
-     ITEM MODAL
-     ======================================================= -->
-
-<div
-  class="modal-overlay"
-  id="itemModal"
->
+<div class="modal-overlay" id="itemModal">
 
   <div class="modal-box">
 
-    <button
-      class="modal-close"
-      data-close="itemModal"
-    >
-      ✕
-    </button>
+    <button class="modal-close" data-close="itemModal">✕</button>
 
-    <h3
-      class="modal-title"
-      id="itemModalTitle"
-    >
+    <h3 class="modal-title" id="itemModalTitle">
       Add to your planner
     </h3>
 
     <div class="modal-accent-bar"></div>
 
-
     <form id="itemForm">
-
 
       <div class="field">
 
@@ -2012,11 +432,7 @@ footer{
           Type
         </label>
 
-
-        <div
-          class="type-toggle"
-          id="typeToggle"
-        >
+        <div class="type-toggle" id="typeToggle">
 
           <button
             type="button"
@@ -2052,10 +468,7 @@ footer{
       </div>
 
 
-      <div
-        class="field"
-        id="classField"
-      >
+      <div class="field" id="classField">
 
         <label>
           Class
@@ -2066,10 +479,7 @@ footer{
       </div>
 
 
-      <div
-        class="field hidden"
-        id="extraField"
-      >
+      <div class="field hidden" id="extraField">
 
         <label>
           Extracurricular
@@ -2099,43 +509,19 @@ footer{
       <div class="field-row">
 
         <div class="field">
-
-          <label>
-            Date
-          </label>
-
-          <input
-            id="itemDate"
-            type="date"
-            required
-          />
-
+          <label>Date</label>
+          <input id="itemDate" type="date" required />
         </div>
 
-
         <div class="field">
-
-          <label>
-            Time
-          </label>
-
-          <input
-            id="itemTime"
-            type="time"
-          />
-
+          <label>Time</label>
+          <input id="itemTime" type="time" />
         </div>
 
       </div>
 
 
-      <!-- ACTIVITY FIELDS -->
-
-      <div
-        class="hidden"
-        id="activityFields"
-      >
-
+      <div class="hidden" id="activityFields">
 
         <div class="field">
 
@@ -2177,7 +563,6 @@ footer{
 
 
         <div class="field-row">
-
 
           <div class="field">
 
@@ -2275,7 +660,6 @@ footer{
 
         </div>
 
-
       </div>
 
 
@@ -2323,6 +707,7 @@ footer{
 
         </div>
 
+
       </div>
 
 
@@ -2333,9 +718,7 @@ footer{
 </div>
 
 
-<!-- =======================================================
-     CLASS MODAL
-     ======================================================= -->
+<!-- CLASS MODAL -->
 
 <div
   class="modal-overlay"
@@ -2374,7 +757,7 @@ footer{
       style="
         width:100%;
         justify-content:center;
-        margin-top:16px;
+        margin-top:16px
       "
     >
       + Add assignment
@@ -2385,9 +768,7 @@ footer{
 </div>
 
 
-<!-- =======================================================
-     SETTINGS MODAL
-     ======================================================= -->
+<!-- SETTINGS -->
 
 <div
   class="modal-overlay"
@@ -2500,7 +881,7 @@ footer{
       </div>
 
       <div class="settings-copy">
-        Add clubs, sports, jobs, volunteering or anything else.
+        Add things like Tennis, Scouts, clubs, sports, jobs or volunteering. Then attach Activities to them.
       </div>
 
       <div
@@ -2532,15 +913,12 @@ footer{
 
     </div>
 
-
   </div>
 
 </div>
 
 
-<!-- =======================================================
-     PROFILE MODAL
-     ======================================================= -->
+<!-- PROFILE -->
 
 <div
   class="modal-overlay"
@@ -2562,16 +940,14 @@ footer{
 
     <div class="modal-accent-bar"></div>
 
-
     <div
       style="
         color:var(--ink-soft);
         font-size:12px;
-        margin-bottom:16px;
+        margin-bottom:16px
       "
       id="profileEmail"
     ></div>
-
 
     <div class="field">
 
@@ -2585,7 +961,6 @@ footer{
       />
 
     </div>
-
 
     <div class="form-actions">
 
@@ -2605,40 +980,216 @@ footer{
 
     </div>
 
-
   </div>
 
 </div>
 
 
-<!-- =======================================================
-     DETAIL MODAL
-     ======================================================= -->
+<!-- FORGOT PASSWORD -->
 
 <div
   class="modal-overlay"
-  id="detailModal"
+  id="forgotModal"
 >
 
   <div class="modal-box">
 
     <button
       class="modal-close"
-      data-close="detailModal"
+      data-close="forgotModal"
     >
       ✕
     </button>
 
-    <h3
-      class="modal-title"
-      id="detailTitle"
-    >
-      Event
+    <h3 class="modal-title">
+      Reset password
     </h3>
 
     <div class="modal-accent-bar"></div>
 
-    <div id="detailBody"></div>
+    <div class="field">
+
+      <label>
+        Email
+      </label>
+
+      <input
+        id="forgotEmail"
+        type="email"
+        placeholder="you@example.com"
+      />
+
+      <div class="helper-text">
+        We'll email you a secure reset link.
+      </div>
+
+    </div>
+
+    <div
+      class="auth-message"
+      id="forgotMessage"
+    ></div>
+
+    <div
+      class="form-actions"
+      style="justify-content:flex-end"
+    >
+
+      <button
+        class="btn btn-ghost"
+        type="button"
+        data-close="forgotModal"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-primary"
+        id="sendResetButton"
+        type="button"
+      >
+        Send reset link
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- SET NEW PASSWORD -->
+
+<div
+  class="modal-overlay"
+  id="resetPasswordModal"
+>
+
+  <div class="modal-box">
+
+    <h3 class="modal-title">
+      Choose a new password
+    </h3>
+
+    <div class="modal-accent-bar"></div>
+
+    <div class="field">
+
+      <label>
+        New password
+      </label>
+
+      <input
+        id="newPassword"
+        type="password"
+        minlength="6"
+        placeholder="New password"
+      />
+
+    </div>
+
+    <div class="field">
+
+      <label>
+        Confirm password
+      </label>
+
+      <input
+        id="confirmPassword"
+        type="password"
+        minlength="6"
+        placeholder="Confirm password"
+      />
+
+    </div>
+
+    <div
+      class="auth-message"
+      id="resetPasswordMessage"
+    ></div>
+
+    <div
+      class="form-actions"
+      style="justify-content:flex-end"
+    >
+
+      <button
+        class="btn btn-primary"
+        id="saveNewPasswordButton"
+        type="button"
+      >
+        Save new password
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- RECURRING DELETE -->
+
+<div
+  class="modal-overlay"
+  id="deleteSeriesModal"
+>
+
+  <div class="modal-box">
+
+    <button
+      class="modal-close"
+      data-close="deleteSeriesModal"
+    >
+      ✕
+    </button>
+
+    <h3 class="modal-title">
+      Delete recurring activity
+    </h3>
+
+    <div class="modal-accent-bar"></div>
+
+    <div
+      id="deleteSeriesText"
+      style="color:var(--ink-soft)"
+    ></div>
+
+    <div class="choice-stack">
+
+      <button
+        class="choice-btn"
+        id="deleteOccurrenceButton"
+        type="button"
+      >
+        Delete only this day
+
+        <small id="deleteOccurrenceSubtext">
+          Keep the rest of the recurring activity.
+        </small>
+      </button>
+
+      <button
+        class="choice-btn danger"
+        id="deleteEntireSeriesButton"
+        type="button"
+      >
+        Delete entire series
+
+        <small>
+          Remove every occurrence of this recurring activity.
+        </small>
+      </button>
+
+      <button
+        class="choice-btn"
+        data-close="deleteSeriesModal"
+        type="button"
+      >
+        Cancel
+      </button>
+
+    </div>
 
   </div>
 
@@ -2648,15 +1199,17 @@ footer{
 <script>
 
 /* =========================================================
-   SUPABASE CONFIG
+   SUPABASE
    ========================================================= */
 
 const SUPABASE_URL =
   'https://vpevjppqdxvyiodhcusj.supabase.co';
 
-
 const SUPABASE_KEY =
   'sb_publishable_7Q-NowkHHGHAGBZ64YwRaw_RL61UmJ-';
+
+const SITE_URL =
+  'https://kirenm.github.io/School-Planner/';
 
 
 const sb =
@@ -2674,12 +1227,12 @@ const sb =
 
 
 /* =========================================================
-   DEFAULT DATA
+   NEW ACCOUNT DEFAULTS
    ========================================================= */
 
 const DEFAULT_STATE = {
 
-  version:7,
+  version:8,
 
   profile:{
     name:''
@@ -2694,51 +1247,51 @@ const DEFAULT_STATE = {
   classes:[
 
     {
-      id:'chem',
-      name:'Chemistry',
+      id:'welcome',
+      name:'Welcome to Homeroom — use Settings to customize your planner and your classes',
       color:'#1F8A78'
     },
 
     {
-      id:'history',
-      name:'AP Modern World History',
-      color:'#8C3A3A'
-    },
-
-    {
-      id:'seminar',
-      name:'AP Seminar',
-      color:'#6B4FA0'
-    },
-
-    {
-      id:'pe',
-      name:'PE',
-      color:'#D97B3F'
-    },
-
-    {
-      id:'cband',
-      name:'Concert Band',
-      color:'#8A4F8C'
-    },
-
-    {
-      id:'jband',
-      name:'Jazz Band',
-      color:'#B98A22'
-    },
-
-    {
-      id:'alg2',
-      name:'Algebra 2',
+      id:'planner-calendar',
+      name:'Planner + Calendar — switch views to see what is next or the bigger picture',
       color:'#3B6EA5'
     },
 
     {
-      id:'span3',
-      name:'Spanish 3',
-      color:'#B9583F'
+      id:'add-item',
+      name:'Add Your First Item — use + Add for assignments, deadlines, reminders and activities',
+      color:'#6B4FA0'
+    },
+
+    {
+      id:'classes-help',
+      name:'Classes — organize schoolwork by class and give each class its own color',
+      color:'#D97B3F'
+    },
+
+    {
+      id:'extras-help',
+      name:'Extracurriculars — add Tennis, Scouts, clubs or sports in Settings, then attach Activities to them',
+      color:'#527A67'
+    },
+
+    {
+      id:'recurring-help',
+      name:'Recurring Activities — repeat an activity on any combination of weekdays',
+      color:'#B98A22'
+    },
+
+    {
+      id:'edit-help',
+      name:'Edit & Complete — tap any item to edit it; assignments and deadlines can be checked off and restored',
+      color:'#8C3A3A'
+    },
+
+    {
+      id:'maps-help',
+      name:'Locations & Maps — add a location to an activity and open it in Maps',
+      color:'#8A4F8C'
     }
 
   ],
@@ -2746,8 +1299,8 @@ const DEFAULT_STATE = {
   extras:[
 
     {
-      id:'general-extra',
-      name:'Extracurricular',
+      id:'example-extra',
+      name:'Example Extracurricular',
       color:'#527A67'
     }
 
@@ -2757,10 +1310,6 @@ const DEFAULT_STATE = {
 
 };
 
-
-/* =========================================================
-   APP STATE
-   ========================================================= */
 
 let state =
   clone(DEFAULT_STATE);
@@ -2780,6 +1329,9 @@ let activeType =
 let editingId =
   null;
 
+let editingOccurrenceDate =
+  null;
+
 let classModalId =
   null;
 
@@ -2793,10 +1345,6 @@ let calendarCursor =
     1
   );
 
-
-/* =========================================================
-   HELPERS
-   ========================================================= */
 
 function clone(value){
 
@@ -2821,20 +1369,23 @@ function uid(prefix='i'){
 function pad(number){
 
   return String(number)
-    .padStart(2,'0');
+    .padStart(
+      2,
+      '0'
+    );
 
 }
 
 
 function todayStr(){
 
-  const d =
+  const date =
     new Date();
 
   return (
-    `${d.getFullYear()}-` +
-    `${pad(d.getMonth()+1)}-` +
-    `${pad(d.getDate())}`
+    `${date.getFullYear()}-` +
+    `${pad(date.getMonth()+1)}-` +
+    `${pad(date.getDate())}`
   );
 
 }
@@ -2924,17 +1475,21 @@ function niceTime(value){
 
 function esc(value){
 
-  return String(value ?? '')
-    .replace(
-      /[&<>"']/g,
-      character => ({
-        '&':'&amp;',
-        '<':'&lt;',
-        '>':'&gt;',
-        '"':'&quot;',
-        "'":'&#39;'
-      })[character]
-    );
+  return String(
+    value ?? ''
+  )
+  .replace(
+    /[&<>"']/g,
+    character => ({
+
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      '"':'&quot;',
+      "'":'&#39;'
+
+    })[character]
+  );
 
 }
 
@@ -2942,8 +1497,9 @@ function esc(value){
 function classById(id){
 
   return state.classes
-    .find(item =>
-      item.id === id
+    .find(
+      item =>
+        item.id === id
     );
 
 }
@@ -2952,8 +1508,9 @@ function classById(id){
 function extraById(id){
 
   return state.extras
-    .find(item =>
-      item.id === id
+    .find(
+      item =>
+        item.id === id
     );
 
 }
@@ -3035,16 +1592,44 @@ function weekdayText(days){
     days ||
     []
   )
-  .map(day =>
-    names[day]
+  .map(
+    day =>
+      names[day]
   )
   .join(', ');
 
 }
 
 
+function isRecurring(task){
+
+  return (
+    task?.type === 'activity' &&
+    task?.recurrence &&
+    task.recurrence !== 'none'
+  );
+
+}
+
+
+function isException(
+  task,
+  date
+){
+
+  return (
+    task.exceptionDates ||
+    []
+  )
+  .includes(
+    date
+  );
+
+}
+
+
 /* =========================================================
-   UI
+   APP UI
    ========================================================= */
 
 function showAuth(){
@@ -3098,7 +1683,9 @@ function openModal(id){
   document
     .getElementById(id)
     .classList
-    .add('open');
+    .add(
+      'open'
+    );
 
 }
 
@@ -3108,7 +1695,9 @@ function closeModal(id){
   document
     .getElementById(id)
     .classList
-    .remove('open');
+    .remove(
+      'open'
+    );
 
 }
 
@@ -3126,7 +1715,7 @@ function setSyncStatus(text){
 
 
 /* =========================================================
-   AUTH UI
+   AUTH
    ========================================================= */
 
 function setAuthMode(mode){
@@ -3136,6 +1725,7 @@ function setAuthMode(mode){
 
   const signup =
     mode === 'signup';
+
 
   document
     .getElementById(
@@ -3147,6 +1737,7 @@ function setAuthMode(mode){
       !signup
     );
 
+
   document
     .getElementById(
       'signUpTab'
@@ -3156,6 +1747,7 @@ function setAuthMode(mode){
       'active',
       signup
     );
+
 
   document
     .getElementById(
@@ -3167,6 +1759,7 @@ function setAuthMode(mode){
       !signup
     );
 
+
   document
     .getElementById(
       'authTitle'
@@ -3175,6 +1768,7 @@ function setAuthMode(mode){
       signup
         ? 'Create your account'
         : 'Welcome back';
+
 
   document
     .getElementById(
@@ -3185,6 +1779,7 @@ function setAuthMode(mode){
         ? 'Your planner will sync anywhere you sign in.'
         : 'Sign in to open your planner.';
 
+
   document
     .getElementById(
       'authSubmit'
@@ -3193,6 +1788,18 @@ function setAuthMode(mode){
       signup
         ? 'Create account'
         : 'Sign in';
+
+
+  document
+    .getElementById(
+      'forgotPasswordButton'
+    )
+    .classList
+    .toggle(
+      'hidden',
+      signup
+    );
+
 
   authMessage('');
 
@@ -3210,8 +1817,10 @@ function authMessage(
         'authMessage'
       );
 
+
   element.textContent =
     message;
+
 
   element.classList
     .toggle(
@@ -3221,10 +1830,6 @@ function authMessage(
 
 }
 
-
-/* =========================================================
-   AUTH
-   ========================================================= */
 
 async function handleAuthSubmit(){
 
@@ -3236,12 +1841,14 @@ async function handleAuthSubmit(){
       .value
       .trim();
 
+
   const password =
     document
       .getElementById(
         'authPassword'
       )
       .value;
+
 
   authMessage(
     'Working…'
@@ -3282,7 +1889,7 @@ async function handleAuthSubmit(){
               },
 
               emailRedirectTo:
-                'https://kirenm.github.io/School-Planner/'
+                SITE_URL
 
             }
 
@@ -3356,13 +1963,238 @@ async function handleAuthSubmit(){
       error
     );
 
-    authMessage(
-      error.message ||
-      'Could not sign in.',
-      true
-    );
+
+    const message =
+      String(
+        error.message ||
+        'Could not sign in.'
+      );
+
+
+    if(
+      /email.*long/i
+        .test(
+          message
+        )
+    ){
+
+      authMessage(
+        'That email was rejected as too long or invalid. Homeroom does not set its own email-length limit, so check for accidental spaces or pasted text.',
+        true
+      );
+
+    }
+
+    else{
+
+      authMessage(
+        message,
+        true
+      );
+
+    }
 
   }
+
+}
+
+
+/* =========================================================
+   PASSWORD RESET
+   ========================================================= */
+
+async function sendPasswordReset(){
+
+  const email =
+    (
+      document
+        .getElementById(
+          'forgotEmail'
+        )
+        .value
+      ||
+      document
+        .getElementById(
+          'authEmail'
+        )
+        .value
+    )
+    .trim();
+
+
+  const message =
+    document
+      .getElementById(
+        'forgotMessage'
+      );
+
+
+  message.classList
+    .remove(
+      'error'
+    );
+
+
+  if(!email){
+
+    message.textContent =
+      'Enter your email first.';
+
+    message.classList
+      .add(
+        'error'
+      );
+
+    return;
+
+  }
+
+
+  message.textContent =
+    'Sending…';
+
+
+  const {
+    error
+  } =
+    await sb.auth
+      .resetPasswordForEmail(
+        email,
+        {
+          redirectTo:
+            SITE_URL
+        }
+      );
+
+
+  if(error){
+
+    message.textContent =
+      error.message;
+
+    message.classList
+      .add(
+        'error'
+      );
+
+    return;
+
+  }
+
+
+  message.textContent =
+    'Reset link sent. Check your email.';
+
+}
+
+
+async function saveNewPassword(){
+
+  const password =
+    document
+      .getElementById(
+        'newPassword'
+      )
+      .value;
+
+
+  const confirmPassword =
+    document
+      .getElementById(
+        'confirmPassword'
+      )
+      .value;
+
+
+  const message =
+    document
+      .getElementById(
+        'resetPasswordMessage'
+      );
+
+
+  message.classList
+    .remove(
+      'error'
+    );
+
+
+  if(
+    password.length < 6
+  ){
+
+    message.textContent =
+      'Use at least 6 characters.';
+
+    message.classList
+      .add(
+        'error'
+      );
+
+    return;
+
+  }
+
+
+  if(
+    password !==
+    confirmPassword
+  ){
+
+    message.textContent =
+      'Passwords do not match.';
+
+    message.classList
+      .add(
+        'error'
+      );
+
+    return;
+
+  }
+
+
+  message.textContent =
+    'Saving…';
+
+
+  const {
+    error
+  } =
+    await sb.auth
+      .updateUser({
+
+        password
+
+      });
+
+
+  if(error){
+
+    message.textContent =
+      error.message;
+
+    message.classList
+      .add(
+        'error'
+      );
+
+    return;
+
+  }
+
+
+  message.textContent =
+    'Password updated.';
+
+
+  setTimeout(
+    () =>
+      closeModal(
+        'resetPasswordModal'
+      ),
+    700
+  );
 
 }
 
@@ -3378,6 +2210,7 @@ async function loadCloudData(){
   ){
     return;
   }
+
 
   setSyncStatus(
     'Loading…'
@@ -3414,7 +2247,9 @@ async function loadCloudData(){
 
     state = {
 
-      ...clone(DEFAULT_STATE),
+      ...clone(
+        DEFAULT_STATE
+      ),
 
       ...data.data,
 
@@ -3430,15 +2265,32 @@ async function loadCloudData(){
 
       classes:
         data.data.classes ||
-        clone(DEFAULT_STATE.classes),
+        clone(
+          DEFAULT_STATE.classes
+        ),
 
       extras:
         data.data.extras ||
-        clone(DEFAULT_STATE.extras),
+        clone(
+          DEFAULT_STATE.extras
+        ),
 
       tasks:
-        data.data.tasks ||
-        []
+        (
+          data.data.tasks ||
+          []
+        )
+        .map(
+          task => ({
+
+            ...task,
+
+            exceptionDates:
+              task.exceptionDates ||
+              []
+
+          })
+        )
 
     };
 
@@ -3447,13 +2299,17 @@ async function loadCloudData(){
   else{
 
     state =
-      clone(DEFAULT_STATE);
+      clone(
+        DEFAULT_STATE
+      );
+
 
     state.profile.name =
       currentUser
         .user_metadata
         ?.name ||
       '';
+
 
     await saveCloudData();
 
@@ -3474,6 +2330,7 @@ async function saveCloudData(){
   ){
     return;
   }
+
 
   setSyncStatus(
     'Saving…'
@@ -3508,9 +2365,11 @@ async function saveCloudData(){
       error
     );
 
+
     setSyncStatus(
       'Sync error'
     );
+
 
     return;
 
@@ -3530,9 +2389,11 @@ function queueSave(){
     saveTimer
   );
 
+
   setSyncStatus(
     'Saving…'
   );
+
 
   saveTimer =
     setTimeout(
@@ -3544,13 +2405,14 @@ function queueSave(){
 
 
 /* =========================================================
-   ENTER APP
+   ENTER / LEAVE APP
    ========================================================= */
 
 async function enterApp(user){
 
   currentUser =
     user;
+
 
   showApp();
 
@@ -3568,12 +2430,17 @@ async function enterApp(user){
       error
     );
 
+
     setSyncStatus(
       'Sync error'
     );
 
+
     state =
-      clone(DEFAULT_STATE);
+      clone(
+        DEFAULT_STATE
+      );
+
 
     state.profile.name =
       user
@@ -3589,24 +2456,26 @@ async function enterApp(user){
 }
 
 
-/* =========================================================
-   SIGN OUT
-   ========================================================= */
-
 async function signOut(){
 
   await sb.auth
     .signOut();
 
+
   currentUser =
     null;
 
+
   state =
-    clone(DEFAULT_STATE);
+    clone(
+      DEFAULT_STATE
+    );
+
 
   closeModal(
     'profileModal'
   );
+
 
   showAuth();
 
@@ -3626,6 +2495,7 @@ function applyTheme(){
       state.theme.green
     );
 
+
   document.documentElement
     .style
     .setProperty(
@@ -3633,12 +2503,14 @@ function applyTheme(){
       state.theme.gold
     );
 
+
   document.documentElement
     .style
     .setProperty(
       '--paper',
       state.theme.paper
     );
+
 
   document
     .querySelector(
@@ -3661,15 +2533,20 @@ function renderAccount(){
   const fallback =
     currentUser
       ?.email
-      ?.split('@')[0] ||
+      ?.split('@')[0]
+    ||
     'Account';
 
+
   const name =
-    state.profile.name ||
+    state.profile.name
+    ||
     currentUser
       ?.user_metadata
-      ?.name ||
+      ?.name
+    ||
     fallback;
+
 
   document
     .getElementById(
@@ -3677,6 +2554,7 @@ function renderAccount(){
     )
     .textContent =
       name;
+
 
   document
     .getElementById(
@@ -3687,12 +2565,14 @@ function renderAccount(){
         .charAt(0)
         .toUpperCase();
 
+
   document
     .getElementById(
       'profileName'
     )
     .value =
       name;
+
 
   document
     .getElementById(
@@ -3701,6 +2581,7 @@ function renderAccount(){
     .textContent =
       currentUser?.email ||
       '';
+
 
   document
     .getElementById(
@@ -3725,16 +2606,20 @@ function renderSelects(){
     )
     .innerHTML =
 
-      '<option value="">No class / general</option>' +
+      '<option value="">No class / general</option>'
+
+      +
 
       state.classes
-        .map(item => `
+        .map(
+          item => `
 
-          <option value="${esc(item.id)}">
-            ${esc(item.name)}
-          </option>
+            <option value="${esc(item.id)}">
+              ${esc(item.name)}
+            </option>
 
-        `)
+          `
+        )
         .join('');
 
 
@@ -3744,16 +2629,20 @@ function renderSelects(){
     )
     .innerHTML =
 
-      '<option value="">No extracurricular</option>' +
+      '<option value="">No extracurricular</option>'
+
+      +
 
       state.extras
-        .map(item => `
+        .map(
+          item => `
 
-          <option value="${esc(item.id)}">
-            ${esc(item.name)}
-          </option>
+            <option value="${esc(item.id)}">
+              ${esc(item.name)}
+            </option>
 
-        `)
+          `
+        )
         .join('');
 
 }
@@ -3768,33 +2657,41 @@ function renderDeadlines(){
   const today =
     todayStr();
 
+
   const tasks =
     state.tasks
 
-      .filter(task =>
-        task.type === 'deadline' &&
-        !task.done
+      .filter(
+        task =>
+          task.type ===
+          'deadline'
       )
 
-      .map(task => ({
+      .map(
+        task => ({
 
-        ...task,
+          ...task,
 
-        days:
-          daysBetween(
-            today,
-            task.date
-          )
+          days:
+            daysBetween(
+              today,
+              task.date
+            )
 
-      }))
+        })
+      )
 
-      .filter(task =>
-        task.days >= 0 &&
-        task.days <= 7
+      .filter(
+        task =>
+          task.days >= 0 &&
+          task.days <= 7
       )
 
       .sort(
-        (a,b) =>
+        (
+          a,
+          b
+        ) =>
           a.days -
           b.days
       )
@@ -3833,6 +2730,7 @@ function renderDeadlines(){
 
     `;
 
+
     return;
 
   }
@@ -3840,90 +2738,112 @@ function renderDeadlines(){
 
   grid.innerHTML =
     tasks
-      .map(task => {
+      .map(
+        task => {
 
 
-        let label =
-          `Due in ${task.days} days`;
-
-        let badge =
-          'ok';
+          let label =
+            `Due in ${task.days} days`;
 
 
-        if(
-          task.days === 0
-        ){
-
-          label =
-            'Due today';
-
-          badge =
-            'urgent';
-
-        }
-
-        else if(
-          task.days === 1
-        ){
-
-          label =
-            'Due tomorrow';
-
-          badge =
-            'urgent';
-
-        }
-
-        else if(
-          task.days <= 3
-        ){
-
-          badge =
-            'soon';
-
-        }
+          let badge =
+            'ok';
 
 
-        return `
+          if(
+            task.done
+          ){
 
-          <button
-            class="deadline-card"
-            data-edit="${esc(task.id)}"
-            style="--accent:${colorFor(task)}"
-          >
+            label =
+              'Completed';
 
-            <div class="deadline-class">
-              ${esc(sourceFor(task))}
-            </div>
 
-            <div class="deadline-title">
-              ${esc(task.title)}
-            </div>
+            badge =
+              'done';
 
-            <div class="deadline-meta">
+          }
 
-              ${niceDate(task.date)}
+          else if(
+            task.days === 0
+          ){
 
-              ${
-                task.time
-                  ? ' · ' +
-                    niceTime(task.time)
+            label =
+              'Due today';
+
+
+            badge =
+              'urgent';
+
+          }
+
+          else if(
+            task.days === 1
+          ){
+
+            label =
+              'Due tomorrow';
+
+
+            badge =
+              'urgent';
+
+          }
+
+          else if(
+            task.days <= 3
+          ){
+
+            badge =
+              'soon';
+
+          }
+
+
+          return `
+
+            <button
+              class="deadline-card ${
+                task.done
+                  ? 'done'
                   : ''
-              }
-
-            </div>
-
-            <span
-              class="deadline-badge ${badge}"
+              }"
+              data-edit="${esc(task.id)}"
+              style="--accent:${colorFor(task)}"
             >
-              ${label}
-            </span>
 
-          </button>
+              <div class="deadline-class">
+                ${esc(sourceFor(task))}
+              </div>
 
-        `;
+              <div class="deadline-title">
+                ${esc(task.title)}
+              </div>
 
-      })
+              <div class="deadline-meta">
+
+                ${niceDate(task.date)}
+
+                ${
+                  task.time
+                    ? ' · ' +
+                      niceTime(task.time)
+                    : ''
+                }
+
+              </div>
+
+              <span
+                class="deadline-badge ${badge}"
+              >
+                ${label}
+              </span>
+
+            </button>
+
+          `;
+
+        }
+      )
       .join('');
 
 }
@@ -3963,6 +2883,7 @@ function renderClasses(){
 
     `;
 
+
     return;
 
   }
@@ -3970,66 +2891,73 @@ function renderClasses(){
 
   grid.innerHTML =
     state.classes
-      .map(schoolClass => {
+      .map(
+        schoolClass => {
 
 
-        const pending =
-          state.tasks
-            .filter(task =>
+          const pending =
+            state.tasks
+              .filter(
+                task =>
 
-              task.classId ===
-                schoolClass.id &&
+                  task.classId ===
+                    schoolClass.id
 
-              !task.done &&
+                  &&
 
-              checkable(task)
+                  !task.done
 
-            )
-            .length;
+                  &&
+
+                  checkable(task)
+
+              )
+              .length;
 
 
-        return `
+          return `
 
-          <button
-            class="class-card"
-            data-class="${esc(schoolClass.id)}"
-            style="--accent:${schoolClass.color}"
-          >
+            <button
+              class="class-card"
+              data-class="${esc(schoolClass.id)}"
+              style="--accent:${schoolClass.color}"
+            >
 
-            <div class="class-name">
-              ${esc(schoolClass.name)}
-            </div>
+              <div class="class-name">
+                ${esc(schoolClass.name)}
+              </div>
 
-            <div class="class-meta">
+              <div class="class-meta">
 
-              <span>
-                View work
-              </span>
+                <span>
+                  View work
+                </span>
 
-              <span
-                class="pill-count ${
-                  pending
-                    ? 'has-items'
-                    : ''
-                }"
-              >
-                ${pending} pending
-              </span>
+                <span
+                  class="pill-count ${
+                    pending
+                      ? 'has-items'
+                      : ''
+                  }"
+                >
+                  ${pending} pending
+                </span>
 
-            </div>
+              </div>
 
-          </button>
+            </button>
 
-        `;
+          `;
 
-      })
+        }
+      )
       .join('');
 
 }
 
 
 /* =========================================================
-   TASK ROW
+   TASKS
    ========================================================= */
 
 function taskRow(task){
@@ -4039,11 +2967,13 @@ function taskRow(task){
 
 
   if(
-    task.type === 'activity'
+    task.type ===
+    'activity'
   ){
 
     if(
-      task.recurrence === 'custom'
+      task.recurrence ===
+      'custom'
     ){
 
       repeat =
@@ -4054,7 +2984,8 @@ function taskRow(task){
     }
 
     else if(
-      task.recurrence === 'weekly'
+      task.recurrence ===
+      'weekly'
     ){
 
       repeat =
@@ -4063,7 +2994,8 @@ function taskRow(task){
     }
 
     else if(
-      task.recurrence === 'monthly'
+      task.recurrence ===
+      'monthly'
     ){
 
       repeat =
@@ -4095,6 +3027,7 @@ function taskRow(task){
 
 
   const left =
+
     checkable(task)
 
       ? `
@@ -4124,7 +3057,9 @@ function taskRow(task){
       `
 
       : `
+
         <span class="item-dot"></span>
+
       `;
 
 
@@ -4176,25 +3111,31 @@ function taskRow(task){
 }
 
 
-/* =========================================================
-   TASK LIST
-   ========================================================= */
-
 function renderTaskList(){
 
   const tasks =
     state.tasks
 
-      .filter(task =>
-        activeFilter === 'all' ||
-        task.type === activeFilter
+      .filter(
+        task =>
+          activeFilter ===
+            'all'
+
+          ||
+
+          task.type ===
+            activeFilter
       )
 
       .sort(
-        (a,b) => {
+        (
+          a,
+          b
+        ) => {
 
           if(
-            a.done !== b.done
+            a.done !==
+            b.done
           ){
 
             return a.done
@@ -4202,6 +3143,7 @@ function renderTaskList(){
               : -1;
 
           }
+
 
           return (
             a.date ||
@@ -4257,11 +3199,14 @@ function openClassModal(id){
   classModalId =
     id;
 
+
   const schoolClass =
     classById(id);
 
 
-  if(!schoolClass){
+  if(
+    !schoolClass
+  ){
     return;
   }
 
@@ -4285,6 +3230,7 @@ function openClassModal(id){
 
   renderClassModal();
 
+
   openModal(
     'classModal'
   );
@@ -4300,7 +3246,9 @@ function renderClassModal(){
     );
 
 
-  if(!schoolClass){
+  if(
+    !schoolClass
+  ){
     return;
   }
 
@@ -4308,16 +3256,21 @@ function renderClassModal(){
   const tasks =
     state.tasks
 
-      .filter(task =>
-        task.classId ===
-        classModalId
+      .filter(
+        task =>
+          task.classId ===
+          classModalId
       )
 
       .sort(
-        (a,b) => {
+        (
+          a,
+          b
+        ) => {
 
           if(
-            a.done !== b.done
+            a.done !==
+            b.done
           ){
 
             return a.done
@@ -4325,6 +3278,7 @@ function renderClassModal(){
               : -1;
 
           }
+
 
           return a.date
             .localeCompare(
@@ -4368,7 +3322,7 @@ function renderClassModal(){
 
 
 /* =========================================================
-   ACTIVITY OCCURRENCES
+   RECURRING ACTIVITIES
    ========================================================= */
 
 function occurrences(
@@ -4382,12 +3336,14 @@ function occurrences(
       task.date
     );
 
+
   const monthStart =
     new Date(
       year,
       month,
       1
     );
+
 
   const monthEnd =
     new Date(
@@ -4398,13 +3354,24 @@ function occurrences(
 
 
   if(
-    task.type !== 'activity' ||
-    task.recurrence === 'none'
+    task.type !==
+      'activity'
+
+    ||
+
+    task.recurrence ===
+      'none'
   ){
 
     return (
-      start >= monthStart &&
+      start >= monthStart
+      &&
       start <= monthEnd
+      &&
+      !isException(
+        task,
+        task.date
+      )
     )
       ? [task.date]
       : [];
@@ -4413,6 +3380,7 @@ function occurrences(
 
 
   const hardEnd =
+
     task.repeatEnd
 
       ? parseDate(
@@ -4446,7 +3414,8 @@ function occurrences(
 
 
   if(
-    task.recurrence === 'weekly'
+    task.recurrence ===
+    'weekly'
   ){
 
     let date =
@@ -4468,9 +3437,23 @@ function occurrences(
       date <= end
     ){
 
-      output.push(
-        dateStr(date)
-      );
+      const key =
+        dateStr(date);
+
+
+      if(
+        !isException(
+          task,
+          key
+        )
+      ){
+
+        output.push(
+          key
+        );
+
+      }
+
 
       date.setDate(
         date.getDate()+7
@@ -4482,7 +3465,8 @@ function occurrences(
 
 
   else if(
-    task.recurrence === 'custom'
+    task.recurrence ===
+    'custom'
   ){
 
     const days =
@@ -4502,14 +3486,25 @@ function occurrences(
       date <= end
     ){
 
+      const key =
+        dateStr(date);
+
+
       if(
         days.includes(
           date.getDay()
         )
+
+        &&
+
+        !isException(
+          task,
+          key
+        )
       ){
 
         output.push(
-          dateStr(date)
+          key
         );
 
       }
@@ -4525,7 +3520,8 @@ function occurrences(
 
 
   else if(
-    task.recurrence === 'monthly'
+    task.recurrence ===
+    'monthly'
   ){
 
     const date =
@@ -4539,13 +3535,23 @@ function occurrences(
       );
 
 
+    const key =
+      dateStr(date);
+
+
     if(
-      date >= start &&
+      date >= start
+      &&
       date <= end
+      &&
+      !isException(
+        task,
+        key
+      )
     ){
 
       output.push(
-        dateStr(date)
+        key
       );
 
     }
@@ -4567,6 +3573,7 @@ function renderCalendar(){
   const year =
     calendarCursor
       .getFullYear();
+
 
   const month =
     calendarCursor
@@ -4593,30 +3600,43 @@ function renderCalendar(){
 
 
   state.tasks
-    .filter(task =>
-      !task.done
+
+    .filter(
+      task =>
+        !task.done
     )
-    .forEach(task => {
 
-      occurrences(
-        task,
-        year,
-        month
-      )
-      .forEach(day => {
+    .forEach(
+      task => {
 
-        if(!map[day]){
-          map[day] = [];
-        }
+        occurrences(
+          task,
+          year,
+          month
+        )
+        .forEach(
+          day => {
 
-        map[day]
-          .push(
-            task
-          );
+            if(
+              !map[day]
+            ){
 
-      });
+              map[day] =
+                [];
 
-    });
+            }
+
+
+            map[day]
+              .push(
+                task
+              );
+
+          }
+        );
+
+      }
+    );
 
 
   const first =
@@ -4699,31 +3719,33 @@ function renderCalendar(){
         0,
         3
       )
-      .forEach(task => {
+      .forEach(
+        task => {
 
-        html += `
+          html += `
 
-          <button
-            class="cal-event"
-            data-detail="${esc(task.id)}"
-            data-occurrence="${key}"
-            style="--event-color:${colorFor(task)}"
-          >
+            <button
+              class="cal-event"
+              data-calendar-edit="${esc(task.id)}"
+              data-occurrence="${key}"
+              style="--event-color:${colorFor(task)}"
+            >
 
-            ${
-              task.time
-                ? niceTime(task.time) +
-                  ' · '
-                : ''
-            }
+              ${
+                task.time
+                  ? niceTime(task.time) +
+                    ' · '
+                  : ''
+              }
 
-            ${esc(task.title)}
+              ${esc(task.title)}
 
-          </button>
+            </button>
 
-        `;
+          `;
 
-      });
+        }
+      );
 
 
     html += `
@@ -4752,20 +3774,22 @@ function renderCalendar(){
         ...state.extras
       ]
 
-      .map(item => `
+      .map(
+        item => `
 
-        <span class="legend-item">
+          <span class="legend-item">
 
-          <span
-            class="legend-dot"
-            style="background:${item.color}"
-          ></span>
+            <span
+              class="legend-dot"
+              style="background:${item.color}"
+            ></span>
 
-          ${esc(item.name)}
+            ${esc(item.name)}
 
-        </span>
+          </span>
 
-      `)
+        `
+      )
 
       .join('');
 
@@ -4844,13 +3868,13 @@ function renderSettings(){
       'classEditor'
     )
     .innerHTML =
-
       state.classes
-        .map(item =>
-          row(
-            item,
-            'class'
-          )
+        .map(
+          item =>
+            row(
+              item,
+              'class'
+            )
         )
         .join('');
 
@@ -4860,13 +3884,13 @@ function renderSettings(){
       'extraEditor'
     )
     .innerHTML =
-
       state.extras
-        .map(item =>
-          row(
-            item,
-            'extra'
-          )
+        .map(
+          item =>
+            row(
+              item,
+              'extra'
+            )
         )
         .join('');
 
@@ -4903,51 +3927,55 @@ function commitSettings(){
     .querySelectorAll(
       '[data-setting-id]'
     )
-    .forEach(row => {
+    .forEach(
+      row => {
 
 
-      const list =
-        row.dataset.settingType ===
-        'class'
+        const list =
 
-          ? state.classes
-          : state.extras;
+          row.dataset.settingType ===
+          'class'
 
-
-      const item =
-        list.find(
-          entry =>
-            entry.id ===
-            row.dataset.settingId
-        );
+            ? state.classes
+            : state.extras;
 
 
-      if(item){
-
-        item.name =
-          row
-            .querySelector(
-              '[data-setting-name]'
-            )
-            .value
-            .trim()
-          ||
-          item.name;
+        const item =
+          list.find(
+            entry =>
+              entry.id ===
+              row.dataset.settingId
+          );
 
 
-        item.color =
-          row
-            .querySelector(
-              '[data-setting-color]'
-            )
-            .value;
+        if(item){
+
+          item.name =
+            row
+              .querySelector(
+                '[data-setting-name]'
+              )
+              .value
+              .trim()
+            ||
+            item.name;
+
+
+          item.color =
+            row
+              .querySelector(
+                '[data-setting-color]'
+              )
+              .value;
+
+        }
 
       }
-
-    });
+    );
 
 
   queueSave();
+
 
   renderAll();
 
@@ -4955,7 +3983,7 @@ function commitSettings(){
 
 
 /* =========================================================
-   ITEM TYPE
+   ITEM EDITOR
    ========================================================= */
 
 function setType(type){
@@ -4968,20 +3996,23 @@ function setType(type){
     .querySelectorAll(
       '#typeToggle [data-type]'
     )
-    .forEach(button => {
+    .forEach(
+      button => {
 
-      button.classList
-        .toggle(
-          'active',
-          button.dataset.type ===
-          type
-        );
+        button.classList
+          .toggle(
+            'active',
+            button.dataset.type ===
+            type
+          );
 
-    });
+      }
+    );
 
 
   const activity =
-    type === 'activity';
+    type ===
+    'activity';
 
 
   document
@@ -5019,10 +4050,6 @@ function setType(type){
 }
 
 
-/* =========================================================
-   REPEAT UI
-   ========================================================= */
-
 function updateRepeatUI(){
 
   const repeat =
@@ -5040,7 +4067,8 @@ function updateRepeatUI(){
     .classList
     .toggle(
       'hidden',
-      repeat === 'none'
+      repeat ===
+      'none'
     );
 
 
@@ -5051,23 +4079,25 @@ function updateRepeatUI(){
     .classList
     .toggle(
       'hidden',
-      repeat !== 'custom'
+      repeat !==
+      'custom'
     );
 
 }
 
 
-/* =========================================================
-   OPEN ITEM
-   ========================================================= */
-
 function openItem(
   id=null,
-  preset={}
+  preset={},
+  occurrenceDate=null
 ){
 
   editingId =
     id;
+
+
+  editingOccurrenceDate =
+    occurrenceDate;
 
 
   document
@@ -5081,11 +4111,12 @@ function openItem(
     .querySelectorAll(
       '#weekdayPicker button'
     )
-    .forEach(button =>
-      button.classList
-        .remove(
-          'active'
-        )
+    .forEach(
+      button =>
+        button.classList
+          .remove(
+            'active'
+          )
     );
 
 
@@ -5095,8 +4126,9 @@ function openItem(
   const task =
     id
       ? state.tasks
-          .find(item =>
-            item.id === id
+          .find(
+            item =>
+              item.id === id
           )
       : null;
 
@@ -5162,6 +4194,7 @@ function openItem(
       'itemDate'
     )
     .value =
+      occurrenceDate ||
       task?.date ||
       preset.date ||
       todayStr();
@@ -5227,21 +4260,24 @@ function openItem(
     task?.repeatDays ||
     []
   )
-  .forEach(day => {
+  .forEach(
+    day => {
 
-    document
-      .querySelector(
-        `#weekdayPicker [data-day="${day}"]`
-      )
-      ?.classList
-      .add(
-        'active'
-      );
+      document
+        .querySelector(
+          `#weekdayPicker [data-day="${day}"]`
+        )
+        ?.classList
+        .add(
+          'active'
+        );
 
-  });
+    }
+  );
 
 
   updateRepeatUI();
+
 
   openModal(
     'itemModal'
@@ -5249,10 +4285,6 @@ function openItem(
 
 }
 
-
-/* =========================================================
-   SAVE ITEM
-   ========================================================= */
 
 function saveItem(){
 
@@ -5288,26 +4320,39 @@ function saveItem(){
           '#weekdayPicker button.active'
         )
     ]
-    .map(button =>
-      Number(
-        button.dataset.day
-      )
+    .map(
+      button =>
+        Number(
+          button.dataset.day
+        )
     );
 
 
   const recurrence =
-    activeType === 'activity'
+
+    activeType ===
+    'activity'
+
       ? document
           .getElementById(
             'itemRepeat'
           )
           .value
+
       : 'none';
 
 
   if(
-    activeType === 'activity' &&
-    recurrence === 'custom' &&
+    activeType ===
+      'activity'
+
+    &&
+
+    recurrence ===
+      'custom'
+
+    &&
+
     !repeatDays.length
   ){
 
@@ -5315,9 +4360,23 @@ function saveItem(){
       'Choose at least one weekday.'
     );
 
+
     return;
 
   }
+
+
+  const oldTask =
+    editingId
+
+      ? state.tasks
+          .find(
+            task =>
+              task.id ===
+              editingId
+          )
+
+      : null;
 
 
   const data = {
@@ -5326,42 +4385,65 @@ function saveItem(){
       activeType,
 
     classId:
-      activeType === 'activity'
+
+      activeType ===
+      'activity'
+
         ? null
+
         : (
             document
               .getElementById(
                 'itemClass'
               )
-              .value ||
+              .value
+            ||
             null
           ),
 
     extraId:
-      activeType === 'activity'
+
+      activeType ===
+      'activity'
+
         ? (
             document
               .getElementById(
                 'itemExtra'
               )
-              .value ||
+              .value
+            ||
             null
           )
+
         : null,
 
     title,
 
-    date,
+    date:
+
+      editingOccurrenceDate
+      &&
+      isRecurring(
+        oldTask
+      )
+
+        ? oldTask.date
+
+        : date,
 
     time:
+
       document
         .getElementById(
           'itemTime'
         )
-        .value ||
+        .value
+      ||
       '',
 
     notes:
+
       document
         .getElementById(
           'itemNotes'
@@ -5372,28 +4454,53 @@ function saveItem(){
     recurrence,
 
     repeatDays:
-      activeType === 'activity'
+
+      activeType ===
+      'activity'
+
         ? repeatDays
+
         : [],
 
     repeatEnd:
-      activeType === 'activity'
+
+      activeType ===
+      'activity'
+
         ? document
             .getElementById(
               'repeatEnd'
             )
             .value
+
         : '',
 
     manualLocation:
-      activeType === 'activity'
+
+      activeType ===
+      'activity'
+
         ? document
             .getElementById(
               'manualLocation'
             )
             .value
             .trim()
-        : ''
+
+        : '',
+
+    exceptionDates:
+
+      editingId
+
+        ? (
+            oldTask
+              ?.exceptionDates
+            ||
+            []
+          )
+
+        : []
 
   };
 
@@ -5404,9 +4511,10 @@ function saveItem(){
 
     const index =
       state.tasks
-        .findIndex(task =>
-          task.id ===
-          editingId
+        .findIndex(
+          task =>
+            task.id ===
+            editingId
         );
 
 
@@ -5447,9 +4555,11 @@ function saveItem(){
 
   queueSave();
 
+
   closeModal(
     'itemModal'
   );
+
 
   renderAll();
 
@@ -5457,10 +4567,90 @@ function saveItem(){
 
 
 /* =========================================================
-   DELETE + COMPLETE
+   DELETE
    ========================================================= */
 
-function deleteItem(){
+function requestDeleteItem(){
+
+  if(
+    !editingId
+  ){
+    return;
+  }
+
+
+  const task =
+    state.tasks
+      .find(
+        item =>
+          item.id ===
+          editingId
+      );
+
+
+  if(
+    !task
+  ){
+    return;
+  }
+
+
+  if(
+    isRecurring(
+      task
+    )
+  ){
+
+    const occurrence =
+      editingOccurrenceDate ||
+      task.date;
+
+
+    document
+      .getElementById(
+        'deleteSeriesText'
+      )
+      .textContent =
+        `${task.title} repeats. What would you like to delete?`;
+
+
+    document
+      .getElementById(
+        'deleteOccurrenceSubtext'
+      )
+      .textContent =
+        `Delete ${niceDate(occurrence)} only and keep every other occurrence.`;
+
+
+    closeModal(
+      'itemModal'
+    );
+
+
+    openModal(
+      'deleteSeriesModal'
+    );
+
+  }
+
+  else{
+
+    if(
+      confirm(
+        `Delete “${task.title}”?`
+      )
+    ){
+
+      deleteEntireTask();
+
+    }
+
+  }
+
+}
+
+
+function deleteEntireTask(){
 
   if(
     !editingId
@@ -5471,29 +4661,116 @@ function deleteItem(){
 
   state.tasks =
     state.tasks
-      .filter(task =>
-        task.id !==
-        editingId
+      .filter(
+        task =>
+          task.id !==
+          editingId
       );
 
 
   queueSave();
 
+
   closeModal(
     'itemModal'
   );
+
+
+  closeModal(
+    'deleteSeriesModal'
+  );
+
+
+  editingId =
+    null;
+
+
+  editingOccurrenceDate =
+    null;
+
 
   renderAll();
 
 }
 
 
+function deleteOneOccurrence(){
+
+  if(
+    !editingId
+  ){
+    return;
+  }
+
+
+  const task =
+    state.tasks
+      .find(
+        item =>
+          item.id ===
+          editingId
+      );
+
+
+  if(
+    !task
+  ){
+    return;
+  }
+
+
+  const occurrence =
+    editingOccurrenceDate ||
+    task.date;
+
+
+  task.exceptionDates =
+
+    [
+      ...new Set(
+        [
+          ...(
+            task.exceptionDates ||
+            []
+          ),
+          occurrence
+        ]
+      )
+    ];
+
+
+  queueSave();
+
+
+  closeModal(
+    'deleteSeriesModal'
+  );
+
+
+  editingId =
+    null;
+
+
+  editingOccurrenceDate =
+    null;
+
+
+  renderAll();
+
+}
+
+
+/* =========================================================
+   COMPLETE
+   ========================================================= */
+
 function toggleComplete(id){
 
   const task =
     state.tasks
-      .find(item =>
-        item.id === id
+      .find(
+        item =>
+          item.id === id
       );
 
 
@@ -5511,6 +4788,7 @@ function toggleComplete(id){
 
   queueSave();
 
+
   renderAll();
 
 }
@@ -5523,8 +4801,11 @@ function toggleComplete(id){
 function mapsUrl(query){
 
   return (
-    'https://www.google.com/maps/search/?api=1&query=' +
-    encodeURIComponent(query)
+    'https://www.google.com/maps/search/?api=1&query='
+    +
+    encodeURIComponent(
+      query
+    )
   );
 
 }
@@ -5555,221 +4836,7 @@ function openMapsForLocation(){
 
 
 /* =========================================================
-   DETAIL
-   ========================================================= */
-
-function openDetail(
-  id,
-  occurrence
-){
-
-  const task =
-    state.tasks
-      .find(item =>
-        item.id === id
-      );
-
-
-  if(!task){
-    return;
-  }
-
-
-  document
-    .getElementById(
-      'detailTitle'
-    )
-    .textContent =
-      task.title;
-
-
-  let repeat =
-    '';
-
-
-  if(
-    task.recurrence === 'custom'
-  ){
-
-    repeat =
-      weekdayText(
-        task.repeatDays
-      );
-
-  }
-
-  else if(
-    task.recurrence === 'weekly'
-  ){
-
-    repeat =
-      'Weekly';
-
-  }
-
-  else if(
-    task.recurrence === 'monthly'
-  ){
-
-    repeat =
-      'Monthly';
-
-  }
-
-
-  document
-    .getElementById(
-      'detailBody'
-    )
-    .innerHTML = `
-
-      <p>
-        <strong>
-          Type:
-        </strong>
-
-        ${esc(task.type)}
-      </p>
-
-      <p>
-
-        <strong>
-          ${
-            task.type === 'activity'
-              ? 'Activity'
-              : 'Class'
-          }:
-        </strong>
-
-        ${esc(sourceFor(task))}
-
-      </p>
-
-      <p>
-
-        <strong>
-          Date:
-        </strong>
-
-        ${
-          niceDate(
-            occurrence ||
-            task.date
-          )
-        }
-
-        ${
-          task.time
-            ? ' at ' +
-              niceTime(task.time)
-            : ''
-        }
-
-      </p>
-
-
-      ${
-        repeat
-
-          ? `
-
-            <p>
-
-              <strong>
-                Repeats:
-              </strong>
-
-              ${esc(repeat)}
-
-            </p>
-
-          `
-
-          : ''
-      }
-
-
-      ${
-        task.manualLocation
-
-          ? `
-
-            <div
-              class="location-box"
-              style="margin:16px 0"
-            >
-
-              <strong>
-                📍 ${esc(task.manualLocation)}
-              </strong>
-
-              <div class="location-actions">
-
-                <button
-                  class="mini-btn"
-                  data-detail-map="${esc(task.manualLocation)}"
-                >
-                  Open in Maps
-                </button>
-
-              </div>
-
-            </div>
-
-          `
-
-          : ''
-      }
-
-
-      <div class="field">
-
-        <label>
-          Notes
-        </label>
-
-        <div
-          style="
-            padding:12px;
-            background:var(--paper);
-            border:1px solid var(--line);
-            border-radius:8px;
-            white-space:pre-wrap;
-          "
-        >
-
-          ${
-            task.notes
-
-              ? esc(task.notes)
-
-              : `
-
-                <span
-                  style="color:var(--ink-soft)"
-                >
-                  No notes added.
-                </span>
-
-              `
-          }
-
-        </div>
-
-      </div>
-
-    `;
-
-
-  openModal(
-    'detailModal'
-  );
-
-}
-
-
-/* =========================================================
-   RENDER ALL
+   RENDER
    ========================================================= */
 
 function renderAll(){
@@ -5792,7 +4859,10 @@ function renderAll(){
 
 
   if(
-    classModalId &&
+    classModalId
+
+    &&
+
     document
       .getElementById(
         'classModal'
@@ -5848,6 +4918,57 @@ document
       await handleAuthSubmit();
 
     };
+
+
+document
+  .getElementById(
+    'forgotPasswordButton'
+  )
+  .onclick =
+    () => {
+
+      document
+        .getElementById(
+          'forgotEmail'
+        )
+        .value =
+          document
+            .getElementById(
+              'authEmail'
+            )
+            .value
+            .trim();
+
+
+      document
+        .getElementById(
+          'forgotMessage'
+        )
+        .textContent =
+          '';
+
+
+      openModal(
+        'forgotModal'
+      );
+
+    };
+
+
+document
+  .getElementById(
+    'sendResetButton'
+  )
+  .onclick =
+    sendPasswordReset;
+
+
+document
+  .getElementById(
+    'saveNewPasswordButton'
+  )
+  .onclick =
+    saveNewPassword;
 
 
 document
@@ -5914,9 +5035,12 @@ document
           .value
           .trim();
 
+
       queueSave();
 
+
       renderAccount();
+
 
       closeModal(
         'profileModal'
@@ -5944,7 +5068,23 @@ document
     'deleteItemButton'
   )
   .onclick =
-    deleteItem;
+    requestDeleteItem;
+
+
+document
+  .getElementById(
+    'deleteOccurrenceButton'
+  )
+  .onclick =
+    deleteOneOccurrence;
+
+
+document
+  .getElementById(
+    'deleteEntireSeriesButton'
+  )
+  .onclick =
+    deleteEntireTask;
 
 
 document
@@ -5959,6 +5099,7 @@ document
           .closest(
             '[data-type]'
           );
+
 
       if(button){
 
@@ -5983,6 +5124,7 @@ document
           .closest(
             '[data-day]'
           );
+
 
       if(button){
 
@@ -6035,7 +5177,9 @@ document
           );
 
 
-      if(!button){
+      if(
+        !button
+      ){
         return;
       }
 
@@ -6048,15 +5192,17 @@ document
         .querySelectorAll(
           '#filterTabs .tab-btn'
         )
-        .forEach(item => {
+        .forEach(
+          item => {
 
-          item.classList
-            .toggle(
-              'active',
-              item === button
-            );
+            item.classList
+              .toggle(
+                'active',
+                item === button
+              );
 
-        });
+          }
+        );
 
 
       renderTaskList();
@@ -6074,9 +5220,11 @@ document
       const id =
         classModalId;
 
+
       closeModal(
         'classModal'
       );
+
 
       openItem(
         null,
@@ -6102,6 +5250,7 @@ document
             .getMonth()-1
         );
 
+
       renderCalendar();
 
     };
@@ -6120,6 +5269,7 @@ document
             .getMonth()+1
         );
 
+
       renderCalendar();
 
     };
@@ -6135,12 +5285,14 @@ document
       const now =
         new Date();
 
+
       calendarCursor =
         new Date(
           now.getFullYear(),
           now.getMonth(),
           1
         );
+
 
       renderCalendar();
 
@@ -6156,6 +5308,7 @@ document
 
       commitSettings();
 
+
       state.classes
         .push({
 
@@ -6170,9 +5323,12 @@ document
 
         });
 
+
       queueSave();
 
+
       renderSettings();
+
 
       renderSelects();
 
@@ -6188,6 +5344,7 @@ document
 
       commitSettings();
 
+
       state.extras
         .push({
 
@@ -6202,9 +5359,12 @@ document
 
         });
 
+
       queueSave();
 
+
       renderSettings();
+
 
       renderSelects();
 
@@ -6220,6 +5380,7 @@ document
 
       commitSettings();
 
+
       closeModal(
         'settingsModal'
       );
@@ -6232,39 +5393,44 @@ document
   'themeGold',
   'themePaper'
 ]
-.forEach(id => {
+.forEach(
+  id => {
 
-  document
-    .getElementById(id)
-    .oninput =
-      () => {
+    document
+      .getElementById(id)
+      .oninput =
+        () => {
 
-        state.theme.green =
-          document
-            .getElementById(
-              'themeGreen'
-            )
-            .value;
+          state.theme.green =
+            document
+              .getElementById(
+                'themeGreen'
+              )
+              .value;
 
-        state.theme.gold =
-          document
-            .getElementById(
-              'themeGold'
-            )
-            .value;
 
-        state.theme.paper =
-          document
-            .getElementById(
-              'themePaper'
-            )
-            .value;
+          state.theme.gold =
+            document
+              .getElementById(
+                'themeGold'
+              )
+              .value;
 
-        applyTheme();
 
-      };
+          state.theme.paper =
+            document
+              .getElementById(
+                'themePaper'
+              )
+              .value;
 
-});
+
+          applyTheme();
+
+        };
+
+  }
+);
 
 
 document
@@ -6286,15 +5452,17 @@ document
           .querySelectorAll(
             '.top-tab'
           )
-          .forEach(button => {
+          .forEach(
+            button => {
 
-            button.classList
-              .toggle(
-                'active',
-                button === view
-              );
+              button.classList
+                .toggle(
+                  'active',
+                  button === view
+                );
 
-          });
+            }
+          );
 
 
         document
@@ -6339,6 +5507,24 @@ document
       }
 
 
+      const calendarEdit =
+        event.target
+          .closest(
+            '[data-calendar-edit]'
+          );
+
+
+      if(calendarEdit){
+
+        openItem(
+          calendarEdit.dataset.calendarEdit,
+          {},
+          calendarEdit.dataset.occurrence
+        );
+
+      }
+
+
       const complete =
         event.target
           .closest(
@@ -6349,6 +5535,7 @@ document
       if(complete){
 
         event.stopPropagation();
+
 
         toggleComplete(
           complete.dataset.complete
@@ -6368,43 +5555,6 @@ document
 
         openClassModal(
           classButton.dataset.class
-        );
-
-      }
-
-
-      const detail =
-        event.target
-          .closest(
-            '[data-detail]'
-          );
-
-
-      if(detail){
-
-        openDetail(
-          detail.dataset.detail,
-          detail.dataset.occurrence
-        );
-
-      }
-
-
-      const detailMap =
-        event.target
-          .closest(
-            '[data-detail-map]'
-          );
-
-
-      if(detailMap){
-
-        window.open(
-          mapsUrl(
-            detailMap.dataset.detailMap
-          ),
-          '_blank',
-          'noopener'
         );
 
       }
@@ -6441,69 +5591,127 @@ document
         const id =
           remove.dataset.removeSetting;
 
+
         const type =
           remove.dataset.removeType;
 
 
         if(
-          type === 'class'
+          type ===
+          'class'
         ){
+
+          const item =
+            state.classes
+              .find(
+                entry =>
+                  entry.id === id
+              );
+
+
+          if(
+            !item
+          ){
+            return;
+          }
+
+
+          if(
+            !confirm(
+              `Delete class “${item.name}”? Its existing planner items will stay but become General.`
+            )
+          ){
+            return;
+          }
+
 
           state.classes =
             state.classes
-              .filter(item =>
-                item.id !== id
+              .filter(
+                entry =>
+                  entry.id !== id
               );
 
 
           state.tasks
-            .forEach(task => {
+            .forEach(
+              task => {
 
-              if(
-                task.classId === id
-              ){
+                if(
+                  task.classId ===
+                  id
+                ){
 
-                task.classId =
-                  null;
+                  task.classId =
+                    null;
+
+                }
 
               }
-
-            });
+            );
 
         }
 
         else{
 
+          const item =
+            state.extras
+              .find(
+                entry =>
+                  entry.id === id
+              );
+
+
+          if(
+            !item
+          ){
+            return;
+          }
+
+
+          if(
+            !confirm(
+              `Delete extracurricular “${item.name}”? Existing activities will stay but become unassigned.`
+            )
+          ){
+            return;
+          }
+
+
           state.extras =
             state.extras
-              .filter(item =>
-                item.id !== id
+              .filter(
+                entry =>
+                  entry.id !== id
               );
 
 
           state.tasks
-            .forEach(task => {
+            .forEach(
+              task => {
 
-              if(
-                task.extraId === id
-              ){
+                if(
+                  task.extraId ===
+                  id
+                ){
 
-                task.extraId =
-                  null;
+                  task.extraId =
+                    null;
+
+                }
 
               }
-
-            });
+            );
 
         }
 
 
         queueSave();
 
+
         renderAll();
 
       }
-
 
     }
   );
@@ -6513,14 +5721,15 @@ document
   .querySelectorAll(
     '.modal-overlay'
   )
-  .forEach(modal => {
+  .forEach(
+    modal => {
 
-    modal
-      .onmousedown =
+      modal.onmousedown =
         event => {
 
           if(
-            event.target === modal
+            event.target ===
+            modal
           ){
 
             closeModal(
@@ -6531,7 +5740,8 @@ document
 
         };
 
-  });
+    }
+  );
 
 
 document
@@ -6548,15 +5758,13 @@ document
           .querySelectorAll(
             '.modal-overlay.open'
           )
-          .forEach(modal => {
-
-            modal
-              .classList
-              .remove(
-                'open'
-              );
-
-          });
+          .forEach(
+            modal =>
+              modal.classList
+                .remove(
+                  'open'
+                )
+          );
 
       }
 
@@ -6565,10 +5773,98 @@ document
 
 
 /* =========================================================
-   STARTUP
+   AUTH EVENTS
+   ========================================================= */
 
-   Login screen is visible immediately.
-   No loading screen.
+sb.auth
+  .onAuthStateChange(
+    async (
+      event,
+      session
+    ) => {
+
+
+      if(
+        event ===
+        'PASSWORD_RECOVERY'
+      ){
+
+        currentUser =
+          session?.user ||
+          currentUser;
+
+
+        document
+          .getElementById(
+            'newPassword'
+          )
+          .value =
+            '';
+
+
+        document
+          .getElementById(
+            'confirmPassword'
+          )
+          .value =
+            '';
+
+
+        document
+          .getElementById(
+            'resetPasswordMessage'
+          )
+          .textContent =
+            '';
+
+
+        openModal(
+          'resetPasswordModal'
+        );
+
+      }
+
+
+      if(
+        event ===
+          'SIGNED_IN'
+
+        &&
+
+        session?.user
+
+        &&
+
+        currentUser?.id !==
+          session.user.id
+      ){
+
+        await enterApp(
+          session.user
+        );
+
+      }
+
+
+      if(
+        event ===
+        'SIGNED_OUT'
+      ){
+
+        currentUser =
+          null;
+
+
+        showAuth();
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   START
    ========================================================= */
 
 async function start(){
@@ -6591,32 +5887,51 @@ async function start(){
 
   try{
 
-    const {
-      data,
-      error
-    } =
-      await sb.auth
-        .getSession();
+    const result =
+      await Promise.race([
+
+        sb.auth
+          .getSession(),
+
+        new Promise(
+          (
+            _,
+            reject
+          ) =>
+            setTimeout(
+              () =>
+                reject(
+                  new Error(
+                    'Session timeout'
+                  )
+                ),
+              5000
+            )
+        )
+
+      ]);
 
 
-    if(error){
-
-      console.warn(
-        error
-      );
-
-    }
+    const session =
+      result
+        ?.data
+        ?.session;
 
 
     if(
-      data
-        ?.session
+      session
         ?.user
     ){
 
       await enterApp(
-        data.session.user
+        session.user
       );
+
+    }
+
+    else{
+
+      showAuth();
 
     }
 
@@ -6629,44 +5944,10 @@ async function start(){
       error
     );
 
+
+    showAuth();
+
   }
-
-
-  sb.auth
-    .onAuthStateChange(
-      async (
-        event,
-        session
-      ) => {
-
-
-        if(
-          event === 'SIGNED_IN' &&
-          session?.user &&
-          currentUser?.id !==
-          session.user.id
-        ){
-
-          await enterApp(
-            session.user
-          );
-
-        }
-
-
-        if(
-          event === 'SIGNED_OUT'
-        ){
-
-          currentUser =
-            null;
-
-          showAuth();
-
-        }
-
-      }
-    );
 
 }
 
