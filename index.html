@@ -74,10 +74,8 @@ body{
   margin:0;
   background:var(--paper);
   color:var(--ink);
-
   font-family:var(--font-body);
   line-height:1.45;
-
   -webkit-font-smoothing:antialiased;
 }
 
@@ -123,20 +121,16 @@ textarea{
   position:sticky;
   top:0;
   z-index:40;
-
   background:var(--green);
   color:#F5F3EE;
-
   border-bottom:1px solid rgba(0,0,0,.15);
 }
 
 .app-header .wrap{
   display:grid;
   grid-template-columns:1fr auto 1fr;
-
   align-items:center;
   gap:16px;
-
   padding-top:14px;
   padding-bottom:14px;
 }
@@ -150,43 +144,28 @@ textarea{
 .brand-sub{
   font-family:var(--font-mono);
   font-size:12px;
-
   opacity:.75;
-
   margin-top:2px;
-
   text-transform:uppercase;
   letter-spacing:.08em;
 }
 
-
-/* =========================================================
-   TOP NAVIGATION
-   ========================================================= */
-
 .top-tabs{
   display:flex;
-
   gap:4px;
   padding:4px;
-
   background:rgba(255,255,255,.10);
-
   border-radius:999px;
 }
 
 .top-tab{
   border:none;
-
   background:transparent;
   color:rgba(255,255,255,.72);
-
   border-radius:999px;
-
   padding:9px 16px;
-
-  font-size:13px;
   font-weight:700;
+  font-size:13px;
 }
 
 .top-tab.active{
@@ -194,15 +173,9 @@ textarea{
   color:var(--green);
 }
 
-
-/* =========================================================
-   HEADER ACTIONS
-   ========================================================= */
-
 .header-actions{
   display:flex;
   justify-content:flex-end;
-
   gap:8px;
 }
 
@@ -214,17 +187,12 @@ textarea{
 .btn{
   border:none;
   border-radius:999px;
-
   padding:11px 18px;
-
   font-weight:600;
   font-size:14px;
-
   display:inline-flex;
   align-items:center;
-
   gap:8px;
-
   transition:
     transform .15s ease,
     box-shadow .15s ease,
@@ -238,21 +206,18 @@ textarea{
 .btn-primary{
   background:var(--gold);
   color:var(--ink);
-
   box-shadow:0 4px 12px rgba(0,0,0,.2);
 }
 
 .btn-outline-light{
   background:rgba(255,255,255,.08);
   color:#fff;
-
   border:1px solid rgba(255,255,255,.35);
 }
 
 .btn-ghost{
   background:transparent;
   color:var(--ink-soft);
-
   border:1px solid var(--line);
 }
 
@@ -261,22 +226,11 @@ textarea{
   color:var(--danger);
 }
 
-.btn-small{
-  padding:7px 13px;
-  font-size:13px;
-}
-
 .icon{
   width:16px;
   height:16px;
-
   flex:none;
 }
-
-
-/* =========================================================
-   MAIN
-   ========================================================= */
 
 main{
   padding-bottom:80px;
@@ -293,14 +247,10 @@ main{
 
 .section-head{
   display:flex;
-
   align-items:baseline;
   justify-content:space-between;
-
   gap:12px;
-
   margin-bottom:14px;
-
   flex-wrap:wrap;
 }
 
@@ -311,10 +261,8 @@ main{
 
 .section-note{
   font-family:var(--font-mono);
-
   font-size:12px;
   color:var(--ink-soft);
-
   text-transform:uppercase;
   letter-spacing:.06em;
 }
@@ -326,45 +274,29 @@ main{
 
 .deadline-shell{
   background:var(--card);
-
   border:1px solid var(--line);
   border-radius:var(--radius-lg);
-
   padding:18px;
-
   box-shadow:var(--shadow-card);
 }
 
 .deadline-grid{
   display:grid;
-
-  grid-template-columns:
-    repeat(4,minmax(0,1fr));
-
+  grid-template-columns:repeat(4,minmax(0,1fr));
   gap:12px;
 }
 
 .deadline-card{
   border:1px solid var(--line);
-
-  border-top:
-    4px solid var(--accent,#8A8578);
-
+  border-top:4px solid var(--accent,#8A8578);
   border-radius:var(--radius-md);
-
   padding:14px;
-
   background:var(--paper);
-
   text-align:left;
-
   min-height:132px;
-
   display:flex;
   flex-direction:column;
-
   gap:8px;
-
   transition:
     transform .15s ease,
     box-shadow .15s ease;
@@ -372,54 +304,39 @@ main{
 
 .deadline-card:hover{
   transform:translateY(-2px);
-
-  box-shadow:
-    0 8px 20px rgba(28,27,25,.08);
+  box-shadow:0 8px 20px rgba(28,27,25,.08);
 }
 
 .deadline-class{
   font-family:var(--font-mono);
-
   font-size:10.5px;
-
   letter-spacing:.06em;
   text-transform:uppercase;
-
   color:var(--accent);
-
   font-weight:700;
 }
 
 .deadline-title{
   font-family:var(--font-display);
-
   font-weight:600;
   font-size:16px;
-
   line-height:1.25;
 }
 
 .deadline-meta{
   margin-top:auto;
-
   font-family:var(--font-mono);
-
   font-size:11px;
   color:var(--ink-soft);
 }
 
 .deadline-badge{
   display:inline-block;
-
   margin-top:6px;
-
   padding:4px 8px;
-
   border-radius:999px;
-
   font-size:10px;
   font-weight:700;
-
   font-family:var(--font-mono);
 }
 
@@ -445,40 +362,25 @@ main{
 
 .classes-grid{
   display:grid;
-
-  grid-template-columns:
-    repeat(auto-fill,minmax(230px,1fr));
-
+  grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
   gap:14px;
 }
 
 .class-card{
   background:var(--card);
-
   border-radius:var(--radius-md);
-
-  border-left:
-    7px solid var(--accent);
-
+  border-left:7px solid var(--accent);
   border-top:none;
   border-right:none;
   border-bottom:none;
-
   box-shadow:var(--shadow-card);
-
   padding:16px 16px 14px;
-
   text-align:left;
-
   display:flex;
   flex-direction:column;
-
   gap:6px;
-
   min-height:96px;
-
   width:100%;
-
   transition:
     transform .15s ease,
     box-shadow .15s ease;
@@ -486,47 +388,33 @@ main{
 
 .class-card:hover{
   transform:translateY(-3px);
-
-  box-shadow:
-    0 10px 24px rgba(28,27,25,.12);
+  box-shadow:0 10px 24px rgba(28,27,25,.12);
 }
 
 .class-name{
   font-size:17px;
   font-weight:600;
-
   font-family:var(--font-display);
-
   color:var(--ink);
 }
 
 .class-meta{
   display:flex;
-
   align-items:center;
   justify-content:space-between;
-
   margin-top:auto;
-
   font-family:var(--font-mono);
-
   font-size:11.5px;
-
   color:var(--ink-soft);
-
   text-transform:uppercase;
-
   letter-spacing:.04em;
 }
 
 .pill-count{
   background:var(--paper-deep);
   color:var(--ink-soft);
-
   border-radius:999px;
-
   padding:3px 9px;
-
   font-weight:700;
 }
 
@@ -537,27 +425,21 @@ main{
 
 
 /* =========================================================
-   FILTER TABS
+   FILTERS
    ========================================================= */
 
 .filter-tabs{
   display:flex;
-
   gap:8px;
-
   flex-wrap:wrap;
 }
 
 .tab-btn{
   background:var(--paper-deep);
   color:var(--ink-soft);
-
   border:none;
-
   border-radius:999px;
-
   padding:8px 15px;
-
   font-size:13px;
   font-weight:600;
 }
@@ -574,90 +456,23 @@ main{
 
 .task-list{
   margin-top:16px;
-
   display:flex;
   flex-direction:column;
-
   gap:9px;
-
   min-height:80px;
 }
 
 .task-row{
   background:var(--card);
-
   border-radius:var(--radius-sm);
-
   box-shadow:var(--shadow-card);
-
   padding:12px 14px;
-
   display:grid;
-
   grid-template-columns:auto 1fr auto;
-
   align-items:center;
-
   gap:12px;
-
-  border-left:
-    4px solid var(--accent,#8A8578);
-
-  transition:
-    opacity .15s ease,
-    transform .15s ease;
+  border-left:4px solid var(--accent,#8A8578);
 }
-
-.task-row.removing{
-  opacity:0;
-  transform:translateY(4px);
-}
-
-
-/* =========================================================
-   TASK COMPLETION
-   ========================================================= */
-
-.check{
-  width:21px;
-  height:21px;
-
-  border-radius:50%;
-
-  border:2px solid var(--line);
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  background:#fff;
-
-  padding:0;
-}
-
-.check svg{
-  width:12px;
-  height:12px;
-
-  opacity:0;
-}
-
-.item-dot{
-  width:10px;
-  height:10px;
-
-  border-radius:50%;
-
-  background:var(--accent);
-
-  margin:0 5px;
-}
-
-
-/* =========================================================
-   TASK TEXT
-   ========================================================= */
 
 .task-main{
   min-width:0;
@@ -671,57 +486,41 @@ main{
 
 .task-meta{
   font-family:var(--font-mono);
-
   font-size:11.5px;
-
   color:var(--ink-soft);
-
   margin-top:2px;
-
   text-transform:uppercase;
-
   letter-spacing:.03em;
 }
 
 .type-badge{
   font-family:var(--font-mono);
-
   font-size:10px;
-
   text-transform:uppercase;
-
   letter-spacing:.05em;
-
   padding:2px 7px;
-
   border-radius:5px;
-
   background:var(--paper-deep);
-
   color:var(--ink-soft);
-
   font-weight:700;
 }
 
-
-/* =========================================================
-   ROW ACTIONS
-   ========================================================= */
+.item-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--accent);
+  margin:0 5px;
+}
 
 .icon-btn{
   background:transparent;
-
   border:none;
-
   color:var(--ink-soft);
-
   width:30px;
   height:30px;
-
   border-radius:50%;
-
   display:flex;
-
   align-items:center;
   justify-content:center;
 }
@@ -732,39 +531,43 @@ main{
 
 
 /* =========================================================
-   COMPLETED ITEMS
+   COMPLETION
    ========================================================= */
 
-.completed-wrap{
-  margin-top:12px;
-}
-
-.completed-toggle{
-  border:none;
-
-  background:transparent;
-
-  color:var(--ink-soft);
-
-  font-family:var(--font-mono);
-
-  font-size:11px;
-  font-weight:700;
-
-  padding:6px 0;
-}
-
-.completed-list{
-  margin-top:8px;
-
+.check{
+  width:21px;
+  height:21px;
+  border-radius:50%;
+  border:2px solid var(--line);
   display:flex;
-  flex-direction:column;
-
-  gap:8px;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  padding:0;
 }
 
-.completed-list .task-row{
-  opacity:.55;
+.check svg{
+  width:12px;
+  height:12px;
+  opacity:0;
+}
+
+.task-row.done{
+  opacity:.58;
+}
+
+.task-row.done .task-title{
+  text-decoration:line-through;
+  text-decoration-thickness:1.5px;
+}
+
+.task-row.done .check{
+  background:var(--green);
+  border-color:var(--green);
+}
+
+.task-row.done .check svg{
+  opacity:1;
 }
 
 
@@ -774,29 +577,19 @@ main{
 
 .empty-state{
   text-align:center;
-
   padding:38px 20px;
-
   color:var(--ink-soft);
-
   background:var(--card);
-
   border-radius:var(--radius-md);
-
   border:1.5px dashed var(--line);
 }
 
 .empty-state strong{
   display:block;
-
   font-family:var(--font-display);
-
   font-size:17px;
-
   color:var(--ink);
-
   margin-bottom:4px;
-
   font-weight:600;
 }
 
@@ -807,95 +600,65 @@ main{
 
 .calendar-shell{
   background:var(--card);
-
   border:1px solid var(--line);
-
   border-radius:var(--radius-lg);
-
   box-shadow:var(--shadow-card);
-
   overflow:hidden;
-
   margin-top:22px;
 }
 
 .calendar-head{
   display:flex;
-
   justify-content:space-between;
   align-items:center;
-
   padding:18px 20px;
-
   border-bottom:1px solid var(--line);
 }
 
 .month-title{
   font-family:var(--font-display);
-
   font-size:24px;
   font-weight:600;
 }
 
 .cal-controls{
   display:flex;
-
   gap:8px;
 }
 
 .cal-btn{
   border:1px solid var(--line);
-
   background:var(--paper);
-
   border-radius:10px;
-
   padding:8px 11px;
-
   font-weight:700;
 }
-
-
-/* =========================================================
-   CALENDAR GRID
-   ========================================================= */
 
 .calendar-week,
 .calendar-grid{
   display:grid;
-
-  grid-template-columns:
-    repeat(7,1fr);
+  grid-template-columns:repeat(7,1fr);
 }
 
 .calendar-week{
   background:var(--paper-deep);
-
   border-bottom:1px solid var(--line);
 }
 
 .week-label{
   text-align:center;
-
   padding:8px;
-
   font-family:var(--font-mono);
-
   font-size:10px;
-
   color:var(--ink-soft);
-
   text-transform:uppercase;
 }
 
 .day-cell{
   min-height:126px;
-
   padding:7px;
-
   border-right:1px solid var(--line);
   border-bottom:1px solid var(--line);
-
   background:#fff;
 }
 
@@ -909,18 +672,12 @@ main{
 
 .day-num{
   font-family:var(--font-mono);
-
   font-size:11px;
-
   color:var(--ink-soft);
-
   width:26px;
   height:26px;
-
   display:grid;
-
   place-items:center;
-
   border-radius:8px;
 }
 
@@ -929,73 +686,46 @@ main{
   color:#fff;
 }
 
-
-/* =========================================================
-   CALENDAR EVENTS
-   ========================================================= */
-
 .cal-event{
   display:block;
-
   width:100%;
-
   border:none;
-
   text-align:left;
-
   border-radius:7px;
-
   padding:5px 6px;
-
   margin-top:4px;
-
   background:
     color-mix(
       in srgb,
       var(--event-color) 12%,
       white
     );
-
-  border-left:
-    3px solid var(--event-color);
-
+  border-left:3px solid var(--event-color);
   font-size:10.5px;
-
   white-space:nowrap;
-
   overflow:hidden;
-
   text-overflow:ellipsis;
 }
 
 .calendar-legend{
   display:flex;
-
   gap:12px;
-
   flex-wrap:wrap;
-
   padding:12px 18px;
-
   font-family:var(--font-mono);
-
   font-size:10.5px;
-
   color:var(--ink-soft);
 }
 
 .legend-item{
   display:flex;
-
   align-items:center;
-
   gap:5px;
 }
 
 .legend-dot{
   width:8px;
   height:8px;
-
   border-radius:50%;
 }
 
@@ -1006,20 +736,13 @@ main{
 
 .modal-overlay{
   position:fixed;
-
   inset:0;
-
   background:rgba(28,27,25,.55);
-
   backdrop-filter:blur(2px);
-
   display:none;
-
   align-items:center;
   justify-content:center;
-
   z-index:100;
-
   padding:20px;
 }
 
@@ -1029,20 +752,13 @@ main{
 
 .modal-box{
   background:var(--card);
-
   border-radius:var(--radius-lg);
-
   box-shadow:var(--shadow-modal);
-
   width:100%;
   max-width:520px;
-
   max-height:90vh;
-
   overflow-y:auto;
-
   padding:26px 26px 22px;
-
   position:relative;
 }
 
@@ -1052,43 +768,30 @@ main{
 
 .modal-close{
   position:absolute;
-
   top:16px;
   right:16px;
-
   background:var(--paper-deep);
-
   border:none;
-
   width:30px;
   height:30px;
-
   border-radius:50%;
-
   display:flex;
-
   align-items:center;
   justify-content:center;
-
   color:var(--ink-soft);
 }
 
 .modal-title{
   font-size:21px;
   font-weight:600;
-
   padding-right:30px;
 }
 
 .modal-accent-bar{
   height:6px;
-
   border-radius:999px;
-
   background:var(--green);
-
   width:52px;
-
   margin-top:8px;
   margin-bottom:18px;
 }
@@ -1104,19 +807,12 @@ main{
 
 .field label{
   display:block;
-
   font-family:var(--font-mono);
-
   font-size:11px;
-
   text-transform:uppercase;
-
   letter-spacing:.06em;
-
   color:var(--ink-soft);
-
   margin-bottom:6px;
-
   font-weight:700;
 }
 
@@ -1126,17 +822,11 @@ main{
 .field select,
 .field textarea{
   width:100%;
-
   border:1.5px solid var(--line);
-
   border-radius:var(--radius-sm);
-
   padding:10px 12px;
-
   font-size:14.5px;
-
   background:var(--paper);
-
   color:var(--ink);
 }
 
@@ -1147,7 +837,6 @@ main{
 
 .field-row{
   display:flex;
-
   gap:12px;
 }
 
@@ -1155,62 +844,65 @@ main{
   flex:1;
 }
 
-
-/* =========================================================
-   TYPE SELECTOR
-   ========================================================= */
-
 .type-toggle{
   display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
+  grid-template-columns:repeat(4,1fr);
   gap:8px;
 }
 
 .type-toggle button{
   border:1.5px solid var(--line);
-
   background:var(--paper);
-
   border-radius:var(--radius-sm);
-
   padding:9px 6px;
-
   font-size:12px;
   font-weight:600;
-
   color:var(--ink-soft);
 }
 
 .type-toggle button.active{
   border-color:var(--green);
-
   background:var(--green-pale);
-
   color:var(--green);
 }
 
-
-/* =========================================================
-   FORM ACTIONS
-   ========================================================= */
-
 .form-actions{
   display:flex;
-
   justify-content:space-between;
-
   gap:10px;
-
   margin-top:6px;
 }
 
 .action-right{
   display:flex;
-
   gap:10px;
+}
+
+
+/* =========================================================
+   WEEKDAY PICKER
+   ========================================================= */
+
+.weekday-picker{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:7px;
+}
+
+.weekday-picker button{
+  border:1.5px solid var(--line);
+  background:var(--paper);
+  color:var(--ink-soft);
+  height:38px;
+  border-radius:10px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.weekday-picker button.active{
+  background:var(--green);
+  border-color:var(--green);
+  color:#fff;
 }
 
 
@@ -1220,7 +912,6 @@ main{
 
 .settings-section{
   padding:16px 0;
-
   border-top:1px solid var(--line);
 }
 
@@ -1230,109 +921,93 @@ main{
 
 .settings-title{
   font-family:var(--font-display);
-
   font-size:18px;
-
   font-weight:600;
 }
 
 .settings-copy{
   color:var(--ink-soft);
-
   font-size:12px;
-
   margin:4px 0 12px;
 }
 
 .color-grid{
   display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
+  grid-template-columns:repeat(3,1fr);
   gap:10px;
 }
 
 .color-card{
   background:var(--paper);
-
   border:1px solid var(--line);
-
   border-radius:10px;
-
   padding:10px;
 }
 
 .color-card input{
   width:100%;
   height:38px;
-
   border:0;
-
   background:transparent;
 }
 
-
-/* =========================================================
-   SETTINGS EDITORS
-   ========================================================= */
-
 .editor-list{
   display:flex;
-
   flex-direction:column;
-
   gap:8px;
 }
 
 .editor-row{
   display:grid;
-
-  grid-template-columns:
-    38px 1fr auto;
-
+  grid-template-columns:38px 1fr auto;
   gap:8px;
-
   align-items:center;
 }
 
 .editor-row input[type=color]{
   width:38px;
   height:38px;
-
   border:0;
-
   background:transparent;
 }
 
 .editor-row input[type=text]{
   width:100%;
-
   border:1px solid var(--line);
-
   border-radius:8px;
-
   padding:9px;
-
   background:var(--paper);
 }
 
 .add-inline{
   width:100%;
-
   margin-top:8px;
-
   border:1px dashed var(--line);
-
   background:transparent;
-
   border-radius:9px;
-
   padding:9px;
-
   font-weight:700;
-
   color:var(--green);
+}
+
+
+/* =========================================================
+   CLASS MODAL
+   ========================================================= */
+
+.class-modal-list{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.class-modal-actions{
+  margin-top:16px;
+}
+
+.class-modal-actions .btn{
+  width:100%;
+  justify-content:center;
 }
 
 
@@ -1342,13 +1017,9 @@ main{
 
 footer{
   text-align:center;
-
   padding:30px 20px 40px;
-
   color:var(--ink-soft);
-
   font-family:var(--font-mono);
-
   font-size:11.5px;
 }
 
@@ -1360,12 +1031,10 @@ footer{
 @media(max-width:900px){
 
   .deadline-grid{
-    grid-template-columns:
-      repeat(2,1fr);
+    grid-template-columns:repeat(2,1fr);
   }
 
 }
-
 
 @media(max-width:640px){
 
@@ -1374,14 +1043,12 @@ footer{
   }
 
   .app-header .wrap{
-    grid-template-columns:
-      1fr auto;
+    grid-template-columns:1fr auto;
   }
 
   .top-tabs{
     grid-column:1 / -1;
     grid-row:2;
-
     justify-self:stretch;
   }
 
@@ -1412,8 +1079,7 @@ footer{
   }
 
   .type-toggle{
-    grid-template-columns:
-      repeat(2,1fr);
+    grid-template-columns:repeat(2,1fr);
   }
 
   .color-grid{
@@ -1422,26 +1088,20 @@ footer{
 
   .day-cell{
     min-height:92px;
-
     padding:4px;
   }
 
   .cal-event{
     font-size:0;
-
     min-height:9px;
   }
 
   .cal-event::after{
     content:'';
-
     display:block;
-
     width:6px;
     height:6px;
-
     border-radius:50%;
-
     background:var(--event-color);
   }
 
@@ -1450,33 +1110,16 @@ footer{
 </style>
 </head>
 
-
 <body>
-
-
-<!-- =======================================================
-     HEADER
-     ======================================================= -->
 
 <header class="app-header">
 
   <div class="wrap">
 
     <div>
-
-      <div class="brand-title">
-        Homeroom
-      </div>
-
-      <div
-        class="brand-sub"
-        id="todayLabel"
-      >
-        —
-      </div>
-
+      <div class="brand-title">Homeroom</div>
+      <div class="brand-sub" id="todayLabel">—</div>
     </div>
-
 
     <div class="top-tabs">
 
@@ -1496,7 +1139,6 @@ footer{
 
     </div>
 
-
     <div class="header-actions">
 
       <button
@@ -1504,11 +1146,8 @@ footer{
         id="openSettingsBtn"
         aria-label="Settings"
       >
-
         ⚙
-
       </button>
-
 
       <button
         class="btn btn-primary"
@@ -1520,19 +1159,15 @@ footer{
           viewBox="0 0 20 20"
           fill="none"
         >
-
           <path
             d="M10 4v12M4 10h12"
             stroke="currentColor"
             stroke-width="2.2"
             stroke-linecap="round"
           />
-
         </svg>
 
-        <span class="btn-label">
-          Add
-        </span>
+        <span class="btn-label">Add</span>
 
       </button>
 
@@ -1543,22 +1178,16 @@ footer{
 </header>
 
 
-
-<!-- =======================================================
-     MAIN
-     ======================================================= -->
-
 <main class="wrap">
 
-
   <!-- =====================================================
-       PLANNER VIEW
+       PLANNER
        ===================================================== -->
 
   <div id="plannerView">
 
 
-    <!-- Upcoming deadlines -->
+    <!-- DEADLINES -->
 
     <section
       class="section"
@@ -1577,7 +1206,6 @@ footer{
 
       </div>
 
-
       <div class="deadline-shell">
 
         <div
@@ -1590,8 +1218,7 @@ footer{
     </section>
 
 
-
-    <!-- Classes -->
+    <!-- CLASSES -->
 
     <section class="section">
 
@@ -1607,7 +1234,6 @@ footer{
 
       </div>
 
-
       <div
         class="classes-grid"
         id="classesGrid"
@@ -1616,8 +1242,7 @@ footer{
     </section>
 
 
-
-    <!-- Everything -->
+    <!-- EVERYTHING -->
 
     <section class="section">
 
@@ -1626,7 +1251,6 @@ footer{
         <h2 class="section-title">
           Everything
         </h2>
-
 
         <div
           class="filter-tabs"
@@ -1640,14 +1264,12 @@ footer{
             All
           </button>
 
-
           <button
             class="tab-btn"
             data-filter="assignment"
           >
             Assignments
           </button>
-
 
           <button
             class="tab-btn"
@@ -1656,14 +1278,12 @@ footer{
             Deadlines
           </button>
 
-
           <button
             class="tab-btn"
             data-filter="reminder"
           >
             Reminders
           </button>
-
 
           <button
             class="tab-btn"
@@ -1676,41 +1296,18 @@ footer{
 
       </div>
 
-
       <div
         class="task-list"
         id="taskList"
       ></div>
-
-
-      <div
-        class="completed-wrap hidden"
-        id="completedWrap"
-      >
-
-        <button
-          class="completed-toggle"
-          id="completedToggle"
-        >
-          Show completed
-        </button>
-
-
-        <div
-          class="completed-list hidden"
-          id="completedList"
-        ></div>
-
-      </div>
 
     </section>
 
   </div>
 
 
-
   <!-- =====================================================
-       CALENDAR VIEW
+       CALENDAR
        ===================================================== -->
 
   <div
@@ -1732,9 +1329,7 @@ footer{
 
       </div>
 
-
       <div class="calendar-shell">
-
 
         <div class="calendar-head">
 
@@ -1742,7 +1337,6 @@ footer{
             class="month-title"
             id="monthTitle"
           ></div>
-
 
           <div class="cal-controls">
 
@@ -1771,8 +1365,6 @@ footer{
 
         </div>
 
-
-
         <div class="calendar-week">
 
           <div class="week-label">Sun</div>
@@ -1785,12 +1377,10 @@ footer{
 
         </div>
 
-
         <div
           class="calendar-grid"
           id="calendarGrid"
         ></div>
-
 
         <div
           class="calendar-legend"
@@ -1806,17 +1396,13 @@ footer{
 </main>
 
 
-
 <footer>
-
   Built for your own binder — everything saves right in this browser.
-
 </footer>
 
 
-
 <!-- =======================================================
-     ADD / EDIT ITEM MODAL
+     ADD / EDIT ITEM
      ======================================================= -->
 
 <div
@@ -1826,7 +1412,6 @@ footer{
 
   <div class="modal-box">
 
-
     <button
       class="modal-close"
       data-close="itemModal"
@@ -1835,7 +1420,6 @@ footer{
       ✕
     </button>
 
-
     <h3
       class="modal-title"
       id="itemModalTitle"
@@ -1843,21 +1427,18 @@ footer{
       Add to your planner
     </h3>
 
-
     <div class="modal-accent-bar"></div>
-
 
     <form id="taskForm">
 
 
-      <!-- Type -->
+      <!-- TYPE -->
 
       <div class="field">
 
         <label>
           Type
         </label>
-
 
         <div
           class="type-toggle"
@@ -1872,7 +1453,6 @@ footer{
             Assignment
           </button>
 
-
           <button
             type="button"
             data-type="deadline"
@@ -1880,14 +1460,12 @@ footer{
             Deadline
           </button>
 
-
           <button
             type="button"
             data-type="reminder"
           >
             Reminder
           </button>
-
 
           <button
             type="button"
@@ -1901,8 +1479,7 @@ footer{
       </div>
 
 
-
-      <!-- Class -->
+      <!-- CLASS -->
 
       <div
         class="field"
@@ -1918,8 +1495,7 @@ footer{
       </div>
 
 
-
-      <!-- Extracurricular -->
+      <!-- EXTRACURRICULAR -->
 
       <div
         class="field hidden"
@@ -1935,8 +1511,7 @@ footer{
       </div>
 
 
-
-      <!-- Title -->
+      <!-- TITLE -->
 
       <div class="field">
 
@@ -1954,11 +1529,9 @@ footer{
       </div>
 
 
-
-      <!-- Date / Time -->
+      <!-- DATE / TIME -->
 
       <div class="field-row">
-
 
         <div class="field">
 
@@ -1973,7 +1546,6 @@ footer{
           />
 
         </div>
-
 
         <div class="field">
 
@@ -1991,14 +1563,12 @@ footer{
       </div>
 
 
-
-      <!-- Activity-only fields -->
+      <!-- ACTIVITY FIELDS -->
 
       <div
         id="activityFields"
         class="hidden"
       >
-
 
         <div class="field">
 
@@ -2015,9 +1585,7 @@ footer{
         </div>
 
 
-
         <div class="field-row">
-
 
           <div class="field">
 
@@ -2035,8 +1603,8 @@ footer{
                 Every week
               </option>
 
-              <option value="weekdays">
-                Every weekday
+              <option value="custom">
+                Specific weekdays
               </option>
 
               <option value="monthly">
@@ -2046,7 +1614,6 @@ footer{
             </select>
 
           </div>
-
 
 
           <div
@@ -2067,11 +1634,80 @@ footer{
 
         </div>
 
+
+        <!-- CUSTOM WEEKDAYS -->
+
+        <div
+          class="field hidden"
+          id="weekdayField"
+        >
+
+          <label>
+            Repeat on
+          </label>
+
+          <div
+            class="weekday-picker"
+            id="weekdayPicker"
+          >
+
+            <button
+              type="button"
+              data-day="0"
+            >
+              S
+            </button>
+
+            <button
+              type="button"
+              data-day="1"
+            >
+              M
+            </button>
+
+            <button
+              type="button"
+              data-day="2"
+            >
+              T
+            </button>
+
+            <button
+              type="button"
+              data-day="3"
+            >
+              W
+            </button>
+
+            <button
+              type="button"
+              data-day="4"
+            >
+              T
+            </button>
+
+            <button
+              type="button"
+              data-day="5"
+            >
+              F
+            </button>
+
+            <button
+              type="button"
+              data-day="6"
+            >
+              S
+            </button>
+
+          </div>
+
+        </div>
+
       </div>
 
 
-
-      <!-- Notes -->
+      <!-- NOTES -->
 
       <div class="field">
 
@@ -2087,11 +1723,9 @@ footer{
       </div>
 
 
-
-      <!-- Actions -->
+      <!-- ACTIONS -->
 
       <div class="form-actions">
-
 
         <button
           type="button"
@@ -2101,9 +1735,7 @@ footer{
           Delete
         </button>
 
-
         <div class="action-right">
-
 
           <button
             type="button"
@@ -2112,7 +1744,6 @@ footer{
           >
             Cancel
           </button>
-
 
           <button
             type="submit"
@@ -2132,9 +1763,8 @@ footer{
 </div>
 
 
-
 <!-- =======================================================
-     SETTINGS MODAL
+     SETTINGS
      ======================================================= -->
 
 <div
@@ -2144,7 +1774,6 @@ footer{
 
   <div class="modal-box wide">
 
-
     <button
       class="modal-close"
       data-close="settingsModal"
@@ -2153,17 +1782,14 @@ footer{
       ✕
     </button>
 
-
     <h3 class="modal-title">
       Settings
     </h3>
 
-
     <div class="modal-accent-bar"></div>
 
 
-
-    <!-- Appearance -->
+    <!-- APP COLORS -->
 
     <div class="settings-section">
 
@@ -2175,9 +1801,7 @@ footer{
         Change the header, accent, and page background.
       </div>
 
-
       <div class="color-grid">
-
 
         <div class="color-card">
 
@@ -2192,8 +1816,6 @@ footer{
 
         </div>
 
-
-
         <div class="color-card">
 
           <label>
@@ -2206,8 +1828,6 @@ footer{
           />
 
         </div>
-
-
 
         <div class="color-card">
 
@@ -2227,8 +1847,7 @@ footer{
     </div>
 
 
-
-    <!-- Classes -->
+    <!-- CLASSES -->
 
     <div class="settings-section">
 
@@ -2240,12 +1859,10 @@ footer{
         Rename, recolor, add, or remove classes.
       </div>
 
-
       <div
         class="editor-list"
         id="classEditor"
       ></div>
-
 
       <button
         class="add-inline"
@@ -2257,8 +1874,7 @@ footer{
     </div>
 
 
-
-    <!-- Extracurriculars -->
+    <!-- EXTRACURRICULARS -->
 
     <div class="settings-section">
 
@@ -2270,12 +1886,10 @@ footer{
         Activities can be tied to an extracurricular and use its color.
       </div>
 
-
       <div
         class="editor-list"
         id="extraEditor"
       ></div>
-
 
       <button
         class="add-inline"
@@ -2285,7 +1899,6 @@ footer{
       </button>
 
     </div>
-
 
 
     <div
@@ -2307,9 +1920,8 @@ footer{
 </div>
 
 
-
 <!-- =======================================================
-     CALENDAR EVENT DETAILS
+     CALENDAR DETAILS
      ======================================================= -->
 
 <div
@@ -2319,7 +1931,6 @@ footer{
 
   <div class="modal-box">
 
-
     <button
       class="modal-close"
       data-close="detailModal"
@@ -2328,7 +1939,6 @@ footer{
       ✕
     </button>
 
-
     <h3
       class="modal-title"
       id="detailTitle"
@@ -2336,9 +1946,7 @@ footer{
       Event
     </h3>
 
-
     <div class="modal-accent-bar"></div>
-
 
     <div id="detailBody"></div>
 
@@ -2346,6 +1954,57 @@ footer{
 
 </div>
 
+
+<!-- =======================================================
+     CLASS VIEW
+     ======================================================= -->
+
+<div
+  class="modal-overlay"
+  id="classModal"
+>
+
+  <div class="modal-box">
+
+    <button
+      class="modal-close"
+      data-close="classModal"
+      aria-label="Close"
+    >
+      ✕
+    </button>
+
+    <h3
+      class="modal-title"
+      id="classModalTitle"
+    >
+      Class
+    </h3>
+
+    <div
+      class="modal-accent-bar"
+      id="classModalAccent"
+    ></div>
+
+    <div
+      class="class-modal-list"
+      id="classModalList"
+    ></div>
+
+    <div class="class-modal-actions">
+
+      <button
+        class="btn btn-primary"
+        id="classModalAddBtn"
+      >
+        + Add assignment
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
 
 
 <script>
@@ -2363,12 +2022,11 @@ const OLD_KEY =
   'homeroom-tasks-v1';
 
 const STATE_KEY =
-  'homeroom-state-v2';
-
+  'homeroom-state-v3';
 
 
 /* =========================================================
-   DEFAULT THEME
+   DEFAULTS
    ========================================================= */
 
 const DEFAULT_THEME = {
@@ -2381,11 +2039,6 @@ const DEFAULT_THEME = {
 
 };
 
-
-
-/* =========================================================
-   DEFAULT CLASSES
-   ========================================================= */
 
 const DEFAULT_CLASSES = [
 
@@ -2440,11 +2093,6 @@ const DEFAULT_CLASSES = [
 ];
 
 
-
-/* =========================================================
-   DEFAULT EXTRACURRICULARS
-   ========================================================= */
-
 const DEFAULT_EXTRAS = [
 
   {
@@ -2454,7 +2102,6 @@ const DEFAULT_EXTRAS = [
   }
 
 ];
-
 
 
 /* =========================================================
@@ -2473,9 +2120,6 @@ let activeType =
 let editingId =
   null;
 
-let completedOpen =
-  false;
-
 let calendarCursor =
   new Date(
     new Date().getFullYear(),
@@ -2483,6 +2127,8 @@ let calendarCursor =
     1
   );
 
+let classModalId =
+  null;
 
 
 /* =========================================================
@@ -2508,150 +2154,6 @@ function clone(value){
 
 }
 
-
-
-/* =========================================================
-   LOAD STATE
-   ========================================================= */
-
-function loadState(){
-
-  try{
-
-    const saved =
-      JSON.parse(
-        localStorage.getItem(STATE_KEY) || 'null'
-      );
-
-    if(
-      saved &&
-      saved.version === 2
-    ){
-
-      return saved;
-
-    }
-
-  }
-
-  catch(error){}
-
-
-  let oldTasks = [];
-
-
-  try{
-
-    oldTasks =
-      JSON.parse(
-        localStorage.getItem(OLD_KEY) || '[]'
-      );
-
-  }
-
-  catch(error){}
-
-
-  const migrated =
-    Array.isArray(oldTasks)
-
-      ? oldTasks.map(task => ({
-
-          id:
-            task.id || uid(),
-
-          type:
-            task.type === 'homework'
-              ? 'assignment'
-              : (
-                  task.type ||
-                  'assignment'
-                ),
-
-          classId:
-            task.classId || null,
-
-          extraId:
-            null,
-
-          title:
-            task.title || 'Untitled',
-
-          date:
-            task.date || todayStr(),
-
-          time:
-            task.time || '',
-
-          notes:
-            task.notes || '',
-
-          location:
-            '',
-
-          recurrence:
-            'none',
-
-          repeatEnd:
-            '',
-
-          done:
-            !!task.done,
-
-          createdAt:
-            task.createdAt ||
-            Date.now()
-
-        }))
-
-      : [];
-
-
-  const initialState = {
-
-    version:2,
-
-    tasks:migrated,
-
-    classes:
-      clone(DEFAULT_CLASSES),
-
-    extras:
-      clone(DEFAULT_EXTRAS),
-
-    theme:{
-      ...DEFAULT_THEME
-    }
-
-  };
-
-
-  localStorage.setItem(
-    STATE_KEY,
-    JSON.stringify(initialState)
-  );
-
-
-  return initialState;
-
-}
-
-
-
-function save(){
-
-  localStorage.setItem(
-    STATE_KEY,
-    JSON.stringify(state)
-  );
-
-}
-
-
-
-/* =========================================================
-   DATE HELPERS
-   ========================================================= */
 
 function pad(number){
 
@@ -2742,12 +2244,10 @@ function formatTimeNice(time){
     return '';
   }
 
-
   const [hours,minutes] =
     time
       .split(':')
       .map(Number);
-
 
   return (
     `${((hours+11)%12)+1}:` +
@@ -2757,11 +2257,6 @@ function formatTimeNice(time){
 
 }
 
-
-
-/* =========================================================
-   HTML ESCAPING
-   ========================================================= */
 
 function esc(value){
 
@@ -2780,9 +2275,199 @@ function esc(value){
 }
 
 
+/* =========================================================
+   LOAD / SAVE STATE
+   ========================================================= */
+
+function loadState(){
+
+  try{
+
+    const saved =
+      JSON.parse(
+        localStorage.getItem(STATE_KEY) || 'null'
+      );
+
+    if(
+      saved &&
+      saved.version === 3
+    ){
+
+      return saved;
+
+    }
+
+  }
+
+  catch(error){}
+
+
+  let previousState = null;
+
+
+  try{
+
+    previousState =
+      JSON.parse(
+        localStorage.getItem(
+          'homeroom-state-v2'
+        ) || 'null'
+      );
+
+  }
+
+  catch(error){}
+
+
+  if(previousState){
+
+    const upgraded = {
+
+      ...previousState,
+
+      version:3,
+
+      tasks:
+        (previousState.tasks || [])
+          .map(task => ({
+
+            ...task,
+
+            repeatDays:
+              task.repeatDays || []
+
+          }))
+
+    };
+
+
+    localStorage.setItem(
+      STATE_KEY,
+      JSON.stringify(upgraded)
+    );
+
+
+    return upgraded;
+
+  }
+
+
+  let oldTasks = [];
+
+
+  try{
+
+    oldTasks =
+      JSON.parse(
+        localStorage.getItem(OLD_KEY) || '[]'
+      );
+
+  }
+
+  catch(error){}
+
+
+  const migrated =
+
+    Array.isArray(oldTasks)
+
+      ? oldTasks.map(task => ({
+
+          id:
+            task.id || uid(),
+
+          type:
+            task.type === 'homework'
+              ? 'assignment'
+              : (
+                  task.type ||
+                  'assignment'
+                ),
+
+          classId:
+            task.classId || null,
+
+          extraId:
+            null,
+
+          title:
+            task.title || 'Untitled',
+
+          date:
+            task.date || todayStr(),
+
+          time:
+            task.time || '',
+
+          notes:
+            task.notes || '',
+
+          location:
+            '',
+
+          recurrence:
+            'none',
+
+          repeatDays:
+            [],
+
+          repeatEnd:
+            '',
+
+          done:
+            !!task.done,
+
+          createdAt:
+            task.createdAt ||
+            Date.now()
+
+        }))
+
+      : [];
+
+
+  const initialState = {
+
+    version:3,
+
+    tasks:migrated,
+
+    classes:
+      clone(DEFAULT_CLASSES),
+
+    extras:
+      clone(DEFAULT_EXTRAS),
+
+    theme:{
+      ...DEFAULT_THEME
+    }
+
+  };
+
+
+  localStorage.setItem(
+    STATE_KEY,
+    JSON.stringify(initialState)
+  );
+
+
+  return initialState;
+
+}
+
+
+function save(){
+
+  localStorage.setItem(
+    STATE_KEY,
+    JSON.stringify(state)
+  );
+
+}
+
 
 /* =========================================================
-   DATA LOOKUPS
+   LOOKUPS
    ========================================================= */
 
 function classById(id){
@@ -2804,11 +2489,6 @@ function extraById(id){
 
 }
 
-
-
-/* =========================================================
-   ITEM COLORS
-   ========================================================= */
 
 function colorFor(task){
 
@@ -2837,11 +2517,6 @@ function colorFor(task){
 }
 
 
-
-/* =========================================================
-   ITEM SOURCE NAME
-   ========================================================= */
-
 function sourceName(task){
 
   if(
@@ -2869,11 +2544,6 @@ function sourceName(task){
 }
 
 
-
-/* =========================================================
-   COMPLETION RULE
-   ========================================================= */
-
 function checkable(task){
 
   return (
@@ -2882,7 +2552,6 @@ function checkable(task){
   );
 
 }
-
 
 
 /* =========================================================
@@ -2896,8 +2565,8 @@ function repeatLabel(value){
     weekly:
       'Weekly',
 
-    weekdays:
-      'Weekdays',
+    custom:
+      'Custom days',
 
     monthly:
       'Monthly'
@@ -2906,6 +2575,37 @@ function repeatLabel(value){
 
 }
 
+
+function weekdayLabel(days){
+
+  const labels = [
+    'Sun',
+    'Mon',
+    'Tue',
+    'Wed',
+    'Thu',
+    'Fri',
+    'Sat'
+  ];
+
+
+  if(
+    !days ||
+    days.length === 0
+  ){
+
+    return '';
+
+  }
+
+
+  return days
+    .map(day =>
+      labels[day]
+    )
+    .join(', ');
+
+}
 
 
 /* =========================================================
@@ -2940,15 +2640,16 @@ function applyTheme(){
 }
 
 
-
 /* =========================================================
-   HEADER DATE
+   HEADER
    ========================================================= */
 
 function initHeader(){
 
   document
-    .getElementById('todayLabel')
+    .getElementById(
+      'todayLabel'
+    )
     .textContent =
 
       new Date()
@@ -2964,16 +2665,16 @@ function initHeader(){
 }
 
 
-
 /* =========================================================
-   FORM SELECTS
+   SELECTS
    ========================================================= */
 
 function fillSelects(){
 
-
   document
-    .getElementById('f-class')
+    .getElementById(
+      'f-class'
+    )
     .innerHTML =
 
       '<option value="">No class / general</option>' +
@@ -2990,7 +2691,9 @@ function fillSelects(){
 
 
   document
-    .getElementById('f-extra')
+    .getElementById(
+      'f-extra'
+    )
     .innerHTML =
 
       '<option value="">No extracurricular</option>' +
@@ -3006,7 +2709,6 @@ function fillSelects(){
         .join('');
 
 }
-
 
 
 /* =========================================================
@@ -3026,6 +2728,7 @@ function renderDeadlines(){
 
 
   const deadlines =
+
     state.tasks
 
       .filter(task =>
@@ -3034,12 +2737,15 @@ function renderDeadlines(){
       )
 
       .map(task => ({
+
         ...task,
+
         delta:
           daysBetween(
             today,
             task.date
           )
+
       }))
 
       .filter(task =>
@@ -3054,7 +2760,6 @@ function renderDeadlines(){
       )
 
       .slice(0,4);
-
 
 
   if(
@@ -3083,8 +2788,8 @@ function renderDeadlines(){
   }
 
 
-
   container.innerHTML =
+
     deadlines
       .map(task => {
 
@@ -3136,13 +2841,11 @@ function renderDeadlines(){
 
             </div>
 
-
             <div class="deadline-title">
 
               ${esc(task.title)}
 
             </div>
-
 
             <div class="deadline-meta">
 
@@ -3157,13 +2860,10 @@ function renderDeadlines(){
 
             </div>
 
-
             <span
               class="deadline-badge ${badgeClass}"
             >
-
               ${label}
-
             </span>
 
           </button>
@@ -3171,10 +2871,10 @@ function renderDeadlines(){
         `;
 
       })
+
       .join('');
 
 }
-
 
 
 /* =========================================================
@@ -3215,7 +2915,6 @@ function renderClasses(){
   }
 
 
-
   grid.innerHTML =
 
     state.classes
@@ -3245,7 +2944,7 @@ function renderClasses(){
 
           <button
             class="class-card"
-            data-class="${esc(schoolClass.id)}"
+            data-class-open="${esc(schoolClass.id)}"
             style="--accent:${schoolClass.color}"
           >
 
@@ -3255,13 +2954,11 @@ function renderClasses(){
 
             </div>
 
-
             <div class="class-meta">
 
               <span>
                 View work
               </span>
-
 
               <span
                 class="pill-count ${
@@ -3288,15 +2985,11 @@ function renderClasses(){
 }
 
 
-
 /* =========================================================
    TASK ROW
    ========================================================= */
 
-function taskRow(
-  task,
-  completed=false
-){
+function taskRow(task){
 
   const leftSide =
 
@@ -3307,7 +3000,11 @@ function taskRow(
         <button
           class="check"
           data-complete="${esc(task.id)}"
-          aria-label="Mark complete"
+          aria-label="${
+            task.done
+              ? 'Mark incomplete'
+              : 'Mark complete'
+          }"
         >
 
           <svg
@@ -3338,47 +3035,55 @@ function taskRow(
       `;
 
 
+  const metadata = [
 
-  const metadata =
-    [
+    sourceName(task),
 
-      sourceName(task),
+    formatDateNice(task.date),
 
-      formatDateNice(task.date),
+    task.time
+      ? formatTimeNice(task.time)
+      : '',
 
-      task.time
-        ? formatTimeNice(task.time)
-        : '',
+    task.location || '',
 
-      task.location || '',
+    (
+      task.type === 'activity' &&
+      task.recurrence === 'custom'
+    )
+      ? weekdayLabel(
+          task.repeatDays || []
+        )
+      : '',
 
-      (
-        task.type === 'activity' &&
-        task.recurrence !== 'none'
-      )
-        ? repeatLabel(
-            task.recurrence
-          )
-        : ''
+    (
+      task.type === 'activity' &&
+      task.recurrence !== 'none' &&
+      task.recurrence !== 'custom'
+    )
+      ? repeatLabel(
+          task.recurrence
+        )
+      : ''
 
-    ]
-
-    .filter(Boolean)
-
-    .join(' · ');
-
+  ]
+  .filter(Boolean)
+  .join(' · ');
 
 
   return `
 
     <div
-      class="task-row"
+      class="task-row ${
+        task.done
+          ? 'done'
+          : ''
+      }"
       data-row="${esc(task.id)}"
       style="--accent:${colorFor(task)}"
     >
 
       ${leftSide}
-
 
       <div
         class="task-main"
@@ -3386,39 +3091,27 @@ function taskRow(
       >
 
         <div class="task-title">
-
           ${esc(task.title)}
-
         </div>
-
 
         <div class="task-meta">
 
           ${esc(metadata)}
 
           <span class="type-badge">
-
-            ${
-              completed
-                ? 'completed'
-                : esc(task.type)
-            }
-
+            ${esc(task.type)}
           </span>
 
         </div>
 
       </div>
 
-
       <button
         class="icon-btn"
         data-open="${esc(task.id)}"
         aria-label="Edit"
       >
-
         •••
-
       </button>
 
     </div>
@@ -3428,43 +3121,52 @@ function taskRow(
 }
 
 
-
 /* =========================================================
    TASK LIST
    ========================================================= */
 
 function renderTaskList(){
 
-
-  let openTasks =
+  let items =
 
     state.tasks
 
       .filter(task =>
 
-        !task.done &&
-
-        (
-          activeFilter === 'all' ||
-          task.type === activeFilter
-        )
+        activeFilter === 'all' ||
+        task.type === activeFilter
 
       )
 
-      .sort(
-        (a,b) =>
-          a.date.localeCompare(b.date)
-      );
+      .sort((a,b) => {
 
+        if(
+          a.done !== b.done
+        ){
+
+          return a.done
+            ? 1
+            : -1;
+
+        }
+
+        return a.date
+          .localeCompare(
+            b.date
+          );
+
+      });
 
 
   document
-    .getElementById('taskList')
+    .getElementById(
+      'taskList'
+    )
     .innerHTML =
 
-      openTasks.length
+      items.length
 
-        ? openTasks
+        ? items
             .map(task =>
               taskRow(task)
             )
@@ -3485,91 +3187,155 @@ function renderTaskList(){
 
         `;
 
+}
 
 
-  const completedTasks =
+/* =========================================================
+   CLASS MODAL
+   ========================================================= */
 
-    state.tasks
+function openClassModal(id){
 
-      .filter(task =>
-
-        task.done &&
-
-        (
-          activeFilter === 'all' ||
-          task.type === activeFilter
-        )
-
-      )
-
-      .sort(
-        (a,b) =>
-          a.date.localeCompare(b.date)
-      );
+  classModalId =
+    id;
 
 
+  const schoolClass =
+    classById(id);
 
-  document
-    .getElementById(
-      'completedWrap'
-    )
-    .classList
-    .toggle(
-      'hidden',
-      !completedTasks.length
-    );
 
+  if(
+    !schoolClass
+  ){
+
+    return;
+
+  }
 
 
   document
     .getElementById(
-      'completedList'
-    )
-    .innerHTML =
-
-      completedTasks
-
-        .map(task =>
-          taskRow(
-            task,
-            true
-          )
-        )
-
-        .join('');
-
-
-
-  document
-    .getElementById(
-      'completedList'
-    )
-    .classList
-    .toggle(
-      'hidden',
-      !completedOpen
-    );
-
-
-
-  document
-    .getElementById(
-      'completedToggle'
+      'classModalTitle'
     )
     .textContent =
+      schoolClass.name;
 
-      completedOpen
 
-        ? 'Hide completed'
+  document
+    .getElementById(
+      'classModalAccent'
+    )
+    .style
+    .background =
+      schoolClass.color;
 
-        : `Show completed (${completedTasks.length})`;
+
+  renderClassModal();
+
+
+  openModal(
+    'classModal'
+  );
 
 }
 
 
+function renderClassModal(){
+
+  if(
+    !classModalId
+  ){
+
+    return;
+
+  }
+
+
+  const schoolClass =
+    classById(classModalId);
+
+
+  if(
+    !schoolClass
+  ){
+
+    return;
+
+  }
+
+
+  const items =
+
+    state.tasks
+
+      .filter(task =>
+        task.classId ===
+          classModalId
+      )
+
+      .sort((a,b) => {
+
+        if(
+          a.done !== b.done
+        ){
+
+          return a.done
+            ? 1
+            : -1;
+
+        }
+
+        return a.date
+          .localeCompare(
+            b.date
+          );
+
+      });
+
+
+  const list =
+    document.getElementById(
+      'classModalList'
+    );
+
+
+  if(
+    items.length === 0
+  ){
+
+    list.innerHTML = `
+
+      <div class="empty-state">
+
+        <strong>
+          You have no work for this class
+        </strong>
+
+        Nothing has been added for
+        ${esc(schoolClass.name)} yet.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+
+    items
+      .map(task =>
+        taskRow(task)
+      )
+      .join('');
+
+}
+
 
 /* =========================================================
-   CALENDAR RECURRENCE
+   CALENDAR OCCURRENCES
    ========================================================= */
 
 function occurrences(
@@ -3579,7 +3345,9 @@ function occurrences(
 ){
 
   const start =
-    parseLocalDate(task.date);
+    parseLocalDate(
+      task.date
+    );
 
 
   const monthStart =
@@ -3617,7 +3385,6 @@ function occurrences(
   }
 
 
-
   const hardEnd =
 
     task.repeatEnd
@@ -3633,13 +3400,11 @@ function occurrences(
         );
 
 
-
   const end =
 
     hardEnd < monthEnd
       ? hardEnd
       : monthEnd;
-
 
 
   const output = [];
@@ -3652,7 +3417,6 @@ function occurrences(
     return output;
 
   }
-
 
 
   if(
@@ -3691,10 +3455,13 @@ function occurrences(
   }
 
 
-
   if(
-    task.recurrence === 'weekdays'
+    task.recurrence === 'custom'
   ){
+
+    const days =
+      task.repeatDays || [];
+
 
     let date =
       new Date(
@@ -3709,8 +3476,9 @@ function occurrences(
     ){
 
       if(
-        date.getDay() !== 0 &&
-        date.getDay() !== 6
+        days.includes(
+          date.getDay()
+        )
       ){
 
         output.push(
@@ -3727,7 +3495,6 @@ function occurrences(
     }
 
   }
-
 
 
   if(
@@ -3768,13 +3535,11 @@ function occurrences(
 }
 
 
-
 /* =========================================================
    CALENDAR
    ========================================================= */
 
 function renderCalendar(){
-
 
   const year =
     calendarCursor.getFullYear();
@@ -3786,7 +3551,6 @@ function renderCalendar(){
 
   const today =
     todayStr();
-
 
 
   document
@@ -3805,9 +3569,7 @@ function renderCalendar(){
         );
 
 
-
   const occurrenceMap = {};
-
 
 
   state.tasks
@@ -3842,7 +3604,6 @@ function renderCalendar(){
     });
 
 
-
   const firstDay =
     new Date(
       year,
@@ -3861,7 +3622,6 @@ function renderCalendar(){
 
 
   let html = '';
-
 
 
   for(
@@ -3894,13 +3654,11 @@ function renderCalendar(){
       <div
         class="
           day-cell
-
           ${
             date.getMonth() !== month
               ? 'other'
               : ''
           }
-
           ${
             dateString === today
               ? 'today'
@@ -3918,7 +3676,6 @@ function renderCalendar(){
     `;
 
 
-
     items
       .slice(0,3)
       .forEach(task => {
@@ -3927,20 +3684,14 @@ function renderCalendar(){
         html += `
 
           <button
-
             class="cal-event"
-
             data-detail="${esc(task.id)}"
-
             data-date="${dateString}"
-
             style="
               --event-color:
               ${colorFor(task)}
             "
-
             title="${esc(task.title)}"
-
           >
 
             ${
@@ -3959,7 +3710,6 @@ function renderCalendar(){
       });
 
 
-
     html += `
 
       </div>
@@ -3969,14 +3719,12 @@ function renderCalendar(){
   }
 
 
-
   document
     .getElementById(
       'calendarGrid'
     )
     .innerHTML =
       html;
-
 
 
   document
@@ -4013,13 +3761,11 @@ function renderCalendar(){
 }
 
 
-
 /* =========================================================
    SETTINGS
    ========================================================= */
 
 function renderSettings(){
-
 
   document
     .getElementById(
@@ -4045,7 +3791,6 @@ function renderSettings(){
       state.theme.paper;
 
 
-
   const row =
     (
       item,
@@ -4064,28 +3809,23 @@ function renderSettings(){
           data-color
         />
 
-
         <input
           type="text"
           value="${esc(item.name)}"
           data-name
         />
 
-
         <button
           class="icon-btn"
           data-remove-setting="${esc(item.id)}"
           data-kind="${kind}"
         >
-
           ✕
-
         </button>
 
       </div>
 
     `;
-
 
 
   document
@@ -4095,16 +3835,13 @@ function renderSettings(){
     .innerHTML =
 
       state.classes
-
         .map(item =>
           row(
             item,
             'class'
           )
         )
-
         .join('');
-
 
 
   document
@@ -4114,22 +3851,19 @@ function renderSettings(){
     .innerHTML =
 
       state.extras
-
         .map(item =>
           row(
             item,
             'extra'
           )
         )
-
         .join('');
 
 }
 
 
-
 /* =========================================================
-   RENDER EVERYTHING
+   RENDER ALL
    ========================================================= */
 
 function renderAll(){
@@ -4148,12 +3882,19 @@ function renderAll(){
 
   renderSettings();
 
+  if(
+    classModalId
+  ){
+
+    renderClassModal();
+
+  }
+
 }
 
 
-
 /* =========================================================
-   TYPE SELECTION
+   TYPE
    ========================================================= */
 
 function setType(type){
@@ -4178,10 +3919,8 @@ function setType(type){
     );
 
 
-
   const isActivity =
     type === 'activity';
-
 
 
   document
@@ -4219,7 +3958,6 @@ function setType(type){
 }
 
 
-
 /* =========================================================
    MODALS
    ========================================================= */
@@ -4244,9 +3982,8 @@ function closeModal(id){
 }
 
 
-
 /* =========================================================
-   OPEN ADD / EDIT ITEM
+   OPEN ITEM
    ========================================================= */
 
 function openItem(
@@ -4268,8 +4005,18 @@ function openItem(
   fillSelects();
 
 
+  document
+    .querySelectorAll(
+      '#weekdayPicker button'
+    )
+    .forEach(button =>
+      button.classList
+        .remove('active')
+    );
+
 
   const task =
+
     id
 
       ? state.tasks
@@ -4278,7 +4025,6 @@ function openItem(
           )
 
       : null;
-
 
 
   document
@@ -4292,7 +4038,6 @@ function openItem(
         : 'Add to your planner';
 
 
-
   document
     .getElementById(
       'deleteItemBtn'
@@ -4302,7 +4047,6 @@ function openItem(
       'hidden',
       !task
     );
-
 
 
   setType(
@@ -4316,16 +4060,18 @@ function openItem(
   );
 
 
-
   document
-    .getElementById('f-title')
+    .getElementById(
+      'f-title'
+    )
     .value =
       task?.title || '';
 
 
-
   document
-    .getElementById('f-date')
+    .getElementById(
+      'f-date'
+    )
     .value =
 
       task?.date ||
@@ -4335,16 +4081,18 @@ function openItem(
       todayStr();
 
 
-
   document
-    .getElementById('f-time')
+    .getElementById(
+      'f-time'
+    )
     .value =
       task?.time || '';
 
 
-
   document
-    .getElementById('f-class')
+    .getElementById(
+      'f-class'
+    )
     .value =
 
       task?.classId ||
@@ -4354,27 +4102,31 @@ function openItem(
       '';
 
 
-
   document
-    .getElementById('f-extra')
+    .getElementById(
+      'f-extra'
+    )
     .value =
-      task?.extraId || '';
-
+      task?.extraId ||
+      '';
 
 
   document
-    .getElementById('f-location')
+    .getElementById(
+      'f-location'
+    )
     .value =
-      task?.location || '';
-
+      task?.location ||
+      '';
 
 
   document
-    .getElementById('f-repeat')
+    .getElementById(
+      'f-repeat'
+    )
     .value =
       task?.recurrence ||
       'none';
-
 
 
   document
@@ -4386,7 +4138,6 @@ function openItem(
       '';
 
 
-
   document
     .getElementById(
       'f-notes'
@@ -4396,6 +4147,36 @@ function openItem(
       '';
 
 
+  const repeatDays =
+    task?.repeatDays || [];
+
+
+  document
+    .querySelectorAll(
+      '#weekdayPicker button'
+    )
+    .forEach(button => {
+
+      button.classList
+        .toggle(
+          'active',
+          repeatDays.includes(
+            Number(
+              button.dataset.day
+            )
+          )
+        );
+
+    });
+
+
+  const repeatValue =
+    document
+      .getElementById(
+        'f-repeat'
+      )
+      .value;
+
 
   document
     .getElementById(
@@ -4403,23 +4184,25 @@ function openItem(
     )
     .classList
     .toggle(
-
       'hidden',
-
-      document
-        .getElementById(
-          'f-repeat'
-        )
-        .value === 'none'
-
+      repeatValue === 'none'
     );
 
+
+  document
+    .getElementById(
+      'weekdayField'
+    )
+    .classList
+    .toggle(
+      'hidden',
+      repeatValue !== 'custom'
+    );
 
 
   openModal(
     'itemModal'
   );
-
 
 
   setTimeout(
@@ -4437,16 +4220,29 @@ function openItem(
 }
 
 
-
 /* =========================================================
    SAVE ITEM
    ========================================================= */
 
 function saveItem(){
 
+  const repeatDays =
+
+    [
+      ...document
+        .querySelectorAll(
+          '#weekdayPicker button.active'
+        )
+    ]
+
+    .map(button =>
+      Number(
+        button.dataset.day
+      )
+    );
+
 
   const data = {
-
 
     type:
       activeType,
@@ -4553,6 +4349,15 @@ function saveItem(){
         : 'none',
 
 
+    repeatDays:
+
+      activeType === 'activity'
+
+        ? repeatDays
+
+        : [],
+
+
     repeatEnd:
 
       activeType === 'activity'
@@ -4568,7 +4373,6 @@ function saveItem(){
   };
 
 
-
   if(
     !data.title ||
     !data.date
@@ -4578,6 +4382,20 @@ function saveItem(){
 
   }
 
+
+  if(
+    activeType === 'activity' &&
+    data.recurrence === 'custom' &&
+    data.repeatDays.length === 0
+  ){
+
+    alert(
+      'Choose at least one weekday for this recurring activity.'
+    );
+
+    return;
+
+  }
 
 
   if(
@@ -4628,7 +4446,6 @@ function saveItem(){
   }
 
 
-
   save();
 
   closeModal(
@@ -4640,9 +4457,8 @@ function saveItem(){
 }
 
 
-
 /* =========================================================
-   DELETE ITEM
+   DELETE
    ========================================================= */
 
 function deleteItem(){
@@ -4678,13 +4494,11 @@ function deleteItem(){
 }
 
 
-
 /* =========================================================
-   COMPLETE ITEM
+   COMPLETE / UNCOMPLETE
    ========================================================= */
 
 function complete(id){
-
 
   const task =
 
@@ -4705,46 +4519,19 @@ function complete(id){
   }
 
 
-
-  const row =
-
-    document
-      .querySelector(
-        `[data-row="${CSS.escape(id)}"]`
-      );
+  task.done =
+    !task.done;
 
 
-  if(row){
+  save();
 
-    row.classList
-      .add('removing');
-
-  }
-
-
-
-  setTimeout(
-    () => {
-
-      task.done =
-        true;
-
-      save();
-
-      renderAll();
-
-    },
-
-    150
-
-  );
+  renderAll();
 
 }
 
 
-
 /* =========================================================
-   CALENDAR DETAIL MODAL
+   CALENDAR DETAIL
    ========================================================= */
 
 function openDetail(
@@ -4770,7 +4557,6 @@ function openDetail(
   }
 
 
-
   document
     .getElementById(
       'detailTitle'
@@ -4779,13 +4565,43 @@ function openDetail(
       task.title;
 
 
+  let repeatText = '';
+
+
+  if(
+    task.type === 'activity'
+  ){
+
+    if(
+      task.recurrence === 'custom'
+    ){
+
+      repeatText =
+        weekdayLabel(
+          task.repeatDays || []
+        );
+
+    }
+
+    else if(
+      task.recurrence !== 'none'
+    ){
+
+      repeatText =
+        repeatLabel(
+          task.recurrence
+        );
+
+    }
+
+  }
+
 
   document
     .getElementById(
       'detailBody'
     )
     .innerHTML = `
-
 
       <p>
 
@@ -4796,7 +4612,6 @@ function openDetail(
         ${esc(task.type)}
 
       </p>
-
 
       <p>
 
@@ -4813,7 +4628,6 @@ function openDetail(
         ${esc(sourceName(task))}
 
       </p>
-
 
       <p>
 
@@ -4839,7 +4653,6 @@ function openDetail(
 
       </p>
 
-
       ${
         task.location
 
@@ -4860,13 +4673,31 @@ function openDetail(
           : ''
       }
 
+      ${
+        repeatText
+
+          ? `
+
+            <p>
+
+              <strong>
+                Repeats:
+              </strong>
+
+              ${esc(repeatText)}
+
+            </p>
+
+          `
+
+          : ''
+      }
 
       <div class="field">
 
         <label>
           Notes
         </label>
-
 
         <div
           style="
@@ -4891,9 +4722,7 @@ function openDetail(
                     var(--ink-soft)
                   "
                 >
-
                   No notes added.
-
                 </span>
 
               `
@@ -4906,7 +4735,6 @@ function openDetail(
     `;
 
 
-
   openModal(
     'detailModal'
   );
@@ -4914,13 +4742,11 @@ function openDetail(
 }
 
 
-
 /* =========================================================
-   SAVE SETTINGS
+   SETTINGS SAVE
    ========================================================= */
 
 function commitSettings(){
-
 
   state.theme.green =
 
@@ -4949,7 +4775,6 @@ function commitSettings(){
       .value;
 
 
-
   document
     .querySelectorAll(
       '[data-row-id]'
@@ -4966,7 +4791,6 @@ function commitSettings(){
           : state.extras;
 
 
-
       const item =
 
         collection
@@ -4977,9 +4801,7 @@ function commitSettings(){
           );
 
 
-
       if(item){
-
 
         item.name =
 
@@ -4991,7 +4813,6 @@ function commitSettings(){
             .trim()
 
           || item.name;
-
 
 
         item.color =
@@ -5007,13 +4828,11 @@ function commitSettings(){
     });
 
 
-
   save();
 
   applyTheme();
 
 }
-
 
 
 /* =========================================================
@@ -5026,9 +4845,7 @@ document
     event => {
 
 
-      /* -----------------------------------------
-         Planner / Calendar navigation
-         ----------------------------------------- */
+      /* VIEW SWITCH */
 
       const viewButton =
         event.target.closest(
@@ -5037,7 +4854,6 @@ document
 
 
       if(viewButton){
-
 
         document
           .querySelectorAll(
@@ -5081,10 +4897,7 @@ document
       }
 
 
-
-      /* -----------------------------------------
-         Open planner item
-         ----------------------------------------- */
+      /* OPEN ITEM */
 
       const openButton =
         event.target.closest(
@@ -5101,10 +4914,7 @@ document
       }
 
 
-
-      /* -----------------------------------------
-         Complete assignment/deadline
-         ----------------------------------------- */
+      /* COMPLETE */
 
       const completionButton =
         event.target.closest(
@@ -5125,10 +4935,7 @@ document
       }
 
 
-
-      /* -----------------------------------------
-         Calendar detail
-         ----------------------------------------- */
+      /* CALENDAR DETAIL */
 
       const detailButton =
         event.target.closest(
@@ -5153,10 +4960,26 @@ document
       }
 
 
+      /* OPEN CLASS */
 
-      /* -----------------------------------------
-         Close modal
-         ----------------------------------------- */
+      const classButton =
+        event.target.closest(
+          '[data-class-open]'
+        );
+
+
+      if(classButton){
+
+        openClassModal(
+          classButton
+            .dataset
+            .classOpen
+        );
+
+      }
+
+
+      /* CLOSE */
 
       const closeButton =
         event.target.closest(
@@ -5175,82 +4998,7 @@ document
       }
 
 
-
-      /* -----------------------------------------
-         Class click
-         ----------------------------------------- */
-
-      const classButton =
-        event.target.closest(
-          '[data-class]'
-        );
-
-
-      if(classButton){
-
-
-        const classId =
-          classButton
-            .dataset
-            .class;
-
-
-        activeFilter =
-          'all';
-
-
-        renderTaskList();
-
-
-
-        document
-          .querySelectorAll(
-            '#taskList .task-row'
-          )
-          .forEach(row => {
-
-
-            const task =
-
-              state.tasks
-                .find(
-                  item =>
-                    item.id ===
-                    row.dataset.row
-                );
-
-
-            row.classList
-              .toggle(
-
-                'hidden',
-
-                !task ||
-
-                task.classId !==
-                  classId
-
-              );
-
-          });
-
-
-
-        document
-          .getElementById(
-            'taskList'
-          )
-          .scrollIntoView({
-            behavior:'smooth'
-          });
-
-      }
-
-
-
-      /* -----------------------------------------
-         Remove class/extracurricular
-         ----------------------------------------- */
+      /* REMOVE CLASS / EXTRA */
 
       const removeSetting =
         event.target.closest(
@@ -5259,7 +5007,6 @@ document
 
 
       if(removeSetting){
-
 
         commitSettings();
 
@@ -5275,7 +5022,6 @@ document
           removeSetting.dataset.kind ===
           'class'
         ){
-
 
           state.classes =
 
@@ -5303,7 +5049,6 @@ document
         }
 
         else{
-
 
           state.extras =
 
@@ -5341,9 +5086,8 @@ document
   );
 
 
-
 /* =========================================================
-   CLICK OUTSIDE MODALS
+   MODAL BACKDROP
    ========================================================= */
 
 document
@@ -5373,7 +5117,6 @@ document
   );
 
 
-
 /* =========================================================
    ADD BUTTON
    ========================================================= */
@@ -5389,9 +5132,8 @@ document
   );
 
 
-
 /* =========================================================
-   SETTINGS BUTTON
+   SETTINGS
    ========================================================= */
 
 document
@@ -5412,7 +5154,6 @@ document
   );
 
 
-
 /* =========================================================
    TYPE TOGGLE
    ========================================================= */
@@ -5424,7 +5165,6 @@ document
   .addEventListener(
     'click',
     event => {
-
 
       const button =
         event.target.closest(
@@ -5444,9 +5184,87 @@ document
   );
 
 
+/* =========================================================
+   WEEKDAY PICKER
+   ========================================================= */
+
+document
+  .getElementById(
+    'weekdayPicker'
+  )
+  .addEventListener(
+    'click',
+    event => {
+
+      const button =
+        event.target.closest(
+          '[data-day]'
+        );
+
+
+      if(
+        !button
+      ){
+
+        return;
+
+      }
+
+
+      button
+        .classList
+        .toggle(
+          'active'
+        );
+
+    }
+  );
+
 
 /* =========================================================
-   FORM SUBMIT
+   REPEAT CHANGE
+   ========================================================= */
+
+document
+  .getElementById(
+    'f-repeat'
+  )
+  .addEventListener(
+    'change',
+    event => {
+
+
+      const value =
+        event.target.value;
+
+
+      document
+        .getElementById(
+          'repeatEndField'
+        )
+        .classList
+        .toggle(
+          'hidden',
+          value === 'none'
+        );
+
+
+      document
+        .getElementById(
+          'weekdayField'
+        )
+        .classList
+        .toggle(
+          'hidden',
+          value !== 'custom'
+        );
+
+    }
+  );
+
+
+/* =========================================================
+   SAVE TASK
    ========================================================= */
 
 document
@@ -5465,9 +5283,8 @@ document
   );
 
 
-
 /* =========================================================
-   DELETE ITEM
+   DELETE
    ========================================================= */
 
 document
@@ -5478,39 +5295,6 @@ document
     'click',
     deleteItem
   );
-
-
-
-/* =========================================================
-   REPEAT FIELD
-   ========================================================= */
-
-document
-  .getElementById(
-    'f-repeat'
-  )
-  .addEventListener(
-    'change',
-    event => {
-
-
-      document
-        .getElementById(
-          'repeatEndField'
-        )
-        .classList
-        .toggle(
-
-          'hidden',
-
-          event.target.value ===
-          'none'
-
-        );
-
-    }
-  );
-
 
 
 /* =========================================================
@@ -5524,7 +5308,6 @@ document
   .addEventListener(
     'click',
     event => {
-
 
       const button =
         event.target.closest(
@@ -5567,31 +5350,6 @@ document
   );
 
 
-
-/* =========================================================
-   COMPLETED ITEMS
-   ========================================================= */
-
-document
-  .getElementById(
-    'completedToggle'
-  )
-  .addEventListener(
-    'click',
-    () => {
-
-
-      completedOpen =
-        !completedOpen;
-
-
-      renderTaskList();
-
-    }
-  );
-
-
-
 /* =========================================================
    CALENDAR CONTROLS
    ========================================================= */
@@ -5604,13 +5362,11 @@ document
     'click',
     () => {
 
-
       calendarCursor
         .setMonth(
           calendarCursor
             .getMonth() - 1
         );
-
 
       renderCalendar();
 
@@ -5626,13 +5382,11 @@ document
     'click',
     () => {
 
-
       calendarCursor
         .setMonth(
           calendarCursor
             .getMonth() + 1
         );
-
 
       renderCalendar();
 
@@ -5648,20 +5402,15 @@ document
     'click',
     () => {
 
-
       const date =
         new Date();
 
 
       calendarCursor =
         new Date(
-
           date.getFullYear(),
-
           date.getMonth(),
-
           1
-
         );
 
 
@@ -5670,6 +5419,47 @@ document
     }
   );
 
+
+/* =========================================================
+   CLASS MODAL ADD
+   ========================================================= */
+
+document
+  .getElementById(
+    'classModalAddBtn'
+  )
+  .addEventListener(
+    'click',
+    () => {
+
+      if(
+        !classModalId
+      ){
+
+        return;
+
+      }
+
+
+      const selectedClass =
+        classModalId;
+
+
+      closeModal(
+        'classModal'
+      );
+
+
+      openItem(
+        null,
+        {
+          type:'assignment',
+          classId:selectedClass
+        }
+      );
+
+    }
+  );
 
 
 /* =========================================================
@@ -5683,7 +5473,6 @@ document
   .addEventListener(
     'click',
     () => {
-
 
       commitSettings();
 
@@ -5713,7 +5502,6 @@ document
   );
 
 
-
 /* =========================================================
    ADD EXTRACURRICULAR
    ========================================================= */
@@ -5725,7 +5513,6 @@ document
   .addEventListener(
     'click',
     () => {
-
 
       commitSettings();
 
@@ -5755,7 +5542,6 @@ document
   );
 
 
-
 /* =========================================================
    SAVE SETTINGS
    ========================================================= */
@@ -5768,20 +5554,16 @@ document
     'click',
     () => {
 
-
       commitSettings();
-
 
       closeModal(
         'settingsModal'
       );
 
-
       renderAll();
 
     }
   );
-
 
 
 /* =========================================================
@@ -5795,13 +5577,11 @@ document
 ]
 .forEach(id => {
 
-
   document
     .getElementById(id)
     .addEventListener(
       'input',
       () => {
-
 
         state.theme.green =
 
@@ -5838,16 +5618,14 @@ document
 });
 
 
-
 /* =========================================================
-   ESCAPE KEY
+   ESCAPE
    ========================================================= */
 
 document
   .addEventListener(
     'keydown',
     event => {
-
 
       if(
         event.key === 'Escape'
@@ -5861,7 +5639,9 @@ document
 
             modal
               .classList
-              .remove('open')
+              .remove(
+                'open'
+              )
 
           );
 
@@ -5871,9 +5651,8 @@ document
   );
 
 
-
 /* =========================================================
-   START APP
+   START
    ========================================================= */
 
 initHeader();
