@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="theme-color" content="#1F3D2B" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#1F3D2B">
 <title>Homeroom</title>
-<link rel="icon" href="data:," />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 :root{
   --ink:#1C1B19;
@@ -32,399 +35,1776 @@
   --font-body:'Inter',system-ui,sans-serif;
   --font-mono:'Space Mono',monospace;
 }
+
 *{box-sizing:border-box}
+
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);line-height:1.45;-webkit-font-smoothing:antialiased}
-h1,h2,h3{margin:0;font-family:var(--font-display)}
-button,input,select,textarea{font:inherit}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  line-height:1.45;
+  -webkit-font-smoothing:antialiased;
+}
+
+h1,h2,h3{
+  margin:0;
+  font-family:var(--font-display);
+}
+
+button,input,select,textarea{
+  font:inherit;
+}
+
 button{cursor:pointer}
+
 .hidden{display:none!important}
-:focus-visible{outline:2px solid var(--green);outline-offset:2px}
-.wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 24px}
 
-/* AUTH */
-.auth-screen{min-height:100vh;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(430px,.85fr)}
-.auth-hero{min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:54px 64px;background:var(--green);color:#fff}
-.auth-brand{font-family:var(--font-display);font-size:38px;font-weight:600}
-.auth-hero-main h1{max-width:700px;font-size:clamp(56px,6vw,88px);line-height:.98;letter-spacing:-.04em;font-weight:500}
-.auth-hero-main p{max-width:610px;margin:28px 0 0;color:rgba(255,255,255,.7);font-size:19px}
-.auth-hero-foot{color:rgba(255,255,255,.42);font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em}
-.auth-panel{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:44px}
-.auth-box{width:100%;max-width:460px}
-.auth-box h2{font-size:38px}
-.auth-subtitle{margin:8px 0 28px;color:var(--ink-soft);font-size:17px}
-.auth-tabs{display:flex;margin-bottom:28px;padding:4px;background:var(--paper-deep);border-radius:999px}
-.auth-tab{flex:1;border:0;border-radius:999px;padding:11px;background:transparent;color:var(--ink-soft);font-weight:700}
-.auth-tab.active{background:#fff;color:var(--green);box-shadow:var(--shadow-card)}
-.auth-message{min-height:20px;margin:-2px 0 12px;color:var(--ink-soft);font-size:12px}
-.auth-message.error{color:var(--danger)}
-.auth-submit{width:100%;justify-content:center}
-.auth-foot{margin-top:20px;text-align:center}
-.auth-link{border:0;background:transparent;color:var(--ink);text-decoration:underline;text-underline-offset:3px;font-size:12px;padding:4px 8px}
+:focus-visible{
+  outline:2px solid var(--green);
+  outline-offset:2px;
+}
 
-/* HEADER */
-.app-header{position:sticky;top:0;z-index:50;background:var(--green);color:#fff;border-bottom:1px solid rgba(0,0,0,.12)}
-.app-header .wrap{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;padding-top:14px;padding-bottom:14px}
-.brand-title{font-family:var(--font-display);font-size:26px;font-weight:600}
-.brand-sub{margin-top:2px;color:rgba(255,255,255,.7);font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.07em}
-.top-tabs{display:flex;gap:4px;padding:4px;background:rgba(255,255,255,.1);border-radius:999px}
-.top-tab{padding:9px 18px;background:transparent;color:rgba(255,255,255,.72);border:0;border-radius:999px;font-size:13px;font-weight:700}
-.top-tab.active{background:#fff;color:var(--green)}
-.header-actions{display:flex;justify-content:flex-end;align-items:center;gap:8px}
-.account-button{display:flex;align-items:center;gap:8px;padding:4px 11px 4px 4px;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:999px}
-.avatar{width:31px;height:31px;display:grid;place-items:center;background:var(--gold);color:var(--ink);border-radius:50%;font-family:var(--font-display);font-weight:700}
-.account-name{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;font-weight:700}
+.wrap{
+  width:100%;
+  max-width:1120px;
+  margin:0 auto;
+  padding:0 24px;
+}
 
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border:0;border-radius:999px;font-size:14px;font-weight:700}
-.btn-primary{background:var(--gold);color:var(--ink)}
-.btn-green{background:var(--green);color:#fff}
-.btn-ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--line)}
-.btn-danger{background:var(--danger-pale);color:var(--danger)}
-.btn-outline-light{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.35)}
 
-/* MAIN */
+/* ======================================================
+   AUTH
+====================================================== */
+
+.auth-screen{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(430px,.85fr);
+}
+
+.auth-hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:54px 64px;
+  background:var(--green);
+  color:#fff;
+}
+
+.auth-brand{
+  font-family:var(--font-display);
+  font-size:38px;
+  font-weight:600;
+}
+
+.auth-hero-main h1{
+  max-width:700px;
+  font-size:clamp(56px,6vw,88px);
+  line-height:.98;
+  letter-spacing:-.04em;
+  font-weight:500;
+}
+
+.auth-hero-main p{
+  max-width:610px;
+  margin:28px 0 0;
+  color:rgba(255,255,255,.7);
+  font-size:19px;
+}
+
+.auth-hero-foot{
+  color:rgba(255,255,255,.42);
+  font-family:var(--font-mono);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.auth-panel{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:44px;
+}
+
+.auth-box{
+  width:100%;
+  max-width:460px;
+}
+
+.auth-box h2{
+  font-size:38px;
+}
+
+.auth-subtitle{
+  margin:8px 0 28px;
+  color:var(--ink-soft);
+  font-size:17px;
+}
+
+.auth-tabs{
+  display:flex;
+  margin-bottom:28px;
+  padding:4px;
+  background:var(--paper-deep);
+  border-radius:999px;
+}
+
+.auth-tab{
+  flex:1;
+  border:0;
+  border-radius:999px;
+  padding:11px;
+  background:transparent;
+  color:var(--ink-soft);
+  font-weight:700;
+}
+
+.auth-tab.active{
+  background:#fff;
+  color:var(--green);
+  box-shadow:var(--shadow-card);
+}
+
+.auth-message{
+  min-height:20px;
+  margin:-2px 0 12px;
+  color:var(--ink-soft);
+  font-size:12px;
+}
+
+.auth-message.error{
+  color:var(--danger);
+}
+
+.auth-submit{
+  width:100%;
+  justify-content:center;
+}
+
+.auth-foot{
+  margin-top:20px;
+  text-align:center;
+}
+
+.auth-link{
+  border:0;
+  background:transparent;
+  color:var(--ink);
+  text-decoration:underline;
+  text-underline-offset:3px;
+  font-size:12px;
+  padding:4px 8px;
+}
+
+
+/* ======================================================
+   HEADER
+====================================================== */
+
+.app-header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:var(--green);
+  color:#fff;
+  border-bottom:1px solid rgba(0,0,0,.12);
+}
+
+.app-header .wrap{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:16px;
+  align-items:center;
+  padding-top:14px;
+  padding-bottom:14px;
+}
+
+.brand-title{
+  font-family:var(--font-display);
+  font-size:26px;
+  font-weight:600;
+}
+
+.brand-sub{
+  margin-top:2px;
+  color:rgba(255,255,255,.7);
+  font-family:var(--font-mono);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+}
+
+.top-tabs{
+  display:flex;
+  gap:4px;
+  padding:4px;
+  background:rgba(255,255,255,.1);
+  border-radius:999px;
+}
+
+.top-tab{
+  padding:9px 18px;
+  background:transparent;
+  color:rgba(255,255,255,.72);
+  border:0;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:700;
+}
+
+.top-tab.active{
+  background:#fff;
+  color:var(--green);
+}
+
+.header-actions{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:8px;
+}
+
+.account-button{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:4px 11px 4px 4px;
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.3);
+  border-radius:999px;
+}
+
+.avatar{
+  width:31px;
+  height:31px;
+  display:grid;
+  place-items:center;
+  background:var(--gold);
+  color:var(--ink);
+  border-radius:50%;
+  font-family:var(--font-display);
+  font-weight:700;
+}
+
+.account-name{
+  max-width:120px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:12px;
+  font-weight:700;
+}
+
+
+/* ======================================================
+   BUTTONS
+====================================================== */
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:11px 18px;
+  border:0;
+  border-radius:999px;
+  font-size:14px;
+  font-weight:700;
+}
+
+.btn-primary{
+  background:var(--gold);
+  color:var(--ink);
+}
+
+.btn-green{
+  background:var(--green);
+  color:#fff;
+}
+
+.btn-ghost{
+  background:transparent;
+  color:var(--ink-soft);
+  border:1px solid var(--line);
+}
+
+.btn-danger{
+  background:var(--danger-pale);
+  color:var(--danger);
+}
+
+.btn-danger-solid{
+  background:var(--danger);
+  color:#fff;
+}
+
+.btn-outline-light{
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.35);
+}
+
+
+/* ======================================================
+   MAIN
+====================================================== */
+
 main{padding-bottom:80px}
+
 .section{margin-top:40px}
-.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px;flex-wrap:wrap}
-.section-title{font-size:22px;font-weight:600;color:var(--ink)}
-.section-note{color:var(--ink-soft);font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em}
 
-/* DEADLINES */
-.deadline-shell{padding:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-card)}
-.deadline-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.deadline-card{min-height:130px;display:flex;flex-direction:column;gap:8px;padding:14px;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-top:4px solid var(--accent,#8A8578);border-radius:var(--radius-md);text-align:left}
-.deadline-card.done{opacity:.58}
-.deadline-card.done .deadline-title{text-decoration:line-through;text-decoration-thickness:1.5px}
-.deadline-class{color:var(--ink);font-family:var(--font-mono);font-size:10px;font-weight:700;text-transform:uppercase}
-.deadline-title{font-family:var(--font-display);font-size:16px;font-weight:600;color:var(--ink)}
-.deadline-meta{margin-top:auto;color:var(--ink-soft);font-family:var(--font-mono);font-size:10px}
-.deadline-badge{align-self:flex-start;padding:4px 8px;border-radius:999px;font-family:var(--font-mono);font-size:9px;font-weight:700}
-.deadline-badge.urgent{background:var(--danger-pale);color:var(--danger)}
-.deadline-badge.soon{background:#FBF1C9;color:#745B00}
-.deadline-badge.ok{background:var(--green-pale);color:var(--green)}
-.deadline-badge.done{background:var(--paper-deep);color:var(--ink-soft)}
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:12px;
+  margin-bottom:14px;
+  flex-wrap:wrap;
+}
 
-/* CLASSES */
-.classes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
-.class-card{min-height:96px;display:flex;flex-direction:column;gap:6px;padding:16px;background:var(--card);color:var(--ink);border:0;border-left:7px solid var(--accent);border-radius:var(--radius-md);box-shadow:var(--shadow-card);text-align:left;transition:.15s transform}
-.class-card:hover{transform:translateY(-2px)}
-.class-name{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--ink)}
-.class-meta{display:flex;justify-content:space-between;gap:8px;margin-top:auto;color:var(--ink);font-family:var(--font-mono);font-size:10px;text-transform:uppercase}
-.pill-count{padding:3px 8px;background:var(--paper-deep);color:var(--ink-soft);border-radius:999px;font-weight:700;white-space:nowrap}
-.pill-count.has-items{background:var(--accent);color:#fff}
+.section-title{
+  font-size:22px;
+  font-weight:600;
+  color:var(--ink);
+}
 
-/* FILTERS + TASKS */
-.filter-tabs{display:flex;gap:8px;flex-wrap:wrap}
-.tab-btn{padding:8px 15px;background:var(--paper-deep);color:var(--ink-soft);border:0;border-radius:999px;font-size:13px;font-weight:600}
-.tab-btn.active{background:var(--green);color:#fff}
-.task-list,.class-modal-list{display:flex;flex-direction:column;gap:9px}
-.task-list{margin-top:16px}
-.task-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 14px;background:var(--card);color:var(--ink);border-left:4px solid var(--accent,#8A8578);border-radius:var(--radius-sm);box-shadow:var(--shadow-card)}
-.task-main{min-width:0;cursor:pointer;color:var(--ink)}
-.task-title{font-size:14.5px;font-weight:600;color:var(--ink)}
-.task-meta{margin-top:2px;color:var(--ink-soft);font-family:var(--font-mono);font-size:10px;text-transform:uppercase}
-.type-badge{display:inline-block;margin-left:4px;padding:2px 6px;background:var(--paper-deep);border-radius:5px;font-size:9px;font-weight:700}
-.check{width:21px;height:21px;display:grid;place-items:center;padding:0;background:#fff;border:2px solid var(--line);border-radius:50%}
-.check svg{width:12px;height:12px;opacity:0}
-.task-row.done{opacity:.58}
-.task-row.done .task-title{text-decoration:line-through;text-decoration-thickness:1.5px}
-.task-row.done .check{background:var(--green);border-color:var(--green)}
-.task-row.done .check svg{opacity:1}
-.item-dot{width:10px;height:10px;margin:0 5px;background:var(--accent);border-radius:50%}
-.icon-btn{width:30px;height:30px;display:grid;place-items:center;padding:0;background:transparent;color:var(--ink-soft);border:0;border-radius:50%}
-.icon-btn:hover{background:var(--paper-deep)}
-.empty-state{padding:38px 20px;background:var(--card);color:var(--ink-soft);border:1.5px dashed var(--line);border-radius:var(--radius-md);text-align:center}
-.empty-state strong{display:block;margin-bottom:4px;color:var(--ink);font-family:var(--font-display);font-size:17px}
+.section-note{
+  color:var(--ink-soft);
+  font-family:var(--font-mono);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
 
-/* CALENDAR */
-.calendar-shell{overflow:hidden;margin-top:20px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-card)}
-.calendar-head{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}
-.month-title{font-family:var(--font-display);font-size:24px;font-weight:600;color:var(--ink)}
-.cal-controls{display:flex;gap:7px}
-.cal-btn{padding:8px 11px;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:9px;font-weight:700}
-.calendar-week,.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr)}
-.calendar-week{background:var(--paper-deep)}
-.week-label{padding:8px;color:var(--ink-soft);text-align:center;font-family:var(--font-mono);font-size:9px}
-.day-cell{min-height:126px;padding:7px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
-.day-cell:nth-child(7n){border-right:0}
-.day-cell.other{background:#FAF9F6}
-.day-num{width:26px;height:26px;display:grid;place-items:center;color:var(--ink-soft);border-radius:8px;font-family:var(--font-mono);font-size:10px}
-.day-cell.today .day-num{background:var(--green);color:#fff}
-.cal-event{display:block;width:100%;margin-top:4px;overflow:hidden;padding:5px 6px;background:#f7f7f5;color:var(--ink);border:0;border-left:3px solid var(--event-color);border-radius:7px;text-align:left;font-size:10px;text-overflow:ellipsis;white-space:nowrap}
-.calendar-legend{display:flex;gap:12px;flex-wrap:wrap;padding:12px 18px;color:var(--ink-soft);font-family:var(--font-mono);font-size:10px}
-.legend-item{display:flex;align-items:center;gap:5px}
-.legend-dot{width:8px;height:8px;border-radius:50%}
 
-/* MODALS */
-.modal-overlay{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(28,27,25,.55);backdrop-filter:blur(3px)}
-.modal-overlay.open{display:flex}
-.modal-box{position:relative;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;padding:26px;background:var(--card);border-radius:var(--radius-lg);box-shadow:var(--shadow-modal)}
-.modal-box.wide{max-width:720px}
-.modal-close{position:absolute;top:16px;right:16px;width:30px;height:30px;display:grid;place-items:center;padding:0;background:var(--paper-deep);color:var(--ink-soft);border:0;border-radius:50%}
-.modal-title{padding-right:40px;font-size:22px;color:var(--ink)}
-.modal-accent-bar{width:52px;height:6px;margin:8px 0 18px;background:var(--green);border-radius:999px}
+/* ======================================================
+   DEADLINES
+====================================================== */
 
-/* FORMS */
-.field{margin-bottom:15px}
-.field label{display:block;margin-bottom:6px;color:var(--ink-soft);font-family:var(--font-mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
-.field input[type=text],.field input[type=email],.field input[type=password],.field input[type=date],.field input[type=time],.field select,.field textarea{width:100%;padding:11px 12px;background:var(--paper);color:var(--ink);border:1.5px solid var(--line);border-radius:var(--radius-sm);font-size:14px}
-.field textarea{min-height:90px;resize:vertical}
-.field-row{display:flex;gap:12px}
-.field-row .field{flex:1}
-.type-toggle{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.type-toggle button{padding:9px 5px;background:var(--paper);color:var(--ink-soft);border:1.5px solid var(--line);border-radius:var(--radius-sm);font-size:12px;font-weight:600}
-.type-toggle button.active{background:var(--green-pale);color:var(--green);border-color:var(--green)}
-.form-actions{display:flex;justify-content:space-between;gap:10px;margin-top:8px}
-.action-right{display:flex;gap:10px}
-.helper-text{margin-top:6px;color:var(--ink-soft);font-size:11px}
+.deadline-shell{
+  padding:18px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card);
+}
 
-/* WEEKDAY PICKER */
-.weekday-picker{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}
-.weekday-picker button{height:40px;background:var(--paper);color:var(--ink-soft);border:1.5px solid var(--line);border-radius:10px;font-size:12px;font-weight:700}
-.weekday-picker button.active{background:var(--green);color:#fff;border-color:var(--green)}
+.deadline-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+}
 
-/* LOCATION */
-.location-box{padding:12px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-sm)}
-.location-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
-.mini-btn{padding:7px 10px;background:var(--paper-deep);color:var(--ink);border:0;border-radius:999px;font-size:11px;font-weight:700}
+.deadline-card{
+  min-height:130px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  padding:14px;
+  background:var(--paper);
+  color:var(--ink);
+  border:1px solid var(--line);
+  border-top:4px solid var(--accent,#8A8578);
+  border-radius:var(--radius-md);
+  text-align:left;
+}
 
-/* SETTINGS */
-.settings-section{padding:16px 0;border-top:1px solid var(--line)}
-.settings-section:first-child{border-top:0}
-.settings-title{font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--ink)}
-.settings-copy{margin:3px 0 12px;color:var(--ink-soft);font-size:12px}
-.color-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.color-card{padding:10px;background:var(--paper);border:1px solid var(--line);border-radius:10px}
-.color-card input{width:100%;height:38px;background:transparent;border:0}
-.editor-list{display:flex;flex-direction:column;gap:8px}
-.editor-row{display:grid;grid-template-columns:38px 1fr auto;gap:8px;align-items:center}
-.editor-row input[type=color]{width:38px;height:38px;background:transparent;border:0}
-.editor-row input[type=text]{width:100%;padding:9px;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:8px}
-.add-inline{width:100%;margin-top:8px;padding:9px;background:transparent;color:var(--green);border:1px dashed var(--line);border-radius:9px;font-weight:700}
+.deadline-card.done{
+  opacity:.58;
+}
 
-/* DELETE SERIES */
-.choice-stack{display:flex;flex-direction:column;gap:9px;margin-top:16px}
-.choice-btn{width:100%;padding:13px 14px;text-align:left;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:12px;font-weight:700}
-.choice-btn small{display:block;margin-top:2px;color:var(--ink-soft);font-weight:500}
-.choice-btn.danger{background:var(--danger-pale);color:var(--danger);border-color:#e4c3c0}
+.deadline-card.done .deadline-title{
+  text-decoration:line-through;
+}
 
-/* FOOTER */
-.sync-line{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:5px;color:var(--ink-soft);font-family:var(--font-mono);font-size:10px}
-.sync-dot{width:7px;height:7px;background:#569B65;border-radius:50%}
-footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-family:var(--font-mono);font-size:10px}
+.deadline-class{
+  color:var(--ink);
+  font-family:var(--font-mono);
+  font-size:10px;
+  font-weight:700;
+  text-transform:uppercase;
+}
 
-@media(max-width:900px){.deadline-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:760px){.auth-screen{grid-template-columns:1fr}.auth-hero{min-height:320px;padding:32px 24px}.auth-hero-main h1{font-size:48px}.auth-panel{min-height:auto;padding:42px 22px}.auth-hero-foot{display:none}}
+.deadline-title{
+  font-family:var(--font-display);
+  font-size:16px;
+  font-weight:600;
+  color:var(--ink);
+}
+
+.deadline-meta{
+  margin-top:auto;
+  color:var(--ink-soft);
+  font-family:var(--font-mono);
+  font-size:10px;
+}
+
+.deadline-badge{
+  align-self:flex-start;
+  padding:4px 8px;
+  border-radius:999px;
+  font-family:var(--font-mono);
+  font-size:9px;
+  font-weight:700;
+}
+
+.deadline-badge.urgent{
+  background:var(--danger-pale);
+  color:var(--danger);
+}
+
+.deadline-badge.soon{
+  background:#FBF1C9;
+  color:#745B00;
+}
+
+.deadline-badge.ok{
+  background:var(--green-pale);
+  color:var(--green);
+}
+
+.deadline-badge.done{
+  background:var(--paper-deep);
+  color:var(--ink-soft);
+}
+
+
+/* ======================================================
+   CLASSES
+====================================================== */
+
+.classes-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:14px;
+}
+
+.class-card{
+  min-height:96px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  padding:16px;
+  background:var(--card);
+  color:var(--ink);
+  border:0;
+  border-left:7px solid var(--accent);
+  border-radius:var(--radius-md);
+  box-shadow:var(--shadow-card);
+  text-align:left;
+}
+
+.class-name{
+  font-family:var(--font-display);
+  font-size:17px;
+  font-weight:600;
+  color:#1C1B19;
+}
+
+.class-meta{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:auto;
+  color:#1C1B19;
+  font-family:var(--font-mono);
+  font-size:10px;
+  text-transform:uppercase;
+}
+
+.pill-count{
+  padding:3px 8px;
+  background:var(--paper-deep);
+  color:var(--ink-soft);
+  border-radius:999px;
+  font-weight:700;
+  white-space:nowrap;
+}
+
+.pill-count.has-items{
+  background:var(--accent);
+  color:#fff;
+}
+
+
+/* ======================================================
+   TASKS
+====================================================== */
+
+.filter-tabs{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.tab-btn{
+  padding:8px 15px;
+  background:var(--paper-deep);
+  color:var(--ink-soft);
+  border:0;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:600;
+}
+
+.tab-btn.active{
+  background:var(--green);
+  color:#fff;
+}
+
+.task-list,
+.class-modal-list{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.task-list{
+  margin-top:16px;
+}
+
+.task-row{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:12px;
+  align-items:center;
+  padding:12px 14px;
+  background:var(--card);
+  color:var(--ink);
+  border-left:4px solid var(--accent,#8A8578);
+  border-radius:var(--radius-sm);
+  box-shadow:var(--shadow-card);
+}
+
+.task-main{
+  min-width:0;
+  cursor:pointer;
+}
+
+.task-title{
+  font-size:14.5px;
+  font-weight:600;
+  color:#1C1B19;
+}
+
+.task-meta{
+  margin-top:2px;
+  color:var(--ink-soft);
+  font-family:var(--font-mono);
+  font-size:10px;
+  text-transform:uppercase;
+}
+
+.type-badge{
+  display:inline-block;
+  margin-left:4px;
+  padding:2px 6px;
+  background:var(--paper-deep);
+  border-radius:5px;
+  font-size:9px;
+  font-weight:700;
+}
+
+.check{
+  width:21px;
+  height:21px;
+  display:grid;
+  place-items:center;
+  padding:0;
+  background:#fff;
+  border:2px solid var(--line);
+  border-radius:50%;
+}
+
+.check svg{
+  width:12px;
+  height:12px;
+  opacity:0;
+}
+
+.task-row.done{
+  opacity:.58;
+}
+
+.task-row.done .task-title{
+  text-decoration:line-through;
+  text-decoration-thickness:1.5px;
+}
+
+.task-row.done .check{
+  background:var(--green);
+  border-color:var(--green);
+}
+
+.task-row.done .check svg{
+  opacity:1;
+}
+
+.item-dot{
+  width:10px;
+  height:10px;
+  margin:0 5px;
+  background:var(--accent);
+  border-radius:50%;
+}
+
+.icon-btn{
+  width:30px;
+  height:30px;
+  display:grid;
+  place-items:center;
+  padding:0;
+  background:transparent;
+  color:var(--ink-soft);
+  border:0;
+  border-radius:50%;
+}
+
+.empty-state{
+  padding:38px 20px;
+  background:var(--card);
+  color:var(--ink-soft);
+  border:1.5px dashed var(--line);
+  border-radius:var(--radius-md);
+  text-align:center;
+}
+
+.empty-state strong{
+  display:block;
+  margin-bottom:4px;
+  color:var(--ink);
+  font-family:var(--font-display);
+  font-size:17px;
+}
+
+
+/* ======================================================
+   CALENDAR
+====================================================== */
+
+.calendar-shell{
+  overflow:hidden;
+  margin-top:20px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card);
+}
+
+.calendar-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 20px;
+  border-bottom:1px solid var(--line);
+}
+
+.month-title{
+  font-family:var(--font-display);
+  font-size:24px;
+  font-weight:600;
+}
+
+.cal-controls{
+  display:flex;
+  gap:7px;
+}
+
+.cal-btn{
+  padding:8px 11px;
+  background:var(--paper);
+  color:var(--ink);
+  border:1px solid var(--line);
+  border-radius:9px;
+  font-weight:700;
+}
+
+.calendar-week,
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+}
+
+.calendar-week{
+  background:var(--paper-deep);
+}
+
+.week-label{
+  padding:8px;
+  color:var(--ink-soft);
+  text-align:center;
+  font-family:var(--font-mono);
+  font-size:9px;
+}
+
+.day-cell{
+  min-height:126px;
+  padding:7px;
+  background:#fff;
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+.day-cell:nth-child(7n){
+  border-right:0;
+}
+
+.day-cell.other{
+  background:#FAF9F6;
+}
+
+.day-num{
+  width:26px;
+  height:26px;
+  display:grid;
+  place-items:center;
+  color:var(--ink-soft);
+  border-radius:8px;
+  font-family:var(--font-mono);
+  font-size:10px;
+}
+
+.day-cell.today .day-num{
+  background:var(--green);
+  color:#fff;
+}
+
+.cal-event{
+  display:block;
+  width:100%;
+  margin-top:4px;
+  overflow:hidden;
+  padding:5px 6px;
+  background:#F7F7F5;
+  color:#1C1B19;
+  border:0;
+  border-left:3px solid var(--event-color);
+  border-radius:7px;
+  text-align:left;
+  font-size:10px;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.calendar-legend{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:12px 18px;
+  color:var(--ink-soft);
+  font-family:var(--font-mono);
+  font-size:10px;
+}
+
+.legend-item{
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+.legend-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+}
+
+
+/* ======================================================
+   MODALS
+====================================================== */
+
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(28,27,25,.55);
+  backdrop-filter:blur(3px);
+}
+
+.modal-overlay.open{
+  display:flex;
+}
+
+.modal-box{
+  position:relative;
+  width:100%;
+  max-width:520px;
+  max-height:90vh;
+  overflow-y:auto;
+  padding:26px;
+  background:var(--card);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-modal);
+}
+
+.modal-box.wide{
+  max-width:720px;
+}
+
+.modal-close{
+  position:absolute;
+  top:16px;
+  right:16px;
+  width:30px;
+  height:30px;
+  display:grid;
+  place-items:center;
+  padding:0;
+  background:var(--paper-deep);
+  color:var(--ink-soft);
+  border:0;
+  border-radius:50%;
+}
+
+.modal-title{
+  padding-right:40px;
+  font-size:22px;
+}
+
+.modal-accent-bar{
+  width:52px;
+  height:6px;
+  margin:8px 0 18px;
+  background:var(--green);
+  border-radius:999px;
+}
+
+
+/* ======================================================
+   FORM
+====================================================== */
+
+.field{
+  margin-bottom:15px;
+}
+
+.field label{
+  display:block;
+  margin-bottom:6px;
+  color:var(--ink-soft);
+  font-family:var(--font-mono);
+  font-size:10px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+
+.field input[type=text],
+.field input[type=email],
+.field input[type=password],
+.field input[type=date],
+.field input[type=time],
+.field select,
+.field textarea{
+  width:100%;
+  padding:11px 12px;
+  background:var(--paper);
+  color:var(--ink);
+  border:1.5px solid var(--line);
+  border-radius:var(--radius-sm);
+  font-size:14px;
+}
+
+.field textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+.field-row{
+  display:flex;
+  gap:12px;
+}
+
+.field-row .field{
+  flex:1;
+}
+
+.type-toggle{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+}
+
+.type-toggle button{
+  padding:9px 5px;
+  background:var(--paper);
+  color:var(--ink-soft);
+  border:1.5px solid var(--line);
+  border-radius:var(--radius-sm);
+  font-size:12px;
+  font-weight:600;
+}
+
+.type-toggle button.active{
+  background:var(--green-pale);
+  color:var(--green);
+  border-color:var(--green);
+}
+
+.form-actions{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:8px;
+}
+
+.action-right{
+  display:flex;
+  gap:10px;
+}
+
+.helper-text{
+  margin-top:6px;
+  color:var(--ink-soft);
+  font-size:11px;
+}
+
+.weekday-picker{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:7px;
+}
+
+.weekday-picker button{
+  height:40px;
+  background:var(--paper);
+  color:var(--ink-soft);
+  border:1.5px solid var(--line);
+  border-radius:10px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.weekday-picker button.active{
+  background:var(--green);
+  color:#fff;
+  border-color:var(--green);
+}
+
+.location-box{
+  padding:12px;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius-sm);
+}
+
+.location-actions{
+  display:flex;
+  gap:8px;
+  margin-top:8px;
+  flex-wrap:wrap;
+}
+
+.mini-btn{
+  padding:7px 10px;
+  background:var(--paper-deep);
+  color:var(--ink);
+  border:0;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:700;
+}
+
+
+/* ======================================================
+   SETTINGS
+====================================================== */
+
+.settings-section{
+  padding:16px 0;
+  border-top:1px solid var(--line);
+}
+
+.settings-section:first-child{
+  border-top:0;
+}
+
+.settings-title{
+  font-family:var(--font-display);
+  font-size:18px;
+  font-weight:600;
+}
+
+.settings-copy{
+  margin:3px 0 12px;
+  color:var(--ink-soft);
+  font-size:12px;
+}
+
+.color-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.color-card{
+  padding:10px;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:10px;
+}
+
+.color-card input{
+  width:100%;
+  height:38px;
+  background:transparent;
+  border:0;
+}
+
+.editor-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.editor-row{
+  display:grid;
+  grid-template-columns:38px 1fr auto;
+  gap:8px;
+  align-items:center;
+}
+
+.editor-row input[type=color]{
+  width:38px;
+  height:38px;
+  background:transparent;
+  border:0;
+}
+
+.editor-row input[type=text]{
+  width:100%;
+  padding:9px;
+  background:var(--paper);
+  color:var(--ink);
+  border:1px solid var(--line);
+  border-radius:8px;
+}
+
+.add-inline{
+  width:100%;
+  margin-top:8px;
+  padding:9px;
+  background:transparent;
+  color:var(--green);
+  border:1px dashed var(--line);
+  border-radius:9px;
+  font-weight:700;
+}
+
+.choice-stack{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+  margin-top:16px;
+}
+
+.choice-btn{
+  width:100%;
+  padding:13px 14px;
+  text-align:left;
+  background:var(--paper);
+  color:var(--ink);
+  border:1px solid var(--line);
+  border-radius:12px;
+  font-weight:700;
+}
+
+.choice-btn small{
+  display:block;
+  margin-top:2px;
+  color:var(--ink-soft);
+  font-weight:500;
+}
+
+.choice-btn.danger{
+  background:var(--danger-pale);
+  color:var(--danger);
+  border-color:#E4C3C0;
+}
+
+.danger-zone{
+  margin-top:24px;
+  padding:16px;
+  border:1px solid #E4C3C0;
+  background:#FFF9F8;
+  border-radius:14px;
+}
+
+
+/* ======================================================
+   FOOTER
+====================================================== */
+
+.sync-line{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  margin-top:5px;
+  color:var(--ink-soft);
+  font-family:var(--font-mono);
+  font-size:10px;
+}
+
+.sync-dot{
+  width:7px;
+  height:7px;
+  background:#569B65;
+  border-radius:50%;
+}
+
+footer{
+  padding:30px 20px 40px;
+  color:var(--ink-soft);
+  text-align:center;
+  font-family:var(--font-mono);
+  font-size:10px;
+}
+
+
+/* ======================================================
+   MOBILE
+====================================================== */
+
+@media(max-width:900px){
+  .deadline-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:760px){
+  .auth-screen{
+    grid-template-columns:1fr;
+  }
+
+  .auth-hero{
+    min-height:320px;
+    padding:32px 24px;
+  }
+
+  .auth-hero-main h1{
+    font-size:48px;
+  }
+
+  .auth-panel{
+    min-height:auto;
+    padding:42px 22px;
+  }
+
+  .auth-hero-foot{
+    display:none;
+  }
+}
+
 @media(max-width:640px){
-  .wrap{padding:0 16px}
-  .app-header .wrap{grid-template-columns:1fr auto}
-  .top-tabs{grid-column:1/-1;grid-row:2;width:100%}
-  .top-tab{flex:1}
-  .header-actions{grid-column:2;grid-row:1}
-  .account-name,.btn-label{display:none}
-  .account-button{padding-right:4px}
-  .deadline-grid{grid-template-columns:1fr}
-  .field-row{flex-direction:column;gap:0}
-  .type-toggle{grid-template-columns:repeat(2,1fr)}
-  .color-grid{grid-template-columns:1fr}
-  .day-cell{min-height:90px;padding:4px}
-  .cal-event{min-height:9px;font-size:0}
-  .cal-event::after{content:'';display:block;width:6px;height:6px;background:var(--event-color);border-radius:50%}
+  .wrap{
+    padding:0 16px;
+  }
+
+  .app-header .wrap{
+    grid-template-columns:1fr auto;
+  }
+
+  .top-tabs{
+    grid-column:1/-1;
+    grid-row:2;
+    width:100%;
+  }
+
+  .top-tab{
+    flex:1;
+  }
+
+  .header-actions{
+    grid-column:2;
+    grid-row:1;
+  }
+
+  .account-name,
+  .btn-label{
+    display:none;
+  }
+
+  .account-button{
+    padding-right:4px;
+  }
+
+  .deadline-grid{
+    grid-template-columns:1fr;
+  }
+
+  .field-row{
+    flex-direction:column;
+    gap:0;
+  }
+
+  .type-toggle{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .color-grid{
+    grid-template-columns:1fr;
+  }
+
+  .day-cell{
+    min-height:90px;
+    padding:4px;
+  }
+
+  .cal-event{
+    min-height:9px;
+    font-size:0;
+  }
+
+  .cal-event::after{
+    content:'';
+    display:block;
+    width:6px;
+    height:6px;
+    background:var(--event-color);
+    border-radius:50%;
+  }
 }
 </style>
 </head>
+
 <body>
 
+
+<!-- ======================================================
+     AUTH
+====================================================== -->
+
 <section class="auth-screen" id="authScreen">
+
   <div class="auth-hero">
-    <div class="auth-brand">Homeroom</div>
-    <div class="auth-hero-main">
-      <h1>School,<br />organized.</h1>
-      <p>Assignments, deadlines, activities and your calendar in one quiet place.</p>
+
+    <div class="auth-brand">
+      Homeroom
     </div>
-    <div class="auth-hero-foot">Your planner follows you between devices</div>
+
+    <div class="auth-hero-main">
+
+      <h1>
+        School,<br>
+        organized.
+      </h1>
+
+      <p>
+        Assignments, deadlines, activities and your calendar
+        in one quiet place.
+      </p>
+
+    </div>
+
+    <div class="auth-hero-foot">
+      Your planner follows you between devices
+    </div>
+
   </div>
+
 
   <div class="auth-panel">
+
     <div class="auth-box">
-      <h2 id="authTitle">Welcome back</h2>
-      <div class="auth-subtitle" id="authSubtitle">Sign in to open your planner.</div>
+
+      <h2 id="authTitle">
+        Welcome back
+      </h2>
+
+      <div
+        class="auth-subtitle"
+        id="authSubtitle"
+      >
+        Sign in to open your planner.
+      </div>
+
 
       <div class="auth-tabs">
-        <button class="auth-tab active" id="signInTab" type="button">Sign in</button>
-        <button class="auth-tab" id="signUpTab" type="button">Create account</button>
+
+        <button
+          class="auth-tab active"
+          id="signInTab"
+          type="button"
+        >
+          Sign in
+        </button>
+
+        <button
+          class="auth-tab"
+          id="signUpTab"
+          type="button"
+        >
+          Create account
+        </button>
+
       </div>
+
 
       <form id="authForm">
-        <div class="field hidden" id="nameField">
-          <label for="authName">Name</label>
-          <input id="authName" type="text" autocomplete="name" placeholder="Your name" />
+
+        <div
+          class="field hidden"
+          id="nameField"
+        >
+
+          <label for="authName">
+            Name
+          </label>
+
+          <input
+            id="authName"
+            type="text"
+            autocomplete="name"
+            placeholder="Your name"
+          >
+
         </div>
+
 
         <div class="field">
-          <label for="authEmail">Email</label>
-          <input id="authEmail" type="email" autocomplete="email" required placeholder="you@example.com" />
+
+          <label for="authEmail">
+            Email
+          </label>
+
+          <input
+            id="authEmail"
+            type="email"
+            autocomplete="email"
+            required
+            placeholder="you@example.com"
+          >
+
         </div>
+
 
         <div class="field">
-          <label for="authPassword">Password</label>
-          <input id="authPassword" type="password" autocomplete="current-password" minlength="6" required placeholder="••••••••" />
+
+          <label for="authPassword">
+            Password
+          </label>
+
+          <input
+            id="authPassword"
+            type="password"
+            autocomplete="current-password"
+            minlength="6"
+            required
+            placeholder="••••••••"
+          >
+
         </div>
 
-        <div class="auth-message" id="authMessage"></div>
-        <button class="btn btn-green auth-submit" id="authSubmit" type="submit">Sign in</button>
+
+        <div
+          class="auth-message"
+          id="authMessage"
+        ></div>
+
+
+        <button
+          class="btn btn-green auth-submit"
+          id="authSubmit"
+          type="submit"
+        >
+          Sign in
+        </button>
+
       </form>
 
+
       <div class="auth-foot">
-        <button class="auth-link" id="forgotPasswordButton" type="button">Forgot password?</button>
+
+        <button
+          class="auth-link"
+          id="forgotPasswordButton"
+          type="button"
+        >
+          Forgot password?
+        </button>
+
       </div>
+
     </div>
+
   </div>
+
 </section>
 
+
+<!-- ======================================================
+     APP
+====================================================== -->
+
 <div class="hidden" id="app">
-  <header class="app-header">
-    <div class="wrap">
-      <div>
-        <div class="brand-title">Homeroom</div>
-        <div class="brand-sub" id="todayLabel">—</div>
+
+<header class="app-header">
+
+  <div class="wrap">
+
+    <div>
+
+      <div class="brand-title">
+        Homeroom
       </div>
 
-      <nav class="top-tabs">
-        <button class="top-tab active" data-view="planner">Planner</button>
-        <button class="top-tab" data-view="calendar">Calendar</button>
-      </nav>
-
-      <div class="header-actions">
-        <button class="account-button" id="accountButton">
-          <span class="avatar" id="headerAvatar">H</span>
-          <span class="account-name" id="headerName">Account</span>
-        </button>
-
-        <button class="btn btn-outline-light" id="settingsButton">⚙</button>
-
-        <button class="btn btn-primary" id="addButton">
-          +
-          <span class="btn-label">Add</span>
-        </button>
+      <div
+        class="brand-sub"
+        id="todayLabel"
+      >
+        —
       </div>
+
     </div>
-  </header>
 
-  <main class="wrap">
-    <div id="plannerView">
 
-      <section class="section">
-        <div class="section-head">
-          <h2 class="section-title">Upcoming Deadlines</h2>
-          <div class="section-note">Next 7 days</div>
+    <nav class="top-tabs">
+
+      <button
+        class="top-tab active"
+        data-view="planner"
+      >
+        Planner
+      </button>
+
+      <button
+        class="top-tab"
+        data-view="calendar"
+      >
+        Calendar
+      </button>
+
+    </nav>
+
+
+    <div class="header-actions">
+
+      <button
+        class="account-button"
+        id="accountButton"
+      >
+
+        <span
+          class="avatar"
+          id="headerAvatar"
+        >
+          H
+        </span>
+
+        <span
+          class="account-name"
+          id="headerName"
+        >
+          Account
+        </span>
+
+      </button>
+
+
+      <button
+        class="btn btn-outline-light"
+        id="settingsButton"
+      >
+        ⚙
+      </button>
+
+
+      <button
+        class="btn btn-primary"
+        id="addButton"
+      >
+        +
+
+        <span class="btn-label">
+          Add
+        </span>
+
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<main class="wrap">
+
+
+  <!-- PLANNER -->
+
+  <div id="plannerView">
+
+
+    <section class="section">
+
+      <div class="section-head">
+
+        <h2 class="section-title">
+          Upcoming Deadlines
+        </h2>
+
+        <div class="section-note">
+          Next 7 days
         </div>
 
-        <div class="deadline-shell">
-          <div class="deadline-grid" id="deadlineGrid"></div>
+      </div>
+
+
+      <div class="deadline-shell">
+
+        <div
+          class="deadline-grid"
+          id="deadlineGrid"
+        ></div>
+
+      </div>
+
+    </section>
+
+
+    <section class="section">
+
+      <div class="section-head">
+
+        <h2 class="section-title">
+          Your Classes
+        </h2>
+
+        <div class="section-note">
+          Tap a class to view its work
         </div>
-      </section>
 
-      <section class="section">
-        <div class="section-head">
-          <h2 class="section-title">Your Classes</h2>
-          <div class="section-note">Tap a class to view its work</div>
+      </div>
+
+
+      <div
+        class="classes-grid"
+        id="classesGrid"
+      ></div>
+
+    </section>
+
+
+    <section class="section">
+
+      <div class="section-head">
+
+        <h2 class="section-title">
+          Everything
+        </h2>
+
+
+        <div
+          class="filter-tabs"
+          id="filterTabs"
+        >
+
+          <button
+            class="tab-btn active"
+            data-filter="all"
+          >
+            All
+          </button>
+
+          <button
+            class="tab-btn"
+            data-filter="assignment"
+          >
+            Assignments
+          </button>
+
+          <button
+            class="tab-btn"
+            data-filter="deadline"
+          >
+            Deadlines
+          </button>
+
+          <button
+            class="tab-btn"
+            data-filter="reminder"
+          >
+            Reminders
+          </button>
+
+          <button
+            class="tab-btn"
+            data-filter="activity"
+          >
+            Activities
+          </button>
+
         </div>
 
-        <div class="classes-grid" id="classesGrid"></div>
-      </section>
+      </div>
 
-      <section class="section">
-        <div class="section-head">
-          <h2 class="section-title">Everything</h2>
 
-          <div class="filter-tabs" id="filterTabs">
-            <button class="tab-btn active" data-filter="all">All</button>
-            <button class="tab-btn" data-filter="assignment">Assignments</button>
-            <button class="tab-btn" data-filter="deadline">Deadlines</button>
-            <button class="tab-btn" data-filter="reminder">Reminders</button>
-            <button class="tab-btn" data-filter="activity">Activities</button>
+      <div
+        class="task-list"
+        id="taskList"
+      ></div>
+
+    </section>
+
+  </div>
+
+
+  <!-- CALENDAR -->
+
+  <div
+    class="hidden"
+    id="calendarView"
+  >
+
+    <section class="section">
+
+      <div class="section-head">
+
+        <h2 class="section-title">
+          Calendar
+        </h2>
+
+        <div class="section-note">
+          Synced from Planner
+        </div>
+
+      </div>
+
+
+      <div class="calendar-shell">
+
+        <div class="calendar-head">
+
+          <div
+            class="month-title"
+            id="monthTitle"
+          ></div>
+
+
+          <div class="cal-controls">
+
+            <button
+              class="cal-btn"
+              id="todayButton"
+            >
+              Today
+            </button>
+
+            <button
+              class="cal-btn"
+              id="prevMonth"
+            >
+              ‹
+            </button>
+
+            <button
+              class="cal-btn"
+              id="nextMonth"
+            >
+              ›
+            </button>
+
           </div>
-        </div>
-
-        <div class="task-list" id="taskList"></div>
-      </section>
-
-    </div>
-
-    <div class="hidden" id="calendarView">
-
-      <section class="section">
-
-        <div class="section-head">
-          <h2 class="section-title">Calendar</h2>
-          <div class="section-note">Synced from Planner</div>
-        </div>
-
-        <div class="calendar-shell">
-
-          <div class="calendar-head">
-
-            <div class="month-title" id="monthTitle"></div>
-
-            <div class="cal-controls">
-              <button class="cal-btn" id="todayButton">Today</button>
-              <button class="cal-btn" id="prevMonth">‹</button>
-              <button class="cal-btn" id="nextMonth">›</button>
-            </div>
-
-          </div>
-
-          <div class="calendar-week">
-            <div class="week-label">Sun</div>
-            <div class="week-label">Mon</div>
-            <div class="week-label">Tue</div>
-            <div class="week-label">Wed</div>
-            <div class="week-label">Thu</div>
-            <div class="week-label">Fri</div>
-            <div class="week-label">Sat</div>
-          </div>
-
-          <div class="calendar-grid" id="calendarGrid"></div>
-          <div class="calendar-legend" id="calendarLegend"></div>
 
         </div>
 
-      </section>
 
-    </div>
+        <div class="calendar-week">
 
-  </main>
+          <div class="week-label">Sun</div>
+          <div class="week-label">Mon</div>
+          <div class="week-label">Tue</div>
+          <div class="week-label">Wed</div>
+          <div class="week-label">Thu</div>
+          <div class="week-label">Fri</div>
+          <div class="week-label">Sat</div>
 
-  <footer>
+        </div>
 
-    <span id="footerEmail"></span>
 
-    <div class="sync-line">
-      <span class="sync-dot"></span>
-      <span id="syncStatus">Synced</span>
-    </div>
+        <div
+          class="calendar-grid"
+          id="calendarGrid"
+        ></div>
 
-  </footer>
+
+        <div
+          class="calendar-legend"
+          id="calendarLegend"
+        ></div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</main>
+
+
+<footer>
+
+  <span id="footerEmail"></span>
+
+  <div class="sync-line">
+
+    <span class="sync-dot"></span>
+
+    <span id="syncStatus">
+      Synced
+    </span>
+
+  </div>
+
+</footer>
 
 </div>
 
-<!-- ITEM MODAL -->
 
-<div class="modal-overlay" id="itemModal">
+<!-- ======================================================
+     ITEM MODAL
+====================================================== -->
+
+<div
+  class="modal-overlay"
+  id="itemModal"
+>
 
   <div class="modal-box">
 
-    <button class="modal-close" data-close="itemModal">✕</button>
+    <button
+      class="modal-close"
+      data-close="itemModal"
+    >
+      ✕
+    </button>
 
-    <h3 class="modal-title" id="itemModalTitle">
+
+    <h3
+      class="modal-title"
+      id="itemModalTitle"
+    >
       Add to your planner
     </h3>
 
+
     <div class="modal-accent-bar"></div>
 
+
     <form id="itemForm">
+
 
       <div class="field">
 
@@ -432,7 +1812,11 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
           Type
         </label>
 
-        <div class="type-toggle" id="typeToggle">
+
+        <div
+          class="type-toggle"
+          id="typeToggle"
+        >
 
           <button
             type="button"
@@ -468,7 +1852,10 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
       </div>
 
 
-      <div class="field" id="classField">
+      <div
+        class="field"
+        id="classField"
+      >
 
         <label>
           Class
@@ -479,7 +1866,10 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
       </div>
 
 
-      <div class="field hidden" id="extraField">
+      <div
+        class="field hidden"
+        id="extraField"
+      >
 
         <label>
           Extracurricular
@@ -501,7 +1891,7 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
           type="text"
           required
           placeholder="What do you need to do?"
-        />
+        >
 
       </div>
 
@@ -509,19 +1899,41 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
       <div class="field-row">
 
         <div class="field">
-          <label>Date</label>
-          <input id="itemDate" type="date" required />
+
+          <label>
+            Date
+          </label>
+
+          <input
+            id="itemDate"
+            type="date"
+            required
+          >
+
         </div>
 
+
         <div class="field">
-          <label>Time</label>
-          <input id="itemTime" type="time" />
+
+          <label>
+            Time
+          </label>
+
+          <input
+            id="itemTime"
+            type="time"
+          >
+
         </div>
 
       </div>
 
 
-      <div class="hidden" id="activityFields">
+      <div
+        class="hidden"
+        id="activityFields"
+      >
+
 
         <div class="field">
 
@@ -529,13 +1941,15 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
             Location
           </label>
 
+
           <div class="location-box">
 
             <input
               id="manualLocation"
               type="text"
               placeholder="e.g. Newport High School"
-            />
+            >
+
 
             <div class="location-actions">
 
@@ -564,11 +1978,13 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
 
         <div class="field-row">
 
+
           <div class="field">
 
             <label>
               Repeats
             </label>
+
 
             <select id="itemRepeat">
 
@@ -605,10 +2021,9 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
             <input
               id="repeatEnd"
               type="date"
-            />
+            >
 
           </div>
-
 
         </div>
 
@@ -628,33 +2043,13 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
             id="weekdayPicker"
           >
 
-            <button type="button" data-day="0">
-              S
-            </button>
-
-            <button type="button" data-day="1">
-              M
-            </button>
-
-            <button type="button" data-day="2">
-              T
-            </button>
-
-            <button type="button" data-day="3">
-              W
-            </button>
-
-            <button type="button" data-day="4">
-              T
-            </button>
-
-            <button type="button" data-day="5">
-              F
-            </button>
-
-            <button type="button" data-day="6">
-              S
-            </button>
+            <button type="button" data-day="0">S</button>
+            <button type="button" data-day="1">M</button>
+            <button type="button" data-day="2">T</button>
+            <button type="button" data-day="3">W</button>
+            <button type="button" data-day="4">T</button>
+            <button type="button" data-day="5">F</button>
+            <button type="button" data-day="6">S</button>
 
           </div>
 
@@ -707,9 +2102,7 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
 
         </div>
 
-
       </div>
-
 
     </form>
 
@@ -718,7 +2111,9 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
 </div>
 
 
-<!-- CLASS MODAL -->
+<!-- ======================================================
+     CLASS MODAL
+====================================================== -->
 
 <div
   class="modal-overlay"
@@ -734,6 +2129,7 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
       ✕
     </button>
 
+
     <h3
       class="modal-title"
       id="classModalTitle"
@@ -741,24 +2137,23 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
       Class
     </h3>
 
+
     <div
       class="modal-accent-bar"
       id="classModalAccent"
     ></div>
+
 
     <div
       class="class-modal-list"
       id="classModalList"
     ></div>
 
+
     <button
       class="btn btn-primary"
       id="classAddButton"
-      style="
-        width:100%;
-        justify-content:center;
-        margin-top:16px
-      "
+      style="width:100%;justify-content:center;margin-top:16px"
     >
       + Add assignment
     </button>
@@ -768,7 +2163,9 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
 </div>
 
 
-<!-- SETTINGS -->
+<!-- ======================================================
+     SETTINGS
+====================================================== -->
 
 <div
   class="modal-overlay"
@@ -784,9 +2181,11 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
       ✕
     </button>
 
+
     <h3 class="modal-title">
       Settings
     </h3>
+
 
     <div class="modal-accent-bar"></div>
 
@@ -801,47 +2200,22 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
         Personalize your planner.
       </div>
 
+
       <div class="color-grid">
 
         <div class="color-card">
-
-          <label>
-            Header
-          </label>
-
-          <input
-            id="themeGreen"
-            type="color"
-          />
-
+          <label>Header</label>
+          <input id="themeGreen" type="color">
         </div>
 
-
         <div class="color-card">
-
-          <label>
-            Accent
-          </label>
-
-          <input
-            id="themeGold"
-            type="color"
-          />
-
+          <label>Accent</label>
+          <input id="themeGold" type="color">
         </div>
 
-
         <div class="color-card">
-
-          <label>
-            Background
-          </label>
-
-          <input
-            id="themePaper"
-            type="color"
-          />
-
+          <label>Background</label>
+          <input id="themePaper" type="color">
         </div>
 
       </div>
@@ -881,7 +2255,9 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
       </div>
 
       <div class="settings-copy">
-        Add things like Tennis, Scouts, clubs, sports, jobs or volunteering. Then attach Activities to them.
+        Add things like Tennis, Scouts, clubs, sports,
+        jobs or volunteering. Activities can then be
+        connected to them.
       </div>
 
       <div
@@ -918,7 +2294,9 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
 </div>
 
 
-<!-- PROFILE -->
+<!-- ======================================================
+     PROFILE
+====================================================== -->
 
 <div
   class="modal-overlay"
@@ -934,20 +2312,20 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
       ✕
     </button>
 
+
     <h3 class="modal-title">
       Your Profile
     </h3>
 
+
     <div class="modal-accent-bar"></div>
 
+
     <div
-      style="
-        color:var(--ink-soft);
-        font-size:12px;
-        margin-bottom:16px
-      "
+      style="color:var(--ink-soft);font-size:12px;margin-bottom:16px"
       id="profileEmail"
     ></div>
+
 
     <div class="field">
 
@@ -958,14 +2336,15 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
       <input
         id="profileName"
         type="text"
-      />
+      >
 
     </div>
+
 
     <div class="form-actions">
 
       <button
-        class="btn btn-danger"
+        class="btn btn-ghost"
         id="signOutButton"
       >
         Sign out
@@ -980,12 +2359,38 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
 
     </div>
 
+
+    <div class="danger-zone">
+
+      <div
+        class="settings-title"
+        style="color:var(--danger)"
+      >
+        Delete account
+      </div>
+
+      <div class="settings-copy">
+        Permanently delete your Homeroom account and its data.
+      </div>
+
+      <button
+        class="btn btn-danger"
+        id="deleteAccountButton"
+        type="button"
+      >
+        Delete account
+      </button>
+
+    </div>
+
   </div>
 
 </div>
 
 
-<!-- FORGOT PASSWORD -->
+<!-- ======================================================
+     FORGOT PASSWORD
+====================================================== -->
 
 <div
   class="modal-overlay"
@@ -1001,11 +2406,14 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
       ✕
     </button>
 
+
     <h3 class="modal-title">
       Reset password
     </h3>
 
+
     <div class="modal-accent-bar"></div>
+
 
     <div class="field">
 
@@ -1017,7 +2425,7 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
         id="forgotEmail"
         type="email"
         placeholder="you@example.com"
-      />
+      >
 
       <div class="helper-text">
         We'll email you a secure reset link.
@@ -1025,10 +2433,12 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
 
     </div>
 
+
     <div
       class="auth-message"
       id="forgotMessage"
     ></div>
+
 
     <div
       class="form-actions"
@@ -1058,7 +2468,9 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
 </div>
 
 
-<!-- SET NEW PASSWORD -->
+<!-- ======================================================
+     NEW PASSWORD
+====================================================== -->
 
 <div
   class="modal-overlay"
@@ -1067,11 +2479,14 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
 
   <div class="modal-box">
 
+
     <h3 class="modal-title">
       Choose a new password
     </h3>
 
+
     <div class="modal-accent-bar"></div>
+
 
     <div class="field">
 
@@ -1084,9 +2499,10 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
         type="password"
         minlength="6"
         placeholder="New password"
-      />
+      >
 
     </div>
+
 
     <div class="field">
 
@@ -1099,14 +2515,16 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
         type="password"
         minlength="6"
         placeholder="Confirm password"
-      />
+      >
 
     </div>
+
 
     <div
       class="auth-message"
       id="resetPasswordMessage"
     ></div>
+
 
     <div
       class="form-actions"
@@ -1128,7 +2546,9 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
 </div>
 
 
-<!-- RECURRING DELETE -->
+<!-- ======================================================
+     DELETE RECURRING ACTIVITY
+====================================================== -->
 
 <div
   class="modal-overlay"
@@ -1144,16 +2564,20 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
       ✕
     </button>
 
+
     <h3 class="modal-title">
       Delete recurring activity
     </h3>
 
+
     <div class="modal-accent-bar"></div>
+
 
     <div
       id="deleteSeriesText"
       style="color:var(--ink-soft)"
     ></div>
+
 
     <div class="choice-stack">
 
@@ -1167,7 +2591,9 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
         <small id="deleteOccurrenceSubtext">
           Keep the rest of the recurring activity.
         </small>
+
       </button>
+
 
       <button
         class="choice-btn danger"
@@ -1179,7 +2605,9 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
         <small>
           Remove every occurrence of this recurring activity.
         </small>
+
       </button>
+
 
       <button
         class="choice-btn"
@@ -1196,11 +2624,83 @@ footer{padding:30px 20px 40px;color:var(--ink-soft);text-align:center;font-famil
 </div>
 
 
+<!-- ======================================================
+     DELETE ACCOUNT
+====================================================== -->
+
+<div
+  class="modal-overlay"
+  id="deleteAccountModal"
+>
+
+  <div class="modal-box">
+
+    <button
+      class="modal-close"
+      data-close="deleteAccountModal"
+    >
+      ✕
+    </button>
+
+
+    <h3
+      class="modal-title"
+      style="color:var(--danger)"
+    >
+      Are you sure you want to delete your account?
+    </h3>
+
+
+    <div
+      class="modal-accent-bar"
+      style="background:var(--danger)"
+    ></div>
+
+
+    <p style="color:var(--ink-soft)">
+      You will lose all your tasks, classes, activities,
+      extracurriculars, notes, colors and planner settings.
+      This cannot be undone.
+    </p>
+
+
+    <div
+      class="auth-message"
+      id="deleteAccountMessage"
+    ></div>
+
+
+    <div class="choice-stack">
+
+      <button
+        class="choice-btn danger"
+        id="confirmDeleteAccountButton"
+        type="button"
+      >
+        Yes, permanently delete my account
+      </button>
+
+
+      <button
+        class="choice-btn"
+        data-close="deleteAccountModal"
+        type="button"
+      >
+        Cancel
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
 <script>
 
-/* =========================================================
+/* ======================================================
    SUPABASE
-   ========================================================= */
+====================================================== */
 
 const SUPABASE_URL =
   'https://vpevjppqdxvyiodhcusj.supabase.co';
@@ -1226,13 +2726,13 @@ const sb =
   );
 
 
-/* =========================================================
-   NEW ACCOUNT DEFAULTS
-   ========================================================= */
+/* ======================================================
+   DEFAULT NEW ACCOUNT
+====================================================== */
 
 const DEFAULT_STATE = {
 
-  version:8,
+  version:9,
 
   profile:{
     name:''
@@ -1296,20 +2796,16 @@ const DEFAULT_STATE = {
 
   ],
 
-  extras:[
-
-    {
-      id:'example-extra',
-      name:'Example Extracurricular',
-      color:'#527A67'
-    }
-
-  ],
+  extras:[],
 
   tasks:[]
 
 };
 
+
+/* ======================================================
+   STATE
+====================================================== */
 
 let state =
   clone(DEFAULT_STATE);
@@ -1346,6 +2842,10 @@ let calendarCursor =
   );
 
 
+/* ======================================================
+   HELPERS
+====================================================== */
+
 function clone(value){
 
   return JSON.parse(
@@ -1369,10 +2869,7 @@ function uid(prefix='i'){
 function pad(number){
 
   return String(number)
-    .padStart(
-      2,
-      '0'
-    );
+    .padStart(2,'0');
 
 }
 
@@ -1475,21 +2972,17 @@ function niceTime(value){
 
 function esc(value){
 
-  return String(
-    value ?? ''
-  )
-  .replace(
-    /[&<>"']/g,
-    character => ({
-
-      '&':'&amp;',
-      '<':'&lt;',
-      '>':'&gt;',
-      '"':'&quot;',
-      "'":'&#39;'
-
-    })[character]
-  );
+  return String(value ?? '')
+    .replace(
+      /[&<>"']/g,
+      character => ({
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#39;'
+      })[character]
+    );
 
 }
 
@@ -1628,9 +3121,9 @@ function isException(
 }
 
 
-/* =========================================================
-   APP UI
-   ========================================================= */
+/* ======================================================
+   UI
+====================================================== */
 
 function showAuth(){
 
@@ -1714,9 +3207,9 @@ function setSyncStatus(text){
 }
 
 
-/* =========================================================
-   AUTH
-   ========================================================= */
+/* ======================================================
+   AUTH UI
+====================================================== */
 
 function setAuthMode(mode){
 
@@ -1831,6 +3324,10 @@ function authMessage(
 }
 
 
+/* ======================================================
+   CREATE ACCOUNT / SIGN IN
+====================================================== */
+
 async function handleAuthSubmit(){
 
   const email =
@@ -1896,8 +3393,42 @@ async function handleAuthSubmit(){
           });
 
 
+      /*
+        Sometimes Supabase can return a database-related
+        message while the Auth user and confirmation email
+        were still successfully created.
+
+        For that specific signup situation, do not scare
+        the user with a fake-looking account failure.
+      */
+
       if(error){
+
+        const message =
+          String(
+            error.message ||
+            ''
+          );
+
+
+        if(
+          /database error saving new user/i
+            .test(
+              message
+            )
+        ){
+
+          authMessage(
+            'Please confirm your email before accessing your account. Check your inbox for the confirmation link.'
+          );
+
+          return;
+
+        }
+
+
         throw error;
+
       }
 
 
@@ -1915,7 +3446,7 @@ async function handleAuthSubmit(){
       else{
 
         authMessage(
-          'Account created. Check your email, confirm it, then come back and sign in.'
+          'Please confirm your email before accessing your account. We sent a confirmation link to your inbox.'
         );
 
       }
@@ -1964,44 +3495,20 @@ async function handleAuthSubmit(){
     );
 
 
-    const message =
-      String(
-        error.message ||
-        'Could not sign in.'
-      );
-
-
-    if(
-      /email.*long/i
-        .test(
-          message
-        )
-    ){
-
-      authMessage(
-        'That email was rejected as too long or invalid. Homeroom does not set its own email-length limit, so check for accidental spaces or pasted text.',
-        true
-      );
-
-    }
-
-    else{
-
-      authMessage(
-        message,
-        true
-      );
-
-    }
+    authMessage(
+      error.message ||
+      'Could not sign in.',
+      true
+    );
 
   }
 
 }
 
 
-/* =========================================================
+/* ======================================================
    PASSWORD RESET
-   ========================================================= */
+====================================================== */
 
 async function sendPasswordReset(){
 
@@ -2069,13 +3576,39 @@ async function sendPasswordReset(){
 
   if(error){
 
-    message.textContent =
-      error.message;
+    const errorText =
+      String(
+        error.message ||
+        ''
+      );
+
+
+    if(
+      /rate limit/i
+        .test(
+          errorText
+        )
+    ){
+
+      message.textContent =
+        'Too many reset requests were sent recently. Please wait a few minutes and try again.';
+
+    }
+
+    else{
+
+      message.textContent =
+        errorText ||
+        'Could not send the reset email.';
+
+    }
+
 
     message.classList
       .add(
         'error'
       );
+
 
     return;
 
@@ -2185,23 +3718,57 @@ async function saveNewPassword(){
 
 
   message.textContent =
-    'Password updated.';
+    'Password updated. Returning to sign in…';
 
 
-  setTimeout(
-    () =>
-      closeModal(
-        'resetPasswordModal'
-      ),
-    700
+  await new Promise(
+    resolve =>
+      setTimeout(
+        resolve,
+        700
+      )
+  );
+
+
+  await sb.auth
+    .signOut();
+
+
+  currentUser =
+    null;
+
+
+  closeModal(
+    'resetPasswordModal'
+  );
+
+
+  showAuth();
+
+
+  setAuthMode(
+    'signin'
+  );
+
+
+  document
+    .getElementById(
+      'authPassword'
+    )
+    .value =
+      '';
+
+
+  authMessage(
+    'Password updated. Sign in with your new password.'
   );
 
 }
 
 
-/* =========================================================
+/* ======================================================
    CLOUD STORAGE
-   ========================================================= */
+====================================================== */
 
 async function loadCloudData(){
 
@@ -2271,9 +3838,7 @@ async function loadCloudData(){
 
       extras:
         data.data.extras ||
-        clone(
-          DEFAULT_STATE.extras
-        ),
+        [],
 
       tasks:
         (
@@ -2404,9 +3969,9 @@ function queueSave(){
 }
 
 
-/* =========================================================
-   ENTER / LEAVE APP
-   ========================================================= */
+/* ======================================================
+   ENTER APP
+====================================================== */
 
 async function enterApp(user){
 
@@ -2456,6 +4021,10 @@ async function enterApp(user){
 }
 
 
+/* ======================================================
+   SIGN OUT
+====================================================== */
+
 async function signOut(){
 
   await sb.auth
@@ -2482,9 +4051,138 @@ async function signOut(){
 }
 
 
-/* =========================================================
-   THEME
-   ========================================================= */
+/* ======================================================
+   DELETE ACCOUNT
+====================================================== */
+
+async function deleteAccount(){
+
+  const message =
+    document
+      .getElementById(
+        'deleteAccountMessage'
+      );
+
+
+  message.textContent =
+    'Deleting your account…';
+
+
+  message.classList
+    .remove(
+      'error'
+    );
+
+
+  try{
+
+    /*
+      Delete the planner row first.
+      This is allowed because RLS lets users delete
+      their own homeroom_state row.
+    */
+
+    const {
+      error:plannerError
+    } =
+      await sb
+        .from(
+          'homeroom_state'
+        )
+        .delete()
+        .eq(
+          'user_id',
+          currentUser.id
+        );
+
+
+    if(plannerError){
+      throw plannerError;
+    }
+
+
+    /*
+      Auth user deletion must happen server-side.
+      The Supabase Edge Function will be named
+      "delete-account".
+    */
+
+    const {
+      error
+    } =
+      await sb.functions
+        .invoke(
+          'delete-account'
+        );
+
+
+    if(error){
+      throw error;
+    }
+
+
+    await sb.auth
+      .signOut();
+
+
+    currentUser =
+      null;
+
+
+    state =
+      clone(
+        DEFAULT_STATE
+      );
+
+
+    closeModal(
+      'deleteAccountModal'
+    );
+
+
+    closeModal(
+      'profileModal'
+    );
+
+
+    showAuth();
+
+
+    setAuthMode(
+      'signin'
+    );
+
+
+    authMessage(
+      'Your account has been permanently deleted.'
+    );
+
+  }
+
+  catch(error){
+
+    console.error(
+      error
+    );
+
+
+    message.textContent =
+      'Homeroom could not finish deleting the account yet. The delete-account server function needs to be enabled.';
+
+
+    message.classList
+      .add(
+        'error'
+      );
+
+  }
+
+}
+
+
+/* ======================================================
+   THEME + ACCOUNT
+====================================================== */
 
 function applyTheme(){
 
@@ -2523,10 +4221,6 @@ function applyTheme(){
 
 }
 
-
-/* =========================================================
-   ACCOUNT
-   ========================================================= */
 
 function renderAccount(){
 
@@ -2594,9 +4288,9 @@ function renderAccount(){
 }
 
 
-/* =========================================================
+/* ======================================================
    SELECTS
-   ========================================================= */
+====================================================== */
 
 function renderSelects(){
 
@@ -2648,9 +4342,9 @@ function renderSelects(){
 }
 
 
-/* =========================================================
+/* ======================================================
    DEADLINES
-   ========================================================= */
+====================================================== */
 
 function renderDeadlines(){
 
@@ -2757,7 +4451,6 @@ function renderDeadlines(){
             label =
               'Completed';
 
-
             badge =
               'done';
 
@@ -2770,7 +4463,6 @@ function renderDeadlines(){
             label =
               'Due today';
 
-
             badge =
               'urgent';
 
@@ -2782,7 +4474,6 @@ function renderDeadlines(){
 
             label =
               'Due tomorrow';
-
 
             badge =
               'urgent';
@@ -2849,9 +4540,9 @@ function renderDeadlines(){
 }
 
 
-/* =========================================================
+/* ======================================================
    CLASSES
-   ========================================================= */
+====================================================== */
 
 function renderClasses(){
 
@@ -2956,9 +4647,9 @@ function renderClasses(){
 }
 
 
-/* =========================================================
+/* ======================================================
    TASKS
-   ========================================================= */
+====================================================== */
 
 function taskRow(task){
 
@@ -3190,9 +4881,9 @@ function renderTaskList(){
 }
 
 
-/* =========================================================
+/* ======================================================
    CLASS MODAL
-   ========================================================= */
+====================================================== */
 
 function openClassModal(id){
 
@@ -3321,9 +5012,9 @@ function renderClassModal(){
 }
 
 
-/* =========================================================
+/* ======================================================
    RECURRING ACTIVITIES
-   ========================================================= */
+====================================================== */
 
 function occurrences(
   task,
@@ -3564,9 +5255,9 @@ function occurrences(
 }
 
 
-/* =========================================================
+/* ======================================================
    CALENDAR
-   ========================================================= */
+====================================================== */
 
 function renderCalendar(){
 
@@ -3796,9 +5487,9 @@ function renderCalendar(){
 }
 
 
-/* =========================================================
+/* ======================================================
    SETTINGS
-   ========================================================= */
+====================================================== */
 
 function renderSettings(){
 
@@ -3842,13 +5533,13 @@ function renderSettings(){
           data-setting-color
           type="color"
           value="${item.color}"
-        />
+        >
 
         <input
           data-setting-name
           type="text"
           value="${esc(item.name)}"
-        />
+        >
 
         <button
           class="icon-btn"
@@ -3982,9 +5673,9 @@ function commitSettings(){
 }
 
 
-/* =========================================================
+/* ======================================================
    ITEM EDITOR
-   ========================================================= */
+====================================================== */
 
 function setType(type){
 
@@ -4297,7 +5988,7 @@ function saveItem(){
       .trim();
 
 
-  const date =
+  const selectedDate =
     document
       .getElementById(
         'itemDate'
@@ -4307,7 +5998,7 @@ function saveItem(){
 
   if(
     !title ||
-    !date
+    !selectedDate
   ){
     return;
   }
@@ -4430,7 +6121,7 @@ function saveItem(){
 
         ? oldTask.date
 
-        : date,
+        : selectedDate,
 
     time:
 
@@ -4566,9 +6257,9 @@ function saveItem(){
 }
 
 
-/* =========================================================
-   DELETE
-   ========================================================= */
+/* ======================================================
+   DELETE ITEMS
+====================================================== */
 
 function requestDeleteItem(){
 
@@ -4760,9 +6451,9 @@ function deleteOneOccurrence(){
 }
 
 
-/* =========================================================
+/* ======================================================
    COMPLETE
-   ========================================================= */
+====================================================== */
 
 function toggleComplete(id){
 
@@ -4794,9 +6485,9 @@ function toggleComplete(id){
 }
 
 
-/* =========================================================
+/* ======================================================
    MAPS
-   ========================================================= */
+====================================================== */
 
 function mapsUrl(query){
 
@@ -4835,9 +6526,9 @@ function openMapsForLocation(){
 }
 
 
-/* =========================================================
-   RENDER
-   ========================================================= */
+/* ======================================================
+   RENDER EVERYTHING
+====================================================== */
 
 function renderAll(){
 
@@ -4880,9 +6571,9 @@ function renderAll(){
 }
 
 
-/* =========================================================
-   EVENTS
-   ========================================================= */
+/* ======================================================
+   BUTTON EVENTS
+====================================================== */
 
 document
   .getElementById(
@@ -5010,6 +6701,36 @@ document
       );
 
     };
+
+
+document
+  .getElementById(
+    'deleteAccountButton'
+  )
+  .onclick =
+    () => {
+
+      document
+        .getElementById(
+          'deleteAccountMessage'
+        )
+        .textContent =
+          '';
+
+
+      openModal(
+        'deleteAccountModal'
+      );
+
+    };
+
+
+document
+  .getElementById(
+    'confirmDeleteAccountButton'
+  )
+  .onclick =
+    deleteAccount;
 
 
 document
@@ -5433,6 +7154,10 @@ document
 );
 
 
+/* ======================================================
+   GLOBAL CLICK EVENTS
+====================================================== */
+
 document
   .addEventListener(
     'click',
@@ -5717,6 +7442,10 @@ document
   );
 
 
+/* ======================================================
+   CLOSE MODALS
+====================================================== */
+
 document
   .querySelectorAll(
     '.modal-overlay'
@@ -5772,9 +7501,9 @@ document
   );
 
 
-/* =========================================================
-   AUTH EVENTS
-   ========================================================= */
+/* ======================================================
+   SUPABASE AUTH EVENTS
+====================================================== */
 
 sb.auth
   .onAuthStateChange(
@@ -5783,6 +7512,11 @@ sb.auth
       session
     ) => {
 
+
+      /*
+        Password reset email link:
+        open the new-password modal.
+      */
 
       if(
         event ===
@@ -5825,6 +7559,11 @@ sb.auth
       }
 
 
+      /*
+        Normal signup confirmation link:
+        automatically enter Homeroom.
+      */
+
       if(
         event ===
           'SIGNED_IN'
@@ -5863,9 +7602,9 @@ sb.auth
   );
 
 
-/* =========================================================
+/* ======================================================
    START
-   ========================================================= */
+====================================================== */
 
 async function start(){
 
@@ -5885,6 +7624,15 @@ async function start(){
         );
 
 
+  /*
+    Login is visible by default.
+
+    Session restore is allowed only a few seconds,
+    so Homeroom can never become permanently stuck
+    on a loading screen again.
+  */
+
+
   try{
 
     const result =
@@ -5898,6 +7646,7 @@ async function start(){
             _,
             reject
           ) =>
+
             setTimeout(
               () =>
                 reject(
@@ -5907,6 +7656,7 @@ async function start(){
                 ),
               5000
             )
+
         )
 
       ]);
