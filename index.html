@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#1F3D2B" />
+
 <title>Homeroom — My Schedule</title>
+
 <link rel="icon" href="data:," />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,6 +16,9 @@
   href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
   rel="stylesheet"
 />
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 
@@ -72,29 +78,32 @@ html{
 
 body{
   margin:0;
+
   background:var(--paper);
   color:var(--ink);
+
   font-family:var(--font-body);
   line-height:1.45;
+
   -webkit-font-smoothing:antialiased;
 }
 
 h1,
 h2,
 h3{
-  font-family:var(--font-display);
   margin:0;
+  font-family:var(--font-display);
 }
 
-button{
-  font-family:inherit;
-  cursor:pointer;
-}
-
+button,
 input,
 select,
 textarea{
-  font-family:inherit;
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
 }
 
 :focus-visible{
@@ -107,9 +116,199 @@ textarea{
 }
 
 .wrap{
+  width:100%;
   max-width:1120px;
   margin:0 auto;
   padding:0 24px;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.loading-screen{
+  position:fixed;
+  inset:0;
+  z-index:500;
+
+  display:grid;
+  place-items:center;
+
+  background:var(--paper);
+}
+
+.loading-inner{
+  text-align:center;
+}
+
+.loading-logo{
+  font-family:var(--font-display);
+  font-size:34px;
+  font-weight:600;
+}
+
+.loading-copy{
+  margin-top:8px;
+  color:var(--ink-soft);
+
+  font-family:var(--font-mono);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+
+/* =========================================================
+   AUTH
+   ========================================================= */
+
+.auth-screen{
+  min-height:100vh;
+
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(420px,540px);
+
+  background:var(--paper);
+}
+
+.auth-hero{
+  min-height:100vh;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+
+  padding:54px;
+
+  background:var(--green);
+  color:#fff;
+}
+
+.auth-brand{
+  font-family:var(--font-display);
+  font-size:31px;
+  font-weight:600;
+}
+
+.auth-hero-copy{
+  max-width:610px;
+}
+
+.auth-hero-copy h1{
+  font-size:clamp(42px,6vw,76px);
+  line-height:1;
+  font-weight:500;
+
+  letter-spacing:-.035em;
+}
+
+.auth-hero-copy p{
+  max-width:540px;
+
+  margin:24px 0 0;
+
+  color:rgba(255,255,255,.72);
+
+  font-size:17px;
+}
+
+.auth-footer{
+  color:rgba(255,255,255,.5);
+
+  font-family:var(--font-mono);
+  font-size:10px;
+
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.auth-panel{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:40px;
+}
+
+.auth-box{
+  width:100%;
+  max-width:390px;
+}
+
+.auth-box h2{
+  font-size:32px;
+}
+
+.auth-sub{
+  margin:8px 0 28px;
+  color:var(--ink-soft);
+}
+
+.auth-switch{
+  display:flex;
+
+  margin-bottom:24px;
+
+  padding:4px;
+
+  background:var(--paper-deep);
+
+  border-radius:999px;
+}
+
+.auth-switch button{
+  flex:1;
+
+  border:0;
+  border-radius:999px;
+
+  padding:9px;
+
+  background:transparent;
+
+  color:var(--ink-soft);
+
+  font-size:13px;
+  font-weight:700;
+}
+
+.auth-switch button.active{
+  background:#fff;
+  color:var(--green);
+
+  box-shadow:var(--shadow-card);
+}
+
+.auth-message{
+  min-height:20px;
+
+  margin:10px 0;
+
+  color:var(--ink-soft);
+
+  font-size:12px;
+}
+
+.auth-message.error{
+  color:var(--danger);
+}
+
+.auth-submit{
+  width:100%;
+  justify-content:center;
+
+  margin-top:4px;
+}
+
+.auth-bottom{
+  margin-top:18px;
+
+  text-align:center;
+
+  color:var(--ink-soft);
+
+  font-size:12px;
 }
 
 
@@ -121,16 +320,21 @@ textarea{
   position:sticky;
   top:0;
   z-index:40;
+
   background:var(--green);
   color:#F5F3EE;
+
   border-bottom:1px solid rgba(0,0,0,.15);
 }
 
 .app-header .wrap{
   display:grid;
   grid-template-columns:1fr auto 1fr;
+
   align-items:center;
+
   gap:16px;
+
   padding-top:14px;
   padding-bottom:14px;
 }
@@ -138,14 +342,16 @@ textarea{
 .brand-title{
   font-size:26px;
   font-weight:600;
-  letter-spacing:.2px;
 }
 
 .brand-sub{
-  font-family:var(--font-mono);
-  font-size:12px;
-  opacity:.75;
   margin-top:2px;
+
+  opacity:.75;
+
+  font-family:var(--font-mono);
+  font-size:11px;
+
   text-transform:uppercase;
   letter-spacing:.08em;
 }
@@ -153,19 +359,27 @@ textarea{
 .top-tabs{
   display:flex;
   gap:4px;
+
   padding:4px;
+
   background:rgba(255,255,255,.10);
+
   border-radius:999px;
 }
 
 .top-tab{
-  border:none;
-  background:transparent;
-  color:rgba(255,255,255,.72);
+  border:0;
+
+  padding:9px 17px;
+
   border-radius:999px;
-  padding:9px 16px;
-  font-weight:700;
+
+  background:transparent;
+
+  color:rgba(255,255,255,.72);
+
   font-size:13px;
+  font-weight:700;
 }
 
 .top-tab.active{
@@ -176,7 +390,57 @@ textarea{
 .header-actions{
   display:flex;
   justify-content:flex-end;
+  align-items:center;
+
   gap:8px;
+}
+
+
+/* =========================================================
+   ACCOUNT BUTTON
+   ========================================================= */
+
+.account-button{
+  display:flex;
+  align-items:center;
+
+  gap:8px;
+
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:999px;
+
+  padding:5px 11px 5px 5px;
+
+  background:rgba(255,255,255,.08);
+
+  color:#fff;
+}
+
+.avatar{
+  width:30px;
+  height:30px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:50%;
+
+  background:var(--gold);
+  color:var(--ink);
+
+  font-family:var(--font-display);
+  font-weight:700;
+}
+
+.account-name{
+  max-width:110px;
+
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+
+  font-size:12px;
+  font-weight:700;
 }
 
 
@@ -185,14 +449,19 @@ textarea{
    ========================================================= */
 
 .btn{
-  border:none;
-  border-radius:999px;
-  padding:11px 18px;
-  font-weight:600;
-  font-size:14px;
   display:inline-flex;
   align-items:center;
+
   gap:8px;
+
+  border:0;
+  border-radius:999px;
+
+  padding:11px 18px;
+
+  font-weight:700;
+  font-size:14px;
+
   transition:
     transform .15s ease,
     box-shadow .15s ease,
@@ -206,18 +475,19 @@ textarea{
 .btn-primary{
   background:var(--gold);
   color:var(--ink);
-  box-shadow:0 4px 12px rgba(0,0,0,.2);
+
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
 }
 
-.btn-outline-light{
-  background:rgba(255,255,255,.08);
+.btn-green{
+  background:var(--green);
   color:#fff;
-  border:1px solid rgba(255,255,255,.35);
 }
 
 .btn-ghost{
   background:transparent;
   color:var(--ink-soft);
+
   border:1px solid var(--line);
 }
 
@@ -226,20 +496,26 @@ textarea{
   color:var(--danger);
 }
 
+.btn-outline-light{
+  background:rgba(255,255,255,.08);
+  color:#fff;
+
+  border:1px solid rgba(255,255,255,.35);
+}
+
 .icon{
   width:16px;
   height:16px;
-  flex:none;
-}
-
-main{
-  padding-bottom:80px;
 }
 
 
 /* =========================================================
-   SECTION HEADERS
+   MAIN
    ========================================================= */
+
+main{
+  padding-bottom:80px;
+}
 
 .section{
   margin-top:40px;
@@ -247,10 +523,13 @@ main{
 
 .section-head{
   display:flex;
-  align-items:baseline;
   justify-content:space-between;
+  align-items:baseline;
+
   gap:12px;
+
   margin-bottom:14px;
+
   flex-wrap:wrap;
 }
 
@@ -260,84 +539,96 @@ main{
 }
 
 .section-note{
-  font-family:var(--font-mono);
-  font-size:12px;
   color:var(--ink-soft);
+
+  font-family:var(--font-mono);
+  font-size:11px;
+
   text-transform:uppercase;
   letter-spacing:.06em;
 }
 
 
 /* =========================================================
-   UPCOMING DEADLINES
+   DEADLINES
    ========================================================= */
 
 .deadline-shell{
+  padding:18px;
+
   background:var(--card);
+
   border:1px solid var(--line);
   border-radius:var(--radius-lg);
-  padding:18px;
+
   box-shadow:var(--shadow-card);
 }
 
 .deadline-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
+
   gap:12px;
 }
 
 .deadline-card{
+  min-height:132px;
+
+  display:flex;
+  flex-direction:column;
+
+  gap:8px;
+
+  padding:14px;
+
+  text-align:left;
+
+  background:var(--paper);
+
   border:1px solid var(--line);
   border-top:4px solid var(--accent,#8A8578);
   border-radius:var(--radius-md);
-  padding:14px;
-  background:var(--paper);
-  text-align:left;
-  min-height:132px;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  transition:
-    transform .15s ease,
-    box-shadow .15s ease;
 }
 
 .deadline-card:hover{
-  transform:translateY(-2px);
   box-shadow:0 8px 20px rgba(28,27,25,.08);
 }
 
 .deadline-class{
-  font-family:var(--font-mono);
-  font-size:10.5px;
-  letter-spacing:.06em;
-  text-transform:uppercase;
   color:var(--accent);
+
+  font-family:var(--font-mono);
+  font-size:10px;
   font-weight:700;
+
+  text-transform:uppercase;
 }
 
 .deadline-title{
   font-family:var(--font-display);
-  font-weight:600;
   font-size:16px;
-  line-height:1.25;
+  font-weight:600;
 }
 
 .deadline-meta{
   margin-top:auto;
-  font-family:var(--font-mono);
-  font-size:11px;
+
   color:var(--ink-soft);
+
+  font-family:var(--font-mono);
+  font-size:10px;
 }
 
 .deadline-badge{
-  display:inline-block;
-  margin-top:6px;
+  align-self:flex-start;
+
   padding:4px 8px;
+
   border-radius:999px;
+
+  font-family:var(--font-mono);
   font-size:10px;
   font-weight:700;
-  font-family:var(--font-mono);
 }
 
 .deadline-badge.urgent{
@@ -363,58 +654,65 @@ main{
 .classes-grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+
   gap:14px;
 }
 
 .class-card{
-  background:var(--card);
-  border-radius:var(--radius-md);
-  border-left:7px solid var(--accent);
-  border-top:none;
-  border-right:none;
-  border-bottom:none;
-  box-shadow:var(--shadow-card);
-  padding:16px 16px 14px;
-  text-align:left;
-  display:flex;
-  flex-direction:column;
-  gap:6px;
   min-height:96px;
   width:100%;
-  transition:
-    transform .15s ease,
-    box-shadow .15s ease;
+
+  display:flex;
+  flex-direction:column;
+
+  gap:6px;
+
+  padding:16px;
+
+  background:var(--card);
+
+  border:0;
+  border-left:7px solid var(--accent);
+  border-radius:var(--radius-md);
+
+  box-shadow:var(--shadow-card);
+
+  text-align:left;
 }
 
 .class-card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 10px 24px rgba(28,27,25,.12);
+  transform:translateY(-2px);
 }
 
 .class-name{
+  color:var(--ink);
+
+  font-family:var(--font-display);
   font-size:17px;
   font-weight:600;
-  font-family:var(--font-display);
-  color:var(--ink);
 }
 
 .class-meta{
   display:flex;
-  align-items:center;
   justify-content:space-between;
+
   margin-top:auto;
-  font-family:var(--font-mono);
-  font-size:11.5px;
+
   color:var(--ink-soft);
+
+  font-family:var(--font-mono);
+  font-size:10px;
+
   text-transform:uppercase;
-  letter-spacing:.04em;
 }
 
 .pill-count{
+  padding:3px 8px;
+
   background:var(--paper-deep);
-  color:var(--ink-soft);
+
   border-radius:999px;
-  padding:3px 9px;
+
   font-weight:700;
 }
 
@@ -435,11 +733,14 @@ main{
 }
 
 .tab-btn{
+  padding:8px 15px;
+
+  border:0;
+  border-radius:999px;
+
   background:var(--paper-deep);
   color:var(--ink-soft);
-  border:none;
-  border-radius:999px;
-  padding:8px 15px;
+
   font-size:13px;
   font-weight:600;
 }
@@ -451,104 +752,106 @@ main{
 
 
 /* =========================================================
-   TASK LIST
+   TASKS
    ========================================================= */
+
+.task-list,
+.class-modal-list{
+  display:flex;
+  flex-direction:column;
+
+  gap:9px;
+}
 
 .task-list{
   margin-top:16px;
-  display:flex;
-  flex-direction:column;
-  gap:9px;
-  min-height:80px;
 }
 
 .task-row{
-  background:var(--card);
-  border-radius:var(--radius-sm);
-  box-shadow:var(--shadow-card);
-  padding:12px 14px;
   display:grid;
   grid-template-columns:auto 1fr auto;
+
   align-items:center;
+
   gap:12px;
+
+  padding:12px 14px;
+
+  background:var(--card);
+
   border-left:4px solid var(--accent,#8A8578);
+  border-radius:var(--radius-sm);
+
+  box-shadow:var(--shadow-card);
 }
 
 .task-main{
   min-width:0;
+
   cursor:pointer;
 }
 
 .task-title{
-  font-weight:600;
   font-size:14.5px;
+  font-weight:600;
 }
 
 .task-meta{
-  font-family:var(--font-mono);
-  font-size:11.5px;
-  color:var(--ink-soft);
   margin-top:2px;
+
+  color:var(--ink-soft);
+
+  font-family:var(--font-mono);
+  font-size:10.5px;
+
   text-transform:uppercase;
-  letter-spacing:.03em;
 }
 
 .type-badge{
-  font-family:var(--font-mono);
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:.05em;
-  padding:2px 7px;
-  border-radius:5px;
+  display:inline-block;
+
+  margin-left:4px;
+
+  padding:2px 6px;
+
   background:var(--paper-deep);
-  color:var(--ink-soft);
+
+  border-radius:5px;
+
+  font-size:9px;
   font-weight:700;
 }
 
 .item-dot{
   width:10px;
   height:10px;
-  border-radius:50%;
-  background:var(--accent);
+
   margin:0 5px;
-}
 
-.icon-btn{
-  background:transparent;
-  border:none;
-  color:var(--ink-soft);
-  width:30px;
-  height:30px;
+  background:var(--accent);
+
   border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
 }
-
-.icon-btn:hover{
-  background:var(--paper-deep);
-}
-
-
-/* =========================================================
-   COMPLETION
-   ========================================================= */
 
 .check{
   width:21px;
   height:21px;
-  border-radius:50%;
-  border:2px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#fff;
+
+  display:grid;
+  place-items:center;
+
   padding:0;
+
+  background:#fff;
+
+  border:2px solid var(--line);
+  border-radius:50%;
 }
 
 .check svg{
   width:12px;
   height:12px;
+
   opacity:0;
 }
 
@@ -563,6 +866,7 @@ main{
 
 .task-row.done .check{
   background:var(--green);
+
   border-color:var(--green);
 }
 
@@ -570,27 +874,51 @@ main{
   opacity:1;
 }
 
+.icon-btn{
+  width:30px;
+  height:30px;
+
+  display:grid;
+  place-items:center;
+
+  border:0;
+  border-radius:50%;
+
+  background:transparent;
+  color:var(--ink-soft);
+}
+
+.icon-btn:hover{
+  background:var(--paper-deep);
+}
+
 
 /* =========================================================
-   EMPTY STATE
+   EMPTY
    ========================================================= */
 
 .empty-state{
-  text-align:center;
   padding:38px 20px;
-  color:var(--ink-soft);
+
   background:var(--card);
-  border-radius:var(--radius-md);
+
   border:1.5px dashed var(--line);
+  border-radius:var(--radius-md);
+
+  color:var(--ink-soft);
+
+  text-align:center;
 }
 
 .empty-state strong{
   display:block;
+
+  margin-bottom:4px;
+
+  color:var(--ink);
+
   font-family:var(--font-display);
   font-size:17px;
-  color:var(--ink);
-  margin-bottom:4px;
-  font-weight:600;
 }
 
 
@@ -599,19 +927,25 @@ main{
    ========================================================= */
 
 .calendar-shell{
+  margin-top:20px;
+
+  overflow:hidden;
+
   background:var(--card);
+
   border:1px solid var(--line);
   border-radius:var(--radius-lg);
+
   box-shadow:var(--shadow-card);
-  overflow:hidden;
-  margin-top:22px;
 }
 
 .calendar-head{
   display:flex;
   justify-content:space-between;
   align-items:center;
+
   padding:18px 20px;
+
   border-bottom:1px solid var(--line);
 }
 
@@ -623,14 +957,17 @@ main{
 
 .cal-controls{
   display:flex;
-  gap:8px;
+  gap:7px;
 }
 
 .cal-btn{
-  border:1px solid var(--line);
-  background:var(--paper);
-  border-radius:10px;
   padding:8px 11px;
+
+  background:var(--paper);
+
+  border:1px solid var(--line);
+  border-radius:9px;
+
   font-weight:700;
 }
 
@@ -642,24 +979,28 @@ main{
 
 .calendar-week{
   background:var(--paper-deep);
-  border-bottom:1px solid var(--line);
 }
 
 .week-label{
-  text-align:center;
   padding:8px;
-  font-family:var(--font-mono);
-  font-size:10px;
+
+  text-align:center;
+
   color:var(--ink-soft);
-  text-transform:uppercase;
+
+  font-family:var(--font-mono);
+  font-size:9px;
 }
 
 .day-cell{
   min-height:126px;
+
   padding:7px;
+
+  background:#fff;
+
   border-right:1px solid var(--line);
   border-bottom:1px solid var(--line);
-  background:#fff;
 }
 
 .day-cell:nth-child(7n){
@@ -671,14 +1012,18 @@ main{
 }
 
 .day-num{
-  font-family:var(--font-mono);
-  font-size:11px;
-  color:var(--ink-soft);
   width:26px;
   height:26px;
+
   display:grid;
   place-items:center;
+
+  color:var(--ink-soft);
+
   border-radius:8px;
+
+  font-family:var(--font-mono);
+  font-size:10px;
 }
 
 .day-cell.today .day-num{
@@ -688,22 +1033,30 @@ main{
 
 .cal-event{
   display:block;
+
   width:100%;
-  border:none;
-  text-align:left;
-  border-radius:7px;
-  padding:5px 6px;
+
   margin-top:4px;
-  background:
-    color-mix(
-      in srgb,
-      var(--event-color) 12%,
-      white
-    );
-  border-left:3px solid var(--event-color);
-  font-size:10.5px;
-  white-space:nowrap;
+
+  padding:5px 6px;
+
   overflow:hidden;
+
+  background:color-mix(
+    in srgb,
+    var(--event-color) 12%,
+    white
+  );
+
+  border:0;
+  border-left:3px solid var(--event-color);
+  border-radius:7px;
+
+  text-align:left;
+
+  font-size:10px;
+
+  white-space:nowrap;
   text-overflow:ellipsis;
 }
 
@@ -711,10 +1064,13 @@ main{
   display:flex;
   gap:12px;
   flex-wrap:wrap;
+
   padding:12px 18px;
-  font-family:var(--font-mono);
-  font-size:10.5px;
+
   color:var(--ink-soft);
+
+  font-family:var(--font-mono);
+  font-size:10px;
 }
 
 .legend-item{
@@ -726,6 +1082,7 @@ main{
 .legend-dot{
   width:8px;
   height:8px;
+
   border-radius:50%;
 }
 
@@ -737,13 +1094,18 @@ main{
 .modal-overlay{
   position:fixed;
   inset:0;
-  background:rgba(28,27,25,.55);
-  backdrop-filter:blur(2px);
+
+  z-index:100;
+
   display:none;
   align-items:center;
   justify-content:center;
-  z-index:100;
+
   padding:20px;
+
+  background:rgba(28,27,25,.55);
+
+  backdrop-filter:blur(3px);
 }
 
 .modal-overlay.open{
@@ -751,15 +1113,21 @@ main{
 }
 
 .modal-box{
-  background:var(--card);
-  border-radius:var(--radius-lg);
-  box-shadow:var(--shadow-modal);
+  position:relative;
+
   width:100%;
   max-width:520px;
   max-height:90vh;
+
   overflow-y:auto;
-  padding:26px 26px 22px;
-  position:relative;
+
+  padding:26px;
+
+  background:var(--card);
+
+  border-radius:var(--radius-lg);
+
+  box-shadow:var(--shadow-modal);
 }
 
 .modal-box.wide{
@@ -770,35 +1138,41 @@ main{
   position:absolute;
   top:16px;
   right:16px;
-  background:var(--paper-deep);
-  border:none;
+
   width:30px;
   height:30px;
+
+  display:grid;
+  place-items:center;
+
+  background:var(--paper-deep);
+
+  border:0;
   border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+
   color:var(--ink-soft);
 }
 
 .modal-title{
-  font-size:21px;
-  font-weight:600;
-  padding-right:30px;
+  padding-right:35px;
+
+  font-size:22px;
 }
 
 .modal-accent-bar{
-  height:6px;
-  border-radius:999px;
-  background:var(--green);
   width:52px;
-  margin-top:8px;
-  margin-bottom:18px;
+  height:6px;
+
+  margin:8px 0 18px;
+
+  background:var(--green);
+
+  border-radius:999px;
 }
 
 
 /* =========================================================
-   FORMS
+   FIELDS
    ========================================================= */
 
 .field{
@@ -807,32 +1181,43 @@ main{
 
 .field label{
   display:block;
+
+  margin-bottom:6px;
+
+  color:var(--ink-soft);
+
   font-family:var(--font-mono);
-  font-size:11px;
+  font-size:10px;
+  font-weight:700;
+
   text-transform:uppercase;
   letter-spacing:.06em;
-  color:var(--ink-soft);
-  margin-bottom:6px;
-  font-weight:700;
 }
 
 .field input[type=text],
+.field input[type=email],
+.field input[type=password],
 .field input[type=date],
 .field input[type=time],
 .field select,
 .field textarea{
   width:100%;
-  border:1.5px solid var(--line);
-  border-radius:var(--radius-sm);
+
   padding:10px 12px;
-  font-size:14.5px;
+
   background:var(--paper);
   color:var(--ink);
+
+  border:1.5px solid var(--line);
+  border-radius:var(--radius-sm);
+
+  font-size:14px;
 }
 
 .field textarea{
-  resize:vertical;
   min-height:90px;
+
+  resize:vertical;
 }
 
 .field-row{
@@ -847,30 +1232,37 @@ main{
 .type-toggle{
   display:grid;
   grid-template-columns:repeat(4,1fr);
+
   gap:8px;
 }
 
 .type-toggle button{
-  border:1.5px solid var(--line);
+  padding:9px 5px;
+
   background:var(--paper);
+  color:var(--ink-soft);
+
+  border:1.5px solid var(--line);
   border-radius:var(--radius-sm);
-  padding:9px 6px;
+
   font-size:12px;
   font-weight:600;
-  color:var(--ink-soft);
 }
 
 .type-toggle button.active{
-  border-color:var(--green);
   background:var(--green-pale);
   color:var(--green);
+
+  border-color:var(--green);
 }
 
 .form-actions{
   display:flex;
   justify-content:space-between;
+
   gap:10px;
-  margin-top:6px;
+
+  margin-top:8px;
 }
 
 .action-right{
@@ -886,23 +1278,101 @@ main{
 .weekday-picker{
   display:grid;
   grid-template-columns:repeat(7,1fr);
+
   gap:7px;
 }
 
 .weekday-picker button{
-  border:1.5px solid var(--line);
+  height:38px;
+
   background:var(--paper);
   color:var(--ink-soft);
-  height:38px;
+
+  border:1.5px solid var(--line);
   border-radius:10px;
+
   font-size:12px;
   font-weight:700;
 }
 
 .weekday-picker button.active{
   background:var(--green);
-  border-color:var(--green);
   color:#fff;
+
+  border-color:var(--green);
+}
+
+
+/* =========================================================
+   GOOGLE PLACE PICKER
+   ========================================================= */
+
+.place-area{
+  padding:12px;
+
+  background:var(--paper);
+
+  border:1px solid var(--line);
+  border-radius:var(--radius-sm);
+}
+
+#placeAutocompleteHolder{
+  width:100%;
+}
+
+#placeAutocompleteHolder gmp-place-autocomplete{
+  width:100%;
+}
+
+.selected-place{
+  margin-top:10px;
+}
+
+.place-card{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+
+  gap:12px;
+
+  padding:12px;
+
+  background:#fff;
+
+  border:1px solid var(--line);
+  border-left:4px solid var(--green);
+  border-radius:10px;
+}
+
+.place-name{
+  font-size:13px;
+  font-weight:700;
+}
+
+.place-address{
+  margin-top:2px;
+
+  color:var(--ink-soft);
+
+  font-size:11px;
+}
+
+.place-actions{
+  display:flex;
+  gap:6px;
+}
+
+.mini-btn{
+  border:0;
+  border-radius:999px;
+
+  padding:6px 9px;
+
+  background:var(--paper-deep);
+  color:var(--ink);
+
+  font-size:10px;
+  font-weight:700;
 }
 
 
@@ -912,6 +1382,7 @@ main{
 
 .settings-section{
   padding:16px 0;
+
   border-top:1px solid var(--line);
 }
 
@@ -926,40 +1397,49 @@ main{
 }
 
 .settings-copy{
+  margin:3px 0 12px;
+
   color:var(--ink-soft);
+
   font-size:12px;
-  margin:4px 0 12px;
 }
 
 .color-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
+
   gap:10px;
 }
 
 .color-card{
+  padding:10px;
+
   background:var(--paper);
+
   border:1px solid var(--line);
   border-radius:10px;
-  padding:10px;
 }
 
 .color-card input{
   width:100%;
   height:38px;
+
   border:0;
+
   background:transparent;
 }
 
 .editor-list{
   display:flex;
   flex-direction:column;
+
   gap:8px;
 }
 
 .editor-row{
   display:grid;
   grid-template-columns:38px 1fr auto;
+
   gap:8px;
   align-items:center;
 }
@@ -967,47 +1447,73 @@ main{
 .editor-row input[type=color]{
   width:38px;
   height:38px;
+
   border:0;
+
   background:transparent;
 }
 
 .editor-row input[type=text]{
   width:100%;
+
+  padding:9px;
+
+  background:var(--paper);
+
   border:1px solid var(--line);
   border-radius:8px;
-  padding:9px;
-  background:var(--paper);
 }
 
 .add-inline{
   width:100%;
+
   margin-top:8px;
-  border:1px dashed var(--line);
-  background:transparent;
-  border-radius:9px;
+
   padding:9px;
-  font-weight:700;
+
+  background:transparent;
   color:var(--green);
+
+  border:1px dashed var(--line);
+  border-radius:9px;
+
+  font-weight:700;
 }
 
 
 /* =========================================================
-   CLASS MODAL
+   PROFILE
    ========================================================= */
 
-.class-modal-list{
+.profile-email{
+  margin:2px 0 18px;
+
+  color:var(--ink-soft);
+
+  font-size:12px;
+}
+
+.sync-status{
   display:flex;
-  flex-direction:column;
-  gap:9px;
+  align-items:center;
+
+  gap:7px;
+
+  margin-top:12px;
+
+  color:var(--ink-soft);
+
+  font-family:var(--font-mono);
+  font-size:10px;
 }
 
-.class-modal-actions{
-  margin-top:16px;
-}
+.sync-dot{
+  width:7px;
+  height:7px;
 
-.class-modal-actions .btn{
-  width:100%;
-  justify-content:center;
+  border-radius:50%;
+
+  background:#569B65;
 }
 
 
@@ -1016,22 +1522,50 @@ main{
    ========================================================= */
 
 footer{
-  text-align:center;
   padding:30px 20px 40px;
+
+  text-align:center;
+
   color:var(--ink-soft);
+
   font-family:var(--font-mono);
-  font-size:11.5px;
+  font-size:10px;
 }
 
 
 /* =========================================================
-   RESPONSIVE
+   MOBILE
    ========================================================= */
 
 @media(max-width:900px){
 
   .deadline-grid{
     grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:760px){
+
+  .auth-screen{
+    grid-template-columns:1fr;
+  }
+
+  .auth-hero{
+    min-height:300px;
+    padding:32px 24px;
+  }
+
+  .auth-hero-copy h1{
+    font-size:46px;
+  }
+
+  .auth-footer{
+    display:none;
+  }
+
+  .auth-panel{
+    padding:42px 22px;
   }
 
 }
@@ -1047,9 +1581,10 @@ footer{
   }
 
   .top-tabs{
-    grid-column:1 / -1;
+    grid-column:1/-1;
     grid-row:2;
-    justify-self:stretch;
+
+    width:100%;
   }
 
   .top-tab{
@@ -1061,11 +1596,15 @@ footer{
     grid-row:1;
   }
 
-  .brand-title{
-    font-size:22px;
+  .account-name{
+    display:none;
   }
 
-  .btn .btn-label{
+  .account-button{
+    padding-right:5px;
+  }
+
+  .btn-label{
     display:none;
   }
 
@@ -1075,6 +1614,7 @@ footer{
 
   .field-row{
     flex-direction:column;
+
     gap:0;
   }
 
@@ -1088,21 +1628,27 @@ footer{
 
   .day-cell{
     min-height:92px;
+
     padding:4px;
   }
 
   .cal-event{
-    font-size:0;
     min-height:9px;
+
+    font-size:0;
   }
 
   .cal-event::after{
     content:'';
+
     display:block;
+
     width:6px;
     height:6px;
-    border-radius:50%;
+
     background:var(--event-color);
+
+    border-radius:50%;
   }
 
 }
@@ -1112,16 +1658,217 @@ footer{
 
 <body>
 
+
+<!-- =======================================================
+     LOADING
+     ======================================================= -->
+
+<div
+  class="loading-screen"
+  id="loadingScreen"
+>
+  <div class="loading-inner">
+
+    <div class="loading-logo">
+      Homeroom
+    </div>
+
+    <div class="loading-copy">
+      Opening your planner
+    </div>
+
+  </div>
+</div>
+
+
+<!-- =======================================================
+     AUTH SCREEN
+     ======================================================= -->
+
+<section
+  class="auth-screen hidden"
+  id="authScreen"
+>
+
+  <div class="auth-hero">
+
+    <div class="auth-brand">
+      Homeroom
+    </div>
+
+    <div class="auth-hero-copy">
+
+      <h1>
+        School,
+        organized.
+      </h1>
+
+      <p>
+        Assignments, deadlines, activities and your calendar
+        in one quiet place.
+      </p>
+
+    </div>
+
+    <div class="auth-footer">
+      Your planner follows you between devices
+    </div>
+
+  </div>
+
+
+  <div class="auth-panel">
+
+    <div class="auth-box">
+
+      <h2 id="authTitle">
+        Welcome back
+      </h2>
+
+      <p
+        class="auth-sub"
+        id="authSubtitle"
+      >
+        Sign in to open your planner.
+      </p>
+
+
+      <div class="auth-switch">
+
+        <button
+          class="active"
+          id="signInTab"
+          type="button"
+        >
+          Sign in
+        </button>
+
+        <button
+          id="signUpTab"
+          type="button"
+        >
+          Create account
+        </button>
+
+      </div>
+
+
+      <form id="authForm">
+
+        <div
+          class="field hidden"
+          id="authNameField"
+        >
+
+          <label for="authName">
+            Name
+          </label>
+
+          <input
+            id="authName"
+            type="text"
+            autocomplete="name"
+            placeholder="Your name"
+          />
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="authEmail">
+            Email
+          </label>
+
+          <input
+            id="authEmail"
+            type="email"
+            autocomplete="email"
+            required
+            placeholder="you@example.com"
+          />
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="authPassword">
+            Password
+          </label>
+
+          <input
+            id="authPassword"
+            type="password"
+            minlength="6"
+            autocomplete="current-password"
+            required
+            placeholder="••••••••"
+          />
+
+        </div>
+
+
+        <div
+          class="auth-message"
+          id="authMessage"
+        ></div>
+
+
+        <button
+          class="btn btn-green auth-submit"
+          id="authSubmit"
+          type="submit"
+        >
+          Sign in
+        </button>
+
+      </form>
+
+
+      <div class="auth-bottom">
+        Your planner data is private to your account.
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     APP
+     ======================================================= -->
+
+<div
+  class="hidden"
+  id="app"
+>
+
+
 <header class="app-header">
 
   <div class="wrap">
 
+
     <div>
-      <div class="brand-title">Homeroom</div>
-      <div class="brand-sub" id="todayLabel">—</div>
+
+      <div class="brand-title">
+        Homeroom
+      </div>
+
+      <div
+        class="brand-sub"
+        id="todayLabel"
+      >
+        —
+      </div>
+
     </div>
 
-    <div class="top-tabs">
+
+    <nav class="top-tabs">
 
       <button
         class="top-tab active"
@@ -1137,9 +1884,33 @@ footer{
         Calendar
       </button>
 
-    </div>
+    </nav>
+
 
     <div class="header-actions">
+
+
+      <button
+        class="account-button"
+        id="accountButton"
+      >
+
+        <span
+          class="avatar"
+          id="headerAvatar"
+        >
+          H
+        </span>
+
+        <span
+          class="account-name"
+          id="headerName"
+        >
+          Account
+        </span>
+
+      </button>
+
 
       <button
         class="btn btn-outline-light"
@@ -1149,27 +1920,17 @@ footer{
         ⚙
       </button>
 
+
       <button
         class="btn btn-primary"
         id="openAddBtn"
       >
-
-        <svg
-          class="icon"
-          viewBox="0 0 20 20"
-          fill="none"
-        >
-          <path
-            d="M10 4v12M4 10h12"
-            stroke="currentColor"
-            stroke-width="2.2"
-            stroke-linecap="round"
-          />
-        </svg>
-
-        <span class="btn-label">Add</span>
-
+        +
+        <span class="btn-label">
+          Add
+        </span>
       </button>
+
 
     </div>
 
@@ -1178,7 +1939,9 @@ footer{
 </header>
 
 
+
 <main class="wrap">
+
 
   <!-- =====================================================
        PLANNER
@@ -1189,10 +1952,7 @@ footer{
 
     <!-- DEADLINES -->
 
-    <section
-      class="section"
-      id="deadlinesSection"
-    >
+    <section class="section">
 
       <div class="section-head">
 
@@ -1205,6 +1965,7 @@ footer{
         </div>
 
       </div>
+
 
       <div class="deadline-shell">
 
@@ -1234,6 +1995,7 @@ footer{
 
       </div>
 
+
       <div
         class="classes-grid"
         id="classesGrid"
@@ -1251,6 +2013,7 @@ footer{
         <h2 class="section-title">
           Everything
         </h2>
+
 
         <div
           class="filter-tabs"
@@ -1296,6 +2059,7 @@ footer{
 
       </div>
 
+
       <div
         class="task-list"
         id="taskList"
@@ -1306,13 +2070,14 @@ footer{
   </div>
 
 
+
   <!-- =====================================================
        CALENDAR
        ===================================================== -->
 
   <div
-    id="calendarView"
     class="hidden"
+    id="calendarView"
   >
 
     <section class="section">
@@ -1324,12 +2089,14 @@ footer{
         </h2>
 
         <div class="section-note">
-          Read-only · synced from Planner
+          Synced from Planner
         </div>
 
       </div>
 
+
       <div class="calendar-shell">
+
 
         <div class="calendar-head">
 
@@ -1337,6 +2104,7 @@ footer{
             class="month-title"
             id="monthTitle"
           ></div>
+
 
           <div class="cal-controls">
 
@@ -1365,6 +2133,7 @@ footer{
 
         </div>
 
+
         <div class="calendar-week">
 
           <div class="week-label">Sun</div>
@@ -1377,15 +2146,18 @@ footer{
 
         </div>
 
+
         <div
           class="calendar-grid"
           id="calendarGrid"
         ></div>
 
+
         <div
           class="calendar-legend"
           id="calendarLegend"
         ></div>
+
 
       </div>
 
@@ -1393,12 +2165,29 @@ footer{
 
   </div>
 
+
 </main>
 
 
 <footer>
-  Built for your own binder — everything saves right in this browser.
+
+  <span id="footerAccount"></span>
+
+  <div class="sync-status" style="justify-content:center">
+
+    <span class="sync-dot"></span>
+
+    <span id="syncStatus">
+      Synced
+    </span>
+
+  </div>
+
 </footer>
+
+
+</div>
+
 
 
 <!-- =======================================================
@@ -1412,13 +2201,14 @@ footer{
 
   <div class="modal-box">
 
+
     <button
       class="modal-close"
       data-close="itemModal"
-      aria-label="Close"
     >
       ✕
     </button>
+
 
     <h3
       class="modal-title"
@@ -1427,7 +2217,9 @@ footer{
       Add to your planner
     </h3>
 
+
     <div class="modal-accent-bar"></div>
+
 
     <form id="taskForm">
 
@@ -1439,6 +2231,7 @@ footer{
         <label>
           Type
         </label>
+
 
         <div
           class="type-toggle"
@@ -1520,10 +2313,10 @@ footer{
         </label>
 
         <input
-          type="text"
           id="f-title"
-          placeholder="What do you need to do?"
+          type="text"
           required
+          placeholder="What do you need to do?"
         />
 
       </div>
@@ -1533,6 +2326,7 @@ footer{
 
       <div class="field-row">
 
+
         <div class="field">
 
           <label for="f-date">
@@ -1540,52 +2334,79 @@ footer{
           </label>
 
           <input
-            type="date"
             id="f-date"
+            type="date"
             required
           />
 
         </div>
 
+
         <div class="field">
 
           <label for="f-time">
-            Time (optional)
+            Time
           </label>
 
           <input
-            type="time"
             id="f-time"
+            type="time"
           />
 
         </div>
+
 
       </div>
 
 
-      <!-- ACTIVITY FIELDS -->
+      <!-- ACTIVITY -->
 
       <div
-        id="activityFields"
         class="hidden"
+        id="activityFields"
       >
+
+
+        <!-- REAL LOCATION -->
 
         <div class="field">
 
-          <label for="f-location">
+          <label>
             Location
           </label>
 
-          <input
-            type="text"
-            id="f-location"
-            placeholder="Gym, library, Zoom..."
-          />
+
+          <div class="place-area">
+
+            <div id="placeAutocompleteHolder">
+
+              <div
+                style="
+                  color:var(--ink-soft);
+                  font-size:12px;
+                "
+                id="placeLoading"
+              >
+                Loading location search…
+              </div>
+
+            </div>
+
+
+            <div
+              class="selected-place hidden"
+              id="selectedPlace"
+            ></div>
+
+          </div>
 
         </div>
 
 
+        <!-- REPEAT -->
+
         <div class="field-row">
+
 
           <div class="field">
 
@@ -1617,7 +2438,7 @@ footer{
 
 
           <div
-            class="field"
+            class="field hidden"
             id="repeatEndField"
           >
 
@@ -1626,16 +2447,17 @@ footer{
             </label>
 
             <input
-              type="date"
               id="f-repeat-end"
+              type="date"
             />
 
           </div>
 
+
         </div>
 
 
-        <!-- CUSTOM WEEKDAYS -->
+        <!-- CUSTOM DAYS -->
 
         <div
           class="field hidden"
@@ -1646,63 +2468,44 @@ footer{
             Repeat on
           </label>
 
+
           <div
             class="weekday-picker"
             id="weekdayPicker"
           >
 
-            <button
-              type="button"
-              data-day="0"
-            >
+            <button type="button" data-day="0">
               S
             </button>
 
-            <button
-              type="button"
-              data-day="1"
-            >
+            <button type="button" data-day="1">
               M
             </button>
 
-            <button
-              type="button"
-              data-day="2"
-            >
+            <button type="button" data-day="2">
               T
             </button>
 
-            <button
-              type="button"
-              data-day="3"
-            >
+            <button type="button" data-day="3">
               W
             </button>
 
-            <button
-              type="button"
-              data-day="4"
-            >
+            <button type="button" data-day="4">
               T
             </button>
 
-            <button
-              type="button"
-              data-day="5"
-            >
+            <button type="button" data-day="5">
               F
             </button>
 
-            <button
-              type="button"
-              data-day="6"
-            >
+            <button type="button" data-day="6">
               S
             </button>
 
           </div>
 
         </div>
+
 
       </div>
 
@@ -1727,40 +2530,104 @@ footer{
 
       <div class="form-actions">
 
+
         <button
-          type="button"
           class="btn btn-danger hidden"
           id="deleteItemBtn"
+          type="button"
         >
           Delete
         </button>
 
+
         <div class="action-right">
 
           <button
-            type="button"
             class="btn btn-ghost"
+            type="button"
             data-close="itemModal"
           >
             Cancel
           </button>
 
           <button
-            type="submit"
             class="btn btn-primary"
+            type="submit"
           >
             Save
           </button>
 
         </div>
 
+
       </div>
+
 
     </form>
 
   </div>
 
 </div>
+
+
+
+<!-- =======================================================
+     CLASS MODAL
+     ======================================================= -->
+
+<div
+  class="modal-overlay"
+  id="classModal"
+>
+
+  <div class="modal-box">
+
+
+    <button
+      class="modal-close"
+      data-close="classModal"
+    >
+      ✕
+    </button>
+
+
+    <h3
+      class="modal-title"
+      id="classModalTitle"
+    >
+      Class
+    </h3>
+
+
+    <div
+      class="modal-accent-bar"
+      id="classModalAccent"
+    ></div>
+
+
+    <div
+      class="class-modal-list"
+      id="classModalList"
+    ></div>
+
+
+    <button
+      class="btn btn-primary"
+      id="classModalAddBtn"
+      style="
+        width:100%;
+        justify-content:center;
+        margin-top:16px;
+      "
+    >
+      + Add assignment
+    </button>
+
+
+  </div>
+
+</div>
+
 
 
 <!-- =======================================================
@@ -1774,22 +2641,24 @@ footer{
 
   <div class="modal-box wide">
 
+
     <button
       class="modal-close"
       data-close="settingsModal"
-      aria-label="Close"
     >
       ✕
     </button>
+
 
     <h3 class="modal-title">
       Settings
     </h3>
 
+
     <div class="modal-accent-bar"></div>
 
 
-    <!-- APP COLORS -->
+    <!-- COLORS -->
 
     <div class="settings-section">
 
@@ -1798,10 +2667,12 @@ footer{
       </div>
 
       <div class="settings-copy">
-        Change the header, accent, and page background.
+        Personalize Homeroom.
       </div>
 
+
       <div class="color-grid">
+
 
         <div class="color-card">
 
@@ -1816,6 +2687,7 @@ footer{
 
         </div>
 
+
         <div class="color-card">
 
           <label>
@@ -1829,6 +2701,7 @@ footer{
 
         </div>
 
+
         <div class="color-card">
 
           <label>
@@ -1841,6 +2714,7 @@ footer{
           />
 
         </div>
+
 
       </div>
 
@@ -1859,10 +2733,12 @@ footer{
         Rename, recolor, add, or remove classes.
       </div>
 
+
       <div
         class="editor-list"
         id="classEditor"
       ></div>
+
 
       <button
         class="add-inline"
@@ -1871,10 +2747,11 @@ footer{
         + Add class
       </button>
 
+
     </div>
 
 
-    <!-- EXTRACURRICULARS -->
+    <!-- EXTRAS -->
 
     <div class="settings-section">
 
@@ -1883,13 +2760,15 @@ footer{
       </div>
 
       <div class="settings-copy">
-        Activities can be tied to an extracurricular and use its color.
+        Add activities such as clubs, sports, jobs or volunteering.
       </div>
+
 
       <div
         class="editor-list"
         id="extraEditor"
       ></div>
+
 
       <button
         class="add-inline"
@@ -1897,6 +2776,7 @@ footer{
       >
         + Add extracurricular
       </button>
+
 
     </div>
 
@@ -1915,9 +2795,85 @@ footer{
 
     </div>
 
+
   </div>
 
 </div>
+
+
+
+<!-- =======================================================
+     PROFILE
+     ======================================================= -->
+
+<div
+  class="modal-overlay"
+  id="profileModal"
+>
+
+  <div class="modal-box">
+
+
+    <button
+      class="modal-close"
+      data-close="profileModal"
+    >
+      ✕
+    </button>
+
+
+    <h3 class="modal-title">
+      Your profile
+    </h3>
+
+
+    <div class="modal-accent-bar"></div>
+
+
+    <div
+      class="profile-email"
+      id="profileEmail"
+    ></div>
+
+
+    <div class="field">
+
+      <label for="profileName">
+        Display name
+      </label>
+
+      <input
+        type="text"
+        id="profileName"
+      />
+
+    </div>
+
+
+    <div class="form-actions">
+
+      <button
+        class="btn btn-danger"
+        id="signOutBtn"
+      >
+        Sign out
+      </button>
+
+
+      <button
+        class="btn btn-primary"
+        id="saveProfileBtn"
+      >
+        Save profile
+      </button>
+
+    </div>
+
+
+  </div>
+
+</div>
+
 
 
 <!-- =======================================================
@@ -1931,13 +2887,14 @@ footer{
 
   <div class="modal-box">
 
+
     <button
       class="modal-close"
       data-close="detailModal"
-      aria-label="Close"
     >
       ✕
     </button>
+
 
     <h3
       class="modal-title"
@@ -1946,170 +2903,158 @@ footer{
       Event
     </h3>
 
+
     <div class="modal-accent-bar"></div>
+
 
     <div id="detailBody"></div>
 
-  </div>
-
-</div>
-
-
-<!-- =======================================================
-     CLASS VIEW
-     ======================================================= -->
-
-<div
-  class="modal-overlay"
-  id="classModal"
->
-
-  <div class="modal-box">
-
-    <button
-      class="modal-close"
-      data-close="classModal"
-      aria-label="Close"
-    >
-      ✕
-    </button>
-
-    <h3
-      class="modal-title"
-      id="classModalTitle"
-    >
-      Class
-    </h3>
-
-    <div
-      class="modal-accent-bar"
-      id="classModalAccent"
-    ></div>
-
-    <div
-      class="class-modal-list"
-      id="classModalList"
-    ></div>
-
-    <div class="class-modal-actions">
-
-      <button
-        class="btn btn-primary"
-        id="classModalAddBtn"
-      >
-        + Add assignment
-      </button>
-
-    </div>
 
   </div>
 
 </div>
+
 
 
 <script>
 
-(function(){
+/* =========================================================
+   IMPORTANT CONFIGURATION
+   ========================================================= */
 
-"use strict";
+/*
+  PUT YOUR SUPABASE VALUES HERE.
+
+  These are safe browser-side values when Row Level Security
+  is configured correctly.
+
+  DO NOT put your Supabase service_role secret here.
+*/
+
+const SUPABASE_URL =
+  'YOUR_SUPABASE_PROJECT_URL';
+
+const SUPABASE_ANON_KEY =
+  'YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY';
 
 
 /* =========================================================
-   STORAGE
+   SUPABASE
    ========================================================= */
 
-const OLD_KEY =
-  'homeroom-tasks-v1';
+let sb = null;
 
-const STATE_KEY =
-  'homeroom-state-v3';
+if(
+  SUPABASE_URL !== 'YOUR_SUPABASE_PROJECT_URL' &&
+  SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY'
+){
+
+  sb =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
+    );
+
+}
 
 
 /* =========================================================
-   DEFAULTS
+   DEFAULT STATE
    ========================================================= */
 
-const DEFAULT_THEME = {
+const DEFAULT_STATE = {
 
-  green:'#1F3D2B',
+  version:4,
 
-  gold:'#F2B705',
+  profile:{
+    name:''
+  },
 
-  paper:'#F5F3EE'
+  theme:{
+    green:'#1F3D2B',
+    gold:'#F2B705',
+    paper:'#F5F3EE'
+  },
+
+  classes:[
+
+    {
+      id:'chem',
+      name:'Chemistry',
+      color:'#1F8A78'
+    },
+
+    {
+      id:'history',
+      name:'AP Modern World History',
+      color:'#8C3A3A'
+    },
+
+    {
+      id:'seminar',
+      name:'AP Seminar',
+      color:'#6B4FA0'
+    },
+
+    {
+      id:'pe',
+      name:'PE',
+      color:'#D97B3F'
+    },
+
+    {
+      id:'cband',
+      name:'Concert Band',
+      color:'#8A4F8C'
+    },
+
+    {
+      id:'jband',
+      name:'Jazz Band',
+      color:'#B98A22'
+    },
+
+    {
+      id:'alg2',
+      name:'Algebra 2',
+      color:'#3B6EA5'
+    },
+
+    {
+      id:'span3',
+      name:'Spanish 3',
+      color:'#B9583F'
+    }
+
+  ],
+
+  extras:[
+
+    {
+      id:'general-extra',
+      name:'Extracurricular',
+      color:'#527A67'
+    }
+
+  ],
+
+  tasks:[]
 
 };
 
 
-const DEFAULT_CLASSES = [
-
-  {
-    id:'chem',
-    name:'Chemistry',
-    color:'#1F8A78'
-  },
-
-  {
-    id:'history',
-    name:'AP Modern World History',
-    color:'#8C3A3A'
-  },
-
-  {
-    id:'seminar',
-    name:'AP Seminar',
-    color:'#6B4FA0'
-  },
-
-  {
-    id:'pe',
-    name:'PE',
-    color:'#D97B3F'
-  },
-
-  {
-    id:'cband',
-    name:'Concert Band',
-    color:'#8A4F8C'
-  },
-
-  {
-    id:'jband',
-    name:'Jazz Band',
-    color:'#B98A22'
-  },
-
-  {
-    id:'alg2',
-    name:'Algebra 2',
-    color:'#3B6EA5'
-  },
-
-  {
-    id:'span3',
-    name:'Spanish 3',
-    color:'#B9583F'
-  }
-
-];
-
-
-const DEFAULT_EXTRAS = [
-
-  {
-    id:'general-extra',
-    name:'Extracurricular',
-    color:'#527A67'
-  }
-
-];
-
-
 /* =========================================================
-   APP STATE
+   STATE
    ========================================================= */
 
 let state =
-  loadState();
+  clone(DEFAULT_STATE);
+
+let currentUser =
+  null;
+
+let authMode =
+  'signin';
 
 let activeFilter =
   'all';
@@ -2120,6 +3065,21 @@ let activeType =
 let editingId =
   null;
 
+let classModalId =
+  null;
+
+let cloudSaveTimer =
+  null;
+
+let selectedPlaceData =
+  null;
+
+let placeAutocompleteElement =
+  null;
+
+let mapsReady =
+  false;
+
 let calendarCursor =
   new Date(
     new Date().getFullYear(),
@@ -2127,29 +3087,26 @@ let calendarCursor =
     1
   );
 
-let classModalId =
-  null;
-
 
 /* =========================================================
-   UTILITIES
+   HELPERS
    ========================================================= */
+
+function clone(value){
+
+  return JSON.parse(
+    JSON.stringify(value)
+  );
+
+}
+
 
 function uid(prefix='i'){
 
   return (
     prefix +
     Date.now().toString(36) +
-    Math.random().toString(36).slice(2,6)
-  );
-
-}
-
-
-function clone(value){
-
-  return JSON.parse(
-    JSON.stringify(value)
+    Math.random().toString(36).slice(2,7)
   );
 
 }
@@ -2177,6 +3134,17 @@ function todayStr(){
 }
 
 
+function dateStr(date){
+
+  return (
+    `${date.getFullYear()}-` +
+    `${pad(date.getMonth()+1)}-` +
+    `${pad(date.getDate())}`
+  );
+
+}
+
+
 function parseLocalDate(string){
 
   const [year,month,day] =
@@ -2193,31 +3161,14 @@ function parseLocalDate(string){
 }
 
 
-function dateStr(date){
-
-  return (
-    `${date.getFullYear()}-` +
-    `${pad(date.getMonth()+1)}-` +
-    `${pad(date.getDate())}`
-  );
-
-}
-
-
-function daysBetween(
-  first,
-  second
-){
+function daysBetween(first,second){
 
   return Math.round(
-
     (
       parseLocalDate(second) -
       parseLocalDate(first)
     )
-
     / 86400000
-
   );
 
 }
@@ -2275,201 +3226,6 @@ function esc(value){
 }
 
 
-/* =========================================================
-   LOAD / SAVE STATE
-   ========================================================= */
-
-function loadState(){
-
-  try{
-
-    const saved =
-      JSON.parse(
-        localStorage.getItem(STATE_KEY) || 'null'
-      );
-
-    if(
-      saved &&
-      saved.version === 3
-    ){
-
-      return saved;
-
-    }
-
-  }
-
-  catch(error){}
-
-
-  let previousState = null;
-
-
-  try{
-
-    previousState =
-      JSON.parse(
-        localStorage.getItem(
-          'homeroom-state-v2'
-        ) || 'null'
-      );
-
-  }
-
-  catch(error){}
-
-
-  if(previousState){
-
-    const upgraded = {
-
-      ...previousState,
-
-      version:3,
-
-      tasks:
-        (previousState.tasks || [])
-          .map(task => ({
-
-            ...task,
-
-            repeatDays:
-              task.repeatDays || []
-
-          }))
-
-    };
-
-
-    localStorage.setItem(
-      STATE_KEY,
-      JSON.stringify(upgraded)
-    );
-
-
-    return upgraded;
-
-  }
-
-
-  let oldTasks = [];
-
-
-  try{
-
-    oldTasks =
-      JSON.parse(
-        localStorage.getItem(OLD_KEY) || '[]'
-      );
-
-  }
-
-  catch(error){}
-
-
-  const migrated =
-
-    Array.isArray(oldTasks)
-
-      ? oldTasks.map(task => ({
-
-          id:
-            task.id || uid(),
-
-          type:
-            task.type === 'homework'
-              ? 'assignment'
-              : (
-                  task.type ||
-                  'assignment'
-                ),
-
-          classId:
-            task.classId || null,
-
-          extraId:
-            null,
-
-          title:
-            task.title || 'Untitled',
-
-          date:
-            task.date || todayStr(),
-
-          time:
-            task.time || '',
-
-          notes:
-            task.notes || '',
-
-          location:
-            '',
-
-          recurrence:
-            'none',
-
-          repeatDays:
-            [],
-
-          repeatEnd:
-            '',
-
-          done:
-            !!task.done,
-
-          createdAt:
-            task.createdAt ||
-            Date.now()
-
-        }))
-
-      : [];
-
-
-  const initialState = {
-
-    version:3,
-
-    tasks:migrated,
-
-    classes:
-      clone(DEFAULT_CLASSES),
-
-    extras:
-      clone(DEFAULT_EXTRAS),
-
-    theme:{
-      ...DEFAULT_THEME
-    }
-
-  };
-
-
-  localStorage.setItem(
-    STATE_KEY,
-    JSON.stringify(initialState)
-  );
-
-
-  return initialState;
-
-}
-
-
-function save(){
-
-  localStorage.setItem(
-    STATE_KEY,
-    JSON.stringify(state)
-  );
-
-}
-
-
-/* =========================================================
-   LOOKUPS
-   ========================================================= */
-
 function classById(id){
 
   return state.classes
@@ -2486,6 +3242,16 @@ function extraById(id){
     .find(item =>
       item.id === id
     );
+
+}
+
+
+function checkable(task){
+
+  return (
+    task.type === 'assignment' ||
+    task.type === 'deadline'
+  );
 
 }
 
@@ -2544,38 +3310,6 @@ function sourceName(task){
 }
 
 
-function checkable(task){
-
-  return (
-    task.type === 'assignment' ||
-    task.type === 'deadline'
-  );
-
-}
-
-
-/* =========================================================
-   RECURRENCE LABELS
-   ========================================================= */
-
-function repeatLabel(value){
-
-  return ({
-
-    weekly:
-      'Weekly',
-
-    custom:
-      'Custom days',
-
-    monthly:
-      'Monthly'
-
-  })[value] || '';
-
-}
-
-
 function weekdayLabel(days){
 
   const labels = [
@@ -2589,21 +3323,777 @@ function weekdayLabel(days){
   ];
 
 
-  if(
-    !days ||
-    days.length === 0
-  ){
-
-    return '';
-
-  }
-
-
-  return days
+  return (days || [])
     .map(day =>
       labels[day]
     )
     .join(', ');
+
+}
+
+
+function repeatLabel(value){
+
+  return ({
+    weekly:'Weekly',
+    monthly:'Monthly'
+  })[value] || '';
+
+}
+
+
+/* =========================================================
+   CLOUD
+   ========================================================= */
+
+function setSyncStatus(text){
+
+  const element =
+    document.getElementById(
+      'syncStatus'
+    );
+
+  if(element){
+    element.textContent = text;
+  }
+
+}
+
+
+function queueCloudSave(){
+
+  if(
+    !currentUser ||
+    !sb
+  ){
+    return;
+  }
+
+
+  clearTimeout(
+    cloudSaveTimer
+  );
+
+
+  setSyncStatus(
+    'Saving…'
+  );
+
+
+  cloudSaveTimer =
+    setTimeout(
+      saveCloudState,
+      450
+    );
+
+}
+
+
+async function saveCloudState(){
+
+  if(
+    !currentUser ||
+    !sb
+  ){
+    return;
+  }
+
+
+  const {
+    error
+  } =
+    await sb
+      .from('homeroom_state')
+      .upsert({
+
+        user_id:
+          currentUser.id,
+
+        state:
+          state,
+
+        updated_at:
+          new Date()
+            .toISOString()
+
+      });
+
+
+  if(error){
+
+    console.error(error);
+
+    setSyncStatus(
+      'Sync error'
+    );
+
+    return;
+
+  }
+
+
+  setSyncStatus(
+    'Synced'
+  );
+
+}
+
+
+async function loadCloudState(){
+
+  if(
+    !currentUser ||
+    !sb
+  ){
+    return;
+  }
+
+
+  setSyncStatus(
+    'Loading…'
+  );
+
+
+  const {
+    data,
+    error
+  } =
+    await sb
+      .from('homeroom_state')
+      .select('state')
+      .eq(
+        'user_id',
+        currentUser.id
+      )
+      .maybeSingle();
+
+
+  if(error){
+
+    console.error(error);
+
+    state =
+      clone(DEFAULT_STATE);
+
+    return;
+
+  }
+
+
+  if(
+    data &&
+    data.state
+  ){
+
+    state = {
+
+      ...clone(DEFAULT_STATE),
+
+      ...data.state,
+
+      profile:{
+        ...DEFAULT_STATE.profile,
+        ...(data.state.profile || {})
+      },
+
+      theme:{
+        ...DEFAULT_STATE.theme,
+        ...(data.state.theme || {})
+      },
+
+      classes:
+        data.state.classes ||
+        clone(DEFAULT_STATE.classes),
+
+      extras:
+        data.state.extras ||
+        clone(DEFAULT_STATE.extras),
+
+      tasks:
+        data.state.tasks ||
+        []
+
+    };
+
+  }
+
+  else{
+
+    state =
+      migrateOldLocalState();
+
+
+    if(
+      !state.profile.name
+    ){
+
+      state.profile.name =
+        currentUser
+          .user_metadata
+          ?.name || '';
+
+    }
+
+
+    await saveCloudState();
+
+  }
+
+
+  setSyncStatus(
+    'Synced'
+  );
+
+}
+
+
+function migrateOldLocalState(){
+
+  const keys = [
+    'homeroom-state-v3',
+    'homeroom-state-v2'
+  ];
+
+
+  for(
+    const key of keys
+  ){
+
+    try{
+
+      const old =
+        JSON.parse(
+          localStorage.getItem(key)
+        );
+
+
+      if(old){
+
+        return {
+
+          ...clone(DEFAULT_STATE),
+
+          ...old,
+
+          version:4,
+
+          profile:{
+            ...DEFAULT_STATE.profile,
+            ...(old.profile || {})
+          }
+
+        };
+
+      }
+
+    }
+
+    catch(error){}
+
+  }
+
+
+  try{
+
+    const oldTasks =
+      JSON.parse(
+        localStorage.getItem(
+          'homeroom-tasks-v1'
+        ) || '[]'
+      );
+
+
+    if(
+      Array.isArray(oldTasks)
+    ){
+
+      const fresh =
+        clone(DEFAULT_STATE);
+
+
+      fresh.tasks =
+        oldTasks.map(task => ({
+
+          id:
+            task.id ||
+            uid('t'),
+
+          type:
+            task.type === 'homework'
+              ? 'assignment'
+              : (
+                  task.type ||
+                  'assignment'
+                ),
+
+          classId:
+            task.classId ||
+            null,
+
+          extraId:
+            null,
+
+          title:
+            task.title ||
+            'Untitled',
+
+          date:
+            task.date ||
+            todayStr(),
+
+          time:
+            task.time ||
+            '',
+
+          notes:
+            task.notes ||
+            '',
+
+          recurrence:
+            'none',
+
+          repeatDays:
+            [],
+
+          repeatEnd:
+            '',
+
+          locationName:
+            '',
+
+          locationAddress:
+            '',
+
+          placeId:
+            '',
+
+          latitude:
+            null,
+
+          longitude:
+            null,
+
+          done:
+            !!task.done,
+
+          createdAt:
+            task.createdAt ||
+            Date.now()
+
+        }));
+
+
+      return fresh;
+
+    }
+
+  }
+
+  catch(error){}
+
+
+  return clone(
+    DEFAULT_STATE
+  );
+
+}
+
+
+/* =========================================================
+   AUTH
+   ========================================================= */
+
+function switchAuthMode(mode){
+
+  authMode =
+    mode;
+
+
+  const signup =
+    mode === 'signup';
+
+
+  document
+    .getElementById(
+      'signInTab'
+    )
+    .classList
+    .toggle(
+      'active',
+      !signup
+    );
+
+
+  document
+    .getElementById(
+      'signUpTab'
+    )
+    .classList
+    .toggle(
+      'active',
+      signup
+    );
+
+
+  document
+    .getElementById(
+      'authNameField'
+    )
+    .classList
+    .toggle(
+      'hidden',
+      !signup
+    );
+
+
+  document
+    .getElementById(
+      'authTitle'
+    )
+    .textContent =
+      signup
+        ? 'Create your account'
+        : 'Welcome back';
+
+
+  document
+    .getElementById(
+      'authSubtitle'
+    )
+    .textContent =
+      signup
+        ? 'Your planner will sync anywhere you sign in.'
+        : 'Sign in to open your planner.';
+
+
+  document
+    .getElementById(
+      'authSubmit'
+    )
+    .textContent =
+      signup
+        ? 'Create account'
+        : 'Sign in';
+
+
+  setAuthMessage('');
+
+}
+
+
+function setAuthMessage(
+  message,
+  error=false
+){
+
+  const element =
+    document.getElementById(
+      'authMessage'
+    );
+
+
+  element.textContent =
+    message;
+
+
+  element.classList
+    .toggle(
+      'error',
+      error
+    );
+
+}
+
+
+async function submitAuth(){
+
+  if(!sb){
+
+    setAuthMessage(
+      'Add your Supabase URL and key to the HTML first.',
+      true
+    );
+
+    return;
+
+  }
+
+
+  const email =
+    document
+      .getElementById(
+        'authEmail'
+      )
+      .value
+      .trim();
+
+
+  const password =
+    document
+      .getElementById(
+        'authPassword'
+      )
+      .value;
+
+
+  setAuthMessage(
+    'Working…'
+  );
+
+
+  if(
+    authMode === 'signup'
+  ){
+
+    const name =
+      document
+        .getElementById(
+          'authName'
+        )
+        .value
+        .trim();
+
+
+    const {
+      data,
+      error
+    } =
+      await sb.auth.signUp({
+
+        email,
+
+        password,
+
+        options:{
+          data:{
+            name
+          }
+        }
+
+      });
+
+
+    if(error){
+
+      setAuthMessage(
+        error.message,
+        true
+      );
+
+      return;
+
+    }
+
+
+    if(
+      data.session
+    ){
+
+      await enterApp(
+        data.user
+      );
+
+    }
+
+    else{
+
+      setAuthMessage(
+        'Account created. Check your email to confirm your address, then sign in.'
+      );
+
+    }
+
+  }
+
+  else{
+
+    const {
+      data,
+      error
+    } =
+      await sb.auth
+        .signInWithPassword({
+
+          email,
+          password
+
+        });
+
+
+    if(error){
+
+      setAuthMessage(
+        error.message,
+        true
+      );
+
+      return;
+
+    }
+
+
+    await enterApp(
+      data.user
+    );
+
+  }
+
+}
+
+
+async function enterApp(user){
+
+  currentUser =
+    user;
+
+
+  document
+    .getElementById(
+      'authScreen'
+    )
+    .classList
+    .add(
+      'hidden'
+    );
+
+
+  document
+    .getElementById(
+      'app'
+    )
+    .classList
+    .remove(
+      'hidden'
+    );
+
+
+  await loadCloudState();
+
+
+  updateAccountUI();
+
+  renderAll();
+
+}
+
+
+async function signOut(){
+
+  if(sb){
+
+    await sb.auth
+      .signOut();
+
+  }
+
+
+  currentUser =
+    null;
+
+
+  state =
+    clone(DEFAULT_STATE);
+
+
+  closeModal(
+    'profileModal'
+  );
+
+
+  document
+    .getElementById(
+      'app'
+    )
+    .classList
+    .add(
+      'hidden'
+    );
+
+
+  document
+    .getElementById(
+      'authScreen'
+    )
+    .classList
+    .remove(
+      'hidden'
+    );
+
+
+  switchAuthMode(
+    'signin'
+  );
+
+}
+
+
+/* =========================================================
+   ACCOUNT UI
+   ========================================================= */
+
+function updateAccountUI(){
+
+  const fallbackName =
+    currentUser?.email
+      ?.split('@')[0] ||
+    'Account';
+
+
+  const name =
+    state.profile.name ||
+    currentUser
+      ?.user_metadata
+      ?.name ||
+    fallbackName;
+
+
+  const initial =
+    name
+      .charAt(0)
+      .toUpperCase();
+
+
+  document
+    .getElementById(
+      'headerName'
+    )
+    .textContent =
+      name;
+
+
+  document
+    .getElementById(
+      'headerAvatar'
+    )
+    .textContent =
+      initial;
+
+
+  document
+    .getElementById(
+      'profileName'
+    )
+    .value =
+      state.profile.name ||
+      name;
+
+
+  document
+    .getElementById(
+      'profileEmail'
+    )
+    .textContent =
+      currentUser?.email ||
+      '';
+
+
+  document
+    .getElementById(
+      'footerAccount'
+    )
+    .textContent =
+      currentUser?.email ||
+      '';
 
 }
 
@@ -2637,30 +4127,15 @@ function applyTheme(){
       state.theme.paper
     );
 
-}
-
-
-/* =========================================================
-   HEADER
-   ========================================================= */
-
-function initHeader(){
 
   document
-    .getElementById(
-      'todayLabel'
+    .querySelector(
+      'meta[name="theme-color"]'
     )
-    .textContent =
-
-      new Date()
-        .toLocaleDateString(
-          undefined,
-          {
-            weekday:'long',
-            month:'long',
-            day:'numeric'
-          }
-        );
+    .setAttribute(
+      'content',
+      state.theme.green
+    );
 
 }
 
@@ -2676,17 +4151,14 @@ function fillSelects(){
       'f-class'
     )
     .innerHTML =
-
       '<option value="">No class / general</option>' +
 
       state.classes
-        .map(item =>
-
-          `<option value="${esc(item.id)}">
+        .map(item => `
+          <option value="${esc(item.id)}">
             ${esc(item.name)}
-          </option>`
-
-        )
+          </option>
+        `)
         .join('');
 
 
@@ -2695,17 +4167,14 @@ function fillSelects(){
       'f-extra'
     )
     .innerHTML =
-
       '<option value="">No extracurricular</option>' +
 
       state.extras
-        .map(item =>
-
-          `<option value="${esc(item.id)}">
+        .map(item => `
+          <option value="${esc(item.id)}">
             ${esc(item.name)}
-          </option>`
-
-        )
+          </option>
+        `)
         .join('');
 
 }
@@ -2717,18 +4186,11 @@ function fillSelects(){
 
 function renderDeadlines(){
 
-  const container =
-    document.getElementById(
-      'deadlinesRow'
-    );
-
-
   const today =
     todayStr();
 
 
-  const deadlines =
-
+  const items =
     state.tasks
 
       .filter(task =>
@@ -2762,25 +4224,27 @@ function renderDeadlines(){
       .slice(0,4);
 
 
+  const container =
+    document.getElementById(
+      'deadlinesRow'
+    );
+
+
   if(
-    deadlines.length === 0
+    items.length === 0
   ){
 
     container.innerHTML = `
-
       <div
         class="empty-state"
         style="grid-column:1/-1"
       >
-
         <strong>
           No upcoming deadlines
         </strong>
 
         You're clear for the next 7 days.
-
       </div>
-
     `;
 
     return;
@@ -2789,31 +4253,39 @@ function renderDeadlines(){
 
 
   container.innerHTML =
-
-    deadlines
+    items
       .map(task => {
 
 
-        let badgeClass =
+        let badge =
           'ok';
 
 
-        let label =
+        let text =
           `Due in ${task.delta} days`;
 
 
         if(
-          task.delta <= 1
+          task.delta === 0
         ){
 
-          badgeClass =
+          badge =
             'urgent';
 
+          text =
+            'Due today';
 
-          label =
-            task.delta === 0
-              ? 'Due today'
-              : 'Due tomorrow';
+        }
+
+        else if(
+          task.delta === 1
+        ){
+
+          badge =
+            'urgent';
+
+          text =
+            'Due tomorrow';
 
         }
 
@@ -2821,7 +4293,7 @@ function renderDeadlines(){
           task.delta <= 3
         ){
 
-          badgeClass =
+          badge =
             'soon';
 
         }
@@ -2836,15 +4308,11 @@ function renderDeadlines(){
           >
 
             <div class="deadline-class">
-
               ${esc(sourceName(task))}
-
             </div>
 
             <div class="deadline-title">
-
               ${esc(task.title)}
-
             </div>
 
             <div class="deadline-meta">
@@ -2861,9 +4329,9 @@ function renderDeadlines(){
             </div>
 
             <span
-              class="deadline-badge ${badgeClass}"
+              class="deadline-badge ${badge}"
             >
-              ${label}
+              ${text}
             </span>
 
           </button>
@@ -2871,7 +4339,6 @@ function renderDeadlines(){
         `;
 
       })
-
       .join('');
 
 }
@@ -2890,24 +4357,20 @@ function renderClasses(){
 
 
   if(
-    state.classes.length === 0
+    !state.classes.length
   ){
 
     grid.innerHTML = `
-
       <div
         class="empty-state"
         style="grid-column:1/-1"
       >
-
         <strong>
           No classes yet
         </strong>
 
-        Add classes in Settings.
-
+        Add your first class in Settings.
       </div>
-
     `;
 
     return;
@@ -2916,27 +4379,17 @@ function renderClasses(){
 
 
   grid.innerHTML =
-
     state.classes
-
       .map(schoolClass => {
 
 
         const pending =
-
           state.tasks
-
             .filter(task =>
-
-              task.classId ===
-                schoolClass.id &&
-
+              task.classId === schoolClass.id &&
               !task.done &&
-
               checkable(task)
-
             )
-
             .length;
 
 
@@ -2949,9 +4402,7 @@ function renderClasses(){
           >
 
             <div class="class-name">
-
               ${esc(schoolClass.name)}
-
             </div>
 
             <div class="class-meta">
@@ -2967,9 +4418,7 @@ function renderClasses(){
                     : ''
                 }"
               >
-
                 ${pending} pending
-
               </span>
 
             </div>
@@ -2979,7 +4428,6 @@ function renderClasses(){
         `;
 
       })
-
       .join('');
 
 }
@@ -2991,8 +4439,7 @@ function renderClasses(){
 
 function taskRow(task){
 
-  const leftSide =
-
+  const completion =
     checkable(task)
 
       ? `
@@ -3011,7 +4458,6 @@ function taskRow(task){
             viewBox="0 0 14 14"
             fill="none"
           >
-
             <path
               d="M2 7l3.5 3.5L12 3"
               stroke="#fff"
@@ -3019,7 +4465,6 @@ function taskRow(task){
               stroke-linecap="round"
               stroke-linejoin="round"
             />
-
           </svg>
 
         </button>
@@ -3027,12 +4472,41 @@ function taskRow(task){
       `
 
       : `
-
-        <span
-          class="item-dot"
-        ></span>
-
+        <span class="item-dot"></span>
       `;
+
+
+  let repeatText =
+    '';
+
+
+  if(
+    task.type === 'activity'
+  ){
+
+    if(
+      task.recurrence === 'custom'
+    ){
+
+      repeatText =
+        weekdayLabel(
+          task.repeatDays || []
+        );
+
+    }
+
+    else if(
+      task.recurrence !== 'none'
+    ){
+
+      repeatText =
+        repeatLabel(
+          task.recurrence
+        );
+
+    }
+
+  }
 
 
   const metadata = [
@@ -3045,26 +4519,9 @@ function taskRow(task){
       ? formatTimeNice(task.time)
       : '',
 
-    task.location || '',
+    task.locationName || '',
 
-    (
-      task.type === 'activity' &&
-      task.recurrence === 'custom'
-    )
-      ? weekdayLabel(
-          task.repeatDays || []
-        )
-      : '',
-
-    (
-      task.type === 'activity' &&
-      task.recurrence !== 'none' &&
-      task.recurrence !== 'custom'
-    )
-      ? repeatLabel(
-          task.recurrence
-        )
-      : ''
+    repeatText
 
   ]
   .filter(Boolean)
@@ -3083,7 +4540,7 @@ function taskRow(task){
       style="--accent:${colorFor(task)}"
     >
 
-      ${leftSide}
+      ${completion}
 
       <div
         class="task-main"
@@ -3109,7 +4566,6 @@ function taskRow(task){
       <button
         class="icon-btn"
         data-open="${esc(task.id)}"
-        aria-label="Edit"
       >
         •••
       </button>
@@ -3122,20 +4578,17 @@ function taskRow(task){
 
 
 /* =========================================================
-   TASK LIST
+   EVERYTHING
    ========================================================= */
 
 function renderTaskList(){
 
-  let items =
-
+  const items =
     state.tasks
 
       .filter(task =>
-
         activeFilter === 'all' ||
         task.type === activeFilter
-
       )
 
       .sort((a,b) => {
@@ -3158,34 +4611,31 @@ function renderTaskList(){
       });
 
 
-  document
-    .getElementById(
+  const list =
+    document.getElementById(
       'taskList'
-    )
-    .innerHTML =
+    );
 
-      items.length
 
-        ? items
-            .map(task =>
-              taskRow(task)
-            )
-            .join('')
+  list.innerHTML =
+    items.length
 
-        : `
+      ? items
+          .map(task =>
+            taskRow(task)
+          )
+          .join('')
 
-          <div class="empty-state">
+      : `
+        <div class="empty-state">
+          <strong>
+            Nothing here yet
+          </strong>
 
-            <strong>
-              Nothing here yet
-            </strong>
-
-            Add an assignment, deadline,
-            reminder, or activity.
-
-          </div>
-
-        `;
+          Add an assignment, deadline,
+          reminder or activity.
+        </div>
+      `;
 
 }
 
@@ -3204,12 +4654,8 @@ function openClassModal(id){
     classById(id);
 
 
-  if(
-    !schoolClass
-  ){
-
+  if(!schoolClass){
     return;
-
   }
 
 
@@ -3245,32 +4691,27 @@ function renderClassModal(){
   if(
     !classModalId
   ){
-
     return;
-
   }
 
 
   const schoolClass =
-    classById(classModalId);
+    classById(
+      classModalId
+    );
 
 
-  if(
-    !schoolClass
-  ){
-
+  if(!schoolClass){
     return;
-
   }
 
 
   const items =
-
     state.tasks
 
       .filter(task =>
         task.classId ===
-          classModalId
+        classModalId
       )
 
       .sort((a,b) => {
@@ -3293,49 +4734,35 @@ function renderClassModal(){
       });
 
 
-  const list =
-    document.getElementById(
+  document
+    .getElementById(
       'classModalList'
-    );
+    )
+    .innerHTML =
+      items.length
 
+        ? items
+            .map(task =>
+              taskRow(task)
+            )
+            .join('')
 
-  if(
-    items.length === 0
-  ){
+        : `
+          <div class="empty-state">
+            <strong>
+              You have no work for this class
+            </strong>
 
-    list.innerHTML = `
-
-      <div class="empty-state">
-
-        <strong>
-          You have no work for this class
-        </strong>
-
-        Nothing has been added for
-        ${esc(schoolClass.name)} yet.
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  list.innerHTML =
-
-    items
-      .map(task =>
-        taskRow(task)
-      )
-      .join('');
+            Nothing has been added for
+            ${esc(schoolClass.name)} yet.
+          </div>
+        `;
 
 }
 
 
 /* =========================================================
-   CALENDAR OCCURRENCES
+   RECURRENCES
    ========================================================= */
 
 function occurrences(
@@ -3372,21 +4799,16 @@ function occurrences(
   ){
 
     return (
-
       start >= monthStart &&
       start <= monthEnd
-
     )
-
       ? [task.date]
-
       : [];
 
   }
 
 
   const hardEnd =
-
     task.repeatEnd
 
       ? parseLocalDate(
@@ -3401,7 +4823,6 @@ function occurrences(
 
 
   const end =
-
     hardEnd < monthEnd
       ? hardEnd
       : monthEnd;
@@ -3445,6 +4866,7 @@ function occurrences(
       output.push(
         dateStr(date)
       );
+
 
       date.setDate(
         date.getDate()+7
@@ -3503,16 +4925,12 @@ function occurrences(
 
     const date =
       new Date(
-
         year,
-
         month,
-
         Math.min(
           start.getDate(),
           monthEnd.getDate()
         )
-
       );
 
 
@@ -3542,11 +4960,13 @@ function occurrences(
 function renderCalendar(){
 
   const year =
-    calendarCursor.getFullYear();
+    calendarCursor
+      .getFullYear();
 
 
   const month =
-    calendarCursor.getMonth();
+    calendarCursor
+      .getMonth();
 
 
   const today =
@@ -3558,7 +4978,6 @@ function renderCalendar(){
       'monthTitle'
     )
     .textContent =
-
       calendarCursor
         .toLocaleDateString(
           undefined,
@@ -3569,15 +4988,13 @@ function renderCalendar(){
         );
 
 
-  const occurrenceMap = {};
+  const map = {};
 
 
   state.tasks
-
     .filter(task =>
       !task.done
     )
-
     .forEach(task => {
 
       occurrences(
@@ -3585,26 +5002,22 @@ function renderCalendar(){
         year,
         month
       )
-
       .forEach(date => {
 
-        if(
-          !occurrenceMap[date]
-        ){
-
-          occurrenceMap[date] = [];
-
+        if(!map[date]){
+          map[date] = [];
         }
 
-        occurrenceMap[date]
-          .push(task);
+        map[date].push(
+          task
+        );
 
       });
 
     });
 
 
-  const firstDay =
+  const first =
     new Date(
       year,
       month,
@@ -3612,12 +5025,12 @@ function renderCalendar(){
     );
 
 
-  const gridStart =
+  const start =
     new Date(
       year,
       month,
       1 -
-      firstDay.getDay()
+      first.getDay()
     );
 
 
@@ -3625,18 +5038,17 @@ function renderCalendar(){
 
 
   for(
-    let index=0;
-    index<42;
-    index++
+    let i=0;
+    i<42;
+    i++
   ){
 
     const date =
-      new Date(gridStart);
+      new Date(start);
 
 
     date.setDate(
-      gridStart.getDate() +
-      index
+      start.getDate()+i
     );
 
 
@@ -3645,8 +5057,7 @@ function renderCalendar(){
 
 
     const items =
-      occurrenceMap[dateString] ||
-      [];
+      map[dateString] || [];
 
 
     html += `
@@ -3668,9 +5079,7 @@ function renderCalendar(){
       >
 
         <div class="day-num">
-
           ${date.getDate()}
-
         </div>
 
     `;
@@ -3680,17 +5089,13 @@ function renderCalendar(){
       .slice(0,3)
       .forEach(task => {
 
-
         html += `
 
           <button
             class="cal-event"
             data-detail="${esc(task.id)}"
             data-date="${dateString}"
-            style="
-              --event-color:
-              ${colorFor(task)}
-            "
+            style="--event-color:${colorFor(task)}"
             title="${esc(task.title)}"
           >
 
@@ -3711,9 +5116,7 @@ function renderCalendar(){
 
 
     html += `
-
       </div>
-
     `;
 
   }
@@ -3732,22 +5135,17 @@ function renderCalendar(){
       'calendarLegend'
     )
     .innerHTML =
-
       [
         ...state.classes,
         ...state.extras
       ]
-
       .map(item => `
 
         <span class="legend-item">
 
           <span
             class="legend-dot"
-            style="
-              background:
-              ${item.color}
-            "
+            style="background:${item.color}"
           ></span>
 
           ${esc(item.name)}
@@ -3755,7 +5153,6 @@ function renderCalendar(){
         </span>
 
       `)
-
       .join('');
 
 }
@@ -3792,27 +5189,24 @@ function renderSettings(){
 
 
   const row =
-    (
-      item,
-      kind
-    ) => `
+    (item,kind) => `
 
       <div
         class="editor-row"
-        data-row-id="${esc(item.id)}"
-        data-kind="${kind}"
+        data-setting-id="${esc(item.id)}"
+        data-setting-kind="${kind}"
       >
 
         <input
+          data-setting-color
           type="color"
           value="${item.color}"
-          data-color
         />
 
         <input
+          data-setting-name
           type="text"
           value="${esc(item.name)}"
-          data-name
         />
 
         <button
@@ -3833,13 +5227,9 @@ function renderSettings(){
       'classEditor'
     )
     .innerHTML =
-
       state.classes
         .map(item =>
-          row(
-            item,
-            'class'
-          )
+          row(item,'class')
         )
         .join('');
 
@@ -3849,13 +5239,9 @@ function renderSettings(){
       'extraEditor'
     )
     .innerHTML =
-
       state.extras
         .map(item =>
-          row(
-            item,
-            'extra'
-          )
+          row(item,'extra')
         )
         .join('');
 
@@ -3863,7 +5249,7 @@ function renderSettings(){
 
 
 /* =========================================================
-   RENDER ALL
+   RENDER
    ========================================================= */
 
 function renderAll(){
@@ -3882,78 +5268,22 @@ function renderAll(){
 
   renderSettings();
 
+  updateAccountUI();
+
+
   if(
-    classModalId
+    classModalId &&
+    document
+      .getElementById(
+        'classModal'
+      )
+      .classList
+      .contains('open')
   ){
 
     renderClassModal();
 
   }
-
-}
-
-
-/* =========================================================
-   TYPE
-   ========================================================= */
-
-function setType(type){
-
-  activeType =
-    type;
-
-
-  document
-    .querySelectorAll(
-      '#typeToggle button'
-    )
-    .forEach(button =>
-
-      button
-        .classList
-        .toggle(
-          'active',
-          button.dataset.type === type
-        )
-
-    );
-
-
-  const isActivity =
-    type === 'activity';
-
-
-  document
-    .getElementById(
-      'classField'
-    )
-    .classList
-    .toggle(
-      'hidden',
-      isActivity
-    );
-
-
-  document
-    .getElementById(
-      'extraField'
-    )
-    .classList
-    .toggle(
-      'hidden',
-      !isActivity
-    );
-
-
-  document
-    .getElementById(
-      'activityFields'
-    )
-    .classList
-    .toggle(
-      'hidden',
-      !isActivity
-    );
 
 }
 
@@ -3983,10 +5313,350 @@ function closeModal(id){
 
 
 /* =========================================================
+   TYPE
+   ========================================================= */
+
+function setType(type){
+
+  activeType =
+    type;
+
+
+  document
+    .querySelectorAll(
+      '#typeToggle button'
+    )
+    .forEach(button => {
+
+      button.classList
+        .toggle(
+          'active',
+          button.dataset.type ===
+          type
+        );
+
+    });
+
+
+  const activity =
+    type === 'activity';
+
+
+  document
+    .getElementById(
+      'classField'
+    )
+    .classList
+    .toggle(
+      'hidden',
+      activity
+    );
+
+
+  document
+    .getElementById(
+      'extraField'
+    )
+    .classList
+    .toggle(
+      'hidden',
+      !activity
+    );
+
+
+  document
+    .getElementById(
+      'activityFields'
+    )
+    .classList
+    .toggle(
+      'hidden',
+      !activity
+    );
+
+
+  if(
+    activity &&
+    mapsReady
+  ){
+
+    ensurePlaceAutocomplete();
+
+  }
+
+}
+
+
+/* =========================================================
+   GOOGLE PLACES
+   ========================================================= */
+
+window.initGoogleMaps =
+  async function(){
+
+    mapsReady =
+      true;
+
+
+    if(
+      activeType === 'activity'
+    ){
+
+      await ensurePlaceAutocomplete();
+
+    }
+
+  };
+
+
+async function ensurePlaceAutocomplete(){
+
+  if(
+    !mapsReady ||
+    placeAutocompleteElement
+  ){
+    return;
+  }
+
+
+  const holder =
+    document.getElementById(
+      'placeAutocompleteHolder'
+    );
+
+
+  holder.innerHTML = '';
+
+
+  try{
+
+    const {
+      PlaceAutocompleteElement
+    } =
+      await google.maps
+        .importLibrary(
+          'places'
+        );
+
+
+    placeAutocompleteElement =
+      new PlaceAutocompleteElement();
+
+
+    placeAutocompleteElement
+      .setAttribute(
+        'placeholder',
+        'Search for a real location'
+      );
+
+
+    holder.appendChild(
+      placeAutocompleteElement
+    );
+
+
+    placeAutocompleteElement
+      .addEventListener(
+        'gmp-select',
+        async event => {
+
+
+          const prediction =
+            event.placePrediction;
+
+
+          if(!prediction){
+            return;
+          }
+
+
+          const place =
+            prediction.toPlace();
+
+
+          await place.fetchFields({
+
+            fields:[
+              'id',
+              'displayName',
+              'formattedAddress',
+              'location'
+            ]
+
+          });
+
+
+          selectedPlaceData = {
+
+            placeId:
+              place.id || '',
+
+            locationName:
+              place.displayName || '',
+
+            locationAddress:
+              place.formattedAddress || '',
+
+            latitude:
+              place.location
+                ? place.location.lat()
+                : null,
+
+            longitude:
+              place.location
+                ? place.location.lng()
+                : null
+
+          };
+
+
+          renderSelectedPlace();
+
+        }
+      );
+
+  }
+
+  catch(error){
+
+    console.error(
+      error
+    );
+
+
+    holder.innerHTML = `
+      <div
+        style="
+          color:var(--danger);
+          font-size:12px;
+        "
+      >
+        Location search could not load.
+      </div>
+    `;
+
+  }
+
+}
+
+
+function renderSelectedPlace(){
+
+  const holder =
+    document.getElementById(
+      'selectedPlace'
+    );
+
+
+  if(
+    !selectedPlaceData ||
+    !selectedPlaceData.locationName
+  ){
+
+    holder
+      .classList
+      .add(
+        'hidden'
+      );
+
+    holder.innerHTML = '';
+
+    return;
+
+  }
+
+
+  holder
+    .classList
+    .remove(
+      'hidden'
+    );
+
+
+  holder.innerHTML = `
+
+    <div class="place-card">
+
+      <div>
+
+        <div class="place-name">
+          ${esc(selectedPlaceData.locationName)}
+        </div>
+
+        <div class="place-address">
+          ${esc(selectedPlaceData.locationAddress)}
+        </div>
+
+      </div>
+
+
+      <div class="place-actions">
+
+        <button
+          type="button"
+          class="mini-btn"
+          data-open-map
+        >
+          Map
+        </button>
+
+        <button
+          type="button"
+          class="mini-btn"
+          data-clear-place
+        >
+          Clear
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+function openMapForPlace(placeData){
+
+  if(
+    !placeData
+  ){
+    return;
+  }
+
+
+  const query =
+    placeData.placeId
+
+      ? `place_id:${placeData.placeId}`
+
+      : (
+          placeData.locationAddress ||
+          placeData.locationName
+        );
+
+
+  const url =
+    `https://www.google.com/maps/search/?api=1&query=${
+      encodeURIComponent(query)
+    }`;
+
+
+  window.open(
+    url,
+    '_blank',
+    'noopener'
+  );
+
+}
+
+
+/* =========================================================
    OPEN ITEM
    ========================================================= */
 
-function openItem(
+async function openItem(
   id=null,
   preset={}
 ){
@@ -4002,9 +5672,6 @@ function openItem(
     .reset();
 
 
-  fillSelects();
-
-
   document
     .querySelectorAll(
       '#weekdayPicker button'
@@ -4015,15 +5682,15 @@ function openItem(
     );
 
 
+  fillSelects();
+
+
   const task =
-
     id
-
       ? state.tasks
           .find(item =>
             item.id === id
           )
-
       : null;
 
 
@@ -4032,7 +5699,6 @@ function openItem(
       'itemModalTitle'
     )
     .textContent =
-
       task
         ? 'Edit item'
         : 'Add to your planner';
@@ -4050,43 +5716,10 @@ function openItem(
 
 
   setType(
-
     task?.type ||
-
     preset.type ||
-
     'assignment'
-
   );
-
-
-  document
-    .getElementById(
-      'f-title'
-    )
-    .value =
-      task?.title || '';
-
-
-  document
-    .getElementById(
-      'f-date'
-    )
-    .value =
-
-      task?.date ||
-
-      preset.date ||
-
-      todayStr();
-
-
-  document
-    .getElementById(
-      'f-time'
-    )
-    .value =
-      task?.time || '';
 
 
   document
@@ -4094,11 +5727,8 @@ function openItem(
       'f-class'
     )
     .value =
-
       task?.classId ||
-
       preset.classId ||
-
       '';
 
 
@@ -4113,10 +5743,38 @@ function openItem(
 
   document
     .getElementById(
-      'f-location'
+      'f-title'
     )
     .value =
-      task?.location ||
+      task?.title ||
+      '';
+
+
+  document
+    .getElementById(
+      'f-date'
+    )
+    .value =
+      task?.date ||
+      preset.date ||
+      todayStr();
+
+
+  document
+    .getElementById(
+      'f-time'
+    )
+    .value =
+      task?.time ||
+      '';
+
+
+  document
+    .getElementById(
+      'f-notes'
+    )
+    .value =
+      task?.notes ||
       '';
 
 
@@ -4135,15 +5793,6 @@ function openItem(
     )
     .value =
       task?.repeatEnd ||
-      '';
-
-
-  document
-    .getElementById(
-      'f-notes'
-    )
-    .value =
-      task?.notes ||
       '';
 
 
@@ -4170,34 +5819,33 @@ function openItem(
     });
 
 
-  const repeatValue =
-    document
-      .getElementById(
-        'f-repeat'
-      )
-      .value;
+  selectedPlaceData =
+    task
+      ? {
+
+          placeId:
+            task.placeId || '',
+
+          locationName:
+            task.locationName || '',
+
+          locationAddress:
+            task.locationAddress || '',
+
+          latitude:
+            task.latitude ?? null,
+
+          longitude:
+            task.longitude ?? null
+
+        }
+      : null;
 
 
-  document
-    .getElementById(
-      'repeatEndField'
-    )
-    .classList
-    .toggle(
-      'hidden',
-      repeatValue === 'none'
-    );
+  renderSelectedPlace();
 
 
-  document
-    .getElementById(
-      'weekdayField'
-    )
-    .classList
-    .toggle(
-      'hidden',
-      repeatValue !== 'custom'
-    );
+  updateRepeatVisibility();
 
 
   openModal(
@@ -4205,16 +5853,24 @@ function openItem(
   );
 
 
+  if(
+    activeType === 'activity' &&
+    mapsReady
+  ){
+
+    await ensurePlaceAutocomplete();
+
+  }
+
+
   setTimeout(
     () =>
-
       document
         .getElementById(
           'f-title'
         )
         .focus(),
-
-    20
+    30
   );
 
 }
@@ -4226,15 +5882,38 @@ function openItem(
 
 function saveItem(){
 
-  const repeatDays =
+  const title =
+    document
+      .getElementById(
+        'f-title'
+      )
+      .value
+      .trim();
 
+
+  const date =
+    document
+      .getElementById(
+        'f-date'
+      )
+      .value;
+
+
+  if(
+    !title ||
+    !date
+  ){
+    return;
+  }
+
+
+  const repeatDays =
     [
       ...document
         .querySelectorAll(
           '#weekdayPicker button.active'
         )
     ]
-
     .map(button =>
       Number(
         button.dataset.day
@@ -4242,155 +5921,24 @@ function saveItem(){
     );
 
 
-  const data = {
-
-    type:
-      activeType,
-
-
-    classId:
-
-      activeType === 'activity'
-
-        ? null
-
-        : (
-            document
-              .getElementById(
-                'f-class'
-              )
-              .value ||
-
-            null
-          ),
-
-
-    extraId:
-
-      activeType === 'activity'
-
-        ? (
-            document
-              .getElementById(
-                'f-extra'
-              )
-              .value ||
-
-            null
+  const recurrence =
+    activeType === 'activity'
+      ? document
+          .getElementById(
+            'f-repeat'
           )
-
-        : null,
-
-
-    title:
-
-      document
-        .getElementById(
-          'f-title'
-        )
-        .value
-        .trim(),
-
-
-    date:
-
-      document
-        .getElementById(
-          'f-date'
-        )
-        .value,
-
-
-    time:
-
-      document
-        .getElementById(
-          'f-time'
-        )
-        .value ||
-
-      '',
-
-
-    notes:
-
-      document
-        .getElementById(
-          'f-notes'
-        )
-        .value
-        .trim(),
-
-
-    location:
-
-      activeType === 'activity'
-
-        ? document
-            .getElementById(
-              'f-location'
-            )
-            .value
-            .trim()
-
-        : '',
-
-
-    recurrence:
-
-      activeType === 'activity'
-
-        ? document
-            .getElementById(
-              'f-repeat'
-            )
-            .value
-
-        : 'none',
-
-
-    repeatDays:
-
-      activeType === 'activity'
-
-        ? repeatDays
-
-        : [],
-
-
-    repeatEnd:
-
-      activeType === 'activity'
-
-        ? document
-            .getElementById(
-              'f-repeat-end'
-            )
-            .value
-
-        : ''
-
-  };
-
-
-  if(
-    !data.title ||
-    !data.date
-  ){
-
-    return;
-
-  }
+          .value
+      : 'none';
 
 
   if(
     activeType === 'activity' &&
-    data.recurrence === 'custom' &&
-    data.repeatDays.length === 0
+    recurrence === 'custom' &&
+    repeatDays.length === 0
   ){
 
     alert(
-      'Choose at least one weekday for this recurring activity.'
+      'Choose at least one day for this recurring activity.'
     );
 
     return;
@@ -4398,16 +5946,125 @@ function saveItem(){
   }
 
 
-  if(
-    editingId
-  ){
+  const data = {
+
+    type:
+      activeType,
+
+    classId:
+      activeType === 'activity'
+        ? null
+        : (
+            document
+              .getElementById(
+                'f-class'
+              )
+              .value ||
+            null
+          ),
+
+    extraId:
+      activeType === 'activity'
+        ? (
+            document
+              .getElementById(
+                'f-extra'
+              )
+              .value ||
+            null
+          )
+        : null,
+
+    title,
+
+    date,
+
+    time:
+      document
+        .getElementById(
+          'f-time'
+        )
+        .value ||
+      '',
+
+    notes:
+      document
+        .getElementById(
+          'f-notes'
+        )
+        .value
+        .trim(),
+
+    recurrence,
+
+    repeatDays:
+      activeType === 'activity'
+        ? repeatDays
+        : [],
+
+    repeatEnd:
+      activeType === 'activity'
+        ? document
+            .getElementById(
+              'f-repeat-end'
+            )
+            .value
+        : '',
+
+    placeId:
+      activeType === 'activity'
+        ? (
+            selectedPlaceData
+              ?.placeId ||
+            ''
+          )
+        : '',
+
+    locationName:
+      activeType === 'activity'
+        ? (
+            selectedPlaceData
+              ?.locationName ||
+            ''
+          )
+        : '',
+
+    locationAddress:
+      activeType === 'activity'
+        ? (
+            selectedPlaceData
+              ?.locationAddress ||
+            ''
+          )
+        : '',
+
+    latitude:
+      activeType === 'activity'
+        ? (
+            selectedPlaceData
+              ?.latitude ??
+            null
+          )
+        : null,
+
+    longitude:
+      activeType === 'activity'
+        ? (
+            selectedPlaceData
+              ?.longitude ??
+            null
+          )
+        : null
+
+  };
+
+
+  if(editingId){
 
     const index =
-
       state.tasks
-        .findIndex(
-          item =>
-            item.id === editingId
+        .findIndex(task =>
+          task.id === editingId
         );
 
 
@@ -4446,11 +6103,13 @@ function saveItem(){
   }
 
 
-  save();
+  queueCloudSave();
+
 
   closeModal(
     'itemModal'
   );
+
 
   renderAll();
 
@@ -4458,30 +6117,24 @@ function saveItem(){
 
 
 /* =========================================================
-   DELETE
+   DELETE / COMPLETE
    ========================================================= */
 
 function deleteItem(){
 
-  if(
-    !editingId
-  ){
-
+  if(!editingId){
     return;
-
   }
 
 
   state.tasks =
-
     state.tasks
-      .filter(
-        task =>
-          task.id !== editingId
+      .filter(task =>
+        task.id !== editingId
       );
 
 
-  save();
+  queueCloudSave();
 
 
   closeModal(
@@ -4494,18 +6147,12 @@ function deleteItem(){
 }
 
 
-/* =========================================================
-   COMPLETE / UNCOMPLETE
-   ========================================================= */
-
-function complete(id){
+function toggleComplete(id){
 
   const task =
-
     state.tasks
-      .find(
-        item =>
-          item.id === id
+      .find(item =>
+        item.id === id
       );
 
 
@@ -4513,9 +6160,7 @@ function complete(id){
     !task ||
     !checkable(task)
   ){
-
     return;
-
   }
 
 
@@ -4523,7 +6168,7 @@ function complete(id){
     !task.done;
 
 
-  save();
+  queueCloudSave();
 
   renderAll();
 
@@ -4531,29 +6176,61 @@ function complete(id){
 
 
 /* =========================================================
-   CALENDAR DETAIL
+   REPEAT UI
+   ========================================================= */
+
+function updateRepeatVisibility(){
+
+  const value =
+    document
+      .getElementById(
+        'f-repeat'
+      )
+      .value;
+
+
+  document
+    .getElementById(
+      'repeatEndField'
+    )
+    .classList
+    .toggle(
+      'hidden',
+      value === 'none'
+    );
+
+
+  document
+    .getElementById(
+      'weekdayField'
+    )
+    .classList
+    .toggle(
+      'hidden',
+      value !== 'custom'
+    );
+
+}
+
+
+/* =========================================================
+   DETAIL
    ========================================================= */
 
 function openDetail(
   id,
-  date
+  occurrenceDate
 ){
 
   const task =
-
     state.tasks
-      .find(
-        item =>
-          item.id === id
+      .find(item =>
+        item.id === id
       );
 
 
-  if(
-    !task
-  ){
-
+  if(!task){
     return;
-
   }
 
 
@@ -4565,7 +6242,8 @@ function openDetail(
       task.title;
 
 
-  let repeatText = '';
+  let repeatText =
+    '';
 
 
   if(
@@ -4604,40 +6282,28 @@ function openDetail(
     .innerHTML = `
 
       <p>
-
-        <strong>
-          Type:
-        </strong>
-
+        <strong>Type:</strong>
         ${esc(task.type)}
-
       </p>
 
       <p>
-
         <strong>
-
           ${
             task.type === 'activity'
               ? 'Activity'
               : 'Class'
           }:
-
         </strong>
 
         ${esc(sourceName(task))}
-
       </p>
 
       <p>
-
-        <strong>
-          Date:
-        </strong>
+        <strong>Date:</strong>
 
         ${
           formatDateNice(
-            date ||
+            occurrenceDate ||
             task.date
           )
         }
@@ -4650,46 +6316,50 @@ function openDetail(
               )
             : ''
         }
-
       </p>
 
       ${
-        task.location
-
+        repeatText
           ? `
-
             <p>
-
-              <strong>
-                Location:
-              </strong>
-
-              ${esc(task.location)}
-
+              <strong>Repeats:</strong>
+              ${esc(repeatText)}
             </p>
-
           `
-
           : ''
       }
 
       ${
-        repeatText
-
+        task.locationName
           ? `
 
-            <p>
+            <div
+              class="place-card"
+              style="margin:16px 0"
+            >
 
-              <strong>
-                Repeats:
-              </strong>
+              <div>
 
-              ${esc(repeatText)}
+                <div class="place-name">
+                  📍 ${esc(task.locationName)}
+                </div>
 
-            </p>
+                <div class="place-address">
+                  ${esc(task.locationAddress)}
+                </div>
+
+              </div>
+
+              <button
+                class="mini-btn"
+                data-map-task="${esc(task.id)}"
+              >
+                Open map
+              </button>
+
+            </div>
 
           `
-
           : ''
       }
 
@@ -4708,26 +6378,17 @@ function openDetail(
             white-space:pre-wrap;
           "
         >
-
           ${
             task.notes
-
               ? esc(task.notes)
-
               : `
-
                 <span
-                  style="
-                    color:
-                    var(--ink-soft)
-                  "
+                  style="color:var(--ink-soft)"
                 >
                   No notes added.
                 </span>
-
               `
           }
-
         </div>
 
       </div>
@@ -4743,13 +6404,12 @@ function openDetail(
 
 
 /* =========================================================
-   SETTINGS SAVE
+   SETTINGS COMMIT
    ========================================================= */
 
 function commitSettings(){
 
   state.theme.green =
-
     document
       .getElementById(
         'themeGreen'
@@ -4758,7 +6418,6 @@ function commitSettings(){
 
 
   state.theme.gold =
-
     document
       .getElementById(
         'themeGold'
@@ -4767,7 +6426,6 @@ function commitSettings(){
 
 
   state.theme.paper =
-
     document
       .getElementById(
         'themePaper'
@@ -4777,49 +6435,43 @@ function commitSettings(){
 
   document
     .querySelectorAll(
-      '[data-row-id]'
+      '[data-setting-id]'
     )
     .forEach(row => {
 
 
       const collection =
-
-        row.dataset.kind === 'class'
+        row.dataset.settingKind ===
+        'class'
 
           ? state.classes
-
           : state.extras;
 
 
       const item =
-
         collection
-          .find(
-            value =>
-              value.id ===
-              row.dataset.rowId
+          .find(value =>
+            value.id ===
+            row.dataset.settingId
           );
 
 
       if(item){
 
         item.name =
-
           row
             .querySelector(
-              '[data-name]'
+              '[data-setting-name]'
             )
             .value
             .trim()
-
           || item.name;
 
 
         item.color =
-
           row
             .querySelector(
-              '[data-color]'
+              '[data-setting-color]'
             )
             .value;
 
@@ -4828,7 +6480,7 @@ function commitSettings(){
     });
 
 
-  save();
+  queueCloudSave();
 
   applyTheme();
 
@@ -4836,290 +6488,50 @@ function commitSettings(){
 
 
 /* =========================================================
-   GLOBAL CLICK HANDLER
+   EVENTS
    ========================================================= */
 
 document
+  .getElementById(
+    'signInTab'
+  )
   .addEventListener(
     'click',
-    event => {
-
-
-      /* VIEW SWITCH */
-
-      const viewButton =
-        event.target.closest(
-          '[data-view]'
-        );
-
-
-      if(viewButton){
-
-        document
-          .querySelectorAll(
-            '.top-tab'
-          )
-          .forEach(button =>
-
-            button.classList
-              .toggle(
-                'active',
-                button ===
-                viewButton
-              )
-
-          );
-
-
-        document
-          .getElementById(
-            'plannerView'
-          )
-          .classList
-          .toggle(
-            'hidden',
-            viewButton.dataset.view
-            !== 'planner'
-          );
-
-
-        document
-          .getElementById(
-            'calendarView'
-          )
-          .classList
-          .toggle(
-            'hidden',
-            viewButton.dataset.view
-            !== 'calendar'
-          );
-
-      }
-
-
-      /* OPEN ITEM */
-
-      const openButton =
-        event.target.closest(
-          '[data-open]'
-        );
-
-
-      if(openButton){
-
-        openItem(
-          openButton.dataset.open
-        );
-
-      }
-
-
-      /* COMPLETE */
-
-      const completionButton =
-        event.target.closest(
-          '[data-complete]'
-        );
-
-
-      if(completionButton){
-
-        event.stopPropagation();
-
-        complete(
-          completionButton
-            .dataset
-            .complete
-        );
-
-      }
-
-
-      /* CALENDAR DETAIL */
-
-      const detailButton =
-        event.target.closest(
-          '[data-detail]'
-        );
-
-
-      if(detailButton){
-
-        openDetail(
-
-          detailButton
-            .dataset
-            .detail,
-
-          detailButton
-            .dataset
-            .date
-
-        );
-
-      }
-
-
-      /* OPEN CLASS */
-
-      const classButton =
-        event.target.closest(
-          '[data-class-open]'
-        );
-
-
-      if(classButton){
-
-        openClassModal(
-          classButton
-            .dataset
-            .classOpen
-        );
-
-      }
-
-
-      /* CLOSE */
-
-      const closeButton =
-        event.target.closest(
-          '[data-close]'
-        );
-
-
-      if(closeButton){
-
-        closeModal(
-          closeButton
-            .dataset
-            .close
-        );
-
-      }
-
-
-      /* REMOVE CLASS / EXTRA */
-
-      const removeSetting =
-        event.target.closest(
-          '[data-remove-setting]'
-        );
-
-
-      if(removeSetting){
-
-        commitSettings();
-
-
-        const id =
-
-          removeSetting
-            .dataset
-            .removeSetting;
-
-
-        if(
-          removeSetting.dataset.kind ===
-          'class'
-        ){
-
-          state.classes =
-
-            state.classes
-              .filter(
-                item =>
-                  item.id !== id
-              );
-
-
-          state.tasks
-            .forEach(task => {
-
-              if(
-                task.classId === id
-              ){
-
-                task.classId =
-                  null;
-
-              }
-
-            });
-
-        }
-
-        else{
-
-          state.extras =
-
-            state.extras
-              .filter(
-                item =>
-                  item.id !== id
-              );
-
-
-          state.tasks
-            .forEach(task => {
-
-              if(
-                task.extraId === id
-              ){
-
-                task.extraId =
-                  null;
-
-              }
-
-            });
-
-        }
-
-
-        save();
-
-        renderAll();
-
-      }
+    () =>
+      switchAuthMode(
+        'signin'
+      )
+  );
+
+
+document
+  .getElementById(
+    'signUpTab'
+  )
+  .addEventListener(
+    'click',
+    () =>
+      switchAuthMode(
+        'signup'
+      )
+  );
+
+
+document
+  .getElementById(
+    'authForm'
+  )
+  .addEventListener(
+    'submit',
+    async event => {
+
+      event.preventDefault();
+
+      await submitAuth();
 
     }
   );
 
-
-/* =========================================================
-   MODAL BACKDROP
-   ========================================================= */
-
-document
-  .querySelectorAll(
-    '.modal-overlay'
-  )
-  .forEach(modal =>
-
-    modal
-      .addEventListener(
-        'mousedown',
-        event => {
-
-          if(
-            event.target === modal
-          ){
-
-            closeModal(
-              modal.id
-            );
-
-          }
-
-        }
-      )
-
-  );
-
-
-/* =========================================================
-   ADD BUTTON
-   ========================================================= */
 
 document
   .getElementById(
@@ -5131,10 +6543,6 @@ document
       openItem()
   );
 
-
-/* =========================================================
-   SETTINGS
-   ========================================================= */
 
 document
   .getElementById(
@@ -5154,9 +6562,88 @@ document
   );
 
 
-/* =========================================================
-   TYPE TOGGLE
-   ========================================================= */
+document
+  .getElementById(
+    'accountButton'
+  )
+  .addEventListener(
+    'click',
+    () => {
+
+      updateAccountUI();
+
+      openModal(
+        'profileModal'
+      );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    'signOutBtn'
+  )
+  .addEventListener(
+    'click',
+    signOut
+  );
+
+
+document
+  .getElementById(
+    'saveProfileBtn'
+  )
+  .addEventListener(
+    'click',
+    () => {
+
+      state.profile.name =
+        document
+          .getElementById(
+            'profileName'
+          )
+          .value
+          .trim();
+
+
+      queueCloudSave();
+
+      updateAccountUI();
+
+      closeModal(
+        'profileModal'
+      );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    'taskForm'
+  )
+  .addEventListener(
+    'submit',
+    event => {
+
+      event.preventDefault();
+
+      saveItem();
+
+    }
+  );
+
+
+document
+  .getElementById(
+    'deleteItemBtn'
+  )
+  .addEventListener(
+    'click',
+    deleteItem
+  );
+
 
 document
   .getElementById(
@@ -5184,10 +6671,6 @@ document
   );
 
 
-/* =========================================================
-   WEEKDAY PICKER
-   ========================================================= */
-
 document
   .getElementById(
     'weekdayPicker'
@@ -5202,28 +6685,18 @@ document
         );
 
 
-      if(
-        !button
-      ){
+      if(button){
 
-        return;
+        button.classList
+          .toggle(
+            'active'
+          );
 
       }
-
-
-      button
-        .classList
-        .toggle(
-          'active'
-        );
 
     }
   );
 
-
-/* =========================================================
-   REPEAT CHANGE
-   ========================================================= */
 
 document
   .getElementById(
@@ -5231,75 +6704,9 @@ document
   )
   .addEventListener(
     'change',
-    event => {
-
-
-      const value =
-        event.target.value;
-
-
-      document
-        .getElementById(
-          'repeatEndField'
-        )
-        .classList
-        .toggle(
-          'hidden',
-          value === 'none'
-        );
-
-
-      document
-        .getElementById(
-          'weekdayField'
-        )
-        .classList
-        .toggle(
-          'hidden',
-          value !== 'custom'
-        );
-
-    }
+    updateRepeatVisibility
   );
 
-
-/* =========================================================
-   SAVE TASK
-   ========================================================= */
-
-document
-  .getElementById(
-    'taskForm'
-  )
-  .addEventListener(
-    'submit',
-    event => {
-
-      event.preventDefault();
-
-      saveItem();
-
-    }
-  );
-
-
-/* =========================================================
-   DELETE
-   ========================================================= */
-
-document
-  .getElementById(
-    'deleteItemBtn'
-  )
-  .addEventListener(
-    'click',
-    deleteItem
-  );
-
-
-/* =========================================================
-   FILTERS
-   ========================================================= */
 
 document
   .getElementById(
@@ -5315,12 +6722,8 @@ document
         );
 
 
-      if(
-        !button
-      ){
-
+      if(!button){
         return;
-
       }
 
 
@@ -5332,16 +6735,15 @@ document
         .querySelectorAll(
           '#filterTabs .tab-btn'
         )
-        .forEach(item =>
+        .forEach(item => {
 
-          item
-            .classList
+          item.classList
             .toggle(
               'active',
               item === button
-            )
+            );
 
-        );
+        });
 
 
       renderTaskList();
@@ -5349,10 +6751,6 @@ document
     }
   );
 
-
-/* =========================================================
-   CALENDAR CONTROLS
-   ========================================================= */
 
 document
   .getElementById(
@@ -5365,8 +6763,9 @@ document
       calendarCursor
         .setMonth(
           calendarCursor
-            .getMonth() - 1
+            .getMonth()-1
         );
+
 
       renderCalendar();
 
@@ -5385,8 +6784,9 @@ document
       calendarCursor
         .setMonth(
           calendarCursor
-            .getMonth() + 1
+            .getMonth()+1
         );
+
 
       renderCalendar();
 
@@ -5402,14 +6802,14 @@ document
     'click',
     () => {
 
-      const date =
+      const now =
         new Date();
 
 
       calendarCursor =
         new Date(
-          date.getFullYear(),
-          date.getMonth(),
+          now.getFullYear(),
+          now.getMonth(),
           1
         );
 
@@ -5420,10 +6820,6 @@ document
   );
 
 
-/* =========================================================
-   CLASS MODAL ADD
-   ========================================================= */
-
 document
   .getElementById(
     'classModalAddBtn'
@@ -5432,16 +6828,7 @@ document
     'click',
     () => {
 
-      if(
-        !classModalId
-      ){
-
-        return;
-
-      }
-
-
-      const selectedClass =
+      const id =
         classModalId;
 
 
@@ -5454,17 +6841,13 @@ document
         null,
         {
           type:'assignment',
-          classId:selectedClass
+          classId:id
         }
       );
 
     }
   );
 
-
-/* =========================================================
-   ADD CLASS
-   ========================================================= */
 
 document
   .getElementById(
@@ -5492,7 +6875,7 @@ document
         });
 
 
-      save();
+      queueCloudSave();
 
       renderSettings();
 
@@ -5501,10 +6884,6 @@ document
     }
   );
 
-
-/* =========================================================
-   ADD EXTRACURRICULAR
-   ========================================================= */
 
 document
   .getElementById(
@@ -5532,7 +6911,7 @@ document
         });
 
 
-      save();
+      queueCloudSave();
 
       renderSettings();
 
@@ -5541,10 +6920,6 @@ document
     }
   );
 
-
-/* =========================================================
-   SAVE SETTINGS
-   ========================================================= */
 
 document
   .getElementById(
@@ -5566,10 +6941,6 @@ document
   );
 
 
-/* =========================================================
-   LIVE THEME PREVIEW
-   ========================================================= */
-
 [
   'themeGreen',
   'themeGold',
@@ -5584,7 +6955,6 @@ document
       () => {
 
         state.theme.green =
-
           document
             .getElementById(
               'themeGreen'
@@ -5593,7 +6963,6 @@ document
 
 
         state.theme.gold =
-
           document
             .getElementById(
               'themeGold'
@@ -5602,7 +6971,6 @@ document
 
 
         state.theme.paper =
-
           document
             .getElementById(
               'themePaper'
@@ -5618,9 +6986,301 @@ document
 });
 
 
-/* =========================================================
-   ESCAPE
-   ========================================================= */
+document
+  .addEventListener(
+    'click',
+    event => {
+
+
+      const view =
+        event.target.closest(
+          '[data-view]'
+        );
+
+
+      if(view){
+
+        document
+          .querySelectorAll(
+            '.top-tab'
+          )
+          .forEach(button => {
+
+            button.classList
+              .toggle(
+                'active',
+                button === view
+              );
+
+          });
+
+
+        document
+          .getElementById(
+            'plannerView'
+          )
+          .classList
+          .toggle(
+            'hidden',
+            view.dataset.view !==
+            'planner'
+          );
+
+
+        document
+          .getElementById(
+            'calendarView'
+          )
+          .classList
+          .toggle(
+            'hidden',
+            view.dataset.view !==
+            'calendar'
+          );
+
+      }
+
+
+      const open =
+        event.target.closest(
+          '[data-open]'
+        );
+
+
+      if(open){
+
+        openItem(
+          open.dataset.open
+        );
+
+      }
+
+
+      const complete =
+        event.target.closest(
+          '[data-complete]'
+        );
+
+
+      if(complete){
+
+        event.stopPropagation();
+
+        toggleComplete(
+          complete.dataset.complete
+        );
+
+      }
+
+
+      const classOpen =
+        event.target.closest(
+          '[data-class-open]'
+        );
+
+
+      if(classOpen){
+
+        openClassModal(
+          classOpen.dataset.classOpen
+        );
+
+      }
+
+
+      const detail =
+        event.target.closest(
+          '[data-detail]'
+        );
+
+
+      if(detail){
+
+        openDetail(
+          detail.dataset.detail,
+          detail.dataset.date
+        );
+
+      }
+
+
+      const mapTask =
+        event.target.closest(
+          '[data-map-task]'
+        );
+
+
+      if(mapTask){
+
+        const task =
+          state.tasks
+            .find(item =>
+              item.id ===
+              mapTask.dataset.mapTask
+            );
+
+
+        if(task){
+
+          openMapForPlace(
+            task
+          );
+
+        }
+
+      }
+
+
+      const openMap =
+        event.target.closest(
+          '[data-open-map]'
+        );
+
+
+      if(openMap){
+
+        openMapForPlace(
+          selectedPlaceData
+        );
+
+      }
+
+
+      const clearPlace =
+        event.target.closest(
+          '[data-clear-place]'
+        );
+
+
+      if(clearPlace){
+
+        selectedPlaceData =
+          null;
+
+        renderSelectedPlace();
+
+      }
+
+
+      const close =
+        event.target.closest(
+          '[data-close]'
+        );
+
+
+      if(close){
+
+        closeModal(
+          close.dataset.close
+        );
+
+      }
+
+
+      const remove =
+        event.target.closest(
+          '[data-remove-setting]'
+        );
+
+
+      if(remove){
+
+        commitSettings();
+
+
+        const id =
+          remove.dataset.removeSetting;
+
+
+        if(
+          remove.dataset.kind ===
+          'class'
+        ){
+
+          state.classes =
+            state.classes
+              .filter(item =>
+                item.id !== id
+              );
+
+
+          state.tasks
+            .forEach(task => {
+
+              if(
+                task.classId === id
+              ){
+
+                task.classId =
+                  null;
+
+              }
+
+            });
+
+        }
+
+        else{
+
+          state.extras =
+            state.extras
+              .filter(item =>
+                item.id !== id
+              );
+
+
+          state.tasks
+            .forEach(task => {
+
+              if(
+                task.extraId === id
+              ){
+
+                task.extraId =
+                  null;
+
+              }
+
+            });
+
+        }
+
+
+        queueCloudSave();
+
+        renderAll();
+
+      }
+
+    }
+  );
+
+
+document
+  .querySelectorAll(
+    '.modal-overlay'
+  )
+  .forEach(modal => {
+
+    modal.addEventListener(
+      'mousedown',
+      event => {
+
+        if(
+          event.target === modal
+        ){
+
+          closeModal(
+            modal.id
+          );
+
+        }
+
+      }
+    );
+
+  });
+
 
 document
   .addEventListener(
@@ -5635,15 +7295,14 @@ document
           .querySelectorAll(
             '.modal-overlay.open'
           )
-          .forEach(modal =>
+          .forEach(modal => {
 
-            modal
-              .classList
+            modal.classList
               .remove(
                 'open'
-              )
+              );
 
-          );
+          });
 
       }
 
@@ -5655,14 +7314,153 @@ document
    START
    ========================================================= */
 
-initHeader();
+async function start(){
 
-renderAll();
+  document
+    .getElementById(
+      'todayLabel'
+    )
+    .textContent =
+      new Date()
+        .toLocaleDateString(
+          undefined,
+          {
+            weekday:'long',
+            month:'long',
+            day:'numeric'
+          }
+        );
 
 
-})();
+  if(!sb){
+
+    document
+      .getElementById(
+        'loadingScreen'
+      )
+      .classList
+      .add(
+        'hidden'
+      );
+
+
+    document
+      .getElementById(
+        'authScreen'
+      )
+      .classList
+      .remove(
+        'hidden'
+      );
+
+
+    setAuthMessage(
+      'Supabase has not been configured yet. Add your project URL and key in index.html.',
+      true
+    );
+
+
+    return;
+
+  }
+
+
+  const {
+    data:{
+      session
+    }
+  } =
+    await sb.auth
+      .getSession();
+
+
+  document
+    .getElementById(
+      'loadingScreen'
+    )
+    .classList
+    .add(
+      'hidden'
+    );
+
+
+  if(
+    session &&
+    session.user
+  ){
+
+    await enterApp(
+      session.user
+    );
+
+  }
+
+  else{
+
+    document
+      .getElementById(
+        'authScreen'
+      )
+      .classList
+      .remove(
+        'hidden'
+      );
+
+  }
+
+
+  sb.auth
+    .onAuthStateChange(
+      async (
+        event,
+        session
+      ) => {
+
+        if(
+          event === 'SIGNED_IN' &&
+          session?.user &&
+          currentUser?.id !==
+          session.user.id
+        ){
+
+          await enterApp(
+            session.user
+          );
+
+        }
+
+        if(
+          event === 'SIGNED_OUT'
+        ){
+
+          currentUser =
+            null;
+
+        }
+
+      }
+    );
+
+}
+
+
+start();
 
 </script>
+
+
+<!-- =======================================================
+     GOOGLE MAPS
+
+     Replace YOUR_GOOGLE_MAPS_API_KEY.
+     Enable Maps JavaScript API + Places API in Google Cloud.
+     ======================================================= -->
+
+<script
+  async
+  src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&loading=async&libraries=places&callback=initGoogleMaps&v=weekly">
+</script>
+
 
 </body>
 </html>
