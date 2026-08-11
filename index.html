@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="theme-color" content="#1F3D2B" />
 
-<title>Homeroom — My Schedule</title>
+<title>Homeroom</title>
 
 <link rel="icon" href="data:," />
 
@@ -17,22 +17,17 @@
   rel="stylesheet"
 />
 
-<!-- SUPABASE -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
-/* =========================================================
-   DESIGN TOKENS
-   ========================================================= */
 
 :root{
   --ink:#1C1B19;
   --ink-soft:#6B675D;
 
   --paper:#F5F3EE;
-  --card:#FFFFFF;
   --paper-deep:#EDEAE1;
+  --card:#FFFFFF;
 
   --line:#DBD5C6;
 
@@ -45,7 +40,7 @@
   --danger:#A83232;
   --danger-pale:#F3E0DE;
 
-  --radius-sm:8px;
+  --radius-sm:9px;
   --radius-md:14px;
   --radius-lg:22px;
 
@@ -61,11 +56,6 @@
   --font-mono:'Space Mono',monospace;
 }
 
-
-/* =========================================================
-   RESET
-   ========================================================= */
-
 *,
 *::before,
 *::after{
@@ -78,13 +68,10 @@ html{
 
 body{
   margin:0;
-
   background:var(--paper);
   color:var(--ink);
-
   font-family:var(--font-body);
   line-height:1.45;
-
   -webkit-font-smoothing:antialiased;
 }
 
@@ -106,13 +93,13 @@ button{
   cursor:pointer;
 }
 
+.hidden{
+  display:none !important;
+}
+
 :focus-visible{
   outline:2px solid var(--green);
   outline-offset:2px;
-}
-
-.hidden{
-  display:none !important;
 }
 
 .wrap{
@@ -130,7 +117,7 @@ button{
 .loading-screen{
   position:fixed;
   inset:0;
-  z-index:500;
+  z-index:9999;
 
   display:grid;
   place-items:center;
@@ -138,18 +125,17 @@ button{
   background:var(--paper);
 }
 
-.loading-inner{
-  text-align:center;
-}
-
 .loading-logo{
   font-family:var(--font-display);
-  font-size:34px;
+  font-size:38px;
   font-weight:600;
+  text-align:center;
 }
 
 .loading-copy{
   margin-top:8px;
+  text-align:center;
+
   color:var(--ink-soft);
 
   font-family:var(--font-mono);
@@ -167,9 +153,7 @@ button{
   min-height:100vh;
 
   display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(420px,540px);
-
-  background:var(--paper);
+  grid-template-columns:minmax(0,1.15fr) minmax(430px,.85fr);
 }
 
 .auth-hero{
@@ -179,7 +163,7 @@ button{
   flex-direction:column;
   justify-content:space-between;
 
-  padding:54px;
+  padding:54px 64px;
 
   background:var(--green);
   color:#fff;
@@ -187,34 +171,31 @@ button{
 
 .auth-brand{
   font-family:var(--font-display);
-  font-size:31px;
+  font-size:38px;
   font-weight:600;
 }
 
-.auth-hero-copy{
-  max-width:610px;
-}
+.auth-hero-main h1{
+  max-width:700px;
 
-.auth-hero-copy h1{
-  font-size:clamp(42px,6vw,76px);
-  line-height:1;
+  font-size:clamp(56px,6vw,88px);
+  line-height:.98;
+  letter-spacing:-.04em;
   font-weight:500;
-
-  letter-spacing:-.035em;
 }
 
-.auth-hero-copy p{
-  max-width:540px;
+.auth-hero-main p{
+  max-width:610px;
 
-  margin:24px 0 0;
+  margin:28px 0 0;
 
-  color:rgba(255,255,255,.72);
+  color:rgba(255,255,255,.7);
 
-  font-size:17px;
+  font-size:19px;
 }
 
-.auth-footer{
-  color:rgba(255,255,255,.5);
+.auth-hero-foot{
+  color:rgba(255,255,255,.42);
 
   font-family:var(--font-mono);
   font-size:10px;
@@ -224,32 +205,34 @@ button{
 }
 
 .auth-panel{
+  min-height:100vh;
+
   display:flex;
   align-items:center;
   justify-content:center;
 
-  padding:40px;
+  padding:44px;
 }
 
 .auth-box{
   width:100%;
-  max-width:390px;
+  max-width:460px;
 }
 
 .auth-box h2{
-  font-size:32px;
+  font-size:38px;
 }
 
-.auth-sub{
+.auth-subtitle{
   margin:8px 0 28px;
   color:var(--ink-soft);
+  font-size:17px;
 }
 
-.auth-switch{
+.auth-tabs{
   display:flex;
 
-  margin-bottom:24px;
-
+  margin-bottom:28px;
   padding:4px;
 
   background:var(--paper-deep);
@@ -257,23 +240,21 @@ button{
   border-radius:999px;
 }
 
-.auth-switch button{
+.auth-tab{
   flex:1;
 
   border:0;
   border-radius:999px;
 
-  padding:9px;
+  padding:11px;
 
   background:transparent;
-
   color:var(--ink-soft);
 
-  font-size:13px;
   font-weight:700;
 }
 
-.auth-switch button.active{
+.auth-tab.active{
   background:#fff;
   color:var(--green);
 
@@ -282,8 +263,7 @@ button{
 
 .auth-message{
   min-height:20px;
-
-  margin:10px 0;
+  margin:-2px 0 12px;
 
   color:var(--ink-soft);
 
@@ -297,17 +277,14 @@ button{
 .auth-submit{
   width:100%;
   justify-content:center;
-
-  margin-top:4px;
 }
 
-.auth-bottom{
-  margin-top:18px;
-
-  text-align:center;
+.auth-foot{
+  margin-top:22px;
 
   color:var(--ink-soft);
 
+  text-align:center;
   font-size:12px;
 }
 
@@ -319,27 +296,27 @@ button{
 .app-header{
   position:sticky;
   top:0;
-  z-index:40;
+  z-index:50;
 
   background:var(--green);
-  color:#F5F3EE;
+  color:#fff;
 
-  border-bottom:1px solid rgba(0,0,0,.15);
+  border-bottom:1px solid rgba(0,0,0,.12);
 }
 
 .app-header .wrap{
   display:grid;
   grid-template-columns:1fr auto 1fr;
 
-  align-items:center;
-
   gap:16px;
+  align-items:center;
 
   padding-top:14px;
   padding-bottom:14px;
 }
 
 .brand-title{
+  font-family:var(--font-display);
   font-size:26px;
   font-weight:600;
 }
@@ -347,13 +324,13 @@ button{
 .brand-sub{
   margin-top:2px;
 
-  opacity:.75;
+  color:rgba(255,255,255,.7);
 
   font-family:var(--font-mono);
-  font-size:11px;
+  font-size:10px;
 
   text-transform:uppercase;
-  letter-spacing:.08em;
+  letter-spacing:.07em;
 }
 
 .top-tabs{
@@ -362,21 +339,19 @@ button{
 
   padding:4px;
 
-  background:rgba(255,255,255,.10);
+  background:rgba(255,255,255,.1);
 
   border-radius:999px;
 }
 
 .top-tab{
-  border:0;
-
-  padding:9px 17px;
-
-  border-radius:999px;
+  padding:9px 18px;
 
   background:transparent;
-
   color:rgba(255,255,255,.72);
+
+  border:0;
+  border-radius:999px;
 
   font-size:13px;
   font-weight:700;
@@ -391,53 +366,46 @@ button{
   display:flex;
   justify-content:flex-end;
   align-items:center;
-
   gap:8px;
 }
-
-
-/* =========================================================
-   ACCOUNT BUTTON
-   ========================================================= */
 
 .account-button{
   display:flex;
   align-items:center;
-
   gap:8px;
 
-  border:1px solid rgba(255,255,255,.28);
-  border-radius:999px;
-
-  padding:5px 11px 5px 5px;
+  padding:4px 11px 4px 4px;
 
   background:rgba(255,255,255,.08);
-
   color:#fff;
+
+  border:1px solid rgba(255,255,255,.3);
+  border-radius:999px;
 }
 
 .avatar{
-  width:30px;
-  height:30px;
+  width:31px;
+  height:31px;
 
   display:grid;
   place-items:center;
 
-  border-radius:50%;
-
   background:var(--gold);
   color:var(--ink);
+
+  border-radius:50%;
 
   font-family:var(--font-display);
   font-weight:700;
 }
 
 .account-name{
-  max-width:110px;
+  max-width:120px;
 
   overflow:hidden;
-  white-space:nowrap;
+
   text-overflow:ellipsis;
+  white-space:nowrap;
 
   font-size:12px;
   font-weight:700;
@@ -451,32 +419,20 @@ button{
 .btn{
   display:inline-flex;
   align-items:center;
-
   gap:8px;
+
+  padding:11px 18px;
 
   border:0;
   border-radius:999px;
 
-  padding:11px 18px;
-
-  font-weight:700;
   font-size:14px;
-
-  transition:
-    transform .15s ease,
-    box-shadow .15s ease,
-    background .15s ease;
-}
-
-.btn:hover{
-  transform:translateY(-1px);
+  font-weight:700;
 }
 
 .btn-primary{
   background:var(--gold);
   color:var(--ink);
-
-  box-shadow:0 4px 12px rgba(0,0,0,.15);
 }
 
 .btn-green{
@@ -503,11 +459,6 @@ button{
   border:1px solid rgba(255,255,255,.35);
 }
 
-.icon{
-  width:16px;
-  height:16px;
-}
-
 
 /* =========================================================
    MAIN
@@ -525,7 +476,6 @@ main{
   display:flex;
   justify-content:space-between;
   align-items:baseline;
-
   gap:12px;
 
   margin-bottom:14px;
@@ -542,7 +492,7 @@ main{
   color:var(--ink-soft);
 
   font-family:var(--font-mono);
-  font-size:11px;
+  font-size:10px;
 
   text-transform:uppercase;
   letter-spacing:.06em;
@@ -567,31 +517,25 @@ main{
 .deadline-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
-
   gap:12px;
 }
 
 .deadline-card{
-  min-height:132px;
+  min-height:130px;
 
   display:flex;
   flex-direction:column;
-
   gap:8px;
 
   padding:14px;
-
-  text-align:left;
 
   background:var(--paper);
 
   border:1px solid var(--line);
   border-top:4px solid var(--accent,#8A8578);
   border-radius:var(--radius-md);
-}
 
-.deadline-card:hover{
-  box-shadow:0 8px 20px rgba(28,27,25,.08);
+  text-align:left;
 }
 
 .deadline-class{
@@ -627,7 +571,7 @@ main{
   border-radius:999px;
 
   font-family:var(--font-mono);
-  font-size:10px;
+  font-size:9px;
   font-weight:700;
 }
 
@@ -660,7 +604,6 @@ main{
 
 .class-card{
   min-height:96px;
-  width:100%;
 
   display:flex;
   flex-direction:column;
@@ -685,8 +628,6 @@ main{
 }
 
 .class-name{
-  color:var(--ink);
-
   font-family:var(--font-display);
   font-size:17px;
   font-weight:600;
@@ -735,11 +676,11 @@ main{
 .tab-btn{
   padding:8px 15px;
 
-  border:0;
-  border-radius:999px;
-
   background:var(--paper-deep);
   color:var(--ink-soft);
+
+  border:0;
+  border-radius:999px;
 
   font-size:13px;
   font-weight:600;
@@ -759,7 +700,6 @@ main{
 .class-modal-list{
   display:flex;
   flex-direction:column;
-
   gap:9px;
 }
 
@@ -771,9 +711,8 @@ main{
   display:grid;
   grid-template-columns:auto 1fr auto;
 
-  align-items:center;
-
   gap:12px;
+  align-items:center;
 
   padding:12px 14px;
 
@@ -802,7 +741,7 @@ main{
   color:var(--ink-soft);
 
   font-family:var(--font-mono);
-  font-size:10.5px;
+  font-size:10px;
 
   text-transform:uppercase;
 }
@@ -811,7 +750,6 @@ main{
   display:inline-block;
 
   margin-left:4px;
-
   padding:2px 6px;
 
   background:var(--paper-deep);
@@ -820,17 +758,6 @@ main{
 
   font-size:9px;
   font-weight:700;
-}
-
-.item-dot{
-  width:10px;
-  height:10px;
-
-  margin:0 5px;
-
-  background:var(--accent);
-
-  border-radius:50%;
 }
 
 .check{
@@ -866,12 +793,22 @@ main{
 
 .task-row.done .check{
   background:var(--green);
-
   border-color:var(--green);
 }
 
 .task-row.done .check svg{
   opacity:1;
+}
+
+.item-dot{
+  width:10px;
+  height:10px;
+
+  margin:0 5px;
+
+  background:var(--accent);
+
+  border-radius:50%;
 }
 
 .icon-btn{
@@ -881,11 +818,13 @@ main{
   display:grid;
   place-items:center;
 
-  border:0;
-  border-radius:50%;
+  padding:0;
 
   background:transparent;
   color:var(--ink-soft);
+
+  border:0;
+  border-radius:50%;
 }
 
 .icon-btn:hover{
@@ -901,11 +840,10 @@ main{
   padding:38px 20px;
 
   background:var(--card);
+  color:var(--ink-soft);
 
   border:1.5px dashed var(--line);
   border-radius:var(--radius-md);
-
-  color:var(--ink-soft);
 
   text-align:center;
 }
@@ -927,9 +865,9 @@ main{
    ========================================================= */
 
 .calendar-shell{
-  margin-top:20px;
-
   overflow:hidden;
+
+  margin-top:20px;
 
   background:var(--card);
 
@@ -984,9 +922,9 @@ main{
 .week-label{
   padding:8px;
 
-  text-align:center;
-
   color:var(--ink-soft);
+
+  text-align:center;
 
   font-family:var(--font-mono);
   font-size:9px;
@@ -1038,9 +976,9 @@ main{
 
   margin-top:4px;
 
-  padding:5px 6px;
-
   overflow:hidden;
+
+  padding:5px 6px;
 
   background:color-mix(
     in srgb,
@@ -1056,8 +994,8 @@ main{
 
   font-size:10px;
 
-  white-space:nowrap;
   text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
 .calendar-legend{
@@ -1094,7 +1032,6 @@ main{
 .modal-overlay{
   position:fixed;
   inset:0;
-
   z-index:100;
 
   display:none;
@@ -1145,16 +1082,17 @@ main{
   display:grid;
   place-items:center;
 
+  padding:0;
+
   background:var(--paper-deep);
+  color:var(--ink-soft);
 
   border:0;
   border-radius:50%;
-
-  color:var(--ink-soft);
 }
 
 .modal-title{
-  padding-right:35px;
+  padding-right:40px;
 
   font-size:22px;
 }
@@ -1172,7 +1110,7 @@ main{
 
 
 /* =========================================================
-   FIELDS
+   FORM
    ========================================================= */
 
 .field{
@@ -1203,7 +1141,7 @@ main{
 .field textarea{
   width:100%;
 
-  padding:10px 12px;
+  padding:11px 12px;
 
   background:var(--paper);
   color:var(--ink);
@@ -1283,7 +1221,7 @@ main{
 }
 
 .weekday-picker button{
-  height:38px;
+  height:40px;
 
   background:var(--paper);
   color:var(--ink-soft);
@@ -1304,10 +1242,10 @@ main{
 
 
 /* =========================================================
-   GOOGLE PLACE PICKER
+   LOCATION
    ========================================================= */
 
-.place-area{
+.location-box{
   padding:12px;
 
   background:var(--paper);
@@ -1316,12 +1254,14 @@ main{
   border-radius:var(--radius-sm);
 }
 
-#placeAutocompleteHolder{
-  width:100%;
+.location-status{
+  color:var(--ink-soft);
+
+  font-size:11px;
 }
 
-#placeAutocompleteHolder gmp-place-autocomplete{
-  width:100%;
+.manual-location{
+  margin-top:8px;
 }
 
 .selected-place{
@@ -1330,10 +1270,9 @@ main{
 
 .place-card{
   display:flex;
-  align-items:flex-start;
   justify-content:space-between;
-
-  gap:12px;
+  align-items:flex-start;
+  gap:10px;
 
   padding:12px;
 
@@ -1363,16 +1302,20 @@ main{
 }
 
 .mini-btn{
-  border:0;
-  border-radius:999px;
-
   padding:6px 9px;
 
   background:var(--paper-deep);
   color:var(--ink);
 
+  border:0;
+  border-radius:999px;
+
   font-size:10px;
   font-weight:700;
+}
+
+#placeAutocompleteHost gmp-place-autocomplete{
+  width:100%;
 }
 
 
@@ -1424,15 +1367,14 @@ main{
   width:100%;
   height:38px;
 
-  border:0;
-
   background:transparent;
+
+  border:0;
 }
 
 .editor-list{
   display:flex;
   flex-direction:column;
-
   gap:8px;
 }
 
@@ -1448,9 +1390,9 @@ main{
   width:38px;
   height:38px;
 
-  border:0;
-
   background:transparent;
+
+  border:0;
 }
 
 .editor-row input[type=text]{
@@ -1468,7 +1410,6 @@ main{
   width:100%;
 
   margin-top:8px;
-
   padding:9px;
 
   background:transparent;
@@ -1482,24 +1423,17 @@ main{
 
 
 /* =========================================================
-   PROFILE
+   SYNC
    ========================================================= */
 
-.profile-email{
-  margin:2px 0 18px;
-
-  color:var(--ink-soft);
-
-  font-size:12px;
-}
-
-.sync-status{
+.sync-line{
   display:flex;
   align-items:center;
+  justify-content:center;
 
-  gap:7px;
+  gap:6px;
 
-  margin-top:12px;
+  margin-top:5px;
 
   color:var(--ink-soft);
 
@@ -1511,9 +1445,9 @@ main{
   width:7px;
   height:7px;
 
-  border-radius:50%;
-
   background:#569B65;
+
+  border-radius:50%;
 }
 
 
@@ -1524,9 +1458,9 @@ main{
 footer{
   padding:30px 20px 40px;
 
-  text-align:center;
-
   color:var(--ink-soft);
+
+  text-align:center;
 
   font-family:var(--font-mono);
   font-size:10px;
@@ -1552,20 +1486,23 @@ footer{
   }
 
   .auth-hero{
-    min-height:300px;
+    min-height:320px;
+
     padding:32px 24px;
   }
 
-  .auth-hero-copy h1{
-    font-size:46px;
-  }
-
-  .auth-footer{
-    display:none;
+  .auth-hero-main h1{
+    font-size:48px;
   }
 
   .auth-panel{
+    min-height:auto;
+
     padding:42px 22px;
+  }
+
+  .auth-hero-foot{
+    display:none;
   }
 
 }
@@ -1596,16 +1533,13 @@ footer{
     grid-row:1;
   }
 
-  .account-name{
+  .account-name,
+  .btn-label{
     display:none;
   }
 
   .account-button{
-    padding-right:5px;
-  }
-
-  .btn-label{
-    display:none;
+    padding-right:4px;
   }
 
   .deadline-grid{
@@ -1614,7 +1548,6 @@ footer{
 
   .field-row{
     flex-direction:column;
-
     gap:0;
   }
 
@@ -1627,7 +1560,7 @@ footer{
   }
 
   .day-cell{
-    min-height:92px;
+    min-height:90px;
 
     padding:4px;
   }
@@ -1656,18 +1589,20 @@ footer{
 </style>
 </head>
 
+
 <body>
 
 
 <!-- =======================================================
-     LOADING
+     LOADING SCREEN
      ======================================================= -->
 
 <div
   class="loading-screen"
   id="loadingScreen"
 >
-  <div class="loading-inner">
+
+  <div>
 
     <div class="loading-logo">
       Homeroom
@@ -1678,11 +1613,12 @@ footer{
     </div>
 
   </div>
+
 </div>
 
 
 <!-- =======================================================
-     AUTH SCREEN
+     AUTH
      ======================================================= -->
 
 <section
@@ -1696,7 +1632,7 @@ footer{
       Homeroom
     </div>
 
-    <div class="auth-hero-copy">
+    <div class="auth-hero-main">
 
       <h1>
         School,
@@ -1710,7 +1646,7 @@ footer{
 
     </div>
 
-    <div class="auth-footer">
+    <div class="auth-hero-foot">
       Your planner follows you between devices
     </div>
 
@@ -1721,22 +1657,24 @@ footer{
 
     <div class="auth-box">
 
+
       <h2 id="authTitle">
         Welcome back
       </h2>
 
-      <p
-        class="auth-sub"
+
+      <div
+        class="auth-subtitle"
         id="authSubtitle"
       >
         Sign in to open your planner.
-      </p>
+      </div>
 
 
-      <div class="auth-switch">
+      <div class="auth-tabs">
 
         <button
-          class="active"
+          class="auth-tab active"
           id="signInTab"
           type="button"
         >
@@ -1744,6 +1682,7 @@ footer{
         </button>
 
         <button
+          class="auth-tab"
           id="signUpTab"
           type="button"
         >
@@ -1755,9 +1694,10 @@ footer{
 
       <form id="authForm">
 
+
         <div
           class="field hidden"
-          id="authNameField"
+          id="nameField"
         >
 
           <label for="authName">
@@ -1800,8 +1740,8 @@ footer{
           <input
             id="authPassword"
             type="password"
-            minlength="6"
             autocomplete="current-password"
+            minlength="6"
             required
             placeholder="••••••••"
           />
@@ -1823,12 +1763,14 @@ footer{
           Sign in
         </button>
 
+
       </form>
 
 
-      <div class="auth-bottom">
+      <div class="auth-foot">
         Your planner data is private to your account.
       </div>
+
 
     </div>
 
@@ -1914,8 +1856,7 @@ footer{
 
       <button
         class="btn btn-outline-light"
-        id="openSettingsBtn"
-        aria-label="Settings"
+        id="settingsButton"
       >
         ⚙
       </button>
@@ -1923,7 +1864,7 @@ footer{
 
       <button
         class="btn btn-primary"
-        id="openAddBtn"
+        id="addButton"
       >
         +
         <span class="btn-label">
@@ -1934,23 +1875,19 @@ footer{
 
     </div>
 
+
   </div>
 
 </header>
 
 
-
 <main class="wrap">
 
 
-  <!-- =====================================================
-       PLANNER
-       ===================================================== -->
+  <!-- PLANNER -->
 
   <div id="plannerView">
 
-
-    <!-- DEADLINES -->
 
     <section class="section">
 
@@ -1971,15 +1908,13 @@ footer{
 
         <div
           class="deadline-grid"
-          id="deadlinesRow"
+          id="deadlineGrid"
         ></div>
 
       </div>
 
     </section>
 
-
-    <!-- CLASSES -->
 
     <section class="section">
 
@@ -2003,8 +1938,6 @@ footer{
 
     </section>
 
-
-    <!-- EVERYTHING -->
 
     <section class="section">
 
@@ -2067,13 +2000,11 @@ footer{
 
     </section>
 
+
   </div>
 
 
-
-  <!-- =====================================================
-       CALENDAR
-       ===================================================== -->
+  <!-- CALENDAR -->
 
   <div
     class="hidden"
@@ -2110,7 +2041,7 @@ footer{
 
             <button
               class="cal-btn"
-              id="todayBtn"
+              id="todayButton"
             >
               Today
             </button>
@@ -2171,9 +2102,9 @@ footer{
 
 <footer>
 
-  <span id="footerAccount"></span>
+  <span id="footerEmail"></span>
 
-  <div class="sync-status" style="justify-content:center">
+  <div class="sync-line">
 
     <span class="sync-dot"></span>
 
@@ -2189,9 +2120,8 @@ footer{
 </div>
 
 
-
 <!-- =======================================================
-     ADD / EDIT ITEM
+     ITEM MODAL
      ======================================================= -->
 
 <div
@@ -2221,10 +2151,8 @@ footer{
     <div class="modal-accent-bar"></div>
 
 
-    <form id="taskForm">
+    <form id="itemForm">
 
-
-      <!-- TYPE -->
 
       <div class="field">
 
@@ -2272,48 +2200,42 @@ footer{
       </div>
 
 
-      <!-- CLASS -->
-
       <div
         class="field"
         id="classField"
       >
 
-        <label for="f-class">
+        <label>
           Class
         </label>
 
-        <select id="f-class"></select>
+        <select id="itemClass"></select>
 
       </div>
 
-
-      <!-- EXTRACURRICULAR -->
 
       <div
         class="field hidden"
         id="extraField"
       >
 
-        <label for="f-extra">
+        <label>
           Extracurricular
         </label>
 
-        <select id="f-extra"></select>
+        <select id="itemExtra"></select>
 
       </div>
 
 
-      <!-- TITLE -->
-
       <div class="field">
 
-        <label for="f-title">
+        <label>
           Title
         </label>
 
         <input
-          id="f-title"
+          id="itemTitle"
           type="text"
           required
           placeholder="What do you need to do?"
@@ -2322,19 +2244,17 @@ footer{
       </div>
 
 
-      <!-- DATE / TIME -->
-
       <div class="field-row">
 
 
         <div class="field">
 
-          <label for="f-date">
+          <label>
             Date
           </label>
 
           <input
-            id="f-date"
+            id="itemDate"
             type="date"
             required
           />
@@ -2344,12 +2264,12 @@ footer{
 
         <div class="field">
 
-          <label for="f-time">
+          <label>
             Time
           </label>
 
           <input
-            id="f-time"
+            id="itemTime"
             type="time"
           />
 
@@ -2359,7 +2279,7 @@ footer{
       </div>
 
 
-      <!-- ACTIVITY -->
+      <!-- ACTIVITY FIELDS -->
 
       <div
         class="hidden"
@@ -2367,7 +2287,7 @@ footer{
       >
 
 
-        <!-- REAL LOCATION -->
+        <!-- LOCATION -->
 
         <div class="field">
 
@@ -2376,27 +2296,32 @@ footer{
           </label>
 
 
-          <div class="place-area">
+          <div class="location-box">
 
-            <div id="placeAutocompleteHolder">
+            <div id="placeAutocompleteHost"></div>
 
-              <div
-                style="
-                  color:var(--ink-soft);
-                  font-size:12px;
-                "
-                id="placeLoading"
-              >
-                Loading location search…
-              </div>
 
+            <div
+              class="location-status"
+              id="locationStatus"
+            >
+              Loading location search…
             </div>
+
+
+            <input
+              class="manual-location"
+              id="manualLocation"
+              type="text"
+              placeholder="Or type a location manually"
+            />
 
 
             <div
               class="selected-place hidden"
               id="selectedPlace"
             ></div>
+
 
           </div>
 
@@ -2410,11 +2335,11 @@ footer{
 
           <div class="field">
 
-            <label for="f-repeat">
+            <label>
               Repeats
             </label>
 
-            <select id="f-repeat">
+            <select id="itemRepeat">
 
               <option value="none">
                 Does not repeat
@@ -2442,12 +2367,12 @@ footer{
             id="repeatEndField"
           >
 
-            <label for="f-repeat-end">
+            <label>
               Repeat until
             </label>
 
             <input
-              id="f-repeat-end"
+              id="repeatEnd"
               type="date"
             />
 
@@ -2456,8 +2381,6 @@ footer{
 
         </div>
 
-
-        <!-- CUSTOM DAYS -->
 
         <div
           class="field hidden"
@@ -2510,30 +2433,26 @@ footer{
       </div>
 
 
-      <!-- NOTES -->
-
       <div class="field">
 
-        <label for="f-notes">
+        <label>
           Notes
         </label>
 
         <textarea
-          id="f-notes"
+          id="itemNotes"
           placeholder="Add notes"
         ></textarea>
 
       </div>
 
 
-      <!-- ACTIONS -->
-
       <div class="form-actions">
 
 
         <button
           class="btn btn-danger hidden"
-          id="deleteItemBtn"
+          id="deleteItemButton"
           type="button"
         >
           Delete
@@ -2568,7 +2487,6 @@ footer{
   </div>
 
 </div>
-
 
 
 <!-- =======================================================
@@ -2613,7 +2531,7 @@ footer{
 
     <button
       class="btn btn-primary"
-      id="classModalAddBtn"
+      id="classAddButton"
       style="
         width:100%;
         justify-content:center;
@@ -2627,7 +2545,6 @@ footer{
   </div>
 
 </div>
-
 
 
 <!-- =======================================================
@@ -2658,8 +2575,6 @@ footer{
     <div class="modal-accent-bar"></div>
 
 
-    <!-- COLORS -->
-
     <div class="settings-section">
 
       <div class="settings-title">
@@ -2667,7 +2582,7 @@ footer{
       </div>
 
       <div class="settings-copy">
-        Personalize Homeroom.
+        Personalize your planner.
       </div>
 
 
@@ -2681,8 +2596,8 @@ footer{
           </label>
 
           <input
-            type="color"
             id="themeGreen"
+            type="color"
           />
 
         </div>
@@ -2695,8 +2610,8 @@ footer{
           </label>
 
           <input
-            type="color"
             id="themeGold"
+            type="color"
           />
 
         </div>
@@ -2709,8 +2624,8 @@ footer{
           </label>
 
           <input
-            type="color"
             id="themePaper"
+            type="color"
           />
 
         </div>
@@ -2721,8 +2636,6 @@ footer{
     </div>
 
 
-    <!-- CLASSES -->
-
     <div class="settings-section">
 
       <div class="settings-title">
@@ -2730,7 +2643,7 @@ footer{
       </div>
 
       <div class="settings-copy">
-        Rename, recolor, add, or remove classes.
+        Rename, recolor, add or remove classes.
       </div>
 
 
@@ -2742,16 +2655,13 @@ footer{
 
       <button
         class="add-inline"
-        id="addClassBtn"
+        id="addClassButton"
       >
         + Add class
       </button>
 
-
     </div>
 
-
-    <!-- EXTRAS -->
 
     <div class="settings-section">
 
@@ -2760,7 +2670,7 @@ footer{
       </div>
 
       <div class="settings-copy">
-        Add activities such as clubs, sports, jobs or volunteering.
+        Add clubs, sports, jobs, volunteering or anything else.
       </div>
 
 
@@ -2772,11 +2682,10 @@ footer{
 
       <button
         class="add-inline"
-        id="addExtraBtn"
+        id="addExtraButton"
       >
         + Add extracurricular
       </button>
-
 
     </div>
 
@@ -2788,7 +2697,7 @@ footer{
 
       <button
         class="btn btn-primary"
-        id="saveSettingsBtn"
+        id="saveSettingsButton"
       >
         Done
       </button>
@@ -2799,7 +2708,6 @@ footer{
   </div>
 
 </div>
-
 
 
 <!-- =======================================================
@@ -2823,7 +2731,7 @@ footer{
 
 
     <h3 class="modal-title">
-      Your profile
+      Your Profile
     </h3>
 
 
@@ -2831,20 +2739,24 @@ footer{
 
 
     <div
-      class="profile-email"
+      style="
+        color:var(--ink-soft);
+        font-size:12px;
+        margin-bottom:16px;
+      "
       id="profileEmail"
     ></div>
 
 
     <div class="field">
 
-      <label for="profileName">
+      <label>
         Display name
       </label>
 
       <input
-        type="text"
         id="profileName"
+        type="text"
       />
 
     </div>
@@ -2852,9 +2764,10 @@ footer{
 
     <div class="form-actions">
 
+
       <button
         class="btn btn-danger"
-        id="signOutBtn"
+        id="signOutButton"
       >
         Sign out
       </button>
@@ -2862,10 +2775,11 @@ footer{
 
       <button
         class="btn btn-primary"
-        id="saveProfileBtn"
+        id="saveProfileButton"
       >
         Save profile
       </button>
+
 
     </div>
 
@@ -2875,9 +2789,8 @@ footer{
 </div>
 
 
-
 <!-- =======================================================
-     CALENDAR DETAILS
+     EVENT DETAIL
      ======================================================= -->
 
 <div
@@ -2915,56 +2828,67 @@ footer{
 </div>
 
 
-
 <script>
 
 /* =========================================================
-   IMPORTANT CONFIGURATION
+   CONFIGURATION
+
+   YOUR SUPABASE URL IS ALREADY CORRECT BELOW.
+
+   ONLY REPLACE THE PUBLISHABLE KEY.
+
+   GOOGLE MAPS IS OPTIONAL.
+   THE APP STILL WORKS WITHOUT IT.
    ========================================================= */
-
-/*
-  PUT YOUR SUPABASE VALUES HERE.
-
-  These are safe browser-side values when Row Level Security
-  is configured correctly.
-
-  DO NOT put your Supabase service_role secret here.
-*/
 
 const SUPABASE_URL =
   'https://vpevjppqdxvyiodhcusj.supabase.co';
 
-const SUPABASE_ANON_KEY =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwZXZqcHBxZHh2eWlvZGhjdXNqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY0MDAwMzEsImV4cCI6MjEwMTk3NjAzMX0.QtQN7f-cpNqFVoSlq7R0-0RVEmGo2fqSTp1MMkpb9sc;
+
+const SUPABASE_KEY =
+  'PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE';
+
+
+const GOOGLE_MAPS_API_KEY =
+  'PASTE_YOUR_GOOGLE_MAPS_API_KEY_HERE';
 
 
 /* =========================================================
-   SUPABASE
+   SUPABASE CLIENT
    ========================================================= */
 
 let sb = null;
 
+
 if(
-  SUPABASE_URL !== 'YOUR_SUPABASE_PROJECT_URL' &&
-  SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY'
+  !SUPABASE_KEY.startsWith(
+    'PASTE_'
+  )
 ){
 
   sb =
     window.supabase.createClient(
       SUPABASE_URL,
-      SUPABASE_ANON_KEY
+      SUPABASE_KEY,
+      {
+        auth:{
+          persistSession:true,
+          autoRefreshToken:true,
+          detectSessionInUrl:true
+        }
+      }
     );
 
 }
 
 
 /* =========================================================
-   DEFAULT STATE
+   DEFAULT DATA
    ========================================================= */
 
 const DEFAULT_STATE = {
 
-  version:4,
+  version:5,
 
   profile:{
     name:''
@@ -3068,17 +2992,17 @@ let editingId =
 let classModalId =
   null;
 
-let cloudSaveTimer =
-  null;
-
-let selectedPlaceData =
-  null;
-
-let placeAutocompleteElement =
+let selectedPlace =
   null;
 
 let mapsReady =
   false;
+
+let placeElement =
+  null;
+
+let saveTimer =
+  null;
 
 let calendarCursor =
   new Date(
@@ -3122,13 +3046,13 @@ function pad(number){
 
 function todayStr(){
 
-  const date =
+  const d =
     new Date();
 
   return (
-    `${date.getFullYear()}-` +
-    `${pad(date.getMonth()+1)}-` +
-    `${pad(date.getDate())}`
+    `${d.getFullYear()}-` +
+    `${pad(d.getMonth()+1)}-` +
+    `${pad(d.getDate())}`
   );
 
 }
@@ -3145,38 +3069,38 @@ function dateStr(date){
 }
 
 
-function parseLocalDate(string){
+function parseDate(value){
 
-  const [year,month,day] =
-    string
+  const [y,m,d] =
+    value
       .split('-')
       .map(Number);
 
   return new Date(
-    year,
-    month-1,
-    day
+    y,
+    m-1,
+    d
   );
 
 }
 
 
-function daysBetween(first,second){
+function daysBetween(a,b){
 
   return Math.round(
     (
-      parseLocalDate(second) -
-      parseLocalDate(first)
+      parseDate(b) -
+      parseDate(a)
     )
-    / 86400000
+    /86400000
   );
 
 }
 
 
-function formatDateNice(string){
+function niceDate(value){
 
-  return parseLocalDate(string)
+  return parseDate(value)
     .toLocaleDateString(
       undefined,
       {
@@ -3189,21 +3113,23 @@ function formatDateNice(string){
 }
 
 
-function formatTimeNice(time){
+function niceTime(value){
 
-  if(!time){
+  if(!value){
     return '';
   }
 
-  const [hours,minutes] =
-    time
+
+  const [h,m] =
+    value
       .split(':')
       .map(Number);
 
+
   return (
-    `${((hours+11)%12)+1}:` +
-    `${pad(minutes)} ` +
-    `${hours>=12?'PM':'AM'}`
+    `${((h+11)%12)+1}:` +
+    `${pad(m)} ` +
+    `${h>=12?'PM':'AM'}`
   );
 
 }
@@ -3214,13 +3140,13 @@ function esc(value){
   return String(value ?? '')
     .replace(
       /[&<>"']/g,
-      character => ({
+      char => ({
         '&':'&amp;',
         '<':'&lt;',
         '>':'&gt;',
         '"':'&quot;',
         "'":'&#39;'
-      })[character]
+      })[char]
     );
 
 }
@@ -3263,17 +3189,22 @@ function colorFor(task){
   ){
 
     const extra =
-      extraById(task.extraId);
+      extraById(
+        task.extraId
+      );
 
-    if(extra){
-      return extra.color;
-    }
+
+    return extra
+      ? extra.color
+      : '#527A67';
 
   }
 
 
   const schoolClass =
-    classById(task.classId);
+    classById(
+      task.classId
+    );
 
 
   return schoolClass
@@ -3283,36 +3214,35 @@ function colorFor(task){
 }
 
 
-function sourceName(task){
+function sourceFor(task){
 
   if(
     task.type === 'activity'
   ){
 
-    const extra =
-      extraById(task.extraId);
-
-    return extra
-      ? extra.name
-      : 'Activity';
+    return (
+      extraById(
+        task.extraId
+      )?.name ||
+      'Activity'
+    );
 
   }
 
 
-  const schoolClass =
-    classById(task.classId);
-
-
-  return schoolClass
-    ? schoolClass.name
-    : 'General';
+  return (
+    classById(
+      task.classId
+    )?.name ||
+    'General'
+  );
 
 }
 
 
-function weekdayLabel(days){
+function weekdayText(days){
 
-  const labels = [
+  const names = [
     'Sun',
     'Mon',
     'Tue',
@@ -3325,385 +3255,122 @@ function weekdayLabel(days){
 
   return (days || [])
     .map(day =>
-      labels[day]
+      names[day]
     )
     .join(', ');
 
 }
 
 
-function repeatLabel(value){
+/* =========================================================
+   UI HELPERS
+   ========================================================= */
 
-  return ({
-    weekly:'Weekly',
-    monthly:'Monthly'
-  })[value] || '';
+function hideLoading(){
+
+  document
+    .getElementById(
+      'loadingScreen'
+    )
+    .classList
+    .add(
+      'hidden'
+    );
 
 }
 
 
-/* =========================================================
-   CLOUD
-   ========================================================= */
+function showAuth(){
+
+  document
+    .getElementById(
+      'app'
+    )
+    .classList
+    .add(
+      'hidden'
+    );
+
+
+  document
+    .getElementById(
+      'authScreen'
+    )
+    .classList
+    .remove(
+      'hidden'
+    );
+
+
+  hideLoading();
+
+}
+
+
+function showApp(){
+
+  document
+    .getElementById(
+      'authScreen'
+    )
+    .classList
+    .add(
+      'hidden'
+    );
+
+
+  document
+    .getElementById(
+      'app'
+    )
+    .classList
+    .remove(
+      'hidden'
+    );
+
+
+  hideLoading();
+
+}
+
+
+function openModal(id){
+
+  document
+    .getElementById(id)
+    .classList
+    .add('open');
+
+}
+
+
+function closeModal(id){
+
+  document
+    .getElementById(id)
+    .classList
+    .remove('open');
+
+}
+
 
 function setSyncStatus(text){
 
-  const element =
-    document.getElementById(
+  document
+    .getElementById(
       'syncStatus'
-    );
-
-  if(element){
-    element.textContent = text;
-  }
-
-}
-
-
-function queueCloudSave(){
-
-  if(
-    !currentUser ||
-    !sb
-  ){
-    return;
-  }
-
-
-  clearTimeout(
-    cloudSaveTimer
-  );
-
-
-  setSyncStatus(
-    'Saving…'
-  );
-
-
-  cloudSaveTimer =
-    setTimeout(
-      saveCloudState,
-      450
-    );
-
-}
-
-
-async function saveCloudState(){
-
-  if(
-    !currentUser ||
-    !sb
-  ){
-    return;
-  }
-
-
-  const {
-    error
-  } =
-    await sb
-      .from('homeroom_state')
-      .upsert({
-
-        user_id:
-          currentUser.id,
-
-        state:
-          state,
-
-        updated_at:
-          new Date()
-            .toISOString()
-
-      });
-
-
-  if(error){
-
-    console.error(error);
-
-    setSyncStatus(
-      'Sync error'
-    );
-
-    return;
-
-  }
-
-
-  setSyncStatus(
-    'Synced'
-  );
-
-}
-
-
-async function loadCloudState(){
-
-  if(
-    !currentUser ||
-    !sb
-  ){
-    return;
-  }
-
-
-  setSyncStatus(
-    'Loading…'
-  );
-
-
-  const {
-    data,
-    error
-  } =
-    await sb
-      .from('homeroom_state')
-      .select('state')
-      .eq(
-        'user_id',
-        currentUser.id
-      )
-      .maybeSingle();
-
-
-  if(error){
-
-    console.error(error);
-
-    state =
-      clone(DEFAULT_STATE);
-
-    return;
-
-  }
-
-
-  if(
-    data &&
-    data.state
-  ){
-
-    state = {
-
-      ...clone(DEFAULT_STATE),
-
-      ...data.state,
-
-      profile:{
-        ...DEFAULT_STATE.profile,
-        ...(data.state.profile || {})
-      },
-
-      theme:{
-        ...DEFAULT_STATE.theme,
-        ...(data.state.theme || {})
-      },
-
-      classes:
-        data.state.classes ||
-        clone(DEFAULT_STATE.classes),
-
-      extras:
-        data.state.extras ||
-        clone(DEFAULT_STATE.extras),
-
-      tasks:
-        data.state.tasks ||
-        []
-
-    };
-
-  }
-
-  else{
-
-    state =
-      migrateOldLocalState();
-
-
-    if(
-      !state.profile.name
-    ){
-
-      state.profile.name =
-        currentUser
-          .user_metadata
-          ?.name || '';
-
-    }
-
-
-    await saveCloudState();
-
-  }
-
-
-  setSyncStatus(
-    'Synced'
-  );
-
-}
-
-
-function migrateOldLocalState(){
-
-  const keys = [
-    'homeroom-state-v3',
-    'homeroom-state-v2'
-  ];
-
-
-  for(
-    const key of keys
-  ){
-
-    try{
-
-      const old =
-        JSON.parse(
-          localStorage.getItem(key)
-        );
-
-
-      if(old){
-
-        return {
-
-          ...clone(DEFAULT_STATE),
-
-          ...old,
-
-          version:4,
-
-          profile:{
-            ...DEFAULT_STATE.profile,
-            ...(old.profile || {})
-          }
-
-        };
-
-      }
-
-    }
-
-    catch(error){}
-
-  }
-
-
-  try{
-
-    const oldTasks =
-      JSON.parse(
-        localStorage.getItem(
-          'homeroom-tasks-v1'
-        ) || '[]'
-      );
-
-
-    if(
-      Array.isArray(oldTasks)
-    ){
-
-      const fresh =
-        clone(DEFAULT_STATE);
-
-
-      fresh.tasks =
-        oldTasks.map(task => ({
-
-          id:
-            task.id ||
-            uid('t'),
-
-          type:
-            task.type === 'homework'
-              ? 'assignment'
-              : (
-                  task.type ||
-                  'assignment'
-                ),
-
-          classId:
-            task.classId ||
-            null,
-
-          extraId:
-            null,
-
-          title:
-            task.title ||
-            'Untitled',
-
-          date:
-            task.date ||
-            todayStr(),
-
-          time:
-            task.time ||
-            '',
-
-          notes:
-            task.notes ||
-            '',
-
-          recurrence:
-            'none',
-
-          repeatDays:
-            [],
-
-          repeatEnd:
-            '',
-
-          locationName:
-            '',
-
-          locationAddress:
-            '',
-
-          placeId:
-            '',
-
-          latitude:
-            null,
-
-          longitude:
-            null,
-
-          done:
-            !!task.done,
-
-          createdAt:
-            task.createdAt ||
-            Date.now()
-
-        }));
-
-
-      return fresh;
-
-    }
-
-  }
-
-  catch(error){}
-
-
-  return clone(
-    DEFAULT_STATE
-  );
+    )
+    .textContent =
+      text;
 
 }
 
 
 /* =========================================================
-   AUTH
+   AUTH SCREEN
    ========================================================= */
 
-function switchAuthMode(mode){
+function setAuthMode(mode){
 
   authMode =
     mode;
@@ -3737,7 +3404,7 @@ function switchAuthMode(mode){
 
   document
     .getElementById(
-      'authNameField'
+      'nameField'
     )
     .classList
     .toggle(
@@ -3776,20 +3443,21 @@ function switchAuthMode(mode){
         : 'Sign in';
 
 
-  setAuthMessage('');
+  authMessage('');
 
 }
 
 
-function setAuthMessage(
+function authMessage(
   message,
   error=false
 ){
 
   const element =
-    document.getElementById(
-      'authMessage'
-    );
+    document
+      .getElementById(
+        'authMessage'
+      );
 
 
   element.textContent =
@@ -3805,12 +3473,16 @@ function setAuthMessage(
 }
 
 
-async function submitAuth(){
+/* =========================================================
+   AUTH REQUEST
+   ========================================================= */
+
+async function handleAuthSubmit(){
 
   if(!sb){
 
-    setAuthMessage(
-      'Add your Supabase URL and key to the HTML first.',
+    authMessage(
+      'Add your Supabase publishable key in index.html first.',
       true
     );
 
@@ -3836,110 +3508,486 @@ async function submitAuth(){
       .value;
 
 
-  setAuthMessage(
+  authMessage(
     'Working…'
   );
 
 
-  if(
-    authMode === 'signup'
-  ){
-
-    const name =
-      document
-        .getElementById(
-          'authName'
-        )
-        .value
-        .trim();
-
-
-    const {
-      data,
-      error
-    } =
-      await sb.auth.signUp({
-
-        email,
-
-        password,
-
-        options:{
-          data:{
-            name
-          }
-        }
-
-      });
-
-
-    if(error){
-
-      setAuthMessage(
-        error.message,
-        true
-      );
-
-      return;
-
-    }
+  try{
 
 
     if(
-      data.session
+      authMode === 'signup'
     ){
 
-      await enterApp(
+      const name =
+        document
+          .getElementById(
+            'authName'
+          )
+          .value
+          .trim();
+
+
+      const {
+        data,
+        error
+      } =
+        await sb.auth
+          .signUp({
+
+            email,
+
+            password,
+
+            options:{
+              data:{
+                name
+              },
+
+              emailRedirectTo:
+                'https://kirenm.github.io/School-Planner/'
+            }
+
+          });
+
+
+      if(error){
+        throw error;
+      }
+
+
+      if(
+        data.session &&
         data.user
-      );
+      ){
+
+        await enterApp(
+          data.user
+        );
+
+      }
+
+      else{
+
+        authMessage(
+          'Account created. Check your email, confirm it, then come back and sign in.'
+        );
+
+      }
 
     }
 
     else{
 
-      setAuthMessage(
-        'Account created. Check your email to confirm your address, then sign in.'
-      );
+      const {
+        data,
+        error
+      } =
+        await sb.auth
+          .signInWithPassword({
+
+            email,
+            password
+
+          });
+
+
+      if(error){
+        throw error;
+      }
+
+
+      if(
+        data.user
+      ){
+
+        await enterApp(
+          data.user
+        );
+
+      }
 
     }
+
 
   }
 
-  else{
+  catch(error){
 
-    const {
-      data,
+    console.error(
       error
-    } =
-      await sb.auth
-        .signInWithPassword({
-
-          email,
-          password
-
-        });
+    );
 
 
-    if(error){
-
-      setAuthMessage(
-        error.message,
-        true
-      );
-
-      return;
-
-    }
-
-
-    await enterApp(
-      data.user
+    authMessage(
+      error.message ||
+      'Could not connect to Supabase.',
+      true
     );
 
   }
 
 }
 
+
+/* =========================================================
+   CLOUD DATA
+
+   IMPORTANT:
+   YOUR DATABASE TABLE HAS A COLUMN NAMED "data".
+   THIS CODE USES "data".
+   ========================================================= */
+
+async function loadCloudData(){
+
+  if(
+    !sb ||
+    !currentUser
+  ){
+    return;
+  }
+
+
+  setSyncStatus(
+    'Loading…'
+  );
+
+
+  const {
+    data,
+    error
+  } =
+    await sb
+      .from(
+        'homeroom_state'
+      )
+      .select(
+        'data'
+      )
+      .eq(
+        'user_id',
+        currentUser.id
+      )
+      .maybeSingle();
+
+
+  if(error){
+    throw error;
+  }
+
+
+  if(
+    data &&
+    data.data
+  ){
+
+    state = {
+
+      ...clone(DEFAULT_STATE),
+
+      ...data.data,
+
+      profile:{
+        ...DEFAULT_STATE.profile,
+        ...(data.data.profile || {})
+      },
+
+      theme:{
+        ...DEFAULT_STATE.theme,
+        ...(data.data.theme || {})
+      },
+
+      classes:
+        data.data.classes ||
+        clone(DEFAULT_STATE.classes),
+
+      extras:
+        data.data.extras ||
+        clone(DEFAULT_STATE.extras),
+
+      tasks:
+        data.data.tasks ||
+        []
+
+    };
+
+  }
+
+  else{
+
+    state =
+      migrateOldBrowserData();
+
+
+    if(
+      !state.profile.name
+    ){
+
+      state.profile.name =
+        currentUser
+          .user_metadata
+          ?.name ||
+        '';
+
+    }
+
+
+    await saveCloudData();
+
+  }
+
+
+  setSyncStatus(
+    'Synced'
+  );
+
+}
+
+
+async function saveCloudData(){
+
+  if(
+    !sb ||
+    !currentUser
+  ){
+    return;
+  }
+
+
+  setSyncStatus(
+    'Saving…'
+  );
+
+
+  const {
+    error
+  } =
+    await sb
+      .from(
+        'homeroom_state'
+      )
+      .upsert({
+
+        user_id:
+          currentUser.id,
+
+        data:
+          state,
+
+        updated_at:
+          new Date()
+            .toISOString()
+
+      });
+
+
+  if(error){
+
+    console.error(
+      error
+    );
+
+
+    setSyncStatus(
+      'Sync error'
+    );
+
+    return;
+
+  }
+
+
+  setSyncStatus(
+    'Synced'
+  );
+
+}
+
+
+function queueSave(){
+
+  clearTimeout(
+    saveTimer
+  );
+
+
+  setSyncStatus(
+    'Saving…'
+  );
+
+
+  saveTimer =
+    setTimeout(
+      saveCloudData,
+      350
+    );
+
+}
+
+
+/* =========================================================
+   OLD DATA MIGRATION
+   ========================================================= */
+
+function migrateOldBrowserData(){
+
+  const keys = [
+    'homeroom-state-v4',
+    'homeroom-state-v3',
+    'homeroom-state-v2'
+  ];
+
+
+  for(
+    const key of keys
+  ){
+
+    try{
+
+      const old =
+        JSON.parse(
+          localStorage.getItem(
+            key
+          )
+        );
+
+
+      if(old){
+
+        return {
+
+          ...clone(DEFAULT_STATE),
+
+          ...old,
+
+          version:5
+
+        };
+
+      }
+
+    }
+
+    catch(error){}
+
+  }
+
+
+  try{
+
+    const oldTasks =
+      JSON.parse(
+        localStorage.getItem(
+          'homeroom-tasks-v1'
+        ) ||
+        '[]'
+      );
+
+
+    if(
+      Array.isArray(
+        oldTasks
+      ) &&
+      oldTasks.length
+    ){
+
+      const fresh =
+        clone(DEFAULT_STATE);
+
+
+      fresh.tasks =
+        oldTasks
+          .map(task => ({
+
+            id:
+              task.id ||
+              uid('t'),
+
+            type:
+              task.type === 'homework'
+                ? 'assignment'
+                : (
+                    task.type ||
+                    'assignment'
+                  ),
+
+            classId:
+              task.classId ||
+              null,
+
+            extraId:
+              null,
+
+            title:
+              task.title ||
+              'Untitled',
+
+            date:
+              task.date ||
+              todayStr(),
+
+            time:
+              task.time ||
+              '',
+
+            notes:
+              task.notes ||
+              '',
+
+            recurrence:
+              'none',
+
+            repeatDays:
+              [],
+
+            repeatEnd:
+              '',
+
+            locationName:
+              '',
+
+            locationAddress:
+              '',
+
+            placeId:
+              '',
+
+            latitude:
+              null,
+
+            longitude:
+              null,
+
+            done:
+              !!task.done,
+
+            createdAt:
+              task.createdAt ||
+              Date.now()
+
+          }));
+
+
+      return fresh;
+
+    }
+
+  }
+
+  catch(error){}
+
+
+  return clone(
+    DEFAULT_STATE
+  );
+
+}
+
+
+/* =========================================================
+   ENTER APP
+   ========================================================= */
 
 async function enterApp(user){
 
@@ -3947,35 +3995,52 @@ async function enterApp(user){
     user;
 
 
-  document
-    .getElementById(
-      'authScreen'
-    )
-    .classList
-    .add(
-      'hidden'
+  showApp();
+
+
+  try{
+
+    await loadCloudData();
+
+  }
+
+  catch(error){
+
+    console.error(
+      'Cloud load failed:',
+      error
     );
 
 
-  document
-    .getElementById(
-      'app'
-    )
-    .classList
-    .remove(
-      'hidden'
+    setSyncStatus(
+      'Sync error'
     );
 
 
-  await loadCloudState();
+    state =
+      clone(DEFAULT_STATE);
 
 
-  updateAccountUI();
+    if(
+      user.user_metadata?.name
+    ){
+
+      state.profile.name =
+        user.user_metadata.name;
+
+    }
+
+  }
+
 
   renderAll();
 
 }
 
+
+/* =========================================================
+   SIGN OUT
+   ========================================================= */
 
 async function signOut(){
 
@@ -4000,100 +4065,7 @@ async function signOut(){
   );
 
 
-  document
-    .getElementById(
-      'app'
-    )
-    .classList
-    .add(
-      'hidden'
-    );
-
-
-  document
-    .getElementById(
-      'authScreen'
-    )
-    .classList
-    .remove(
-      'hidden'
-    );
-
-
-  switchAuthMode(
-    'signin'
-  );
-
-}
-
-
-/* =========================================================
-   ACCOUNT UI
-   ========================================================= */
-
-function updateAccountUI(){
-
-  const fallbackName =
-    currentUser?.email
-      ?.split('@')[0] ||
-    'Account';
-
-
-  const name =
-    state.profile.name ||
-    currentUser
-      ?.user_metadata
-      ?.name ||
-    fallbackName;
-
-
-  const initial =
-    name
-      .charAt(0)
-      .toUpperCase();
-
-
-  document
-    .getElementById(
-      'headerName'
-    )
-    .textContent =
-      name;
-
-
-  document
-    .getElementById(
-      'headerAvatar'
-    )
-    .textContent =
-      initial;
-
-
-  document
-    .getElementById(
-      'profileName'
-    )
-    .value =
-      state.profile.name ||
-      name;
-
-
-  document
-    .getElementById(
-      'profileEmail'
-    )
-    .textContent =
-      currentUser?.email ||
-      '';
-
-
-  document
-    .getElementById(
-      'footerAccount'
-    )
-    .textContent =
-      currentUser?.email ||
-      '';
+  showAuth();
 
 }
 
@@ -4141,14 +4113,80 @@ function applyTheme(){
 
 
 /* =========================================================
-   SELECTS
+   ACCOUNT
    ========================================================= */
 
-function fillSelects(){
+function renderAccount(){
+
+  const fallback =
+    currentUser?.email
+      ?.split('@')[0] ||
+    'Account';
+
+
+  const name =
+    state.profile.name ||
+    currentUser
+      ?.user_metadata
+      ?.name ||
+    fallback;
+
 
   document
     .getElementById(
-      'f-class'
+      'headerName'
+    )
+    .textContent =
+      name;
+
+
+  document
+    .getElementById(
+      'headerAvatar'
+    )
+    .textContent =
+      name
+        .charAt(0)
+        .toUpperCase();
+
+
+  document
+    .getElementById(
+      'profileName'
+    )
+    .value =
+      name;
+
+
+  document
+    .getElementById(
+      'profileEmail'
+    )
+    .textContent =
+      currentUser?.email ||
+      '';
+
+
+  document
+    .getElementById(
+      'footerEmail'
+    )
+    .textContent =
+      currentUser?.email ||
+      '';
+
+}
+
+
+/* =========================================================
+   SELECTS
+   ========================================================= */
+
+function renderSelects(){
+
+  document
+    .getElementById(
+      'itemClass'
     )
     .innerHTML =
       '<option value="">No class / general</option>' +
@@ -4164,7 +4202,7 @@ function fillSelects(){
 
   document
     .getElementById(
-      'f-extra'
+      'itemExtra'
     )
     .innerHTML =
       '<option value="">No extracurricular</option>' +
@@ -4190,7 +4228,7 @@ function renderDeadlines(){
     todayStr();
 
 
-  const items =
+  const tasks =
     state.tasks
 
       .filter(task =>
@@ -4202,7 +4240,7 @@ function renderDeadlines(){
 
         ...task,
 
-        delta:
+        days:
           daysBetween(
             today,
             task.date
@@ -4211,40 +4249,47 @@ function renderDeadlines(){
       }))
 
       .filter(task =>
-        task.delta >= 0 &&
-        task.delta <= 7
+        task.days >= 0 &&
+        task.days <= 7
       )
 
       .sort(
         (a,b) =>
-          a.delta -
-          b.delta
+          a.days -
+          b.days
       )
 
-      .slice(0,4);
+      .slice(
+        0,
+        4
+      );
 
 
-  const container =
+  const grid =
     document.getElementById(
-      'deadlinesRow'
+      'deadlineGrid'
     );
 
 
   if(
-    items.length === 0
+    !tasks.length
   ){
 
-    container.innerHTML = `
+    grid.innerHTML = `
+
       <div
         class="empty-state"
         style="grid-column:1/-1"
       >
+
         <strong>
           No upcoming deadlines
         </strong>
 
         You're clear for the next 7 days.
+
       </div>
+
     `;
 
     return;
@@ -4252,45 +4297,45 @@ function renderDeadlines(){
   }
 
 
-  container.innerHTML =
-    items
+  grid.innerHTML =
+    tasks
       .map(task => {
+
+
+        let label =
+          `Due in ${task.days} days`;
 
 
         let badge =
           'ok';
 
 
-        let text =
-          `Due in ${task.delta} days`;
-
-
         if(
-          task.delta === 0
+          task.days === 0
         ){
 
-          badge =
-            'urgent';
-
-          text =
+          label =
             'Due today';
 
+          badge =
+            'urgent';
+
         }
 
         else if(
-          task.delta === 1
+          task.days === 1
         ){
+
+          label =
+            'Due tomorrow';
 
           badge =
             'urgent';
 
-          text =
-            'Due tomorrow';
-
         }
 
         else if(
-          task.delta <= 3
+          task.days <= 3
         ){
 
           badge =
@@ -4303,12 +4348,12 @@ function renderDeadlines(){
 
           <button
             class="deadline-card"
-            data-open="${esc(task.id)}"
+            data-edit="${esc(task.id)}"
             style="--accent:${colorFor(task)}"
           >
 
             <div class="deadline-class">
-              ${esc(sourceName(task))}
+              ${esc(sourceFor(task))}
             </div>
 
             <div class="deadline-title">
@@ -4317,12 +4362,12 @@ function renderDeadlines(){
 
             <div class="deadline-meta">
 
-              ${formatDateNice(task.date)}
+              ${niceDate(task.date)}
 
               ${
                 task.time
                   ? ' · ' +
-                    formatTimeNice(task.time)
+                    niceTime(task.time)
                   : ''
               }
 
@@ -4331,7 +4376,7 @@ function renderDeadlines(){
             <span
               class="deadline-badge ${badge}"
             >
-              ${text}
+              ${label}
             </span>
 
           </button>
@@ -4361,16 +4406,20 @@ function renderClasses(){
   ){
 
     grid.innerHTML = `
+
       <div
         class="empty-state"
         style="grid-column:1/-1"
       >
+
         <strong>
-          No classes yet
+          No classes
         </strong>
 
-        Add your first class in Settings.
+        Add one in Settings.
+
       </div>
+
     `;
 
     return;
@@ -4386,9 +4435,14 @@ function renderClasses(){
         const pending =
           state.tasks
             .filter(task =>
-              task.classId === schoolClass.id &&
+
+              task.classId ===
+                schoolClass.id &&
+
               !task.done &&
+
               checkable(task)
+
             )
             .length;
 
@@ -4397,7 +4451,7 @@ function renderClasses(){
 
           <button
             class="class-card"
-            data-class-open="${esc(schoolClass.id)}"
+            data-class="${esc(schoolClass.id)}"
             style="--accent:${schoolClass.color}"
           >
 
@@ -4439,7 +4493,68 @@ function renderClasses(){
 
 function taskRow(task){
 
-  const completion =
+  let repeat =
+    '';
+
+
+  if(
+    task.type === 'activity'
+  ){
+
+    if(
+      task.recurrence === 'custom'
+    ){
+
+      repeat =
+        weekdayText(
+          task.repeatDays
+        );
+
+    }
+
+    else if(
+      task.recurrence === 'weekly'
+    ){
+
+      repeat =
+        'Weekly';
+
+    }
+
+    else if(
+      task.recurrence === 'monthly'
+    ){
+
+      repeat =
+        'Monthly';
+
+    }
+
+  }
+
+
+  const metadata = [
+
+    sourceFor(task),
+
+    niceDate(task.date),
+
+    task.time
+      ? niceTime(task.time)
+      : '',
+
+    task.locationName ||
+    task.manualLocation ||
+    '',
+
+    repeat
+
+  ]
+  .filter(Boolean)
+  .join(' · ');
+
+
+  const left =
     checkable(task)
 
       ? `
@@ -4447,11 +4562,6 @@ function taskRow(task){
         <button
           class="check"
           data-complete="${esc(task.id)}"
-          aria-label="${
-            task.done
-              ? 'Mark incomplete'
-              : 'Mark complete'
-          }"
         >
 
           <svg
@@ -4476,58 +4586,6 @@ function taskRow(task){
       `;
 
 
-  let repeatText =
-    '';
-
-
-  if(
-    task.type === 'activity'
-  ){
-
-    if(
-      task.recurrence === 'custom'
-    ){
-
-      repeatText =
-        weekdayLabel(
-          task.repeatDays || []
-        );
-
-    }
-
-    else if(
-      task.recurrence !== 'none'
-    ){
-
-      repeatText =
-        repeatLabel(
-          task.recurrence
-        );
-
-    }
-
-  }
-
-
-  const metadata = [
-
-    sourceName(task),
-
-    formatDateNice(task.date),
-
-    task.time
-      ? formatTimeNice(task.time)
-      : '',
-
-    task.locationName || '',
-
-    repeatText
-
-  ]
-  .filter(Boolean)
-  .join(' · ');
-
-
   return `
 
     <div
@@ -4536,15 +4594,14 @@ function taskRow(task){
           ? 'done'
           : ''
       }"
-      data-row="${esc(task.id)}"
       style="--accent:${colorFor(task)}"
     >
 
-      ${completion}
+      ${left}
 
       <div
         class="task-main"
-        data-open="${esc(task.id)}"
+        data-edit="${esc(task.id)}"
       >
 
         <div class="task-title">
@@ -4565,7 +4622,7 @@ function taskRow(task){
 
       <button
         class="icon-btn"
-        data-open="${esc(task.id)}"
+        data-edit="${esc(task.id)}"
       >
         •••
       </button>
@@ -4578,17 +4635,19 @@ function taskRow(task){
 
 
 /* =========================================================
-   EVERYTHING
+   TASK LIST
    ========================================================= */
 
 function renderTaskList(){
 
-  const items =
+  const tasks =
     state.tasks
 
       .filter(task =>
+
         activeFilter === 'all' ||
         task.type === activeFilter
+
       )
 
       .sort((a,b) => {
@@ -4603,39 +4662,46 @@ function renderTaskList(){
 
         }
 
-        return a.date
-          .localeCompare(
-            b.date
-          );
+
+        return (
+          a.date ||
+          ''
+        )
+        .localeCompare(
+          b.date ||
+          ''
+        );
 
       });
 
 
-  const list =
-    document.getElementById(
+  document
+    .getElementById(
       'taskList'
-    );
+    )
+    .innerHTML =
+      tasks.length
 
+        ? tasks
+            .map(task =>
+              taskRow(task)
+            )
+            .join('')
 
-  list.innerHTML =
-    items.length
+        : `
 
-      ? items
-          .map(task =>
-            taskRow(task)
-          )
-          .join('')
+          <div class="empty-state">
 
-      : `
-        <div class="empty-state">
-          <strong>
-            Nothing here yet
-          </strong>
+            <strong>
+              Nothing here yet
+            </strong>
 
-          Add an assignment, deadline,
-          reminder or activity.
-        </div>
-      `;
+            Add an assignment, deadline,
+            reminder or activity.
+
+          </div>
+
+        `;
 
 }
 
@@ -4688,13 +4754,6 @@ function openClassModal(id){
 
 function renderClassModal(){
 
-  if(
-    !classModalId
-  ){
-    return;
-  }
-
-
   const schoolClass =
     classById(
       classModalId
@@ -4706,7 +4765,7 @@ function renderClassModal(){
   }
 
 
-  const items =
+  const tasks =
     state.tasks
 
       .filter(task =>
@@ -4726,6 +4785,7 @@ function renderClassModal(){
 
         }
 
+
         return a.date
           .localeCompare(
             b.date
@@ -4739,30 +4799,34 @@ function renderClassModal(){
       'classModalList'
     )
     .innerHTML =
-      items.length
+      tasks.length
 
-        ? items
+        ? tasks
             .map(task =>
               taskRow(task)
             )
             .join('')
 
         : `
+
           <div class="empty-state">
+
             <strong>
               You have no work for this class
             </strong>
 
             Nothing has been added for
-            ${esc(schoolClass.name)} yet.
+            ${esc(schoolClass.name)}.
+
           </div>
+
         `;
 
 }
 
 
 /* =========================================================
-   RECURRENCES
+   RECURRENCE
    ========================================================= */
 
 function occurrences(
@@ -4772,7 +4836,7 @@ function occurrences(
 ){
 
   const start =
-    parseLocalDate(
+    parseDate(
       task.date
     );
 
@@ -4811,12 +4875,12 @@ function occurrences(
   const hardEnd =
     task.repeatEnd
 
-      ? parseLocalDate(
+      ? parseDate(
           task.repeatEnd
         )
 
       : new Date(
-          year+2,
+          year+3,
           month,
           monthEnd.getDate()
         );
@@ -4834,9 +4898,7 @@ function occurrences(
   if(
     start > end
   ){
-
     return output;
-
   }
 
 
@@ -4844,32 +4906,32 @@ function occurrences(
     task.recurrence === 'weekly'
   ){
 
-    let date =
+    let d =
       new Date(start);
 
 
     while(
-      date < monthStart
+      d < monthStart
     ){
 
-      date.setDate(
-        date.getDate()+7
+      d.setDate(
+        d.getDate()+7
       );
 
     }
 
 
     while(
-      date <= end
+      d <= end
     ){
 
       output.push(
-        dateStr(date)
+        dateStr(d)
       );
 
 
-      date.setDate(
-        date.getDate()+7
+      d.setDate(
+        d.getDate()+7
       );
 
     }
@@ -4877,7 +4939,7 @@ function occurrences(
   }
 
 
-  if(
+  else if(
     task.recurrence === 'custom'
   ){
 
@@ -4885,7 +4947,7 @@ function occurrences(
       task.repeatDays || [];
 
 
-    let date =
+    let d =
       new Date(
         start < monthStart
           ? monthStart
@@ -4894,24 +4956,24 @@ function occurrences(
 
 
     while(
-      date <= end
+      d <= end
     ){
 
       if(
         days.includes(
-          date.getDay()
+          d.getDay()
         )
       ){
 
         output.push(
-          dateStr(date)
+          dateStr(d)
         );
 
       }
 
 
-      date.setDate(
-        date.getDate()+1
+      d.setDate(
+        d.getDate()+1
       );
 
     }
@@ -4919,11 +4981,11 @@ function occurrences(
   }
 
 
-  if(
+  else if(
     task.recurrence === 'monthly'
   ){
 
-    const date =
+    const d =
       new Date(
         year,
         month,
@@ -4935,12 +4997,12 @@ function occurrences(
 
 
     if(
-      date >= start &&
-      date <= end
+      d >= start &&
+      d <= end
     ){
 
       output.push(
-        dateStr(date)
+        dateStr(d)
       );
 
     }
@@ -4967,10 +5029,6 @@ function renderCalendar(){
   const month =
     calendarCursor
       .getMonth();
-
-
-  const today =
-    todayStr();
 
 
   document
@@ -5002,13 +5060,14 @@ function renderCalendar(){
         year,
         month
       )
-      .forEach(date => {
+      .forEach(day => {
 
-        if(!map[date]){
-          map[date] = [];
+        if(!map[day]){
+          map[day] = [];
         }
 
-        map[date].push(
+
+        map[day].push(
           task
         );
 
@@ -5034,6 +5093,10 @@ function renderCalendar(){
     );
 
 
+  const today =
+    todayStr();
+
+
   let html = '';
 
 
@@ -5052,12 +5115,12 @@ function renderCalendar(){
     );
 
 
-    const dateString =
+    const key =
       dateStr(date);
 
 
-    const items =
-      map[dateString] || [];
+    const events =
+      map[key] || [];
 
 
     html += `
@@ -5071,7 +5134,7 @@ function renderCalendar(){
               : ''
           }
           ${
-            dateString === today
+            key === today
               ? 'today'
               : ''
           }
@@ -5085,7 +5148,7 @@ function renderCalendar(){
     `;
 
 
-    items
+    events
       .slice(0,3)
       .forEach(task => {
 
@@ -5094,14 +5157,13 @@ function renderCalendar(){
           <button
             class="cal-event"
             data-detail="${esc(task.id)}"
-            data-date="${dateString}"
+            data-occurrence="${key}"
             style="--event-color:${colorFor(task)}"
-            title="${esc(task.title)}"
           >
 
             ${
               task.time
-                ? formatTimeNice(task.time) +
+                ? niceTime(task.time) +
                   ' · '
                 : ''
             }
@@ -5188,13 +5250,13 @@ function renderSettings(){
       state.theme.paper;
 
 
-  const row =
-    (item,kind) => `
+  const makeRow =
+    (item,type) => `
 
       <div
         class="editor-row"
         data-setting-id="${esc(item.id)}"
-        data-setting-kind="${kind}"
+        data-setting-type="${type}"
       >
 
         <input
@@ -5212,7 +5274,7 @@ function renderSettings(){
         <button
           class="icon-btn"
           data-remove-setting="${esc(item.id)}"
-          data-kind="${kind}"
+          data-remove-type="${type}"
         >
           ✕
         </button>
@@ -5229,7 +5291,10 @@ function renderSettings(){
     .innerHTML =
       state.classes
         .map(item =>
-          row(item,'class')
+          makeRow(
+            item,
+            'class'
+          )
         )
         .join('');
 
@@ -5241,79 +5306,435 @@ function renderSettings(){
     .innerHTML =
       state.extras
         .map(item =>
-          row(item,'extra')
+          makeRow(
+            item,
+            'extra'
+          )
         )
         .join('');
 
 }
 
 
-/* =========================================================
-   RENDER
-   ========================================================= */
+function commitSettings(){
 
-function renderAll(){
-
-  applyTheme();
-
-  fillSelects();
-
-  renderDeadlines();
-
-  renderClasses();
-
-  renderTaskList();
-
-  renderCalendar();
-
-  renderSettings();
-
-  updateAccountUI();
-
-
-  if(
-    classModalId &&
+  state.theme.green =
     document
       .getElementById(
-        'classModal'
+        'themeGreen'
       )
-      .classList
-      .contains('open')
+      .value;
+
+
+  state.theme.gold =
+    document
+      .getElementById(
+        'themeGold'
+      )
+      .value;
+
+
+  state.theme.paper =
+    document
+      .getElementById(
+        'themePaper'
+      )
+      .value;
+
+
+  document
+    .querySelectorAll(
+      '[data-setting-id]'
+    )
+    .forEach(row => {
+
+      const type =
+        row.dataset.settingType;
+
+
+      const list =
+        type === 'class'
+          ? state.classes
+          : state.extras;
+
+
+      const item =
+        list.find(
+          x =>
+            x.id ===
+            row.dataset.settingId
+        );
+
+
+      if(!item){
+        return;
+      }
+
+
+      item.name =
+        row
+          .querySelector(
+            '[data-setting-name]'
+          )
+          .value
+          .trim()
+        || item.name;
+
+
+      item.color =
+        row
+          .querySelector(
+            '[data-setting-color]'
+          )
+          .value;
+
+    });
+
+
+  queueSave();
+
+  renderAll();
+
+}
+
+
+/* =========================================================
+   GOOGLE MAPS
+   ========================================================= */
+
+function loadGoogleMaps(){
+
+  if(
+    GOOGLE_MAPS_API_KEY.startsWith(
+      'PASTE_'
+    )
   ){
 
-    renderClassModal();
+    document
+      .getElementById(
+        'locationStatus'
+      )
+      .textContent =
+        'Google Places is not connected yet. You can still type a location manually.';
+
+
+    return;
+
+  }
+
+
+  const script =
+    document.createElement(
+      'script'
+    );
+
+
+  script.async =
+    true;
+
+
+  script.src =
+    'https://maps.googleapis.com/maps/api/js' +
+    `?key=${encodeURIComponent(GOOGLE_MAPS_API_KEY)}` +
+    '&loading=async' +
+    '&libraries=places' +
+    '&callback=onGoogleMapsReady' +
+    '&v=weekly';
+
+
+  document.head
+    .appendChild(
+      script
+    );
+
+}
+
+
+window.onGoogleMapsReady =
+  async function(){
+
+    mapsReady =
+      true;
+
+
+    document
+      .getElementById(
+        'locationStatus'
+      )
+      .textContent =
+        'Search for a real location.';
+
+
+    if(
+      activeType === 'activity'
+    ){
+
+      await createPlaceAutocomplete();
+
+    }
+
+  };
+
+
+async function createPlaceAutocomplete(){
+
+  if(
+    !mapsReady ||
+    placeElement
+  ){
+    return;
+  }
+
+
+  try{
+
+    const {
+      PlaceAutocompleteElement
+    } =
+      await google.maps
+        .importLibrary(
+          'places'
+        );
+
+
+    placeElement =
+      new PlaceAutocompleteElement();
+
+
+    placeElement
+      .setAttribute(
+        'placeholder',
+        'Search Google Maps'
+      );
+
+
+    document
+      .getElementById(
+        'placeAutocompleteHost'
+      )
+      .appendChild(
+        placeElement
+      );
+
+
+    placeElement
+      .addEventListener(
+        'gmp-select',
+        async event => {
+
+
+          const prediction =
+            event.placePrediction;
+
+
+          if(!prediction){
+            return;
+          }
+
+
+          const place =
+            prediction.toPlace();
+
+
+          await place.fetchFields({
+
+            fields:[
+              'id',
+              'displayName',
+              'formattedAddress',
+              'location'
+            ]
+
+          });
+
+
+          selectedPlace = {
+
+            placeId:
+              place.id ||
+              '',
+
+            locationName:
+              place.displayName ||
+              '',
+
+            locationAddress:
+              place.formattedAddress ||
+              '',
+
+            latitude:
+              place.location
+                ? place.location.lat()
+                : null,
+
+            longitude:
+              place.location
+                ? place.location.lng()
+                : null
+
+          };
+
+
+          document
+            .getElementById(
+              'manualLocation'
+            )
+            .value =
+              '';
+
+
+          renderSelectedPlace();
+
+        }
+      );
+
+  }
+
+  catch(error){
+
+    console.error(
+      error
+    );
+
+
+    document
+      .getElementById(
+        'locationStatus'
+      )
+      .textContent =
+        'Google location search could not load. You can type the location manually.';
 
   }
 
 }
 
 
-/* =========================================================
-   MODALS
-   ========================================================= */
+function renderSelectedPlace(){
 
-function openModal(id){
+  const holder =
+    document.getElementById(
+      'selectedPlace'
+    );
 
-  document
-    .getElementById(id)
-    .classList
-    .add('open');
+
+  if(
+    !selectedPlace ||
+    !selectedPlace.locationName
+  ){
+
+    holder.classList
+      .add('hidden');
+
+
+    holder.innerHTML =
+      '';
+
+
+    return;
+
+  }
+
+
+  holder.classList
+    .remove('hidden');
+
+
+  holder.innerHTML = `
+
+    <div class="place-card">
+
+      <div>
+
+        <div class="place-name">
+          📍 ${esc(selectedPlace.locationName)}
+        </div>
+
+        <div class="place-address">
+          ${esc(selectedPlace.locationAddress)}
+        </div>
+
+      </div>
+
+      <div class="place-actions">
+
+        <button
+          class="mini-btn"
+          type="button"
+          data-preview-map
+        >
+          Map
+        </button>
+
+        <button
+          class="mini-btn"
+          type="button"
+          data-clear-location
+        >
+          Clear
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
 
 }
 
 
-function closeModal(id){
+function openMap(data){
 
-  document
-    .getElementById(id)
-    .classList
-    .remove('open');
+  if(!data){
+    return;
+  }
+
+
+  const name =
+    data.locationName ||
+    data.manualLocation ||
+    data.locationAddress ||
+    '';
+
+
+  let url =
+    'https://www.google.com/maps/search/?api=1';
+
+
+  if(name){
+
+    url +=
+      `&query=${
+        encodeURIComponent(name)
+      }`;
+
+  }
+
+
+  if(
+    data.placeId
+  ){
+
+    url +=
+      `&query_place_id=${
+        encodeURIComponent(
+          data.placeId
+        )
+      }`;
+
+  }
+
+
+  window.open(
+    url,
+    '_blank',
+    'noopener'
+  );
 
 }
 
 
 /* =========================================================
-   TYPE
+   ITEM TYPE
    ========================================================= */
 
 function setType(type){
@@ -5324,7 +5745,7 @@ function setType(type){
 
   document
     .querySelectorAll(
-      '#typeToggle button'
+      '#typeToggle [data-type]'
     )
     .forEach(button => {
 
@@ -5380,274 +5801,9 @@ function setType(type){
     mapsReady
   ){
 
-    ensurePlaceAutocomplete();
+    createPlaceAutocomplete();
 
   }
-
-}
-
-
-/* =========================================================
-   GOOGLE PLACES
-   ========================================================= */
-
-window.initGoogleMaps =
-  async function(){
-
-    mapsReady =
-      true;
-
-
-    if(
-      activeType === 'activity'
-    ){
-
-      await ensurePlaceAutocomplete();
-
-    }
-
-  };
-
-
-async function ensurePlaceAutocomplete(){
-
-  if(
-    !mapsReady ||
-    placeAutocompleteElement
-  ){
-    return;
-  }
-
-
-  const holder =
-    document.getElementById(
-      'placeAutocompleteHolder'
-    );
-
-
-  holder.innerHTML = '';
-
-
-  try{
-
-    const {
-      PlaceAutocompleteElement
-    } =
-      await google.maps
-        .importLibrary(
-          'places'
-        );
-
-
-    placeAutocompleteElement =
-      new PlaceAutocompleteElement();
-
-
-    placeAutocompleteElement
-      .setAttribute(
-        'placeholder',
-        'Search for a real location'
-      );
-
-
-    holder.appendChild(
-      placeAutocompleteElement
-    );
-
-
-    placeAutocompleteElement
-      .addEventListener(
-        'gmp-select',
-        async event => {
-
-
-          const prediction =
-            event.placePrediction;
-
-
-          if(!prediction){
-            return;
-          }
-
-
-          const place =
-            prediction.toPlace();
-
-
-          await place.fetchFields({
-
-            fields:[
-              'id',
-              'displayName',
-              'formattedAddress',
-              'location'
-            ]
-
-          });
-
-
-          selectedPlaceData = {
-
-            placeId:
-              place.id || '',
-
-            locationName:
-              place.displayName || '',
-
-            locationAddress:
-              place.formattedAddress || '',
-
-            latitude:
-              place.location
-                ? place.location.lat()
-                : null,
-
-            longitude:
-              place.location
-                ? place.location.lng()
-                : null
-
-          };
-
-
-          renderSelectedPlace();
-
-        }
-      );
-
-  }
-
-  catch(error){
-
-    console.error(
-      error
-    );
-
-
-    holder.innerHTML = `
-      <div
-        style="
-          color:var(--danger);
-          font-size:12px;
-        "
-      >
-        Location search could not load.
-      </div>
-    `;
-
-  }
-
-}
-
-
-function renderSelectedPlace(){
-
-  const holder =
-    document.getElementById(
-      'selectedPlace'
-    );
-
-
-  if(
-    !selectedPlaceData ||
-    !selectedPlaceData.locationName
-  ){
-
-    holder
-      .classList
-      .add(
-        'hidden'
-      );
-
-    holder.innerHTML = '';
-
-    return;
-
-  }
-
-
-  holder
-    .classList
-    .remove(
-      'hidden'
-    );
-
-
-  holder.innerHTML = `
-
-    <div class="place-card">
-
-      <div>
-
-        <div class="place-name">
-          ${esc(selectedPlaceData.locationName)}
-        </div>
-
-        <div class="place-address">
-          ${esc(selectedPlaceData.locationAddress)}
-        </div>
-
-      </div>
-
-
-      <div class="place-actions">
-
-        <button
-          type="button"
-          class="mini-btn"
-          data-open-map
-        >
-          Map
-        </button>
-
-        <button
-          type="button"
-          class="mini-btn"
-          data-clear-place
-        >
-          Clear
-        </button>
-
-      </div>
-
-    </div>
-
-  `;
-
-}
-
-
-function openMapForPlace(placeData){
-
-  if(
-    !placeData
-  ){
-    return;
-  }
-
-
-  const query =
-    placeData.placeId
-
-      ? `place_id:${placeData.placeId}`
-
-      : (
-          placeData.locationAddress ||
-          placeData.locationName
-        );
-
-
-  const url =
-    `https://www.google.com/maps/search/?api=1&query=${
-      encodeURIComponent(query)
-    }`;
-
-
-  window.open(
-    url,
-    '_blank',
-    'noopener'
-  );
 
 }
 
@@ -5667,7 +5823,7 @@ async function openItem(
 
   document
     .getElementById(
-      'taskForm'
+      'itemForm'
     )
     .reset();
 
@@ -5682,7 +5838,14 @@ async function openItem(
     );
 
 
-  fillSelects();
+  selectedPlace =
+    null;
+
+
+  renderSelectedPlace();
+
+
+  renderSelects();
 
 
   const task =
@@ -5706,7 +5869,7 @@ async function openItem(
 
   document
     .getElementById(
-      'deleteItemBtn'
+      'deleteItemButton'
     )
     .classList
     .toggle(
@@ -5724,7 +5887,7 @@ async function openItem(
 
   document
     .getElementById(
-      'f-class'
+      'itemClass'
     )
     .value =
       task?.classId ||
@@ -5734,7 +5897,7 @@ async function openItem(
 
   document
     .getElementById(
-      'f-extra'
+      'itemExtra'
     )
     .value =
       task?.extraId ||
@@ -5743,7 +5906,7 @@ async function openItem(
 
   document
     .getElementById(
-      'f-title'
+      'itemTitle'
     )
     .value =
       task?.title ||
@@ -5752,7 +5915,7 @@ async function openItem(
 
   document
     .getElementById(
-      'f-date'
+      'itemDate'
     )
     .value =
       task?.date ||
@@ -5762,7 +5925,7 @@ async function openItem(
 
   document
     .getElementById(
-      'f-time'
+      'itemTime'
     )
     .value =
       task?.time ||
@@ -5771,7 +5934,7 @@ async function openItem(
 
   document
     .getElementById(
-      'f-notes'
+      'itemNotes'
     )
     .value =
       task?.notes ||
@@ -5780,7 +5943,7 @@ async function openItem(
 
   document
     .getElementById(
-      'f-repeat'
+      'itemRepeat'
     )
     .value =
       task?.recurrence ||
@@ -5789,15 +5952,59 @@ async function openItem(
 
   document
     .getElementById(
-      'f-repeat-end'
+      'repeatEnd'
     )
     .value =
       task?.repeatEnd ||
       '';
 
 
-  const repeatDays =
-    task?.repeatDays || [];
+  document
+    .getElementById(
+      'manualLocation'
+    )
+    .value =
+      task?.manualLocation ||
+      '';
+
+
+  if(
+    task?.locationName
+  ){
+
+    selectedPlace = {
+
+      placeId:
+        task.placeId ||
+        '',
+
+      locationName:
+        task.locationName ||
+        '',
+
+      locationAddress:
+        task.locationAddress ||
+        '',
+
+      latitude:
+        task.latitude ??
+        null,
+
+      longitude:
+        task.longitude ??
+        null
+
+    };
+
+
+    renderSelectedPlace();
+
+  }
+
+
+  const days =
+    task?.repeatDays ||
+    [];
 
 
   document
@@ -5809,7 +6016,7 @@ async function openItem(
       button.classList
         .toggle(
           'active',
-          repeatDays.includes(
+          days.includes(
             Number(
               button.dataset.day
             )
@@ -5819,33 +6026,7 @@ async function openItem(
     });
 
 
-  selectedPlaceData =
-    task
-      ? {
-
-          placeId:
-            task.placeId || '',
-
-          locationName:
-            task.locationName || '',
-
-          locationAddress:
-            task.locationAddress || '',
-
-          latitude:
-            task.latitude ?? null,
-
-          longitude:
-            task.longitude ?? null
-
-        }
-      : null;
-
-
-  renderSelectedPlace();
-
-
-  updateRepeatVisibility();
+  updateRepeatUI();
 
 
   openModal(
@@ -5858,20 +6039,47 @@ async function openItem(
     mapsReady
   ){
 
-    await ensurePlaceAutocomplete();
+    await createPlaceAutocomplete();
 
   }
 
+}
 
-  setTimeout(
-    () =>
-      document
-        .getElementById(
-          'f-title'
-        )
-        .focus(),
-    30
-  );
+
+/* =========================================================
+   REPEAT UI
+   ========================================================= */
+
+function updateRepeatUI(){
+
+  const repeat =
+    document
+      .getElementById(
+        'itemRepeat'
+      )
+      .value;
+
+
+  document
+    .getElementById(
+      'repeatEndField'
+    )
+    .classList
+    .toggle(
+      'hidden',
+      repeat === 'none'
+    );
+
+
+  document
+    .getElementById(
+      'weekdayField'
+    )
+    .classList
+    .toggle(
+      'hidden',
+      repeat !== 'custom'
+    );
 
 }
 
@@ -5885,7 +6093,7 @@ function saveItem(){
   const title =
     document
       .getElementById(
-        'f-title'
+        'itemTitle'
       )
       .value
       .trim();
@@ -5894,7 +6102,7 @@ function saveItem(){
   const date =
     document
       .getElementById(
-        'f-date'
+        'itemDate'
       )
       .value;
 
@@ -5925,7 +6133,7 @@ function saveItem(){
     activeType === 'activity'
       ? document
           .getElementById(
-            'f-repeat'
+            'itemRepeat'
           )
           .value
       : 'none';
@@ -5938,12 +6146,21 @@ function saveItem(){
   ){
 
     alert(
-      'Choose at least one day for this recurring activity.'
+      'Choose at least one weekday.'
     );
 
     return;
 
   }
+
+
+  const manualLocation =
+    document
+      .getElementById(
+        'manualLocation'
+      )
+      .value
+      .trim();
 
 
   const data = {
@@ -5957,7 +6174,7 @@ function saveItem(){
         : (
             document
               .getElementById(
-                'f-class'
+                'itemClass'
               )
               .value ||
             null
@@ -5968,7 +6185,7 @@ function saveItem(){
         ? (
             document
               .getElementById(
-                'f-extra'
+                'itemExtra'
               )
               .value ||
             null
@@ -5982,7 +6199,7 @@ function saveItem(){
     time:
       document
         .getElementById(
-          'f-time'
+          'itemTime'
         )
         .value ||
       '',
@@ -5990,7 +6207,7 @@ function saveItem(){
     notes:
       document
         .getElementById(
-          'f-notes'
+          'itemNotes'
         )
         .value
         .trim(),
@@ -6006,16 +6223,20 @@ function saveItem(){
       activeType === 'activity'
         ? document
             .getElementById(
-              'f-repeat-end'
+              'repeatEnd'
             )
             .value
+        : '',
+
+    manualLocation:
+      activeType === 'activity'
+        ? manualLocation
         : '',
 
     placeId:
       activeType === 'activity'
         ? (
-            selectedPlaceData
-              ?.placeId ||
+            selectedPlace?.placeId ||
             ''
           )
         : '',
@@ -6023,8 +6244,7 @@ function saveItem(){
     locationName:
       activeType === 'activity'
         ? (
-            selectedPlaceData
-              ?.locationName ||
+            selectedPlace?.locationName ||
             ''
           )
         : '',
@@ -6032,8 +6252,7 @@ function saveItem(){
     locationAddress:
       activeType === 'activity'
         ? (
-            selectedPlaceData
-              ?.locationAddress ||
+            selectedPlace?.locationAddress ||
             ''
           )
         : '',
@@ -6041,8 +6260,7 @@ function saveItem(){
     latitude:
       activeType === 'activity'
         ? (
-            selectedPlaceData
-              ?.latitude ??
+            selectedPlace?.latitude ??
             null
           )
         : null,
@@ -6050,8 +6268,7 @@ function saveItem(){
     longitude:
       activeType === 'activity'
         ? (
-            selectedPlaceData
-              ?.longitude ??
+            selectedPlace?.longitude ??
             null
           )
         : null
@@ -6103,13 +6320,11 @@ function saveItem(){
   }
 
 
-  queueCloudSave();
-
+  queueSave();
 
   closeModal(
     'itemModal'
   );
-
 
   renderAll();
 
@@ -6134,7 +6349,7 @@ function deleteItem(){
       );
 
 
-  queueCloudSave();
+  queueSave();
 
 
   closeModal(
@@ -6168,47 +6383,9 @@ function toggleComplete(id){
     !task.done;
 
 
-  queueCloudSave();
+  queueSave();
 
   renderAll();
-
-}
-
-
-/* =========================================================
-   REPEAT UI
-   ========================================================= */
-
-function updateRepeatVisibility(){
-
-  const value =
-    document
-      .getElementById(
-        'f-repeat'
-      )
-      .value;
-
-
-  document
-    .getElementById(
-      'repeatEndField'
-    )
-    .classList
-    .toggle(
-      'hidden',
-      value === 'none'
-    );
-
-
-  document
-    .getElementById(
-      'weekdayField'
-    )
-    .classList
-    .toggle(
-      'hidden',
-      value !== 'custom'
-    );
 
 }
 
@@ -6219,7 +6396,7 @@ function updateRepeatVisibility(){
 
 function openDetail(
   id,
-  occurrenceDate
+  occurrence
 ){
 
   const task =
@@ -6242,37 +6419,43 @@ function openDetail(
       task.title;
 
 
-  let repeatText =
+  let repeat =
     '';
 
 
   if(
-    task.type === 'activity'
+    task.recurrence === 'custom'
   ){
 
-    if(
-      task.recurrence === 'custom'
-    ){
-
-      repeatText =
-        weekdayLabel(
-          task.repeatDays || []
-        );
-
-    }
-
-    else if(
-      task.recurrence !== 'none'
-    ){
-
-      repeatText =
-        repeatLabel(
-          task.recurrence
-        );
-
-    }
+    repeat =
+      weekdayText(
+        task.repeatDays
+      );
 
   }
+
+  else if(
+    task.recurrence === 'weekly'
+  ){
+
+    repeat =
+      'Weekly';
+
+  }
+
+  else if(
+    task.recurrence === 'monthly'
+  ){
+
+    repeat =
+      'Monthly';
+
+  }
+
+
+  const hasLocation =
+    task.locationName ||
+    task.manualLocation;
 
 
   document
@@ -6282,7 +6465,10 @@ function openDetail(
     .innerHTML = `
 
       <p>
-        <strong>Type:</strong>
+        <strong>
+          Type:
+        </strong>
+
         ${esc(task.type)}
       </p>
 
@@ -6295,42 +6481,40 @@ function openDetail(
           }:
         </strong>
 
-        ${esc(sourceName(task))}
+        ${esc(sourceFor(task))}
       </p>
 
       <p>
-        <strong>Date:</strong>
+        <strong>
+          Date:
+        </strong>
 
-        ${
-          formatDateNice(
-            occurrenceDate ||
-            task.date
-          )
-        }
+        ${niceDate(occurrence || task.date)}
 
         ${
           task.time
             ? ' at ' +
-              formatTimeNice(
-                task.time
-              )
+              niceTime(task.time)
             : ''
         }
       </p>
 
       ${
-        repeatText
+        repeat
           ? `
             <p>
-              <strong>Repeats:</strong>
-              ${esc(repeatText)}
+              <strong>
+                Repeats:
+              </strong>
+
+              ${esc(repeat)}
             </p>
           `
           : ''
       }
 
       ${
-        task.locationName
+        hasLocation
           ? `
 
             <div
@@ -6341,18 +6525,29 @@ function openDetail(
               <div>
 
                 <div class="place-name">
-                  📍 ${esc(task.locationName)}
+                  📍 ${
+                    esc(
+                      task.locationName ||
+                      task.manualLocation
+                    )
+                  }
                 </div>
 
-                <div class="place-address">
-                  ${esc(task.locationAddress)}
-                </div>
+                ${
+                  task.locationAddress
+                    ? `
+                      <div class="place-address">
+                        ${esc(task.locationAddress)}
+                      </div>
+                    `
+                    : ''
+                }
 
               </div>
 
               <button
                 class="mini-btn"
-                data-map-task="${esc(task.id)}"
+                data-task-map="${esc(task.id)}"
               >
                 Open map
               </button>
@@ -6371,10 +6566,10 @@ function openDetail(
 
         <div
           style="
+            padding:12px;
             background:var(--paper);
             border:1px solid var(--line);
             border-radius:8px;
-            padding:12px;
             white-space:pre-wrap;
           "
         >
@@ -6382,9 +6577,7 @@ function openDetail(
             task.notes
               ? esc(task.notes)
               : `
-                <span
-                  style="color:var(--ink-soft)"
-                >
+                <span style="color:var(--ink-soft)">
                   No notes added.
                 </span>
               `
@@ -6404,85 +6597,41 @@ function openDetail(
 
 
 /* =========================================================
-   SETTINGS COMMIT
+   RENDER ALL
    ========================================================= */
 
-function commitSettings(){
-
-  state.theme.green =
-    document
-      .getElementById(
-        'themeGreen'
-      )
-      .value;
-
-
-  state.theme.gold =
-    document
-      .getElementById(
-        'themeGold'
-      )
-      .value;
-
-
-  state.theme.paper =
-    document
-      .getElementById(
-        'themePaper'
-      )
-      .value;
-
-
-  document
-    .querySelectorAll(
-      '[data-setting-id]'
-    )
-    .forEach(row => {
-
-
-      const collection =
-        row.dataset.settingKind ===
-        'class'
-
-          ? state.classes
-          : state.extras;
-
-
-      const item =
-        collection
-          .find(value =>
-            value.id ===
-            row.dataset.settingId
-          );
-
-
-      if(item){
-
-        item.name =
-          row
-            .querySelector(
-              '[data-setting-name]'
-            )
-            .value
-            .trim()
-          || item.name;
-
-
-        item.color =
-          row
-            .querySelector(
-              '[data-setting-color]'
-            )
-            .value;
-
-      }
-
-    });
-
-
-  queueCloudSave();
+function renderAll(){
 
   applyTheme();
+
+  renderAccount();
+
+  renderSelects();
+
+  renderDeadlines();
+
+  renderClasses();
+
+  renderTaskList();
+
+  renderCalendar();
+
+  renderSettings();
+
+
+  if(
+    classModalId &&
+    document
+      .getElementById(
+        'classModal'
+      )
+      .classList
+      .contains('open')
+  ){
+
+    renderClassModal();
+
+  }
 
 }
 
@@ -6498,7 +6647,7 @@ document
   .addEventListener(
     'click',
     () =>
-      switchAuthMode(
+      setAuthMode(
         'signin'
       )
   );
@@ -6511,7 +6660,7 @@ document
   .addEventListener(
     'click',
     () =>
-      switchAuthMode(
+      setAuthMode(
         'signup'
       )
   );
@@ -6527,7 +6676,7 @@ document
 
       event.preventDefault();
 
-      await submitAuth();
+      await handleAuthSubmit();
 
     }
   );
@@ -6535,7 +6684,7 @@ document
 
 document
   .getElementById(
-    'openAddBtn'
+    'addButton'
   )
   .addEventListener(
     'click',
@@ -6546,7 +6695,7 @@ document
 
 document
   .getElementById(
-    'openSettingsBtn'
+    'settingsButton'
   )
   .addEventListener(
     'click',
@@ -6570,7 +6719,7 @@ document
     'click',
     () => {
 
-      updateAccountUI();
+      renderAccount();
 
       openModal(
         'profileModal'
@@ -6582,7 +6731,7 @@ document
 
 document
   .getElementById(
-    'signOutBtn'
+    'signOutButton'
   )
   .addEventListener(
     'click',
@@ -6592,7 +6741,7 @@ document
 
 document
   .getElementById(
-    'saveProfileBtn'
+    'saveProfileButton'
   )
   .addEventListener(
     'click',
@@ -6607,9 +6756,9 @@ document
           .trim();
 
 
-      queueCloudSave();
+      queueSave();
 
-      updateAccountUI();
+      renderAccount();
 
       closeModal(
         'profileModal'
@@ -6621,7 +6770,7 @@ document
 
 document
   .getElementById(
-    'taskForm'
+    'itemForm'
   )
   .addEventListener(
     'submit',
@@ -6637,7 +6786,7 @@ document
 
 document
   .getElementById(
-    'deleteItemBtn'
+    'deleteItemButton'
   )
   .addEventListener(
     'click',
@@ -6700,11 +6849,11 @@ document
 
 document
   .getElementById(
-    'f-repeat'
+    'itemRepeat'
   )
   .addEventListener(
     'change',
-    updateRepeatVisibility
+    updateRepeatUI
   );
 
 
@@ -6754,6 +6903,35 @@ document
 
 document
   .getElementById(
+    'classAddButton'
+  )
+  .addEventListener(
+    'click',
+    () => {
+
+      const id =
+        classModalId;
+
+
+      closeModal(
+        'classModal'
+      );
+
+
+      openItem(
+        null,
+        {
+          type:'assignment',
+          classId:id
+        }
+      );
+
+    }
+  );
+
+
+document
+  .getElementById(
     'prevMonth'
   )
   .addEventListener(
@@ -6796,7 +6974,7 @@ document
 
 document
   .getElementById(
-    'todayBtn'
+    'todayButton'
   )
   .addEventListener(
     'click',
@@ -6822,36 +7000,7 @@ document
 
 document
   .getElementById(
-    'classModalAddBtn'
-  )
-  .addEventListener(
-    'click',
-    () => {
-
-      const id =
-        classModalId;
-
-
-      closeModal(
-        'classModal'
-      );
-
-
-      openItem(
-        null,
-        {
-          type:'assignment',
-          classId:id
-        }
-      );
-
-    }
-  );
-
-
-document
-  .getElementById(
-    'addClassBtn'
+    'addClassButton'
   )
   .addEventListener(
     'click',
@@ -6860,26 +7009,25 @@ document
       commitSettings();
 
 
-      state.classes
-        .push({
+      state.classes.push({
 
-          id:
-            uid('c'),
+        id:
+          uid('c'),
 
-          name:
-            'New class',
+        name:
+          'New class',
 
-          color:
-            '#5D7BA8'
+        color:
+          '#5D7BA8'
 
-        });
+      });
 
 
-      queueCloudSave();
+      queueSave();
 
       renderSettings();
 
-      fillSelects();
+      renderSelects();
 
     }
   );
@@ -6887,7 +7035,7 @@ document
 
 document
   .getElementById(
-    'addExtraBtn'
+    'addExtraButton'
   )
   .addEventListener(
     'click',
@@ -6896,26 +7044,25 @@ document
       commitSettings();
 
 
-      state.extras
-        .push({
+      state.extras.push({
 
-          id:
-            uid('e'),
+        id:
+          uid('e'),
 
-          name:
-            'New extracurricular',
+        name:
+          'New extracurricular',
 
-          color:
-            '#5E846C'
+        color:
+          '#5E846C'
 
-        });
+      });
 
 
-      queueCloudSave();
+      queueSave();
 
       renderSettings();
 
-      fillSelects();
+      renderSelects();
 
     }
   );
@@ -6923,7 +7070,7 @@ document
 
 document
   .getElementById(
-    'saveSettingsBtn'
+    'saveSettingsButton'
   )
   .addEventListener(
     'click',
@@ -6934,8 +7081,6 @@ document
       closeModal(
         'settingsModal'
       );
-
-      renderAll();
 
     }
   );
@@ -7041,16 +7186,16 @@ document
       }
 
 
-      const open =
+      const edit =
         event.target.closest(
-          '[data-open]'
+          '[data-edit]'
         );
 
 
-      if(open){
+      if(edit){
 
         openItem(
-          open.dataset.open
+          edit.dataset.edit
         );
 
       }
@@ -7066,6 +7211,7 @@ document
 
         event.stopPropagation();
 
+
         toggleComplete(
           complete.dataset.complete
         );
@@ -7073,16 +7219,16 @@ document
       }
 
 
-      const classOpen =
+      const classButton =
         event.target.closest(
-          '[data-class-open]'
+          '[data-class]'
         );
 
 
-      if(classOpen){
+      if(classButton){
 
         openClassModal(
-          classOpen.dataset.classOpen
+          classButton.dataset.class
         );
 
       }
@@ -7098,64 +7244,61 @@ document
 
         openDetail(
           detail.dataset.detail,
-          detail.dataset.date
+          detail.dataset.occurrence
         );
 
       }
 
 
-      const mapTask =
+      const taskMap =
         event.target.closest(
-          '[data-map-task]'
+          '[data-task-map]'
         );
 
 
-      if(mapTask){
+      if(taskMap){
 
         const task =
           state.tasks
             .find(item =>
               item.id ===
-              mapTask.dataset.mapTask
+              taskMap.dataset.taskMap
             );
 
 
-        if(task){
-
-          openMapForPlace(
-            task
-          );
-
-        }
-
-      }
-
-
-      const openMap =
-        event.target.closest(
-          '[data-open-map]'
-        );
-
-
-      if(openMap){
-
-        openMapForPlace(
-          selectedPlaceData
+        openMap(
+          task
         );
 
       }
 
 
-      const clearPlace =
+      const previewMap =
         event.target.closest(
-          '[data-clear-place]'
+          '[data-preview-map]'
         );
 
 
-      if(clearPlace){
+      if(previewMap){
 
-        selectedPlaceData =
+        openMap(
+          selectedPlace
+        );
+
+      }
+
+
+      const clearLocation =
+        event.target.closest(
+          '[data-clear-location]'
+        );
+
+
+      if(clearLocation){
+
+        selectedPlace =
           null;
+
 
         renderSelectedPlace();
 
@@ -7192,9 +7335,12 @@ document
           remove.dataset.removeSetting;
 
 
+        const type =
+          remove.dataset.removeType;
+
+
         if(
-          remove.dataset.kind ===
-          'class'
+          type === 'class'
         ){
 
           state.classes =
@@ -7246,11 +7392,12 @@ document
         }
 
 
-        queueCloudSave();
+        queueSave();
 
         renderAll();
 
       }
+
 
     }
   );
@@ -7298,9 +7445,7 @@ document
           .forEach(modal => {
 
             modal.classList
-              .remove(
-                'open'
-              );
+              .remove('open');
 
           });
 
@@ -7311,7 +7456,9 @@ document
 
 
 /* =========================================================
-   START
+   SAFE STARTUP
+
+   THIS WILL NEVER SIT ON THE LOADING SCREEN FOREVER.
    ========================================================= */
 
 async function start(){
@@ -7332,30 +7479,16 @@ async function start(){
         );
 
 
+  loadGoogleMaps();
+
+
   if(!sb){
 
-    document
-      .getElementById(
-        'loadingScreen'
-      )
-      .classList
-      .add(
-        'hidden'
-      );
+    showAuth();
 
 
-    document
-      .getElementById(
-        'authScreen'
-      )
-      .classList
-      .remove(
-        'hidden'
-      );
-
-
-    setAuthMessage(
-      'Supabase has not been configured yet. Add your project URL and key in index.html.',
+    authMessage(
+      'Add your Supabase publishable key in index.html.',
       true
     );
 
@@ -7365,28 +7498,54 @@ async function start(){
   }
 
 
-  const {
-    data:{
-      session
-    }
-  } =
-    await sb.auth
-      .getSession();
+  let session =
+    null;
 
 
-  document
-    .getElementById(
-      'loadingScreen'
-    )
-    .classList
-    .add(
-      'hidden'
+  try{
+
+    const result =
+      await Promise.race([
+
+        sb.auth.getSession(),
+
+        new Promise(
+          (_,reject) => {
+
+            setTimeout(
+              () =>
+                reject(
+                  new Error(
+                    'Session check timed out'
+                  )
+                ),
+              5000
+            );
+
+          }
+        )
+
+      ]);
+
+
+    session =
+      result?.data?.session ||
+      null;
+
+  }
+
+  catch(error){
+
+    console.warn(
+      'Session restore failed:',
+      error
     );
+
+  }
 
 
   if(
-    session &&
-    session.user
+    session?.user
   ){
 
     await enterApp(
@@ -7397,14 +7556,7 @@ async function start(){
 
   else{
 
-    document
-      .getElementById(
-        'authScreen'
-      )
-      .classList
-      .remove(
-        'hidden'
-      );
+    showAuth();
 
   }
 
@@ -7429,12 +7581,16 @@ async function start(){
 
         }
 
+
         if(
           event === 'SIGNED_OUT'
         ){
 
           currentUser =
             null;
+
+
+          showAuth();
 
         }
 
@@ -7447,20 +7603,6 @@ async function start(){
 start();
 
 </script>
-
-
-<!-- =======================================================
-     GOOGLE MAPS
-
-     Replace YOUR_GOOGLE_MAPS_API_KEY.
-     Enable Maps JavaScript API + Places API in Google Cloud.
-     ======================================================= -->
-
-<script
-  async
-  src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&loading=async&libraries=places&callback=initGoogleMaps&v=weekly">
-</script>
-
 
 </body>
 </html>
