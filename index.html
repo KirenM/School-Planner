@@ -1,16 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#1F3D2B">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+  name="theme-color"
+  content="#1F3D2B"
+>
 
 <title>Homeroom</title>
 
 <link rel="icon" href="data:,">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  rel="preconnect"
+  href="https://fonts.googleapis.com"
+>
+
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin
+>
 
 <link
   href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
@@ -22,12 +40,14 @@
 
 <style>
 
-:root{
+:root {
+
   --ink:#1C1B19;
   --ink-soft:#6B675D;
 
   --paper:#F5F3EE;
   --paper-deep:#EDEAE1;
+
   --card:#FFFFFF;
 
   --line:#DBD5C6;
@@ -58,75 +78,109 @@
   --font-display:'Fraunces',serif;
   --font-body:'Inter',system-ui,sans-serif;
   --font-mono:'Space Mono',monospace;
+
 }
 
 
-*{
+* {
+
   box-sizing:border-box;
+
 }
 
 
-html{
+html {
+
   scroll-behavior:smooth;
+
 }
 
 
-body{
+body {
+
   margin:0;
 
   background:var(--paper);
+
   color:var(--ink);
 
   font-family:var(--font-body);
+
   line-height:1.45;
 
   -webkit-font-smoothing:antialiased;
+
+}
+
+
+body.modal-open {
+
+  overflow:hidden;
+
 }
 
 
 h1,
 h2,
-h3{
+h3 {
+
   margin:0;
+
   font-family:var(--font-display);
+
 }
 
 
 button,
 input,
 select,
-textarea{
+textarea {
+
   font:inherit;
+
 }
 
 
-button{
+button {
+
   cursor:pointer;
+
 }
 
 
-button:disabled{
+button:disabled {
+
   cursor:not-allowed;
+
 }
 
 
-.hidden{
+.hidden {
+
   display:none !important;
+
 }
 
 
-.wrap{
+.wrap {
+
   width:100%;
+
   max-width:1160px;
 
   margin:0 auto;
+
   padding:0 24px;
+
 }
 
 
-:focus-visible{
+:focus-visible {
+
   outline:2px solid var(--green);
+
   outline-offset:2px;
+
 }
 
 
@@ -135,48 +189,65 @@ button:disabled{
    AUTH
 ========================================================= */
 
-.auth-screen{
+
+.auth-screen {
+
   min-height:100vh;
 
   display:grid;
+
   grid-template-columns:
     minmax(0,1.15fr)
     minmax(420px,.85fr);
+
 }
 
 
-.auth-hero{
+.auth-hero {
+
   min-height:100vh;
 
   display:flex;
+
   flex-direction:column;
+
   justify-content:space-between;
 
   padding:54px 64px;
 
   background:var(--green);
+
   color:white;
+
 }
 
 
-.auth-brand{
+.auth-brand {
+
   font-family:var(--font-display);
+
   font-size:38px;
+
   font-weight:600;
+
 }
 
 
-.auth-hero-main h1{
+.auth-hero-main h1 {
+
   font-size:clamp(56px,6vw,90px);
 
   line-height:.97;
+
   letter-spacing:-.04em;
 
   font-weight:500;
+
 }
 
 
-.auth-hero-main p{
+.auth-hero-main p {
+
   max-width:570px;
 
   margin:28px 0 0;
@@ -184,86 +255,112 @@ button:disabled{
   color:rgba(255,255,255,.7);
 
   font-size:19px;
+
 }
 
 
-.auth-hero-foot{
+.auth-hero-foot {
+
   color:rgba(255,255,255,.42);
 
   font:10px var(--font-mono);
 
   text-transform:uppercase;
+
   letter-spacing:.08em;
+
 }
 
 
-.auth-panel{
+.auth-panel {
+
   min-height:100vh;
 
   display:flex;
+
   align-items:center;
+
   justify-content:center;
 
   padding:44px;
+
 }
 
 
-.auth-box{
+.auth-box {
+
   width:100%;
+
   max-width:450px;
+
 }
 
 
-.auth-box h2{
+.auth-box h2 {
+
   font-size:38px;
+
 }
 
 
-.auth-subtitle{
+.auth-subtitle {
+
   margin:8px 0 28px;
 
   color:var(--ink-soft);
 
   font-size:17px;
+
 }
 
 
-.auth-tabs{
+.auth-tabs {
+
   display:flex;
 
   margin-bottom:28px;
+
   padding:4px;
 
   background:var(--paper-deep);
 
   border-radius:999px;
+
 }
 
 
-.auth-tab{
+.auth-tab {
+
   flex:1;
 
   border:0;
+
   border-radius:999px;
 
   padding:11px;
 
   background:transparent;
+
   color:var(--ink-soft);
 
   font-weight:700;
+
 }
 
 
-.auth-tab.active{
+.auth-tab.active {
+
   background:white;
+
   color:var(--green);
 
   box-shadow:var(--shadow-card);
+
 }
 
 
-.auth-message{
+.auth-message {
+
   min-height:20px;
 
   margin:0 0 12px;
@@ -271,36 +368,49 @@ button:disabled{
   color:var(--ink-soft);
 
   font-size:12px;
+
 }
 
 
-.auth-message.error{
+.auth-message.error {
+
   color:var(--danger);
+
 }
 
 
-.auth-submit{
+.auth-submit {
+
   width:100%;
+
   justify-content:center;
+
 }
 
 
-.auth-foot{
+.auth-foot {
+
   margin-top:18px;
+
   text-align:center;
+
 }
 
 
-.auth-link{
+.auth-link {
+
   border:0;
 
   background:transparent;
+
   color:var(--ink);
 
   text-decoration:underline;
+
   text-underline-offset:3px;
 
   font-size:12px;
+
 }
 
 
@@ -309,21 +419,26 @@ button:disabled{
    HEADER
 ========================================================= */
 
-.app-header{
+
+.app-header {
+
   position:sticky;
+
   top:0;
 
   z-index:50;
 
   background:var(--green);
+
   color:white;
 
-  border-bottom:
-    1px solid rgba(0,0,0,.15);
+  border-bottom:1px solid rgba(0,0,0,.15);
+
 }
 
 
-.app-header .wrap{
+.app-header .wrap {
+
   min-height:72px;
 
   display:grid;
@@ -336,18 +451,23 @@ button:disabled{
   align-items:center;
 
   gap:16px;
+
 }
 
 
-.brand-title{
+.brand-title {
+
   font-family:var(--font-display);
 
   font-size:26px;
+
   font-weight:600;
+
 }
 
 
-.brand-sub{
+.brand-sub {
+
   margin-top:2px;
 
   color:rgba(255,255,255,.7);
@@ -355,105 +475,126 @@ button:disabled{
   font:10px var(--font-mono);
 
   text-transform:uppercase;
+
   letter-spacing:.06em;
+
 }
 
 
-.top-tabs{
+.top-tabs {
+
   display:flex;
 
   gap:4px;
 
   padding:4px;
 
-  background:
-    rgba(255,255,255,.1);
+  background:rgba(255,255,255,.1);
 
   border-radius:999px;
+
 }
 
 
-.top-tab{
+.top-tab {
+
   border:0;
+
   border-radius:999px;
 
   padding:9px 18px;
 
   background:transparent;
 
-  color:
-    rgba(255,255,255,.72);
+  color:rgba(255,255,255,.72);
 
   font-size:13px;
+
   font-weight:700;
+
 }
 
 
-.top-tab.active{
+.top-tab.active {
+
   background:white;
+
   color:var(--green);
+
 }
 
 
-.header-actions{
+.header-actions {
+
   display:flex;
 
   justify-content:flex-end;
+
   align-items:center;
 
   gap:8px;
+
 }
 
 
-.account-button{
+.account-button {
+
   display:flex;
 
   align-items:center;
 
   gap:8px;
 
-  padding:
-    4px 11px 4px 4px;
+  padding:4px 11px 4px 4px;
 
-  border:
-    1px solid
-    rgba(255,255,255,.3);
+  border:1px solid rgba(255,255,255,.3);
 
   border-radius:999px;
 
-  background:
-    rgba(255,255,255,.08);
+  background:rgba(255,255,255,.08);
 
   color:white;
+
 }
 
 
-.avatar{
+.avatar {
+
   width:31px;
+
   height:31px;
 
   display:grid;
+
   place-items:center;
 
   border-radius:50%;
 
   background:var(--gold);
+
   color:var(--ink);
 
   font-family:var(--font-display);
+
   font-weight:700;
+
 }
 
 
-.account-name{
+.account-name {
+
   max-width:130px;
 
   overflow:hidden;
+
   text-overflow:ellipsis;
+
   white-space:nowrap;
 
   font-size:12px;
+
   font-weight:700;
+
 }
 
 
@@ -462,8 +603,11 @@ button:disabled{
    BUTTONS
 ========================================================= */
 
-.btn{
+
+.btn {
+
   border:0;
+
   border-radius:999px;
 
   padding:11px 18px;
@@ -471,75 +615,100 @@ button:disabled{
   display:inline-flex;
 
   align-items:center;
+
   justify-content:center;
 
   gap:8px;
 
   font-size:14px;
+
   font-weight:700;
+
 }
 
 
-.btn-primary{
+.btn-primary {
+
   background:var(--gold);
+
   color:var(--ink);
+
 }
 
 
-.btn-green{
+.btn-green {
+
   background:var(--green);
+
   color:white;
+
 }
 
 
-.btn-ghost{
+.btn-ghost {
+
   background:transparent;
+
   color:var(--ink-soft);
 
-  border:
-    1px solid var(--line);
+  border:1px solid var(--line);
+
 }
 
 
-.btn-danger{
+.btn-danger {
+
   background:var(--danger-pale);
+
   color:var(--danger);
+
 }
 
 
-.btn-danger-solid{
+.btn-danger-solid {
+
   background:var(--danger);
+
   color:white;
+
 }
 
 
-.btn-family{
+.btn-family {
+
   background:var(--family);
+
   color:white;
+
 }
 
 
-.btn-light{
+.btn-light {
+
   background:var(--paper-deep);
+
   color:var(--ink);
+
 }
 
 
-.btn-outline-light{
-  background:
-    rgba(255,255,255,.08);
+.btn-outline-light {
+
+  background:rgba(255,255,255,.08);
 
   color:white;
 
-  border:
-    1px solid
-    rgba(255,255,255,.35);
+  border:1px solid rgba(255,255,255,.35);
+
 }
 
 
-.btn-small{
+.btn-small {
+
   padding:7px 12px;
+
   font-size:12px;
+
 }
 
 
@@ -548,20 +717,27 @@ button:disabled{
    MAIN
 ========================================================= */
 
-main{
+
+main {
+
   padding-bottom:80px;
+
 }
 
 
-.section{
+.section {
+
   margin-top:40px;
+
 }
 
 
-.section-head{
+.section-head {
+
   display:flex;
 
   align-items:baseline;
+
   justify-content:space-between;
 
   gap:12px;
@@ -569,22 +745,29 @@ main{
   margin-bottom:14px;
 
   flex-wrap:wrap;
+
 }
 
 
-.section-title{
+.section-title {
+
   font-size:22px;
+
   font-weight:600;
+
 }
 
 
-.section-note{
+.section-note {
+
   color:var(--ink-soft);
 
   font:10px var(--font-mono);
 
   text-transform:uppercase;
+
   letter-spacing:.06em;
+
 }
 
 
@@ -593,131 +776,153 @@ main{
    DEADLINES
 ========================================================= */
 
-.deadline-shell{
+
+.deadline-shell {
+
   padding:18px;
 
   background:var(--card);
 
-  border:
-    1px solid var(--line);
+  border:1px solid var(--line);
 
   border-radius:var(--radius-lg);
 
   box-shadow:var(--shadow-card);
+
 }
 
 
-.deadline-grid{
+.deadline-grid {
+
   display:grid;
 
-  grid-template-columns:
-    repeat(4,minmax(0,1fr));
+  grid-template-columns:repeat(4,minmax(0,1fr));
 
   gap:12px;
+
 }
 
 
-.deadline-card{
+.deadline-card {
+
   min-height:130px;
 
   display:flex;
+
   flex-direction:column;
 
   gap:8px;
 
   padding:14px;
 
-  border:
-    1px solid var(--line);
+  border:1px solid var(--line);
 
-  border-top:
-    4px solid
-    var(--accent,#8A8578);
+  border-top:4px solid var(--accent,#8A8578);
 
   border-radius:var(--radius-md);
 
   background:var(--paper);
+
   color:var(--ink);
 
   text-align:left;
+
 }
 
 
-.deadline-card.done{
+.deadline-card.done {
+
   opacity:.58;
+
 }
 
 
-.deadline-card.done
-.deadline-title{
+.deadline-card.done .deadline-title {
+
   text-decoration:line-through;
+
 }
 
 
-.deadline-class{
+.deadline-class {
+
   color:var(--ink);
 
-  font:
-    700 10px
-    var(--font-mono);
+  font:700 10px var(--font-mono);
 
   text-transform:uppercase;
+
 }
 
 
-.deadline-title{
+.deadline-title {
+
   font-family:var(--font-display);
 
   font-size:16px;
+
   font-weight:600;
+
 }
 
 
-.deadline-meta{
+.deadline-meta {
+
   margin-top:auto;
 
   color:var(--ink-soft);
 
-  font:
-    10px
-    var(--font-mono);
+  font:10px var(--font-mono);
+
 }
 
 
-.deadline-badge{
+.deadline-badge {
+
   align-self:flex-start;
 
   padding:4px 8px;
 
   border-radius:999px;
 
-  font:
-    700 9px
-    var(--font-mono);
+  font:700 9px var(--font-mono);
+
 }
 
 
-.deadline-badge.urgent{
+.deadline-badge.urgent {
+
   background:var(--danger-pale);
+
   color:var(--danger);
+
 }
 
 
-.deadline-badge.soon{
+.deadline-badge.soon {
+
   background:#FBF1C9;
+
   color:#745B00;
+
 }
 
 
-.deadline-badge.ok{
+.deadline-badge.ok {
+
   background:var(--green-pale);
+
   color:var(--green);
+
 }
 
 
-.deadline-badge.done{
+.deadline-badge.done {
+
   background:var(--paper-deep);
+
   color:var(--ink-soft);
+
 }
 
 
@@ -726,23 +931,25 @@ main{
    CLASSES
 ========================================================= */
 
-.classes-grid{
+
+.classes-grid {
+
   display:grid;
 
   grid-template-columns:
-    repeat(
-      auto-fill,
-      minmax(240px,1fr)
-    );
+    repeat(auto-fill,minmax(240px,1fr));
 
   gap:14px;
+
 }
 
 
-.class-card{
+.class-card {
+
   min-height:108px;
 
   display:flex;
+
   flex-direction:column;
 
   gap:7px;
@@ -751,58 +958,66 @@ main{
 
   border:0;
 
-  border-left:
-    7px solid var(--accent);
+  border-left:7px solid var(--accent);
 
   border-radius:var(--radius-md);
 
   background:white;
+
   color:var(--ink);
 
   box-shadow:var(--shadow-card);
 
   text-align:left;
+
 }
 
 
-.class-name{
+.class-name {
+
   color:#1C1B19;
 
   font-family:var(--font-display);
 
   font-size:17px;
+
   font-weight:600;
+
 }
 
 
-.class-info-preview{
+.class-info-preview {
+
   color:var(--ink-soft);
 
   font-size:11px;
+
 }
 
 
-.class-meta{
+.class-meta {
+
   margin-top:auto;
 
   display:flex;
 
   justify-content:space-between;
+
   align-items:center;
 
   gap:8px;
 
   color:#1C1B19;
 
-  font:
-    10px
-    var(--font-mono);
+  font:10px var(--font-mono);
 
   text-transform:uppercase;
+
 }
 
 
-.pill-count{
+.pill-count {
+
   padding:3px 8px;
 
   border-radius:999px;
@@ -814,12 +1029,16 @@ main{
   white-space:nowrap;
 
   font-weight:700;
+
 }
 
 
-.pill-count.has-items{
+.pill-count.has-items {
+
   background:var(--accent);
+
   color:white;
+
 }
 
 
@@ -828,50 +1047,67 @@ main{
    TASKS
 ========================================================= */
 
-.filter-tabs{
+
+.filter-tabs {
+
   display:flex;
 
   gap:8px;
 
   flex-wrap:wrap;
+
 }
 
 
-.tab-btn{
+.tab-btn {
+
   border:0;
+
   border-radius:999px;
 
   padding:8px 15px;
 
   background:var(--paper-deep);
+
   color:var(--ink-soft);
 
   font-size:13px;
+
   font-weight:600;
+
 }
 
 
-.tab-btn.active{
+.tab-btn.active {
+
   background:var(--green);
+
   color:white;
+
 }
 
 
 .task-list,
-.class-modal-list{
+.class-modal-list {
+
   display:flex;
+
   flex-direction:column;
 
   gap:9px;
+
 }
 
 
-.task-list{
+.task-list {
+
   margin-top:16px;
+
 }
 
 
-.task-row{
+.task-row {
+
   display:grid;
 
   grid-template-columns:
@@ -885,47 +1121,53 @@ main{
 
   padding:12px 14px;
 
-  border-left:
-    4px solid
-    var(--accent,#8A8578);
+  border-left:4px solid var(--accent,#8A8578);
 
   border-radius:var(--radius-sm);
 
   background:white;
 
   box-shadow:var(--shadow-card);
+
 }
 
 
-.task-main{
+.task-main {
+
   min-width:0;
+
   cursor:pointer;
+
 }
 
 
-.task-title{
+.task-title {
+
   color:#1C1B19;
 
   font-size:14.5px;
+
   font-weight:600;
+
 }
 
 
-.task-meta{
+.task-meta {
+
   margin-top:2px;
 
   color:var(--ink-soft);
 
-  font:
-    10px
-    var(--font-mono);
+  font:10px var(--font-mono);
 
   text-transform:uppercase;
+
 }
 
 
 .type-badge,
-.visibility-badge{
+.visibility-badge {
+
   display:inline-block;
 
   margin-left:4px;
@@ -935,80 +1177,105 @@ main{
   border-radius:5px;
 
   font-size:9px;
+
   font-weight:700;
+
 }
 
 
-.type-badge{
+.type-badge {
+
   background:var(--paper-deep);
+
 }
 
 
-.visibility-badge.personal{
+.visibility-badge.personal {
+
   background:var(--green-pale);
+
   color:var(--green);
+
 }
 
 
-.visibility-badge.family{
+.visibility-badge.family {
+
   background:var(--family-pale);
+
   color:var(--family);
+
 }
 
 
-.check{
+.check {
+
   width:21px;
+
   height:21px;
 
   display:grid;
+
   place-items:center;
 
-  border:
-    2px solid var(--line);
+  border:2px solid var(--line);
 
   border-radius:50%;
 
   background:white;
 
   padding:0;
+
 }
 
 
-.check svg{
+.check svg {
+
   width:12px;
+
   height:12px;
 
   opacity:0;
+
 }
 
 
-.task-row.done{
+.task-row.done {
+
   opacity:.58;
+
 }
 
 
-.task-row.done
-.task-title{
+.task-row.done .task-title {
+
   text-decoration:line-through;
+
   text-decoration-thickness:1.5px;
+
 }
 
 
-.task-row.done
-.check{
+.task-row.done .check {
+
   background:var(--green);
+
   border-color:var(--green);
+
 }
 
 
-.task-row.done
-.check svg{
+.task-row.done .check svg {
+
   opacity:1;
+
 }
 
 
-.item-dot{
+.item-dot {
+
   width:10px;
+
   height:10px;
 
   margin:0 5px;
@@ -1016,48 +1283,59 @@ main{
   border-radius:50%;
 
   background:var(--accent);
+
 }
 
 
-.icon-btn{
+.icon-btn {
+
   width:30px;
+
   height:30px;
 
   display:grid;
+
   place-items:center;
 
   border:0;
+
   border-radius:50%;
 
   padding:0;
 
   background:transparent;
+
   color:var(--ink-soft);
+
 }
 
 
-.icon-btn:hover{
+.icon-btn:hover {
+
   background:var(--paper-deep);
+
 }
 
 
-.empty-state{
+.empty-state {
+
   padding:38px 20px;
 
-  border:
-    1.5px dashed
-    var(--line);
+  border:1.5px dashed var(--line);
 
   border-radius:var(--radius-md);
 
   background:white;
+
   color:var(--ink-soft);
 
   text-align:center;
+
 }
 
 
-.empty-state strong{
+.empty-state strong {
+
   display:block;
 
   margin-bottom:4px;
@@ -1067,6 +1345,7 @@ main{
   font-family:var(--font-display);
 
   font-size:17px;
+
 }
 
 
@@ -1075,10 +1354,13 @@ main{
    CALENDAR
 ========================================================= */
 
-.calendar-toolbar{
+
+.calendar-toolbar {
+
   display:flex;
 
   justify-content:space-between;
+
   align-items:center;
 
   gap:12px;
@@ -1086,10 +1368,12 @@ main{
   flex-wrap:wrap;
 
   margin-bottom:14px;
+
 }
 
 
-.calendar-view-toggle{
+.calendar-view-toggle {
+
   display:flex;
 
   padding:4px;
@@ -1097,166 +1381,198 @@ main{
   border-radius:999px;
 
   background:var(--paper-deep);
+
 }
 
 
-.calendar-view-btn{
+.calendar-view-btn {
+
   border:0;
+
   border-radius:999px;
 
   padding:8px 15px;
 
   background:transparent;
+
   color:var(--ink-soft);
 
   font-size:12px;
+
   font-weight:700;
+
 }
 
 
-.calendar-view-btn.active{
+.calendar-view-btn.active {
+
   background:white;
+
   color:var(--green);
 
   box-shadow:var(--shadow-card);
+
 }
 
 
-.calendar-shell{
+.calendar-shell {
+
   overflow:hidden;
 
   background:white;
 
-  border:
-    1px solid var(--line);
+  border:1px solid var(--line);
 
   border-radius:var(--radius-lg);
 
   box-shadow:var(--shadow-card);
+
 }
 
 
-.calendar-head{
+.calendar-head {
+
   display:flex;
 
   justify-content:space-between;
+
   align-items:center;
 
   gap:12px;
 
   padding:18px 20px;
 
-  border-bottom:
-    1px solid var(--line);
+  border-bottom:1px solid var(--line);
+
 }
 
 
-.month-title{
+.month-title {
+
   font-family:var(--font-display);
 
   font-size:24px;
+
   font-weight:600;
+
 }
 
 
-.cal-controls{
+.cal-controls {
+
   display:flex;
+
   gap:7px;
+
 }
 
 
-.cal-btn{
-  border:
-    1px solid var(--line);
+.cal-btn {
+
+  border:1px solid var(--line);
 
   border-radius:9px;
 
   padding:8px 11px;
 
   background:var(--paper);
+
   color:var(--ink);
 
   font-weight:700;
+
 }
 
 
 .calendar-week,
-.calendar-grid{
+.calendar-grid {
+
   display:grid;
 
-  grid-template-columns:
-    repeat(7,1fr);
+  grid-template-columns:repeat(7,1fr);
+
 }
 
 
-.calendar-week{
+.calendar-week {
+
   background:var(--paper-deep);
+
 }
 
 
-.week-label{
+.week-label {
+
   padding:8px;
 
   color:var(--ink-soft);
 
   text-align:center;
 
-  font:
-    9px
-    var(--font-mono);
+  font:9px var(--font-mono);
+
 }
 
 
-.day-cell{
+.day-cell {
+
   min-height:126px;
 
   padding:7px;
 
-  border-right:
-    1px solid var(--line);
+  border-right:1px solid var(--line);
 
-  border-bottom:
-    1px solid var(--line);
+  border-bottom:1px solid var(--line);
 
   background:white;
+
 }
 
 
-.day-cell:nth-child(7n){
+.day-cell:nth-child(7n) {
+
   border-right:0;
+
 }
 
 
-.day-cell.other{
+.day-cell.other {
+
   background:#FAF9F6;
+
 }
 
 
-.day-num{
+.day-num {
+
   width:26px;
+
   height:26px;
 
   display:grid;
+
   place-items:center;
 
   border-radius:8px;
 
   color:var(--ink-soft);
 
-  font:
-    10px
-    var(--font-mono);
+  font:10px var(--font-mono);
+
 }
 
 
-.day-cell.today
-.day-num{
+.day-cell.today .day-num {
+
   background:var(--green);
+
   color:white;
+
 }
 
 
-.cal-event{
+.cal-event {
+
   width:100%;
 
   display:block;
@@ -1269,13 +1585,12 @@ main{
 
   border:0;
 
-  border-left:
-    3px solid
-    var(--event-color);
+  border-left:3px solid var(--event-color);
 
   border-radius:7px;
 
   background:#F7F7F5;
+
   color:#1C1B19;
 
   text-align:left;
@@ -1283,18 +1598,21 @@ main{
   font-size:10px;
 
   text-overflow:ellipsis;
+
   white-space:nowrap;
+
 }
 
 
-.cal-event.family{
-  box-shadow:
-    inset 0 0 0 1px
-    rgba(123,90,166,.18);
+.cal-event.family {
+
+  box-shadow:inset 0 0 0 1px rgba(123,90,166,.18);
+
 }
 
 
-.calendar-legend{
+.calendar-legend {
+
   display:flex;
 
   gap:12px;
@@ -1305,26 +1623,30 @@ main{
 
   color:var(--ink-soft);
 
-  font:
-    10px
-    var(--font-mono);
+  font:10px var(--font-mono);
+
 }
 
 
-.legend-item{
+.legend-item {
+
   display:flex;
 
   align-items:center;
 
   gap:5px;
+
 }
 
 
-.legend-dot{
+.legend-dot {
+
   width:8px;
+
   height:8px;
 
   border-radius:50%;
+
 }
 
 
@@ -1333,23 +1655,26 @@ main{
    WEEK VIEW
 ========================================================= */
 
-.week-shell{
+
+.week-shell {
+
   margin-top:14px;
 
   overflow:auto;
 
   background:white;
 
-  border:
-    1px solid var(--line);
+  border:1px solid var(--line);
 
   border-radius:var(--radius-lg);
 
   box-shadow:var(--shadow-card);
+
 }
 
 
-.week-grid{
+.week-grid {
+
   min-width:930px;
 
   display:grid;
@@ -1359,12 +1684,15 @@ main{
     repeat(7,1fr);
 
   position:relative;
+
 }
 
 
 .week-corner,
-.week-day-head{
+.week-day-head {
+
   position:sticky;
+
   top:0;
 
   z-index:4;
@@ -1373,153 +1701,156 @@ main{
 
   background:var(--paper-deep);
 
-  border-bottom:
-    1px solid var(--line);
+  border-bottom:1px solid var(--line);
+
 }
 
 
-.week-corner{
-  border-right:
-    1px solid var(--line);
+.week-corner {
+
+  border-right:1px solid var(--line);
+
 }
 
 
-.week-day-head{
+.week-day-head {
+
   padding:11px 8px;
 
   text-align:center;
 
-  border-right:
-    1px solid var(--line);
+  border-right:1px solid var(--line);
+
 }
 
 
-/*
-   CURRENT DAY:
-   SAME STRONG DARK GREEN AS MONTH VIEW
-*/
+.week-day-head.today {
 
-.week-day-head.today{
   background:var(--green);
+
   color:white;
+
 }
 
 
-.week-day-head.today
-.week-day-name{
-  color:
-    rgba(255,255,255,.75);
+.week-day-head.today .week-day-name {
+
+  color:rgba(255,255,255,.75);
+
 }
 
 
-.week-day-head.today
-.week-day-number{
+.week-day-head.today .week-day-number {
+
   color:white;
+
 }
 
 
-.week-day-name{
+.week-day-name {
+
   color:var(--ink-soft);
 
-  font:
-    10px
-    var(--font-mono);
+  font:10px var(--font-mono);
 
   text-transform:uppercase;
+
 }
 
 
-.week-day-number{
+.week-day-number {
+
   margin-top:3px;
 
   font-family:var(--font-display);
 
   font-size:20px;
+
   font-weight:600;
+
 }
 
 
-.all-day-label{
+.all-day-label {
+
   padding:10px 5px;
 
   color:var(--ink-soft);
 
-  font:
-    9px
-    var(--font-mono);
+  font:9px var(--font-mono);
 
-  border-right:
-    1px solid var(--line);
+  border-right:1px solid var(--line);
 
-  border-bottom:
-    1px solid var(--line);
+  border-bottom:1px solid var(--line);
+
 }
 
 
-.all-day-cell{
+.all-day-cell {
+
   min-height:55px;
 
   padding:5px;
 
-  border-right:
-    1px solid var(--line);
+  border-right:1px solid var(--line);
 
-  border-bottom:
-    1px solid var(--line);
+  border-bottom:1px solid var(--line);
+
 }
 
 
-.all-day-cell.today{
-  background:
-    rgba(31,61,43,.035);
+.all-day-cell.today {
+
+  background:rgba(31,61,43,.035);
+
 }
 
 
-.week-time{
+.week-time {
+
   height:56px;
 
-  padding:
-    4px 6px 0 0;
+  padding:4px 6px 0 0;
 
-  border-right:
-    1px solid var(--line);
+  border-right:1px solid var(--line);
 
-  border-bottom:
-    1px solid var(--line);
+  border-bottom:1px solid var(--line);
 
   color:var(--ink-soft);
 
   text-align:right;
 
-  font:
-    9px
-    var(--font-mono);
+  font:9px var(--font-mono);
+
 }
 
 
-.week-hour-cell{
+.week-hour-cell {
+
   position:relative;
 
   height:56px;
 
-  border-right:
-    1px solid var(--line);
+  border-right:1px solid var(--line);
 
-  border-bottom:
-    1px solid var(--line);
+  border-bottom:1px solid var(--line);
+
 }
 
 
-.week-hour-cell.today{
-  background:
-    rgba(31,61,43,.025);
+.week-hour-cell.today {
+
+  background:rgba(31,61,43,.025);
+
 }
 
 
-.week-event{
+.week-event {
+
   position:absolute;
 
   left:4px;
+
   right:4px;
 
   z-index:3;
@@ -1530,34 +1861,36 @@ main{
 
   border:0;
 
-  border-left:
-    4px solid
-    var(--event-color);
+  border-left:4px solid var(--event-color);
 
   border-radius:8px;
 
   background:#F7F7F5;
+
   color:var(--ink);
 
   text-align:left;
 
   font-size:10px;
 
-  box-shadow:
-    0 2px 8px
-    rgba(28,27,25,.08);
+  box-shadow:0 2px 8px rgba(28,27,25,.08);
+
 }
 
 
-.week-event.family{
+.week-event.family {
+
   background:var(--family-pale);
+
 }
 
 
-.current-time-line{
+.current-time-line {
+
   position:absolute;
 
   left:64px;
+
   right:0;
 
   z-index:6;
@@ -1567,21 +1900,26 @@ main{
   background:var(--danger);
 
   pointer-events:none;
+
 }
 
 
-.current-time-dot{
+.current-time-dot {
+
   position:absolute;
 
   left:-4px;
+
   top:-3px;
 
   width:8px;
+
   height:8px;
 
   border-radius:50%;
 
   background:var(--danger);
+
 }
 
 
@@ -1590,7 +1928,9 @@ main{
    MODALS
 ========================================================= */
 
-.modal-overlay{
+
+.modal-overlay {
+
   position:fixed;
 
   inset:0;
@@ -1600,31 +1940,38 @@ main{
   display:none;
 
   align-items:center;
+
   justify-content:center;
 
   padding:20px;
 
-  background:
-    rgba(28,27,25,.55);
+  background:rgba(28,27,25,.55);
 
   backdrop-filter:blur(3px);
+
 }
 
 
-.modal-overlay.open{
+.modal-overlay.open {
+
   display:flex;
+
 }
 
 
-.modal-box{
+.modal-box {
+
   position:relative;
 
   width:100%;
+
   max-width:540px;
 
-  max-height:91vh;
+  max-height:88vh;
 
   overflow-y:auto;
+
+  overscroll-behavior:contain;
 
   padding:26px;
 
@@ -1633,51 +1980,65 @@ main{
   background:white;
 
   box-shadow:var(--shadow-modal);
+
 }
 
 
-.modal-box.wide{
+.modal-box.wide {
+
   max-width:760px;
+
 }
 
 
-.modal-close{
+.modal-close {
+
   position:absolute;
 
   top:16px;
+
   right:16px;
 
   width:30px;
+
   height:30px;
 
   display:grid;
+
   place-items:center;
 
   border:0;
+
   border-radius:50%;
 
   background:var(--paper-deep);
+
   color:var(--ink-soft);
+
 }
 
 
-.modal-title{
+.modal-title {
+
   padding-right:40px;
 
   font-size:22px;
+
 }
 
 
-.modal-accent-bar{
+.modal-accent-bar {
+
   width:52px;
+
   height:6px;
 
-  margin:
-    8px 0 18px;
+  margin:8px 0 18px;
 
   border-radius:999px;
 
   background:var(--green);
+
 }
 
 
@@ -1686,24 +2047,28 @@ main{
    FORMS
 ========================================================= */
 
-.field{
+
+.field {
+
   margin-bottom:15px;
+
 }
 
 
-.field label{
+.field label {
+
   display:block;
 
   margin-bottom:6px;
 
   color:var(--ink-soft);
 
-  font:
-    700 10px
-    var(--font-mono);
+  font:700 10px var(--font-mono);
 
   text-transform:uppercase;
+
   letter-spacing:.06em;
+
 }
 
 
@@ -1713,78 +2078,93 @@ main{
 .field input[type=date],
 .field input[type=time],
 .field select,
-.field textarea{
+.field textarea {
+
   width:100%;
 
-  border:
-    1.5px solid
-    var(--line);
+  border:1.5px solid var(--line);
 
   border-radius:var(--radius-sm);
 
   padding:11px 12px;
 
   background:var(--paper);
+
   color:var(--ink);
 
   font-size:14px;
+
 }
 
 
-.field textarea{
+.field textarea {
+
   min-height:90px;
+
   resize:vertical;
+
 }
 
 
-.field-row{
+.field-row {
+
   display:flex;
+
   gap:12px;
+
 }
 
 
-.field-row
-.field{
+.field-row .field {
+
   flex:1;
+
 }
 
 
-.type-toggle{
+.type-toggle {
+
   display:grid;
 
-  grid-template-columns:
-    repeat(5,1fr);
+  grid-template-columns:repeat(5,1fr);
 
   gap:7px;
+
 }
 
 
-.type-toggle button{
-  border:
-    1.5px solid
-    var(--line);
+.type-toggle button {
+
+  border:1.5px solid var(--line);
 
   border-radius:var(--radius-sm);
 
   padding:9px 5px;
 
   background:var(--paper);
+
   color:var(--ink-soft);
 
   font-size:11px;
+
   font-weight:700;
+
 }
 
 
-.type-toggle button.active{
+.type-toggle button.active {
+
   border-color:var(--green);
 
   background:var(--green-pale);
+
   color:var(--green);
+
 }
 
 
-.form-actions{
+.form-actions {
+
   margin-top:8px;
 
   display:flex;
@@ -1792,25 +2172,32 @@ main{
   justify-content:space-between;
 
   gap:10px;
+
 }
 
 
-.action-right{
+.action-right {
+
   display:flex;
+
   gap:10px;
+
 }
 
 
-.helper-text{
+.helper-text {
+
   margin-top:6px;
 
   color:var(--ink-soft);
 
   font-size:11px;
+
 }
 
 
-.toggle-row{
+.toggle-row {
+
   display:flex;
 
   align-items:center;
@@ -1821,126 +2208,295 @@ main{
 
   background:var(--paper);
 
-  border:
-    1px solid var(--line);
+  border:1px solid var(--line);
 
   border-radius:10px;
+
 }
 
 
-.toggle-row input{
+.toggle-row input {
+
   width:17px;
+
   height:17px;
+
 }
 
 
-.toggle-copy strong{
+.toggle-copy {
+
+  flex:1;
+
+}
+
+
+.toggle-copy strong {
+
   display:block;
 
   font-size:13px;
+
 }
 
 
-.toggle-copy span{
+.toggle-copy span {
+
   display:block;
 
   color:var(--ink-soft);
 
   font-size:11px;
+
 }
 
 
-.visibility-toggle{
+
+/* =========================================================
+   NEW SETTINGS SWITCH
+========================================================= */
+
+
+.setting-toggle-card {
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:18px;
+
+  padding:14px;
+
+  border:1px solid var(--line);
+
+  border-radius:12px;
+
+  background:var(--paper);
+
+}
+
+
+.setting-toggle-copy {
+
+  flex:1;
+
+}
+
+
+.setting-toggle-copy strong {
+
+  display:block;
+
+  font-size:14px;
+
+}
+
+
+.setting-toggle-copy span {
+
+  display:block;
+
+  margin-top:3px;
+
+  color:var(--ink-soft);
+
+  font-size:11px;
+
+}
+
+
+.switch {
+
+  position:relative;
+
+  width:48px;
+
+  height:28px;
+
+  flex:none;
+
+}
+
+
+.switch input {
+
+  width:0;
+
+  height:0;
+
+  opacity:0;
+
+}
+
+
+.switch-slider {
+
+  position:absolute;
+
+  inset:0;
+
+  border-radius:999px;
+
+  background:#CFCBC0;
+
+  transition:.2s ease;
+
+}
+
+
+.switch-slider::after {
+
+  content:'';
+
+  position:absolute;
+
+  top:4px;
+
+  left:4px;
+
+  width:20px;
+
+  height:20px;
+
+  border-radius:50%;
+
+  background:white;
+
+  box-shadow:0 1px 4px rgba(0,0,0,.18);
+
+  transition:.2s ease;
+
+}
+
+
+.switch input:checked + .switch-slider {
+
+  background:var(--green);
+
+}
+
+
+.switch input:checked + .switch-slider::after {
+
+  transform:translateX(20px);
+
+}
+
+
+
+/* =========================================================
+   VISIBILITY
+========================================================= */
+
+
+.visibility-toggle {
+
   display:grid;
 
-  grid-template-columns:
-    1fr 1fr;
+  grid-template-columns:1fr 1fr;
 
   gap:8px;
+
 }
 
 
-.visibility-btn{
-  border:
-    1.5px solid
-    var(--line);
+.visibility-btn {
+
+  border:1.5px solid var(--line);
 
   border-radius:10px;
 
   padding:11px;
 
   background:var(--paper);
+
   color:var(--ink-soft);
 
   font-weight:700;
+
 }
 
 
-.visibility-btn.active.personal{
+.visibility-btn.active.personal {
+
   border-color:var(--green);
 
   background:var(--green-pale);
+
   color:var(--green);
+
 }
 
 
-.visibility-btn.active.family{
+.visibility-btn.active.family {
+
   border-color:var(--family);
 
   background:var(--family-pale);
+
   color:var(--family);
+
 }
 
 
-.weekday-picker{
+.weekday-picker {
+
   display:grid;
 
-  grid-template-columns:
-    repeat(7,1fr);
+  grid-template-columns:repeat(7,1fr);
 
   gap:7px;
+
 }
 
 
-.weekday-picker button{
+.weekday-picker button {
+
   height:40px;
 
-  border:
-    1.5px solid
-    var(--line);
+  border:1.5px solid var(--line);
 
   border-radius:10px;
 
   background:var(--paper);
+
   color:var(--ink-soft);
 
   font-size:12px;
+
   font-weight:700;
+
 }
 
 
-.weekday-picker
-button.active{
+.weekday-picker button.active {
+
   border-color:var(--green);
 
   background:var(--green);
+
   color:white;
+
 }
 
 
-.location-box{
+.location-box {
+
   padding:12px;
 
-  border:
-    1px solid var(--line);
+  border:1px solid var(--line);
 
   border-radius:var(--radius-sm);
 
   background:var(--paper);
+
 }
 
 
-.location-actions{
+.location-actions {
+
   display:flex;
 
   gap:8px;
@@ -1948,20 +2504,26 @@ button.active{
   flex-wrap:wrap;
 
   margin-top:8px;
+
 }
 
 
-.mini-btn{
+.mini-btn {
+
   border:0;
+
   border-radius:999px;
 
   padding:7px 10px;
 
   background:var(--paper-deep);
+
   color:var(--ink);
 
   font-size:11px;
+
   font-weight:700;
+
 }
 
 
@@ -1970,45 +2532,50 @@ button.active{
    CLASS DETAILS
 ========================================================= */
 
-.class-info-panel{
+
+.class-info-panel {
+
   display:grid;
 
-  grid-template-columns:
-    1fr 1fr;
+  grid-template-columns:1fr 1fr;
 
   gap:10px;
 
   margin-bottom:18px;
+
 }
 
 
-.info-card{
+.info-card {
+
   padding:12px;
 
-  border:
-    1px solid var(--line);
+  border:1px solid var(--line);
 
   border-radius:10px;
 
   background:var(--paper);
+
 }
 
 
-.info-card-label{
+.info-card-label {
+
   color:var(--ink-soft);
 
-  font:
-    9px
-    var(--font-mono);
+  font:9px var(--font-mono);
 
   text-transform:uppercase;
+
 }
 
 
-.info-card-value{
+.info-card-value {
+
   margin-top:4px;
 
   font-weight:600;
+
 }
 
 
@@ -2017,19 +2584,22 @@ button.active{
    ATTACHMENTS
 ========================================================= */
 
-.attachments-box{
+
+.attachments-box {
+
   padding:14px;
 
-  border:
-    1px solid var(--line);
+  border:1px solid var(--line);
 
   border-radius:12px;
 
   background:var(--paper);
+
 }
 
 
-.attachment-actions{
+.attachment-actions {
+
   display:flex;
 
   gap:8px;
@@ -2037,62 +2607,71 @@ button.active{
   flex-wrap:wrap;
 
   margin-bottom:12px;
+
 }
 
 
-.attachment-grid{
+.attachment-grid {
+
   display:grid;
 
   grid-template-columns:
-    repeat(
-      auto-fill,
-      minmax(135px,1fr)
-    );
+    repeat(auto-fill,minmax(135px,1fr));
 
   gap:10px;
+
 }
 
 
-.attachment-card{
+.attachment-card {
+
   position:relative;
 
   min-height:110px;
 
   overflow:hidden;
 
-  border:
-    1px solid var(--line);
+  border:1px solid var(--line);
 
   border-radius:10px;
 
   background:white;
+
 }
 
 
-.attachment-preview{
+.attachment-preview {
+
   width:100%;
+
   height:86px;
 
   object-fit:cover;
 
   display:block;
+
 }
 
 
-.attachment-file{
+.attachment-file {
+
   height:86px;
 
   display:grid;
+
   place-items:center;
 
   color:var(--ink-soft);
 
   font-family:var(--font-mono);
+
   font-size:11px;
+
 }
 
 
-.attachment-name{
+.attachment-name {
+
   padding:7px;
 
   overflow:hidden;
@@ -2102,31 +2681,38 @@ button.active{
   font-size:10px;
 
   text-overflow:ellipsis;
+
   white-space:nowrap;
+
 }
 
 
-.attachment-remove{
+.attachment-remove {
+
   position:absolute;
 
   top:5px;
+
   right:5px;
 
   z-index:2;
 
   width:24px;
+
   height:24px;
 
   display:grid;
+
   place-items:center;
 
   border:0;
+
   border-radius:50%;
 
-  background:
-    rgba(28,27,25,.76);
+  background:rgba(28,27,25,.76);
 
   color:white;
+
 }
 
 
@@ -2135,78 +2721,95 @@ button.active{
    SETTINGS
 ========================================================= */
 
-.settings-section{
+
+.settings-section {
+
   padding:16px 0;
 
-  border-top:
-    1px solid var(--line);
+  border-top:1px solid var(--line);
+
 }
 
 
-.settings-section:first-child{
+.settings-section:first-child {
+
   border-top:0;
+
 }
 
 
-.settings-title{
+.settings-title {
+
   font-family:var(--font-display);
 
   font-size:18px;
+
   font-weight:600;
+
 }
 
 
-.settings-copy{
-  margin:
-    3px 0 12px;
+.settings-copy {
+
+  margin:3px 0 12px;
 
   color:var(--ink-soft);
 
   font-size:12px;
+
 }
 
 
-.color-grid{
+.color-grid {
+
   display:grid;
 
-  grid-template-columns:
-    repeat(3,1fr);
+  grid-template-columns:repeat(3,1fr);
 
   gap:10px;
+
 }
 
 
-.color-card{
+.color-card {
+
   padding:10px;
 
-  border:
-    1px solid var(--line);
+  border:1px solid var(--line);
 
   border-radius:10px;
 
   background:var(--paper);
+
 }
 
 
-.color-card input{
+.color-card input {
+
   width:100%;
+
   height:38px;
 
   border:0;
 
   background:transparent;
+
 }
 
 
-.editor-list{
+.editor-list {
+
   display:flex;
+
   flex-direction:column;
 
   gap:8px;
+
 }
 
 
-.editor-row{
+.editor-row {
+
   display:grid;
 
   grid-template-columns:
@@ -2219,104 +2822,120 @@ button.active{
   gap:8px;
 
   align-items:center;
+
 }
 
 
-.editor-row input[type=color]{
+.editor-row input[type=color] {
+
   width:38px;
+
   height:38px;
 
   border:0;
 
   background:transparent;
+
 }
 
 
-.editor-row input[type=text]{
+.editor-row input[type=text] {
+
   width:100%;
 
   padding:9px;
 
-  border:
-    1px solid var(--line);
+  border:1px solid var(--line);
 
   border-radius:8px;
 
   background:var(--paper);
+
 }
 
 
-.add-inline{
+.add-inline {
+
   width:100%;
 
   margin-top:8px;
 
   padding:9px;
 
-  border:
-    1px dashed
-    var(--line);
+  border:1px dashed var(--line);
 
   border-radius:9px;
 
   background:transparent;
+
   color:var(--green);
 
   font-weight:700;
+
 }
 
 
 
 /* =========================================================
-   FAMILY SHARING
+   FAMILY
 ========================================================= */
 
-.family-card{
+
+.family-card {
+
   padding:16px;
 
-  border:
-    1px solid var(--line);
+  border:1px solid var(--line);
 
   border-radius:14px;
 
   background:var(--paper);
+
 }
 
 
-.family-header{
+.family-header {
+
   display:flex;
 
   justify-content:space-between;
+
   align-items:center;
 
   gap:12px;
+
 }
 
 
-.family-name{
+.family-name {
+
   font-family:var(--font-display);
 
   font-size:18px;
+
   font-weight:600;
+
 }
 
 
-.member-list{
+.member-list {
+
   display:flex;
+
   flex-direction:column;
 
   gap:7px;
 
   margin-top:14px;
+
 }
 
 
-.member-row{
+.member-row {
+
   display:grid;
 
-  grid-template-columns:
-    minmax(0,1fr)
-    auto;
+  grid-template-columns:minmax(0,1fr) auto;
 
   align-items:center;
 
@@ -2327,26 +2946,34 @@ button.active{
   border-radius:9px;
 
   background:white;
+
 }
 
 
-.member-identity{
+.member-identity {
+
   min-width:0;
+
 }
 
 
-.member-name{
+.member-name {
+
   overflow:hidden;
 
   font-size:12px;
+
   font-weight:600;
 
   text-overflow:ellipsis;
+
   white-space:nowrap;
+
 }
 
 
-.member-email{
+.member-email {
+
   margin-top:2px;
 
   overflow:hidden;
@@ -2356,50 +2983,57 @@ button.active{
   font-size:10px;
 
   text-overflow:ellipsis;
+
   white-space:nowrap;
+
 }
 
 
-.member-controls{
+.member-controls {
+
   display:flex;
 
   align-items:center;
 
   gap:7px;
+
 }
 
 
-.member-role-select{
+.member-role-select {
+
   padding:6px 8px;
 
-  border:
-    1px solid var(--line);
+  border:1px solid var(--line);
 
   border-radius:8px;
 
   background:var(--paper);
 
   font-size:11px;
+
 }
 
 
-.member-role{
+.member-role {
+
   padding:3px 7px;
 
   border-radius:999px;
 
   background:var(--paper-deep);
+
   color:var(--ink-soft);
 
-  font:
-    9px
-    var(--font-mono);
+  font:9px var(--font-mono);
 
   text-transform:uppercase;
+
 }
 
 
-.invite-code{
+.invite-code {
+
   margin-top:14px;
 
   padding:12px;
@@ -2407,27 +3041,31 @@ button.active{
   display:flex;
 
   align-items:center;
+
   justify-content:space-between;
 
   gap:10px;
 
-  border:
-    1px dashed
-    var(--family);
+  border:1px dashed var(--family);
 
   border-radius:10px;
 
   background:var(--family-pale);
+
 }
 
 
-.invite-code strong{
+.invite-code strong {
+
   font-family:var(--font-mono);
+
   letter-spacing:.08em;
+
 }
 
 
-.family-bottom-actions{
+.family-bottom-actions {
+
   display:flex;
 
   gap:8px;
@@ -2435,99 +3073,115 @@ button.active{
   flex-wrap:wrap;
 
   margin-top:14px;
+
 }
 
 
-.family-danger-zone{
+.family-danger-zone {
+
   margin-top:18px;
 
   padding-top:16px;
 
-  border-top:
-    1px solid #E4C3C0;
+  border-top:1px solid #E4C3C0;
+
 }
 
 
-.invite-banner{
+.invite-banner {
+
   margin-bottom:10px;
 
   padding:14px;
 
-  border:
-    1px solid #D8CAE7;
+  border:1px solid #D8CAE7;
 
   border-radius:12px;
 
   background:var(--family-pale);
+
 }
 
 
-.invite-banner-title{
+.invite-banner-title {
+
   font-family:var(--font-display);
 
   font-size:16px;
+
   font-weight:600;
+
 }
 
 
-.invite-banner-actions{
+.invite-banner-actions {
+
   display:flex;
 
   gap:8px;
 
   margin-top:10px;
+
 }
 
 
 
 /* =========================================================
-   DANGER / CONFIRMATION
+   DANGER
 ========================================================= */
 
-.danger-zone{
+
+.danger-zone {
+
   margin-top:24px;
 
   padding:16px;
 
-  border:
-    1px solid #E4C3C0;
+  border:1px solid #E4C3C0;
 
   border-radius:14px;
 
   background:#FFF9F8;
+
 }
 
 
-.choice-stack{
+.choice-stack {
+
   display:flex;
+
   flex-direction:column;
 
   gap:9px;
 
   margin-top:16px;
+
 }
 
 
-.choice-btn{
+.choice-btn {
+
   width:100%;
 
   padding:13px 14px;
 
-  border:
-    1px solid var(--line);
+  border:1px solid var(--line);
 
   border-radius:12px;
 
   background:var(--paper);
+
   color:var(--ink);
 
   text-align:left;
 
   font-weight:700;
+
 }
 
 
-.choice-btn small{
+.choice-btn small {
+
   display:block;
 
   margin-top:2px;
@@ -2535,14 +3189,18 @@ button.active{
   color:var(--ink-soft);
 
   font-weight:500;
+
 }
 
 
-.choice-btn.danger{
+.choice-btn.danger {
+
   border-color:#E4C3C0;
 
   background:var(--danger-pale);
+
   color:var(--danger);
+
 }
 
 
@@ -2551,10 +3209,13 @@ button.active{
    FOOTER
 ========================================================= */
 
-.sync-line{
+
+.sync-line {
+
   display:flex;
 
   align-items:center;
+
   justify-content:center;
 
   gap:6px;
@@ -2563,33 +3224,34 @@ button.active{
 
   color:var(--ink-soft);
 
-  font:
-    10px
-    var(--font-mono);
+  font:10px var(--font-mono);
+
 }
 
 
-.sync-dot{
+.sync-dot {
+
   width:7px;
+
   height:7px;
 
   border-radius:50%;
 
   background:#569B65;
+
 }
 
 
-footer{
-  padding:
-    30px 20px 40px;
+footer {
+
+  padding:30px 20px 40px;
 
   color:var(--ink-soft);
 
   text-align:center;
 
-  font:
-    10px
-    var(--font-mono);
+  font:10px var(--font-mono);
+
 }
 
 
@@ -2598,176 +3260,232 @@ footer{
    MOBILE
 ========================================================= */
 
-@media(max-width:920px){
 
-  .deadline-grid{
-    grid-template-columns:
-      repeat(2,1fr);
+@media(max-width:920px) {
+
+  .deadline-grid {
+
+    grid-template-columns:repeat(2,1fr);
+
   }
 
 
-  .editor-row{
+  .editor-row {
+
     grid-template-columns:
       38px
       1fr
       auto;
+
   }
 
 
   .editor-teacher,
-  .editor-room{
+  .editor-room {
+
     grid-column:2;
+
   }
 
 }
 
 
-@media(max-width:760px){
+@media(max-width:760px) {
 
-  .auth-screen{
+  .auth-screen {
+
     grid-template-columns:1fr;
+
   }
 
 
-  .auth-hero{
+  .auth-hero {
+
     min-height:310px;
 
     padding:32px 24px;
+
   }
 
 
-  .auth-hero-main h1{
+  .auth-hero-main h1 {
+
     font-size:48px;
+
   }
 
 
-  .auth-panel{
+  .auth-panel {
+
     min-height:auto;
 
     padding:42px 22px;
+
   }
 
 
-  .auth-hero-foot{
+  .auth-hero-foot {
+
     display:none;
+
   }
 
 }
 
 
-@media(max-width:640px){
+@media(max-width:640px) {
 
-  .wrap{
+  .wrap {
+
     padding:0 16px;
+
   }
 
 
-  .app-header .wrap{
+  .app-header .wrap {
+
     grid-template-columns:
-      1fr auto;
+      1fr
+      auto;
 
     padding-top:12px;
+
     padding-bottom:12px;
+
   }
 
 
-  .top-tabs{
+  .top-tabs {
+
     grid-column:1/-1;
+
     grid-row:2;
 
     width:100%;
+
   }
 
 
-  .top-tab{
+  .top-tab {
+
     flex:1;
+
   }
 
 
-  .header-actions{
+  .header-actions {
+
     grid-column:2;
+
     grid-row:1;
+
   }
 
 
   .account-name,
-  .btn-label{
+  .btn-label {
+
     display:none;
+
   }
 
 
-  .account-button{
+  .account-button {
+
     padding-right:4px;
+
   }
 
 
-  .deadline-grid{
+  .deadline-grid {
+
     grid-template-columns:1fr;
+
   }
 
 
-  .field-row{
+  .field-row {
+
     flex-direction:column;
+
     gap:0;
+
   }
 
 
-  .type-toggle{
-    grid-template-columns:
-      repeat(2,1fr);
+  .type-toggle {
+
+    grid-template-columns:repeat(2,1fr);
+
   }
 
 
-  .color-grid{
+  .color-grid {
+
     grid-template-columns:1fr;
+
   }
 
 
-  .class-info-panel{
+  .class-info-panel {
+
     grid-template-columns:1fr;
+
   }
 
 
-  .day-cell{
+  .day-cell {
+
     min-height:90px;
 
     padding:4px;
+
   }
 
 
-  .cal-event{
+  .cal-event {
+
     min-height:9px;
 
     font-size:0;
+
   }
 
 
-  .cal-event::after{
+  .cal-event::after {
+
     content:'';
 
     display:block;
 
     width:6px;
+
     height:6px;
 
     border-radius:50%;
 
     background:var(--event-color);
+
   }
 
 
-  .member-row{
+  .member-row {
+
     grid-template-columns:1fr;
+
   }
 
 
-  .member-controls{
+  .member-controls {
+
     justify-content:flex-start;
+
   }
 
 }
 
 </style>
+
 </head>
 
 
@@ -2998,6 +3716,7 @@ footer{
       <button
         class="account-button"
         id="accountButton"
+        type="button"
       >
 
         <span
@@ -3020,6 +3739,7 @@ footer{
       <button
         class="btn btn-outline-light"
         id="settingsButton"
+        type="button"
       >
         ⚙
       </button>
@@ -3028,6 +3748,7 @@ footer{
       <button
         class="btn btn-primary"
         id="addButton"
+        type="button"
       >
 
         +
@@ -3091,7 +3812,14 @@ footer{
 
 
 
-  <section class="section">
+  <!--
+       THIS SECTION DISAPPEARS WHEN CLASSES ARE DISABLED
+  -->
+
+  <section
+    class="section"
+    id="classesSection"
+  >
 
 
     <div class="section-head">
@@ -3121,7 +3849,10 @@ footer{
 
     <div class="section-head">
 
-      <h2 class="section-title">
+      <h2
+        class="section-title"
+        id="everythingTitle"
+      >
         Everything
       </h2>
 
@@ -3241,8 +3972,6 @@ footer{
 
 
 
-  <!-- MONTH VIEW -->
-
   <div id="monthCalendarWrap">
 
     <div class="calendar-shell">
@@ -3261,6 +3990,7 @@ footer{
           <button
             class="cal-btn"
             id="todayButton"
+            type="button"
           >
             Today
           </button>
@@ -3268,6 +3998,7 @@ footer{
           <button
             class="cal-btn"
             id="prevMonth"
+            type="button"
           >
             ‹
           </button>
@@ -3275,6 +4006,7 @@ footer{
           <button
             class="cal-btn"
             id="nextMonth"
+            type="button"
           >
             ›
           </button>
@@ -3314,8 +4046,6 @@ footer{
 
 
 
-  <!-- WEEK VIEW -->
-
   <div
     class="hidden"
     id="weekCalendarWrap"
@@ -3337,6 +4067,7 @@ footer{
           <button
             class="cal-btn"
             id="weekTodayButton"
+            type="button"
           >
             Today
           </button>
@@ -3344,6 +4075,7 @@ footer{
           <button
             class="cal-btn"
             id="prevWeek"
+            type="button"
           >
             ‹
           </button>
@@ -3351,6 +4083,7 @@ footer{
           <button
             class="cal-btn"
             id="nextWeek"
+            type="button"
           >
             ›
           </button>
@@ -3421,6 +4154,7 @@ footer{
   <button
     class="modal-close"
     data-close="itemModal"
+    type="button"
   >
     ✕
   </button>
@@ -3535,6 +4269,10 @@ footer{
     </div>
 
 
+
+    <!--
+         HIDDEN AUTOMATICALLY IF CLASSES ARE DISABLED
+    -->
 
     <div
       class="field"
@@ -3705,7 +4443,7 @@ footer{
         <input
           id="manualLocation"
           type="text"
-          placeholder="e.g. Newport High School"
+          placeholder="Location"
         >
 
 
@@ -3717,14 +4455,6 @@ footer{
             type="button"
           >
             Search in Maps
-          </button>
-
-          <button
-            class="mini-btn hidden"
-            id="openMapsButton"
-            type="button"
-          >
-            Open location
           </button>
 
         </div>
@@ -3843,8 +4573,6 @@ footer{
 
 
 
-    <!-- ASSIGNMENT ATTACHMENTS -->
-
     <div
       class="field"
       id="attachmentsField"
@@ -3859,11 +4587,6 @@ footer{
 
 
         <div class="attachment-actions">
-
-
-          <!--
-               CAMERA + DOCUMENT PHOTO ARE NOW ONE FEATURE
-          -->
 
           <button
             class="btn btn-light btn-small"
@@ -3881,7 +4604,6 @@ footer{
           >
             📎 Add File
           </button>
-
 
         </div>
 
@@ -3977,6 +4699,7 @@ footer{
   <button
     class="modal-close"
     data-close="classModal"
+    type="button"
   >
     ✕
   </button>
@@ -4014,7 +4737,6 @@ footer{
       </div>
 
     </div>
-
 
 
     <div class="info-card">
@@ -4081,7 +4803,7 @@ footer{
 
 
 <!-- =========================================================
-     CLASS INFO EDITOR
+     EDIT CLASS INFO
 ========================================================= -->
 
 <div
@@ -4096,6 +4818,7 @@ footer{
   <button
     class="modal-close"
     data-close="classInfoModal"
+    type="button"
   >
     ✕
   </button>
@@ -4124,7 +4847,6 @@ footer{
   </div>
 
 
-
   <div class="field">
 
     <label>
@@ -4140,7 +4862,6 @@ footer{
   </div>
 
 
-
   <div class="field">
 
     <label>
@@ -4154,7 +4875,6 @@ footer{
     >
 
   </div>
-
 
 
   <div class="field">
@@ -4218,6 +4938,7 @@ footer{
   <button
     class="modal-close"
     data-close="settingsModal"
+    type="button"
   >
     ✕
   </button>
@@ -4229,6 +4950,57 @@ footer{
 
 
   <div class="modal-accent-bar"></div>
+
+
+
+  <!-- NEW CLASSES TOGGLE -->
+
+  <div class="settings-section">
+
+
+    <div class="settings-title">
+      Planner Mode
+    </div>
+
+
+    <div class="settings-copy">
+      Choose whether you want to organize work by classes.
+    </div>
+
+
+    <div class="setting-toggle-card">
+
+
+      <div class="setting-toggle-copy">
+
+        <strong>
+          Disable Classes
+        </strong>
+
+        <span>
+          Hide classes and use Homeroom as a general task planner.
+          Your existing class data will stay saved.
+        </span>
+
+      </div>
+
+
+      <label class="switch">
+
+        <input
+          id="disableClassesToggle"
+          type="checkbox"
+        >
+
+        <span class="switch-slider"></span>
+
+      </label>
+
+
+    </div>
+
+
+  </div>
 
 
 
@@ -4263,7 +5035,6 @@ footer{
       </div>
 
 
-
       <div class="color-card">
 
         <label>
@@ -4276,7 +5047,6 @@ footer{
         >
 
       </div>
-
 
 
       <div class="color-card">
@@ -4300,9 +5070,10 @@ footer{
 
 
 
-  <!-- CLASSES -->
-
-  <div class="settings-section">
+  <div
+    class="settings-section"
+    id="classSettingsSection"
+  >
 
 
     <div class="settings-title">
@@ -4334,8 +5105,6 @@ footer{
 
 
 
-  <!-- EXTRACURRICULARS -->
-
   <div class="settings-section">
 
 
@@ -4345,8 +5114,7 @@ footer{
 
 
     <div class="settings-copy">
-      Add sports, clubs, Scouts, jobs or volunteering.
-      New extracurriculars automatically receive a different color.
+      Add sports, clubs, jobs or volunteering.
     </div>
 
 
@@ -4368,8 +5136,6 @@ footer{
   </div>
 
 
-
-  <!-- FAMILY -->
 
   <div class="settings-section">
 
@@ -4429,6 +5195,7 @@ footer{
   <button
     class="modal-close"
     data-close="createFamilyModal"
+    type="button"
   >
     ✕
   </button>
@@ -4506,6 +5273,7 @@ footer{
   <button
     class="modal-close"
     data-close="joinFamilyModal"
+    type="button"
   >
     ✕
   </button>
@@ -4589,6 +5357,7 @@ footer{
   <button
     class="modal-close"
     data-close="inviteFamilyModal"
+    type="button"
   >
     ✕
   </button>
@@ -4617,12 +5386,6 @@ footer{
       placeholder="family@example.com"
     >
 
-  </div>
-
-
-  <div class="helper-text">
-    If they already use Homeroom, the invitation appears in the app.
-    Otherwise it waits until they create an account with that email.
   </div>
 
 
@@ -4678,6 +5441,7 @@ footer{
   <button
     class="modal-close"
     data-close="profileModal"
+    type="button"
   >
     ✕
   </button>
@@ -4787,6 +5551,7 @@ footer{
   <button
     class="modal-close"
     data-close="forgotModal"
+    type="button"
   >
     ✕
   </button>
@@ -4852,7 +5617,7 @@ footer{
 
 
 <!-- =========================================================
-     NEW PASSWORD
+     RESET PASSWORD
 ========================================================= -->
 
 <div
@@ -4931,7 +5696,7 @@ footer{
 
 
 <!-- =========================================================
-     DELETE RECURRING
+     RECURRING DELETE
 ========================================================= -->
 
 <div
@@ -4946,6 +5711,7 @@ footer{
   <button
     class="modal-close"
     data-close="deleteSeriesModal"
+    type="button"
   >
     ✕
   </button>
@@ -5047,6 +5813,7 @@ footer{
   <button
     class="modal-close"
     data-close="deleteAccountModal"
+    type="button"
   >
     ✕
   </button>
@@ -5107,14 +5874,7 @@ footer{
 
 
 <!-- =========================================================
-     GENERIC HOMEROOM CONFIRMATION MODAL
-
-     Used for:
-       - Remove family member
-       - Leave family
-       - Promote owner
-       - Demote owner
-       - Delete family
+     GENERIC CONFIRMATION
 ========================================================= -->
 
 <div
@@ -5129,6 +5889,7 @@ footer{
   <button
     class="modal-close"
     data-close="confirmModal"
+    type="button"
   >
     ✕
   </button>
@@ -5203,6 +5964,7 @@ footer{
   <button
     class="modal-close"
     data-close="attachmentViewerModal"
+    type="button"
   >
     ✕
   </button>
@@ -5234,6 +5996,7 @@ footer{
 /* =========================================================
    SUPABASE
 ========================================================= */
+
 
 const SUPABASE_URL =
   'https://vpevjppqdxvyiodhcusj.supabase.co';
@@ -5267,11 +6030,9 @@ const sb =
 
 
 /* =========================================================
-   CURATED EXTRACURRICULAR COLORS
-
-   We pick an unused color from here before ever generating
-   a new one.
+   COLORS
 ========================================================= */
+
 
 const EXTRACURRICULAR_COLORS = [
 
@@ -5316,18 +6077,29 @@ const EXTRACURRICULAR_COLORS = [
 
 
 /* =========================================================
-   NEW USER DEFAULTS
+   DEFAULT STATE
 
-   ONLY FOUR SIMPLE TUTORIAL CARDS
+   NEW:
+   settings.classesEnabled = true
 ========================================================= */
+
 
 const DEFAULT_STATE = {
 
-  version:11,
+  version:12,
 
 
   profile:{
+
     name:''
+
+  },
+
+
+  settings:{
+
+    classesEnabled:true
+
   },
 
 
@@ -5430,8 +6202,9 @@ const DEFAULT_STATE = {
 
 
 /* =========================================================
-   GLOBAL STATE
+   STATE
 ========================================================= */
+
 
 let state =
   clone(DEFAULT_STATE);
@@ -5523,10 +6296,11 @@ let pendingConfirmAction =
 
 
 /* =========================================================
-   GENERAL HELPERS
+   HELPERS
 ========================================================= */
 
-function clone(value){
+
+function clone(value) {
 
   return JSON.parse(
     JSON.stringify(value)
@@ -5536,7 +6310,7 @@ function clone(value){
 
 
 
-function uid(prefix='i'){
+function uid(prefix='i') {
 
   return (
     prefix
@@ -5552,7 +6326,7 @@ function uid(prefix='i'){
 
 
 
-function pad(number){
+function pad(number) {
 
   return String(number)
     .padStart(
@@ -5564,7 +6338,7 @@ function pad(number){
 
 
 
-function todayStr(){
+function todayStr() {
 
   const date =
     new Date();
@@ -5582,7 +6356,7 @@ function todayStr(){
 
 
 
-function dateStr(date){
+function dateStr(date) {
 
   return (
     `${date.getFullYear()}-`
@@ -5596,7 +6370,7 @@ function dateStr(date){
 
 
 
-function parseDate(value){
+function parseDate(value) {
 
   const [
     year,
@@ -5618,7 +6392,7 @@ function parseDate(value){
 
 
 
-function niceDate(value){
+function niceDate(value) {
 
   return parseDate(value)
     .toLocaleDateString(
@@ -5634,10 +6408,12 @@ function niceDate(value){
 
 
 
-function niceTime(value){
+function niceTime(value) {
 
-  if(!value){
+  if(!value) {
+
     return '';
+
   }
 
 
@@ -5662,7 +6438,7 @@ function niceTime(value){
 
 
 
-function daysBetween(a,b){
+function daysBetween(a,b) {
 
   return Math.round(
     (
@@ -5678,7 +6454,7 @@ function daysBetween(a,b){
 
 
 
-function esc(value){
+function esc(value) {
 
   return String(
     value ?? ''
@@ -5704,7 +6480,7 @@ function esc(value){
 
 
 
-function addDays(date,days){
+function addDays(date,days) {
 
   const copy =
     new Date(date);
@@ -5723,7 +6499,7 @@ function addDays(date,days){
 
 
 
-function mondayFor(date){
+function mondayFor(date) {
 
   const d =
     new Date(
@@ -5756,16 +6532,18 @@ function mondayFor(date){
 
 
 
-function timeToMinutes(value){
+function timeToMinutes(value) {
 
-  if(!value){
+  if(!value) {
+
     return null;
+
   }
 
 
   const [
-    hours,
-    minutes
+    hour,
+    minute
   ] =
     value
       .split(':')
@@ -5773,16 +6551,16 @@ function timeToMinutes(value){
 
 
   return (
-    hours*60
+    hour*60
     +
-    minutes
+    minute
   );
 
 }
 
 
 
-function classById(id){
+function classById(id) {
 
   return state.classes
     .find(
@@ -5794,7 +6572,7 @@ function classById(id){
 
 
 
-function extraById(id){
+function extraById(id) {
 
   return state.extras
     .find(
@@ -5806,7 +6584,20 @@ function extraById(id){
 
 
 
-function checkable(task){
+function classesEnabled() {
+
+  return (
+    state.settings
+      ?.classesEnabled
+    !==
+    false
+  );
+
+}
+
+
+
+function checkable(task) {
 
   return (
     task.type === 'assignment'
@@ -5818,7 +6609,7 @@ function checkable(task){
 
 
 
-function timedType(type){
+function timedType(type) {
 
   return (
     type === 'activity'
@@ -5830,7 +6621,7 @@ function timedType(type){
 
 
 
-function isRecurring(task){
+function isRecurring(task) {
 
   return (
     task?.type === 'activity'
@@ -5844,7 +6635,7 @@ function isRecurring(task){
 
 
 
-function isException(task,date){
+function isException(task,date) {
 
   return (
     task.exceptionDates
@@ -5857,18 +6648,17 @@ function isException(task,date){
 
 
 
-function weekdayText(days){
+function weekdayText(days) {
 
-  const names =
-    [
-      'Sun',
-      'Mon',
-      'Tue',
-      'Wed',
-      'Thu',
-      'Fri',
-      'Sat'
-    ];
+  const names = [
+    'Sun',
+    'Mon',
+    'Tue',
+    'Wed',
+    'Thu',
+    'Fri',
+    'Sat'
+  ];
 
 
   return (
@@ -5886,9 +6676,9 @@ function weekdayText(days){
 
 
 
-function personalItemColor(task){
+function personalItemColor(task) {
 
-  if(task.type === 'activity'){
+  if(task.type === 'activity') {
 
     return (
       extraById(task.extraId)
@@ -5900,12 +6690,19 @@ function personalItemColor(task){
   }
 
 
-  if(task.type === 'appointment'){
+  if(task.type === 'appointment') {
 
     return '#A26A3D';
 
   }
 
+
+  /*
+     Class data is preserved even when classes are disabled.
+
+     We still retain its color internally so turning classes
+     back on restores the original appearance.
+  */
 
   return (
     classById(task.classId)
@@ -5918,9 +6715,9 @@ function personalItemColor(task){
 
 
 
-function itemColor(task){
+function itemColor(task) {
 
-  if(task.visibility === 'family'){
+  if(task.visibility === 'family') {
 
     return (
       task.color
@@ -5939,9 +6736,9 @@ function itemColor(task){
 
 
 
-function sourceFor(task){
+function sourceFor(task) {
 
-  if(task.visibility === 'family'){
+  if(task.visibility === 'family') {
 
     return (
       family?.name
@@ -5952,7 +6749,7 @@ function sourceFor(task){
   }
 
 
-  if(task.type === 'activity'){
+  if(task.type === 'activity') {
 
     return (
       extraById(task.extraId)
@@ -5964,9 +6761,43 @@ function sourceFor(task){
   }
 
 
-  if(task.type === 'appointment'){
+  if(task.type === 'appointment') {
 
     return 'Appointment';
+
+  }
+
+
+  /*
+     NEW:
+     When classes are disabled, class labels disappear
+     from normal planner task presentation.
+  */
+
+  if(!classesEnabled()) {
+
+    if(task.type === 'assignment') {
+
+      return 'Assignment';
+
+    }
+
+
+    if(task.type === 'deadline') {
+
+      return 'Deadline';
+
+    }
+
+
+    if(task.type === 'reminder') {
+
+      return 'Reminder';
+
+    }
+
+
+    return 'Task';
 
   }
 
@@ -5983,10 +6814,11 @@ function sourceFor(task){
 
 
 /* =========================================================
-   UNUSED COLOR GENERATOR
+   COLORS
 ========================================================= */
 
-function normalizeColor(color){
+
+function normalizeColor(color) {
 
   return String(
     color ||
@@ -5999,7 +6831,7 @@ function normalizeColor(color){
 
 
 
-function getUsedColors(){
+function getUsedColors() {
 
   const colors =
     new Set();
@@ -6047,7 +6879,7 @@ function getUsedColors(){
   );
 
 
-  if(family?.color){
+  if(family?.color) {
 
     colors.add(
       normalizeColor(
@@ -6064,7 +6896,7 @@ function getUsedColors(){
 
 
 
-function getUniqueExtracurricularColor(){
+function getUniqueExtracurricularColor() {
 
   const used =
     getUsedColors();
@@ -6082,7 +6914,7 @@ function getUniqueExtracurricularColor(){
       );
 
 
-  if(available.length){
+  if(available.length) {
 
     return available[
       Math.floor(
@@ -6095,43 +6927,13 @@ function getUniqueExtracurricularColor(){
   }
 
 
-  /*
-     If every curated color has already been used,
-     create a new bright-but-controlled color.
-  */
-
-  for(
-    let attempt=0;
-    attempt<30;
-    attempt++
-  ){
-
-    const hue =
-      Math.floor(
-        Math.random()*360
-      );
-
-
-    const color =
-      `hsl(${hue}, 62%, 52%)`;
-
-
-    if(
-      !used.has(
-        normalizeColor(
-          color
-        )
-      )
-    ){
-
-      return color;
-
-    }
-
-  }
-
-
-  return '#4D96FF';
+  return EXTRACURRICULAR_COLORS[
+    Math.floor(
+      Math.random()
+      *
+      EXTRACURRICULAR_COLORS.length
+    )
+  ];
 
 }
 
@@ -6141,13 +6943,14 @@ function getUniqueExtracurricularColor(){
    FAMILY HELPERS
 ========================================================= */
 
-function currentFamilyMember(){
+
+function currentFamilyMember() {
 
   if(
     !currentUser
     ||
     !family
-  ){
+  ) {
 
     return null;
 
@@ -6157,8 +6960,7 @@ function currentFamilyMember(){
   return familyMembers
     .find(
       member =>
-        member.user_id ===
-        currentUser.id
+        member.user_id === currentUser.id
     )
     ||
     null;
@@ -6167,7 +6969,7 @@ function currentFamilyMember(){
 
 
 
-function currentFamilyRole(){
+function currentFamilyRole() {
 
   return (
     currentFamilyMember()
@@ -6180,7 +6982,7 @@ function currentFamilyRole(){
 
 
 
-function isFamilyOwner(){
+function isFamilyOwner() {
 
   return (
     currentFamilyRole() ===
@@ -6191,7 +6993,7 @@ function isFamilyOwner(){
 
 
 
-function familyOwners(){
+function familyOwners() {
 
   return familyMembers
     .filter(
@@ -6204,7 +7006,7 @@ function familyOwners(){
 
 
 
-function familyMemberName(member){
+function familyMemberName(member) {
 
   return (
     member.display_name
@@ -6218,7 +7020,7 @@ function familyMemberName(member){
 
 
 
-function randomInviteCode(){
+function randomInviteCode() {
 
   const characters =
     'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
@@ -6232,7 +7034,7 @@ function randomInviteCode(){
     let index=0;
     index<5;
     index++
-  ){
+  ) {
 
     result +=
       characters[
@@ -6253,66 +7055,124 @@ function randomInviteCode(){
 
 
 /* =========================================================
-   BASIC UI
+   MODALS + SIGN OUT FIX
 ========================================================= */
 
-function showAuth(){
 
-  document
-    .getElementById('app')
-    .classList
-    .add('hidden');
-
-
-  document
-    .getElementById('authScreen')
-    .classList
-    .remove('hidden');
-
-}
-
-
-
-function showApp(){
-
-  document
-    .getElementById('authScreen')
-    .classList
-    .add('hidden');
-
-
-  document
-    .getElementById('app')
-    .classList
-    .remove('hidden');
-
-}
-
-
-
-function openModal(id){
+function openModal(id) {
 
   document
     .getElementById(id)
-    .classList
+    ?.classList
     .add('open');
 
+
+  document.body
+    .classList
+    .add('modal-open');
+
 }
 
 
 
-function closeModal(id){
+function closeModal(id) {
 
   document
     .getElementById(id)
-    .classList
+    ?.classList
     .remove('open');
+
+
+  if(
+    !document
+      .querySelector(
+        '.modal-overlay.open'
+      )
+  ) {
+
+    document.body
+      .classList
+      .remove('modal-open');
+
+  }
 
 }
 
 
 
-function setSyncStatus(text){
+/*
+   NEW SIGN OUT FIX.
+
+   This closes Profile, Settings, Add Item,
+   confirmations, attachment viewers, etc.
+*/
+
+function closeAllModals() {
+
+  document
+    .querySelectorAll(
+      '.modal-overlay.open'
+    )
+    .forEach(
+      modal => {
+
+        modal.classList
+          .remove('open');
+
+      }
+    );
+
+
+  document.body
+    .classList
+    .remove('modal-open');
+
+
+  pendingConfirmAction =
+    null;
+
+}
+
+
+
+function showAuth() {
+
+  closeAllModals();
+
+
+  document
+    .getElementById('app')
+    .classList
+    .add('hidden');
+
+
+  document
+    .getElementById('authScreen')
+    .classList
+    .remove('hidden');
+
+}
+
+
+
+function showApp() {
+
+  document
+    .getElementById('authScreen')
+    .classList
+    .add('hidden');
+
+
+  document
+    .getElementById('app')
+    .classList
+    .remove('hidden');
+
+}
+
+
+
+function setSyncStatus(text) {
 
   document
     .getElementById('syncStatus')
@@ -6324,8 +7184,9 @@ function setSyncStatus(text){
 
 
 /* =========================================================
-   GENERIC CONFIRMATION
+   CONFIRMATION
 ========================================================= */
+
 
 function showConfirmation({
 
@@ -6339,7 +7200,7 @@ function showConfirmation({
 
   onConfirm
 
-}){
+}) {
 
 
   document
@@ -6390,7 +7251,7 @@ function showConfirmation({
 
 
 
-async function runConfirmedAction(){
+async function runConfirmedAction() {
 
   const action =
     pendingConfirmAction;
@@ -6405,7 +7266,7 @@ async function runConfirmedAction(){
   );
 
 
-  if(action){
+  if(action) {
 
     await action();
 
@@ -6416,10 +7277,11 @@ async function runConfirmedAction(){
 
 
 /* =========================================================
-   AUTH UI
+   AUTH
 ========================================================= */
 
-function setAuthMode(mode){
+
+function setAuthMode(mode) {
 
   authMode =
     mode;
@@ -6498,7 +7360,7 @@ function setAuthMode(mode){
 function authMessage(
   message,
   error=false
-){
+) {
 
   const element =
     document
@@ -6519,13 +7381,7 @@ function authMessage(
 
 
 
-/* =========================================================
-   SIGNUP / SIGN IN
-
-   EMAIL CONFIRMATION IS NOW OFF IN SUPABASE.
-========================================================= */
-
-async function handleAuthSubmit(){
+async function handleAuthSubmit() {
 
   const email =
     document
@@ -6545,10 +7401,10 @@ async function handleAuthSubmit(){
   );
 
 
-  try{
+  try {
 
 
-    if(authMode === 'signup'){
+    if(authMode === 'signup') {
 
 
       const name =
@@ -6570,38 +7426,34 @@ async function handleAuthSubmit(){
             password,
 
             options:{
+
               data:{
                 name
               }
+
             }
 
           });
 
 
-      if(error){
+      if(error) {
+
         throw error;
+
       }
 
 
-      /*
-         With confirmation disabled,
-         Supabase should immediately provide a session.
-      */
-
-      if(data.session?.user){
+      if(data.session?.user) {
 
         await enterApp(
           data.session.user
         );
 
+
         return;
 
       }
 
-
-      /*
-         Fallback in case configuration changes later.
-      */
 
       setAuthMode(
         'signin'
@@ -6633,12 +7485,14 @@ async function handleAuthSubmit(){
         });
 
 
-    if(error){
+    if(error) {
+
       throw error;
+
     }
 
 
-    if(data.user){
+    if(data.user) {
 
       await enterApp(
         data.user
@@ -6649,11 +7503,9 @@ async function handleAuthSubmit(){
 
   }
 
-  catch(error){
+  catch(error) {
 
-    console.error(
-      error
-    );
+    console.error(error);
 
 
     authMessage(
@@ -6673,7 +7525,8 @@ async function handleAuthSubmit(){
    PASSWORD RESET
 ========================================================= */
 
-async function sendPasswordReset(){
+
+async function sendPasswordReset() {
 
   const email =
     (
@@ -6699,7 +7552,7 @@ async function sendPasswordReset(){
     .remove('error');
 
 
-  if(!email){
+  if(!email) {
 
     message.textContent =
       'Enter your email first.';
@@ -6725,13 +7578,12 @@ async function sendPasswordReset(){
       .resetPasswordForEmail(
         email,
         {
-          redirectTo:
-            SITE_URL
+          redirectTo:SITE_URL
         }
       );
 
 
-  if(error){
+  if(error) {
 
     const text =
       String(
@@ -6745,18 +7597,14 @@ async function sendPasswordReset(){
       .add('error');
 
 
-    if(
-      /rate limit/i.test(
-        text
-      )
-    ){
+    if(/rate limit/i.test(text)) {
 
       message.textContent =
         'Too many reset emails were requested recently. Please wait and try again.';
 
     }
 
-    else{
+    else {
 
       message.textContent =
         text
@@ -6778,7 +7626,7 @@ async function sendPasswordReset(){
 
 
 
-async function saveNewPassword(){
+async function saveNewPassword() {
 
   const password =
     document
@@ -6801,7 +7649,7 @@ async function saveNewPassword(){
     .remove('error');
 
 
-  if(password.length < 6){
+  if(password.length < 6) {
 
     message.textContent =
       'Use at least 6 characters.';
@@ -6816,7 +7664,7 @@ async function saveNewPassword(){
   }
 
 
-  if(password !== confirmation){
+  if(password !== confirmation) {
 
     message.textContent =
       'Passwords do not match.';
@@ -6840,13 +7688,11 @@ async function saveNewPassword(){
   } =
     await sb.auth
       .updateUser({
-
         password
-
       });
 
 
-  if(error){
+  if(error) {
 
     message.textContent =
       error.message;
@@ -6861,30 +7707,15 @@ async function saveNewPassword(){
   }
 
 
-  message.textContent =
-    'Password updated. Returning to sign in…';
-
-
-  await new Promise(
-    resolve =>
-      setTimeout(
-        resolve,
-        700
-      )
-  );
-
-
   await sb.auth
     .signOut();
 
 
+  closeAllModals();
+
+
   currentUser =
     null;
-
-
-  closeModal(
-    'resetPasswordModal'
-  );
 
 
   showAuth();
@@ -6910,13 +7741,16 @@ async function saveNewPassword(){
 
 
 /* =========================================================
-   PERSONAL CLOUD STATE
+   CLOUD STATE
 ========================================================= */
 
-async function loadCloudData(){
 
-  if(!currentUser){
+async function loadCloudData() {
+
+  if(!currentUser) {
+
     return;
+
   }
 
 
@@ -6939,12 +7773,15 @@ async function loadCloudData(){
       .maybeSingle();
 
 
-  if(error){
+  if(error) {
+
     throw error;
+
   }
 
 
-  if(data?.data){
+  if(data?.data) {
+
 
     state = {
 
@@ -6961,6 +7798,26 @@ async function loadCloudData(){
 
         ...(
           data.data.profile
+          ||
+          {}
+        )
+
+      },
+
+
+      /*
+         MIGRATION:
+         Old users did not have a settings object.
+
+         They automatically default to classes enabled.
+      */
+
+      settings:{
+
+        ...DEFAULT_STATE.settings,
+
+        ...(
+          data.data.settings
           ||
           {}
         )
@@ -7028,7 +7885,8 @@ async function loadCloudData(){
 
   }
 
-  else{
+  else {
+
 
     state =
       clone(
@@ -7057,10 +7915,12 @@ async function loadCloudData(){
 
 
 
-async function saveCloudData(){
+async function saveCloudData() {
 
-  if(!currentUser){
+  if(!currentUser) {
+
     return;
+
   }
 
 
@@ -7089,11 +7949,9 @@ async function saveCloudData(){
       });
 
 
-  if(error){
+  if(error) {
 
-    console.error(
-      error
-    );
+    console.error(error);
 
 
     setSyncStatus(
@@ -7114,7 +7972,7 @@ async function saveCloudData(){
 
 
 
-function queueSave(){
+function queueSave() {
 
   clearTimeout(
     saveTimer
@@ -7140,7 +7998,8 @@ function queueSave(){
    FAMILY LOAD
 ========================================================= */
 
-async function loadFamily(){
+
+async function loadFamily() {
 
   family =
     null;
@@ -7158,12 +8017,14 @@ async function loadFamily(){
     [];
 
 
-  if(!currentUser){
+  if(!currentUser) {
+
     return;
+
   }
 
 
-  try{
+  try {
 
 
     const {
@@ -7194,8 +8055,10 @@ async function loadFamily(){
         .limit(1);
 
 
-    if(membershipError){
+    if(membershipError) {
+
       throw membershipError;
+
     }
 
 
@@ -7203,7 +8066,8 @@ async function loadFamily(){
       membershipRows
       &&
       membershipRows.length
-    ){
+    ) {
+
 
       family =
         membershipRows[0]
@@ -7211,8 +8075,7 @@ async function loadFamily(){
 
 
       const {
-        data:members,
-        error:membersError
+        data:members
       } =
         await sb
           .from('family_members')
@@ -7229,11 +8092,6 @@ async function loadFamily(){
           );
 
 
-      if(membersError){
-        throw membersError;
-      }
-
-
       familyMembers =
         members
         ||
@@ -7241,8 +8099,7 @@ async function loadFamily(){
 
 
       const {
-        data:events,
-        error:eventError
+        data:events
       } =
         await sb
           .from('family_events')
@@ -7251,11 +8108,6 @@ async function loadFamily(){
             'family_id',
             family.id
           );
-
-
-      if(eventError){
-        throw eventError;
-      }
 
 
       familyEvents =
@@ -7269,8 +8121,7 @@ async function loadFamily(){
 
             ...item,
 
-            visibility:
-              'family',
+            visibility:'family',
 
             exceptionDates:
               item.exception_dates
@@ -7323,7 +8174,8 @@ async function loadFamily(){
         ?.toLowerCase();
 
 
-    if(email){
+    if(email) {
+
 
       const {
         data:invites
@@ -7360,7 +8212,7 @@ async function loadFamily(){
 
   }
 
-  catch(error){
+  catch(error) {
 
     console.warn(
       'Family sharing load error:',
@@ -7377,7 +8229,8 @@ async function loadFamily(){
    FAMILY CREATE
 ========================================================= */
 
-async function createFamily(){
+
+async function createFamily() {
 
   const name =
     document
@@ -7386,8 +8239,10 @@ async function createFamily(){
       .trim();
 
 
-  if(!name){
+  if(!name) {
+
     return;
+
   }
 
 
@@ -7419,11 +8274,12 @@ async function createFamily(){
       .single();
 
 
-  if(error){
+  if(error) {
 
     alert(
       error.message
     );
+
 
     return;
 
@@ -7443,8 +8299,7 @@ async function createFamily(){
         user_id:
           currentUser.id,
 
-        role:
-          'owner',
+        role:'owner',
 
         email:
           currentUser.email,
@@ -7457,11 +8312,12 @@ async function createFamily(){
       });
 
 
-  if(memberError){
+  if(memberError) {
 
     alert(
       memberError.message
     );
+
 
     return;
 
@@ -7483,13 +8339,11 @@ async function createFamily(){
 
 
 /* =========================================================
-   FAMILY JOIN BY CODE
-
-   This uses an RPC if you add one later.
-   It also attempts the direct method for backwards compatibility.
+   FAMILY JOIN
 ========================================================= */
 
-async function joinFamilyByCode(){
+
+async function joinFamilyByCode() {
 
   const code =
     document
@@ -7508,51 +8362,16 @@ async function joinFamilyByCode(){
     .remove('error');
 
 
-  if(!code){
+  if(!code) {
 
     message.textContent =
       'Enter an invite code.';
 
-    return;
-
-  }
-
-
-  /*
-     Preferred secure method.
-  */
-
-  const rpcResult =
-    await sb.rpc(
-      'join_family_by_code',
-      {
-        code_input:
-          code
-      }
-    );
-
-
-  if(!rpcResult.error){
-
-    closeModal(
-      'joinFamilyModal'
-    );
-
-
-    await loadFamily();
-
-
-    renderAll();
-
 
     return;
 
   }
 
-
-  /*
-     Fallback for older backend setup.
-  */
 
   const {
     data:foundFamily,
@@ -7572,7 +8391,7 @@ async function joinFamilyByCode(){
     error
     ||
     !foundFamily
-  ){
+  ) {
 
     message.textContent =
       'That invite code could not be used.';
@@ -7600,8 +8419,7 @@ async function joinFamilyByCode(){
         user_id:
           currentUser.id,
 
-        role:
-          'member',
+        role:'member',
 
         email:
           currentUser.email,
@@ -7614,7 +8432,7 @@ async function joinFamilyByCode(){
       });
 
 
-  if(joinError){
+  if(joinError) {
 
     message.textContent =
       joinError.message;
@@ -7644,17 +8462,20 @@ async function joinFamilyByCode(){
 
 
 /* =========================================================
-   INVITE FAMILY MEMBER
+   FAMILY INVITE
 ========================================================= */
 
-async function inviteFamilyMember(){
+
+async function inviteFamilyMember() {
 
   if(
     !family
     ||
     !isFamilyOwner()
-  ){
+  ) {
+
     return;
+
   }
 
 
@@ -7675,10 +8496,11 @@ async function inviteFamilyMember(){
     .remove('error');
 
 
-  if(!email){
+  if(!email) {
 
     message.textContent =
       'Enter an email address.';
+
 
     return;
 
@@ -7701,13 +8523,12 @@ async function inviteFamilyMember(){
         invited_by:
           currentUser.id,
 
-        status:
-          'pending'
+        status:'pending'
 
       });
 
 
-  if(error){
+  if(error) {
 
     message.textContent =
       error.message;
@@ -7730,10 +8551,11 @@ async function inviteFamilyMember(){
 
 
 /* =========================================================
-   ACCEPT / DECLINE EMAIL INVITE
+   FAMILY INVITE ACCEPT / DECLINE
 ========================================================= */
 
-async function acceptFamilyInvite(id){
+
+async function acceptFamilyInvite(id) {
 
   const invite =
     pendingInvites
@@ -7743,8 +8565,10 @@ async function acceptFamilyInvite(id){
       );
 
 
-  if(!invite){
+  if(!invite) {
+
     return;
+
   }
 
 
@@ -7761,8 +8585,7 @@ async function acceptFamilyInvite(id){
         user_id:
           currentUser.id,
 
-        role:
-          'member',
+        role:'member',
 
         email:
           currentUser.email,
@@ -7775,11 +8598,12 @@ async function acceptFamilyInvite(id){
       });
 
 
-  if(error){
+  if(error) {
 
     alert(
       error.message
     );
+
 
     return;
 
@@ -7806,7 +8630,7 @@ async function acceptFamilyInvite(id){
 
 
 
-async function declineFamilyInvite(id){
+async function declineFamilyInvite(id) {
 
   await sb
     .from('family_invites')
@@ -7829,21 +8653,19 @@ async function declineFamilyInvite(id){
 
 
 /* =========================================================
-   TRANSFER PRIMARY OWNER
-
-   families.owner_id needs to stay attached to a real owner.
+   FAMILY OWNER MANAGEMENT
 ========================================================= */
+
 
 async function transferPrimaryOwnerIfNeeded(
   leavingUserId
-){
+) {
 
   if(
     !family
     ||
-    family.owner_id !==
-      leavingUserId
-  ){
+    family.owner_id !== leavingUserId
+  ) {
 
     return true;
 
@@ -7854,15 +8676,13 @@ async function transferPrimaryOwnerIfNeeded(
     familyMembers
       .find(
         member =>
-          member.user_id !==
-            leavingUserId
+          member.user_id !== leavingUserId
           &&
-          member.role ===
-            'owner'
+          member.role === 'owner'
       );
 
 
-  if(!replacement){
+  if(!replacement) {
 
     return false;
 
@@ -7886,11 +8706,12 @@ async function transferPrimaryOwnerIfNeeded(
       );
 
 
-  if(error){
+  if(error) {
 
     alert(
       error.message
     );
+
 
     return false;
 
@@ -7907,17 +8728,15 @@ async function transferPrimaryOwnerIfNeeded(
 
 
 
-/* =========================================================
-   CHANGE MEMBER ROLE
-========================================================= */
-
 function requestFamilyRoleChange(
   memberId,
   newRole
-){
+) {
 
-  if(!isFamilyOwner()){
+  if(!isFamilyOwner()) {
+
     return;
+
   }
 
 
@@ -7929,22 +8748,21 @@ function requestFamilyRoleChange(
       );
 
 
-  if(!member){
+  if(!member) {
+
     return;
+
   }
 
 
   if(
-    member.role ===
-    newRole
-  ){
+    member.role === newRole
+  ) {
+
     return;
+
   }
 
-
-  /*
-     Prevent family from having zero owners.
-  */
 
   if(
     member.role === 'owner'
@@ -7952,7 +8770,7 @@ function requestFamilyRoleChange(
     newRole === 'member'
     &&
     familyOwners().length <= 1
-  ){
+  ) {
 
     alert(
       'This is the last Owner. Make another member an Owner before changing this role.'
@@ -7989,7 +8807,7 @@ function requestFamilyRoleChange(
 
         ? 'Owners can invite and remove members, manage roles, delete the Family and edit shared Family events.'
 
-        : 'They will keep access to Family events, but will no longer be able to manage members or Family settings.',
+        : 'They will keep access to Family events, but will no longer be able to manage Family members or settings.',
 
     confirmText:
       promoting
@@ -8003,18 +8821,11 @@ function requestFamilyRoleChange(
       async () => {
 
 
-        /*
-           If primary owner is being demoted,
-           first move families.owner_id.
-        */
-
         if(
-          member.user_id ===
-            family.owner_id
+          member.user_id === family.owner_id
           &&
-          newRole ===
-            'member'
-        ){
+          newRole === 'member'
+        ) {
 
           const transferred =
             await transferPrimaryOwnerIfNeeded(
@@ -8022,11 +8833,12 @@ function requestFamilyRoleChange(
             );
 
 
-          if(!transferred){
+          if(!transferred) {
 
             alert(
               'Make another member an Owner first.'
             );
+
 
             return;
 
@@ -8052,11 +8864,12 @@ function requestFamilyRoleChange(
             );
 
 
-        if(error){
+        if(error) {
 
           alert(
             error.message
           );
+
 
           return;
 
@@ -8076,16 +8889,14 @@ function requestFamilyRoleChange(
 
 
 
-/* =========================================================
-   REMOVE FAMILY MEMBER
-========================================================= */
-
 function requestRemoveFamilyMember(
   memberId
-){
+) {
 
-  if(!isFamilyOwner()){
+  if(!isFamilyOwner()) {
+
     return;
+
   }
 
 
@@ -8097,20 +8908,7 @@ function requestRemoveFamilyMember(
       );
 
 
-  if(!member){
-    return;
-  }
-
-
-  /*
-     You leave yourself through Leave Family,
-     not Remove.
-  */
-
-  if(
-    member.user_id ===
-    currentUser.id
-  ){
+  if(!member) {
 
     return;
 
@@ -8118,14 +8916,8 @@ function requestRemoveFamilyMember(
 
 
   if(
-    member.role === 'owner'
-    &&
-    familyOwners().length <= 1
-  ){
-
-    alert(
-      'This person is the last Owner and cannot be removed until another Owner exists.'
-    );
+    member.user_id === currentUser.id
+  ) {
 
     return;
 
@@ -8144,7 +8936,7 @@ function requestRemoveFamilyMember(
       `Remove ${name}?`,
 
     text:
-      'They will lose access to shared Family events. Their personal classes, assignments, reminders, activities and appointments will not be changed.',
+      'They will lose access to shared Family events. Their personal Homeroom data will not be changed.',
 
     confirmText:
       'Remove Member',
@@ -8156,9 +8948,8 @@ function requestRemoveFamilyMember(
 
 
         if(
-          member.user_id ===
-          family.owner_id
-        ){
+          member.user_id === family.owner_id
+        ) {
 
           const transferred =
             await transferPrimaryOwnerIfNeeded(
@@ -8166,11 +8957,12 @@ function requestRemoveFamilyMember(
             );
 
 
-          if(!transferred){
+          if(!transferred) {
 
             alert(
-              'Make another member an Owner before removing this person.'
+              'Make another member an Owner first.'
             );
+
 
             return;
 
@@ -8191,11 +8983,12 @@ function requestRemoveFamilyMember(
             );
 
 
-        if(error){
+        if(error) {
 
           alert(
             error.message
           );
+
 
           return;
 
@@ -8215,11 +9008,7 @@ function requestRemoveFamilyMember(
 
 
 
-/* =========================================================
-   LEAVE FAMILY
-========================================================= */
-
-function requestLeaveFamily(){
+function requestLeaveFamily() {
 
   const membership =
     currentFamilyMember();
@@ -8229,8 +9018,10 @@ function requestLeaveFamily(){
     !family
     ||
     !membership
-  ){
+  ) {
+
     return;
+
   }
 
 
@@ -8238,11 +9029,12 @@ function requestLeaveFamily(){
     membership.role === 'owner'
     &&
     familyOwners().length <= 1
-  ){
+  ) {
 
     alert(
       'You are the last Owner. Make another member an Owner before leaving the Family.'
     );
+
 
     return;
 
@@ -8255,7 +9047,7 @@ function requestLeaveFamily(){
       `Leave ${family.name}?`,
 
     text:
-      'Shared Family events will disappear from your calendar. Your personal Homeroom classes, assignments, reminders, activities and appointments will stay exactly as they are.',
+      'Shared Family events will disappear from your calendar. Your personal Homeroom data will stay exactly as it is.',
 
     confirmText:
       'Leave Family',
@@ -8267,9 +9059,8 @@ function requestLeaveFamily(){
 
 
         if(
-          currentUser.id ===
-          family.owner_id
-        ){
+          currentUser.id === family.owner_id
+        ) {
 
           const transferred =
             await transferPrimaryOwnerIfNeeded(
@@ -8277,11 +9068,12 @@ function requestLeaveFamily(){
             );
 
 
-          if(!transferred){
+          if(!transferred) {
 
             alert(
               'Make another member an Owner before leaving.'
             );
+
 
             return;
 
@@ -8302,11 +9094,12 @@ function requestLeaveFamily(){
             );
 
 
-        if(error){
+        if(error) {
 
           alert(
             error.message
           );
+
 
           return;
 
@@ -8338,18 +9131,16 @@ function requestLeaveFamily(){
 
 
 
-/* =========================================================
-   DELETE ENTIRE FAMILY
-========================================================= */
-
-function requestDeleteFamily(){
+function requestDeleteFamily() {
 
   if(
     !family
     ||
     !isFamilyOwner()
-  ){
+  ) {
+
     return;
+
   }
 
 
@@ -8359,7 +9150,7 @@ function requestDeleteFamily(){
       `Delete ${family.name}?`,
 
     text:
-      'This permanently deletes the shared Family, all Family memberships, pending invitations and every shared Family event.\n\nNobody’s personal Homeroom classes, assignments, reminders, activities or appointments will be deleted.',
+      'This permanently deletes the shared Family, all memberships, pending invitations and every shared Family event.\n\nNobody’s personal Homeroom data will be deleted.',
 
     confirmText:
       'Delete Family',
@@ -8382,11 +9173,12 @@ function requestDeleteFamily(){
             );
 
 
-        if(error){
+        if(error) {
 
           alert(
             error.message
           );
+
 
           return;
 
@@ -8423,7 +9215,8 @@ function requestDeleteFamily(){
    ENTER APP
 ========================================================= */
 
-async function enterApp(user){
+
+async function enterApp(user) {
 
   currentUser =
     user;
@@ -8432,7 +9225,7 @@ async function enterApp(user){
   showApp();
 
 
-  try{
+  try {
 
     await loadCloudData();
 
@@ -8441,11 +9234,9 @@ async function enterApp(user){
 
   }
 
-  catch(error){
+  catch(error) {
 
-    console.error(
-      error
-    );
+    console.error(error);
 
 
     state =
@@ -8469,7 +9260,8 @@ async function enterApp(user){
    THEME
 ========================================================= */
 
-function applyTheme(){
+
+function applyTheme() {
 
   document.documentElement
     .style
@@ -8512,7 +9304,8 @@ function applyTheme(){
    ACCOUNT
 ========================================================= */
 
-function renderAccount(){
+
+function renderAccount() {
 
   const fallback =
     currentUser
@@ -8572,10 +9365,79 @@ function renderAccount(){
 
 
 /* =========================================================
+   CLASS MODE UI
+
+   THIS IS THE MAIN NEW FEATURE.
+========================================================= */
+
+
+function renderClassMode() {
+
+  const enabled =
+    classesEnabled();
+
+
+  /*
+     Hide or show the entire Classes section on Planner.
+  */
+
+  document
+    .getElementById('classesSection')
+    .classList
+    .toggle(
+      'hidden',
+      !enabled
+    );
+
+
+  /*
+     Hide class management inside Settings when disabled.
+
+     The toggle itself remains visible so the user can
+     turn classes back on at any time.
+  */
+
+  document
+    .getElementById('classSettingsSection')
+    .classList
+    .toggle(
+      'hidden',
+      !enabled
+    );
+
+
+  /*
+     Rename Everything.
+  */
+
+  document
+    .getElementById('everythingTitle')
+    .textContent =
+      enabled
+        ? 'Everything'
+        : 'All Tasks';
+
+
+  /*
+     Settings switch wording is "Disable Classes",
+     so checked = classesEnabled false.
+  */
+
+  document
+    .getElementById('disableClassesToggle')
+    .checked =
+      !enabled;
+
+}
+
+
+
+/* =========================================================
    SELECTS
 ========================================================= */
 
-function renderSelects(){
+
+function renderSelects() {
 
   document
     .getElementById('itemClass')
@@ -8623,44 +9485,37 @@ function renderSelects(){
 
 
 /* =========================================================
-   MERGED PERSONAL + FAMILY ITEMS
+   FAMILY EVENT CONVERSION
 ========================================================= */
 
-function familyEventToTask(item){
+
+function familyEventToTask(item) {
 
   return {
 
     ...item,
 
-
     id:
       `family:${item.id}`,
-
 
     familyId:
       item.id,
 
-
     visibility:
       'family',
-
 
     title:
       item.title,
 
-
     date:
       item.date,
-
 
     notes:
       item.notes
       ||
       '',
 
-
     done:false,
-
 
     attachments:[]
 
@@ -8670,12 +9525,11 @@ function familyEventToTask(item){
 
 
 
-function allItems(){
+function allItems() {
 
   return [
 
     ...state.tasks,
-
 
     ...familyEvents
       .map(
@@ -8692,7 +9546,8 @@ function allItems(){
    DEADLINES
 ========================================================= */
 
-function renderDeadlines(){
+
+function renderDeadlines() {
 
   const today =
     todayStr();
@@ -8703,8 +9558,7 @@ function renderDeadlines(){
 
       .filter(
         task =>
-          task.type ===
-          'deadline'
+          task.type === 'deadline'
       )
 
       .map(
@@ -8744,7 +9598,7 @@ function renderDeadlines(){
       .getElementById('deadlineGrid');
 
 
-  if(!items.length){
+  if(!items.length) {
 
     grid.innerHTML = `
 
@@ -8783,7 +9637,7 @@ function renderDeadlines(){
             'ok';
 
 
-          if(task.done){
+          if(task.done) {
 
             label =
               'Completed';
@@ -8793,9 +9647,7 @@ function renderDeadlines(){
 
           }
 
-          else if(
-            task.days === 0
-          ){
+          else if(task.days === 0) {
 
             label =
               'Due today';
@@ -8805,9 +9657,7 @@ function renderDeadlines(){
 
           }
 
-          else if(
-            task.days === 1
-          ){
+          else if(task.days === 1) {
 
             label =
               'Due tomorrow';
@@ -8817,9 +9667,7 @@ function renderDeadlines(){
 
           }
 
-          else if(
-            task.days <= 3
-          ){
+          else if(task.days <= 3) {
 
             badge =
               'soon';
@@ -8874,14 +9722,15 @@ function renderDeadlines(){
    CLASSES
 ========================================================= */
 
-function renderClasses(){
+
+function renderClasses() {
 
   const grid =
     document
       .getElementById('classesGrid');
 
 
-  if(!state.classes.length){
+  if(!state.classes.length) {
 
     grid.innerHTML = `
 
@@ -8916,8 +9765,7 @@ function renderClasses(){
             state.tasks
               .filter(
                 task =>
-                  task.classId ===
-                    schoolClass.id
+                  task.classId === schoolClass.id
                   &&
                   !task.done
                   &&
@@ -9011,21 +9859,16 @@ function renderClasses(){
    TASK ROW
 ========================================================= */
 
-function taskRow(task){
+
+function taskRow(task) {
 
   let repeat =
     '';
 
 
-  if(
-    task.type ===
-    'activity'
-  ){
+  if(task.type === 'activity') {
 
-    if(
-      task.recurrence ===
-      'custom'
-    ){
+    if(task.recurrence === 'custom') {
 
       repeat =
         weekdayText(
@@ -9034,20 +9877,14 @@ function taskRow(task){
 
     }
 
-    else if(
-      task.recurrence ===
-      'weekly'
-    ){
+    else if(task.recurrence === 'weekly') {
 
       repeat =
         'Weekly';
 
     }
 
-    else if(
-      task.recurrence ===
-      'monthly'
-    ){
+    else if(task.recurrence === 'monthly') {
 
       repeat =
         'Monthly';
@@ -9109,6 +9946,7 @@ function taskRow(task){
         <button
           class="check"
           data-complete="${esc(task.id)}"
+          type="button"
         >
 
           <svg
@@ -9178,11 +10016,8 @@ function taskRow(task){
           >
 
             ${
-              task.visibility ===
-              'family'
-
+              task.visibility === 'family'
                 ? 'Family'
-
                 : 'Personal'
             }
 
@@ -9196,6 +10031,7 @@ function taskRow(task){
       <button
         class="icon-btn"
         data-edit="${esc(task.id)}"
+        type="button"
       >
         •••
       </button>
@@ -9213,22 +10049,19 @@ function taskRow(task){
    TASK LIST
 ========================================================= */
 
-function renderTaskList(){
+
+function renderTaskList() {
 
   let items =
     allItems();
 
 
-  if(
-    activeFilter !==
-    'all'
-  ){
+  if(activeFilter !== 'all') {
 
     items =
       items.filter(
         task =>
-          task.type ===
-          activeFilter
+          task.type === activeFilter
       );
 
   }
@@ -9238,10 +10071,7 @@ function renderTaskList(){
     (a,b) => {
 
 
-      if(
-        a.done !==
-        b.done
-      ){
+      if(a.done !== b.done) {
 
         return a.done
           ? 1
@@ -9282,8 +10112,7 @@ function renderTaskList(){
               Nothing here yet
             </strong>
 
-            Add an assignment, deadline, reminder,
-            activity or appointment.
+            Add something to your planner.
 
           </div>
 
@@ -9297,7 +10126,15 @@ function renderTaskList(){
    CLASS MODAL
 ========================================================= */
 
-function openClassModal(id){
+
+function openClassModal(id) {
+
+  if(!classesEnabled()) {
+
+    return;
+
+  }
+
 
   classModalId =
     id;
@@ -9307,8 +10144,10 @@ function openClassModal(id){
     classById(id);
 
 
-  if(!schoolClass){
+  if(!schoolClass) {
+
     return;
+
   }
 
 
@@ -9352,7 +10191,7 @@ function openClassModal(id){
 
 
 
-function renderClassModal(){
+function renderClassModal() {
 
   const schoolClass =
     classById(
@@ -9360,8 +10199,10 @@ function renderClassModal(){
     );
 
 
-  if(!schoolClass){
+  if(!schoolClass) {
+
     return;
+
   }
 
 
@@ -9370,18 +10211,14 @@ function renderClassModal(){
 
       .filter(
         task =>
-          task.classId ===
-          classModalId
+          task.classId === classModalId
       )
 
       .sort(
         (a,b) => {
 
 
-          if(
-            a.done !==
-            b.done
-          ){
+          if(a.done !== b.done) {
 
             return a.done
               ? 1
@@ -9427,11 +10264,7 @@ function renderClassModal(){
 
 
 
-/* =========================================================
-   CLASS INFO EDITOR
-========================================================= */
-
-function openClassInfoEditor(){
+function openClassInfoEditor() {
 
   const item =
     classById(
@@ -9439,8 +10272,10 @@ function openClassInfoEditor(){
     );
 
 
-  if(!item){
+  if(!item) {
+
     return;
+
   }
 
 
@@ -9480,7 +10315,7 @@ function openClassInfoEditor(){
 
 
 
-function saveClassInfo(){
+function saveClassInfo() {
 
   const item =
     classById(
@@ -9488,8 +10323,10 @@ function saveClassInfo(){
     );
 
 
-  if(!item){
+  if(!item) {
+
     return;
+
   }
 
 
@@ -9522,11 +10359,6 @@ function saveClassInfo(){
       .value;
 
 
-  /*
-     Once a tutorial card has been customized,
-     it becomes a normal class.
-  */
-
   item.tutorial =
     '';
 
@@ -9554,11 +10386,12 @@ function saveClassInfo(){
    RECURRENCE
 ========================================================= */
 
+
 function occurrences(
   task,
   year,
   month
-){
+) {
 
   const start =
     parseDate(
@@ -9583,12 +10416,10 @@ function occurrences(
 
 
   if(
-    task.type !==
-      'activity'
+    task.type !== 'activity'
     ||
-    task.recurrence ===
-      'none'
-  ){
+    task.recurrence === 'none'
+  ) {
 
     return (
       start >= monthStart
@@ -9632,26 +10463,20 @@ function occurrences(
     [];
 
 
-  if(start > end){
+  if(start > end) {
 
     return output;
 
   }
 
 
-  if(
-    task.recurrence ===
-    'weekly'
-  ){
+  if(task.recurrence === 'weekly') {
 
     let date =
       new Date(start);
 
 
-    while(
-      date <
-      monthStart
-    ){
+    while(date < monthStart) {
 
       date.setDate(
         date.getDate()+7
@@ -9660,9 +10485,7 @@ function occurrences(
     }
 
 
-    while(
-      date <= end
-    ){
+    while(date <= end) {
 
       const key =
         dateStr(date);
@@ -9673,7 +10496,7 @@ function occurrences(
           task,
           key
         )
-      ){
+      ) {
 
         output.push(
           key
@@ -9691,10 +10514,7 @@ function occurrences(
   }
 
 
-  else if(
-    task.recurrence ===
-    'custom'
-  ){
+  else if(task.recurrence === 'custom') {
 
     const days =
       task.repeatDays
@@ -9710,9 +10530,7 @@ function occurrences(
       );
 
 
-    while(
-      date <= end
-    ){
+    while(date <= end) {
 
       const key =
         dateStr(date);
@@ -9727,7 +10545,7 @@ function occurrences(
           task,
           key
         )
-      ){
+      ) {
 
         output.push(
           key
@@ -9745,10 +10563,7 @@ function occurrences(
   }
 
 
-  else if(
-    task.recurrence ===
-    'monthly'
-  ){
+  else if(task.recurrence === 'monthly') {
 
     const date =
       new Date(
@@ -9774,7 +10589,7 @@ function occurrences(
         task,
         key
       )
-    ){
+    ) {
 
       output.push(
         key
@@ -9795,7 +10610,8 @@ function occurrences(
    MONTH CALENDAR
 ========================================================= */
 
-function renderCalendar(){
+
+function renderCalendar() {
 
   const year =
     calendarCursor
@@ -9840,7 +10656,7 @@ function renderCalendar(){
         .forEach(
           day => {
 
-            if(!map[day]){
+            if(!map[day]) {
 
               map[day] =
                 [];
@@ -9888,7 +10704,7 @@ function renderCalendar(){
     let index=0;
     index<42;
     index++
-  ){
+  ) {
 
     const date =
       new Date(start);
@@ -9917,11 +10733,8 @@ function renderCalendar(){
         class="
           day-cell
           ${
-            date.getMonth() !==
-            month
-
+            date.getMonth() !== month
               ? 'other'
-
               : ''
           }
           ${
@@ -9953,11 +10766,8 @@ function renderCalendar(){
               class="
                 cal-event
                 ${
-                  task.visibility ===
-                  'family'
-
+                  task.visibility === 'family'
                     ? 'family'
-
                     : ''
                 }
               "
@@ -9966,6 +10776,7 @@ function renderCalendar(){
               style="
                 --event-color:${itemColor(task)}
               "
+              type="button"
             >
 
               ${
@@ -10014,10 +10825,11 @@ function renderCalendar(){
 
 
 /* =========================================================
-   ITEMS FOR A SPECIFIC DATE
+   WEEK
 ========================================================= */
 
-function itemsForDate(day){
+
+function itemsForDate(day) {
 
   const year =
     day.getFullYear();
@@ -10054,11 +10866,7 @@ function itemsForDate(day){
 
 
 
-/* =========================================================
-   WEEK CALENDAR
-========================================================= */
-
-function renderWeek(){
+function renderWeek() {
 
   const monday =
     mondayFor(
@@ -10231,11 +11039,8 @@ function renderWeek(){
                             class="
                               cal-event
                               ${
-                                item.visibility ===
-                                'family'
-
+                                item.visibility === 'family'
                                   ? 'family'
-
                                   : ''
                               }
                             "
@@ -10244,6 +11049,7 @@ function renderWeek(){
                             style="
                               --event-color:${itemColor(item)}
                             "
+                            type="button"
                           >
 
                             ${esc(item.title)}
@@ -10279,26 +11085,23 @@ function renderWeek(){
     let hour=startHour;
     hour<=endHour;
     hour++
-  ){
+  ) {
+
 
     html += `
 
       <div class="week-time">
 
         ${
-          hour === 0
+          hour < 12
 
-            ? '12 AM'
+            ? `${hour} AM`
 
-            : hour < 12
+            : hour === 12
 
-              ? `${hour} AM`
+              ? '12 PM'
 
-              : hour === 12
-
-                ? '12 PM'
-
-                : `${hour-12} PM`
+              : `${hour-12} PM`
         }
 
       </div>
@@ -10310,7 +11113,8 @@ function renderWeek(){
       let dayIndex=0;
       dayIndex<7;
       dayIndex++
-    ){
+    ) {
+
 
       const day =
         days[dayIndex];
@@ -10351,10 +11155,7 @@ function renderWeek(){
                 );
 
 
-              if(
-                minutes ===
-                null
-              ){
+              if(minutes === null) {
 
                 return false;
 
@@ -10384,8 +11185,6 @@ function renderWeek(){
                 : ''
             }
           "
-          data-week-date="${key}"
-          data-hour="${hour}"
         >
 
           ${
@@ -10445,11 +11244,8 @@ function renderWeek(){
                       class="
                         week-event
                         ${
-                          item.visibility ===
-                          'family'
-
+                          item.visibility === 'family'
                             ? 'family'
-
                             : ''
                         }
                       "
@@ -10460,6 +11256,7 @@ function renderWeek(){
                         top:${offset}px;
                         height:${Math.max(28,height)}px;
                       "
+                      type="button"
                     >
 
                       <strong>
@@ -10494,94 +11291,6 @@ function renderWeek(){
   }
 
 
-  /*
-     CURRENT TIME LINE
-  */
-
-  const now =
-    new Date();
-
-
-  const mondayKey =
-    dateStr(monday);
-
-
-  const sundayKey =
-    dateStr(sunday);
-
-
-  const nowKey =
-    todayStr();
-
-
-  const withinThisWeek =
-    nowKey >= mondayKey
-    &&
-    nowKey <= sundayKey;
-
-
-  if(withinThisWeek){
-
-    const currentMinutes =
-      now.getHours()*60
-      +
-      now.getMinutes();
-
-
-    if(
-      currentMinutes >=
-      startHour*60
-      &&
-      currentMinutes <=
-      endHour*60+59
-    ){
-
-      const headerHeight =
-        62;
-
-
-      const allDayHeight =
-        55;
-
-
-      const hourlyOffset =
-        (
-          currentMinutes
-          -
-          startHour*60
-        )
-        /
-        60
-        *
-        56;
-
-
-      const top =
-        headerHeight
-        +
-        allDayHeight
-        +
-        hourlyOffset;
-
-
-      html += `
-
-        <div
-          class="current-time-line"
-          style="top:${top}px"
-        >
-
-          <span class="current-time-dot"></span>
-
-        </div>
-
-      `;
-
-    }
-
-  }
-
-
   document
     .getElementById('weekGrid')
     .innerHTML =
@@ -10595,29 +11304,43 @@ function renderWeek(){
    CALENDAR LEGEND
 ========================================================= */
 
-function renderCalendarLegend(){
+
+function renderCalendarLegend() {
 
   const items =
-    [
+    [];
 
+
+  /*
+     When classes are disabled, don't clutter the legend
+     with hidden class organization.
+  */
+
+  if(classesEnabled()) {
+
+    items.push(
       ...state.classes.map(
         item => ({
           name:item.name,
           color:item.color
         })
-      ),
-
-      ...state.extras.map(
-        item => ({
-          name:item.name,
-          color:item.color
-        })
       )
+    );
 
-    ];
+  }
 
 
-  if(family){
+  items.push(
+    ...state.extras.map(
+      item => ({
+        name:item.name,
+        color:item.color
+      })
+    )
+  );
+
+
+  if(family) {
 
     items.push({
 
@@ -10664,9 +11387,12 @@ function renderCalendarLegend(){
 
 /* =========================================================
    ITEM TYPE
+
+   CLASS FIELD NOW RESPECTS DISABLE CLASSES.
 ========================================================= */
 
-function setType(type){
+
+function setType(type) {
 
   activeType =
     type;
@@ -10682,8 +11408,7 @@ function setType(type){
         button.classList
           .toggle(
             'active',
-            button.dataset.type ===
-            type
+            button.dataset.type === type
           );
 
       }
@@ -10691,8 +11416,7 @@ function setType(type){
 
 
   const activity =
-    type ===
-    'activity';
+    type === 'activity';
 
 
   const timed =
@@ -10701,12 +11425,22 @@ function setType(type){
     );
 
 
+  /*
+     IMPORTANT CHANGE:
+
+     Class field appears ONLY when:
+     1. this is not an Activity/Appointment
+     2. classes are enabled
+  */
+
   document
     .getElementById('classField')
     .classList
     .toggle(
       'hidden',
       timed
+      ||
+      !classesEnabled()
     );
 
 
@@ -10760,8 +11494,7 @@ function setType(type){
     .classList
     .toggle(
       'hidden',
-      type !==
-      'assignment'
+      type !== 'assignment'
     );
 
 
@@ -10775,21 +11508,22 @@ function setType(type){
 
 
 /* =========================================================
-   PERSONAL / FAMILY
+   VISIBILITY
 ========================================================= */
 
-function setVisibility(value){
+
+function setVisibility(value) {
 
   if(
-    value ===
-    'family'
+    value === 'family'
     &&
     !family
-  ){
+  ) {
 
     alert(
       'Create or join a Family in Settings first.'
     );
+
 
     return;
 
@@ -10810,8 +11544,7 @@ function setVisibility(value){
         button.classList
           .toggle(
             'active',
-            button.dataset.visibility ===
-            value
+            button.dataset.visibility === value
           );
 
       }
@@ -10821,8 +11554,7 @@ function setVisibility(value){
   document
     .getElementById('visibilityHelp')
     .textContent =
-      value ===
-      'family'
+      value === 'family'
 
         ? `Everyone in ${family?.name || 'your Family'} can see this item.`
 
@@ -10832,7 +11564,7 @@ function setVisibility(value){
 
 
 
-function updateFamilyVisibilityAvailability(){
+function updateFamilyVisibilityAvailability() {
 
   const button =
     document
@@ -10854,11 +11586,7 @@ function updateFamilyVisibilityAvailability(){
 
 
 
-/* =========================================================
-   ALL DAY
-========================================================= */
-
-function updateAllDayUI(){
+function updateAllDayUI() {
 
   const checked =
     document
@@ -10882,11 +11610,7 @@ function updateAllDayUI(){
 
 
 
-/* =========================================================
-   RECURRENCE UI
-========================================================= */
-
-function updateRepeatUI(){
+function updateRepeatUI() {
 
   const repeat =
     document
@@ -10899,8 +11623,7 @@ function updateRepeatUI(){
     .classList
     .toggle(
       'hidden',
-      repeat ===
-      'none'
+      repeat === 'none'
     );
 
 
@@ -10909,8 +11632,7 @@ function updateRepeatUI(){
     .classList
     .toggle(
       'hidden',
-      repeat !==
-      'custom'
+      repeat !== 'custom'
     );
 
 }
@@ -10921,11 +11643,12 @@ function updateRepeatUI(){
    OPEN ITEM
 ========================================================= */
 
+
 async function openItem(
   id=null,
   preset={},
   occurrenceDate=null
-){
+) {
 
   editingId =
     null;
@@ -10978,7 +11701,7 @@ async function openItem(
       .startsWith(
         'family:'
       )
-  ){
+  ) {
 
     editingFamilyEventId =
       String(id)
@@ -10998,7 +11721,7 @@ async function openItem(
         );
 
 
-    if(raw){
+    if(raw) {
 
       task =
         familyEventToTask(
@@ -11009,7 +11732,7 @@ async function openItem(
 
   }
 
-  else if(id){
+  else if(id) {
 
     editingId =
       id;
@@ -11019,8 +11742,7 @@ async function openItem(
       state.tasks
         .find(
           item =>
-            item.id ===
-            id
+            item.id === id
         );
 
   }
@@ -11060,6 +11782,11 @@ async function openItem(
     'personal'
   );
 
+
+  /*
+     Keep existing class ID in memory even if classes
+     are disabled. We do NOT erase it.
+  */
 
   document
     .getElementById('itemClass')
@@ -11213,7 +11940,8 @@ async function openItem(
    SAVE ITEM
 ========================================================= */
 
-async function saveItem(){
+
+async function saveItem() {
 
   const title =
     document
@@ -11232,7 +11960,7 @@ async function saveItem(){
     !title
     ||
     !selectedDate
-  ){
+  ) {
 
     return;
 
@@ -11255,8 +11983,7 @@ async function saveItem(){
 
 
   const recurrence =
-    activeType ===
-    'activity'
+    activeType === 'activity'
 
       ? document
           .getElementById('itemRepeat')
@@ -11265,34 +11992,13 @@ async function saveItem(){
       : 'none';
 
 
-  if(
-    activeType ===
-    'activity'
-    &&
-    recurrence ===
-    'custom'
-    &&
-    !repeatDays.length
-  ){
-
-    alert(
-      'Choose at least one weekday.'
-    );
-
-
-    return;
-
-  }
-
-
   const original =
     editingId
 
       ? state.tasks
           .find(
             task =>
-              task.id ===
-              editingId
+              task.id === editingId
           )
 
       : null;
@@ -11300,13 +12006,10 @@ async function saveItem(){
 
   const common = {
 
-
     type:
       activeType,
 
-
     title,
-
 
     date:
       editingOccurrenceDate
@@ -11319,13 +12022,11 @@ async function saveItem(){
 
         : selectedDate,
 
-
     notes:
       document
         .getElementById('itemNotes')
         .value
         .trim(),
-
 
     allDay:
       timedType(
@@ -11338,7 +12039,6 @@ async function saveItem(){
 
         : false,
 
-
     startTime:
       timedType(
         activeType
@@ -11349,7 +12049,6 @@ async function saveItem(){
             .value
 
         : '',
-
 
     endTime:
       timedType(
@@ -11362,7 +12061,6 @@ async function saveItem(){
 
         : '',
 
-
     time:
       !timedType(
         activeType
@@ -11373,7 +12071,6 @@ async function saveItem(){
             .value
 
         : '',
-
 
     manualLocation:
       timedType(
@@ -11387,22 +12084,15 @@ async function saveItem(){
 
         : '',
 
-
     recurrence,
 
-
     repeatDays:
-      activeType ===
-      'activity'
-
+      activeType === 'activity'
         ? repeatDays
-
         : [],
 
-
     repeatEnd:
-      activeType ===
-      'activity'
+      activeType === 'activity'
 
         ? document
             .getElementById('repeatEnd')
@@ -11410,13 +12100,11 @@ async function saveItem(){
 
         : '',
 
-
     exceptionDates:
       original
         ?.exceptionDates
       ||
       [],
-
 
     visibility:
       activeVisibility
@@ -11425,16 +12113,10 @@ async function saveItem(){
 
 
 
-  /*
-     FAMILY ITEM
-  */
+  if(activeVisibility === 'family') {
 
-  if(
-    activeVisibility ===
-    'family'
-  ){
 
-    if(!family){
+    if(!family) {
 
       alert(
         'Create or join a Family first.'
@@ -11448,68 +12130,53 @@ async function saveItem(){
 
     const payload = {
 
-
       family_id:
         family.id,
-
 
       created_by:
         currentUser.id,
 
-
       type:
         activeType,
-
 
       title:
         common.title,
 
-
       date:
         common.date,
-
 
       notes:
         common.notes,
 
-
       all_day:
         common.allDay,
-
 
       start_time:
         common.startTime
         ||
         null,
 
-
       end_time:
         common.endTime
         ||
         null,
 
-
       location:
         common.manualLocation,
-
 
       recurrence:
         common.recurrence,
 
-
       repeat_days:
         common.repeatDays,
-
 
       repeat_end:
         common.repeatEnd
         ||
         null,
 
-
       exception_dates:
         common.exceptionDates,
-
 
       color:
         family.color
@@ -11519,7 +12186,7 @@ async function saveItem(){
     };
 
 
-    if(editingFamilyEventId){
+    if(editingFamilyEventId) {
 
       const {
         error
@@ -11535,7 +12202,7 @@ async function saveItem(){
           );
 
 
-      if(error){
+      if(error) {
 
         alert(
           error.message
@@ -11548,7 +12215,7 @@ async function saveItem(){
 
     }
 
-    else{
+    else {
 
       const {
         error
@@ -11560,7 +12227,7 @@ async function saveItem(){
           );
 
 
-      if(error){
+      if(error) {
 
         alert(
           error.message
@@ -11592,34 +12259,58 @@ async function saveItem(){
 
 
   /*
-     PERSONAL ITEM
+     IMPORTANT CLASSES-DISABLED BEHAVIOR:
+
+     Editing an existing assignment while Classes are disabled
+     keeps its old classId intact.
+
+     Creating a brand-new item while Classes are disabled gets
+     no class.
+
+     Therefore nothing is destroyed when toggling the mode.
   */
+
+  let classId =
+    null;
+
+
+  if(
+    !timedType(
+      activeType
+    )
+  ) {
+
+    if(classesEnabled()) {
+
+      classId =
+        document
+          .getElementById('itemClass')
+          .value
+        ||
+        null;
+
+    }
+
+    else if(original) {
+
+      classId =
+        original.classId
+        ||
+        null;
+
+    }
+
+  }
+
 
   const payload = {
 
-
     ...common,
 
-
-    classId:
-      timedType(
-        activeType
-      )
-
-        ? null
-
-        : (
-            document
-              .getElementById('itemClass')
-              .value
-            ||
-            null
-          ),
-
+    classId,
 
     extraId:
-      activeType ===
-      'activity'
+      activeType === 'activity'
 
         ? (
             document
@@ -11631,10 +12322,8 @@ async function saveItem(){
 
         : null,
 
-
     attachments:
-      activeType ===
-      'assignment'
+      activeType === 'assignment'
 
         ? pendingAttachments
 
@@ -11643,18 +12332,18 @@ async function saveItem(){
   };
 
 
-  if(editingId){
+  if(editingId) {
+
 
     const index =
       state.tasks
         .findIndex(
           task =>
-            task.id ===
-            editingId
+            task.id === editingId
         );
 
 
-    if(index >= 0){
+    if(index >= 0) {
 
       state.tasks[index] = {
 
@@ -11668,7 +12357,8 @@ async function saveItem(){
 
   }
 
-  else{
+  else {
+
 
     state.tasks
       .push({
@@ -11706,14 +12396,15 @@ async function saveItem(){
    COMPLETE
 ========================================================= */
 
-function toggleComplete(id){
+
+function toggleComplete(id) {
 
   if(
     String(id)
       .startsWith(
         'family:'
       )
-  ){
+  ) {
 
     return;
 
@@ -11724,8 +12415,7 @@ function toggleComplete(id){
     state.tasks
       .find(
         item =>
-          item.id ===
-          id
+          item.id === id
       );
 
 
@@ -11733,7 +12423,7 @@ function toggleComplete(id){
     !task
     ||
     !checkable(task)
-  ){
+  ) {
 
     return;
 
@@ -11754,12 +12444,13 @@ function toggleComplete(id){
 
 
 /* =========================================================
-   CURRENT EDITING TASK
+   DELETE ITEM
 ========================================================= */
 
-function currentEditingTask(){
 
-  if(editingFamilyEventId){
+function currentEditingTask() {
+
+  if(editingFamilyEventId) {
 
     const raw =
       familyEvents
@@ -11774,23 +12465,18 @@ function currentEditingTask(){
 
 
     return raw
-
-      ? familyEventToTask(
-          raw
-        )
-
+      ? familyEventToTask(raw)
       : null;
 
   }
 
 
-  if(editingId){
+  if(editingId) {
 
     return state.tasks
       .find(
         item =>
-          item.id ===
-          editingId
+          item.id === editingId
       );
 
   }
@@ -11802,26 +12488,21 @@ function currentEditingTask(){
 
 
 
-/* =========================================================
-   DELETE ITEM
-========================================================= */
-
-function requestDeleteItem(){
+function requestDeleteItem() {
 
   const task =
     currentEditingTask();
 
 
-  if(!task){
+  if(!task) {
+
     return;
+
   }
 
 
-  if(
-    isRecurring(
-      task
-    )
-  ){
+  if(isRecurring(task)) {
+
 
     const occurrence =
       editingOccurrenceDate
@@ -11878,13 +12559,10 @@ function requestDeleteItem(){
 
 
 
-/* =========================================================
-   DELETE ENTIRE TASK
-========================================================= */
+async function deleteEntireTask() {
 
-async function deleteEntireTask(){
+  if(editingFamilyEventId) {
 
-  if(editingFamilyEventId){
 
     const {
       error
@@ -11898,7 +12576,7 @@ async function deleteEntireTask(){
         );
 
 
-    if(error){
+    if(error) {
 
       alert(
         error.message
@@ -11914,14 +12592,14 @@ async function deleteEntireTask(){
 
   }
 
-  else if(editingId){
+  else if(editingId) {
+
 
     const task =
       state.tasks
         .find(
           item =>
-            item.id ===
-            editingId
+            item.id === editingId
         );
 
 
@@ -11930,7 +12608,7 @@ async function deleteEntireTask(){
       of task?.attachments
       ||
       []
-    ){
+    ) {
 
       await deleteAttachmentFile(
         attachment
@@ -11943,8 +12621,7 @@ async function deleteEntireTask(){
       state.tasks
         .filter(
           task =>
-            task.id !==
-            editingId
+            task.id !== editingId
         );
 
 
@@ -11981,18 +12658,16 @@ async function deleteEntireTask(){
 
 
 
-/* =========================================================
-   DELETE ONE OCCURRENCE
-========================================================= */
-
-async function deleteOneOccurrence(){
+async function deleteOneOccurrence() {
 
   const task =
     currentEditingTask();
 
 
-  if(!task){
+  if(!task) {
+
     return;
+
   }
 
 
@@ -12022,49 +12697,35 @@ async function deleteOneOccurrence(){
     ];
 
 
-  if(editingFamilyEventId){
-
-    const {
-      error
-    } =
-      await sb
-        .from('family_events')
-        .update({
-
-          exception_dates:
-            exceptions
-
-        })
-        .eq(
-          'id',
-          editingFamilyEventId
-        );
+  if(editingFamilyEventId) {
 
 
-    if(error){
+    await sb
+      .from('family_events')
+      .update({
 
-      alert(
-        error.message
+        exception_dates:
+          exceptions
+
+      })
+      .eq(
+        'id',
+        editingFamilyEventId
       );
-
-
-      return;
-
-    }
 
 
     await loadFamily();
 
   }
 
-  else{
+  else {
+
 
     const original =
       state.tasks
         .find(
           item =>
-            item.id ===
-            editingId
+            item.id === editingId
         );
 
 
@@ -12100,18 +12761,16 @@ async function deleteOneOccurrence(){
 
 
 
-/* =========================================================
-   DELETE THIS + FUTURE
-========================================================= */
-
-async function deleteThisAndFuture(){
+async function deleteThisAndFuture() {
 
   const task =
     currentEditingTask();
 
 
-  if(!task){
+  if(!task) {
+
     return;
+
   }
 
 
@@ -12136,49 +12795,35 @@ async function deleteThisAndFuture(){
     );
 
 
-  if(editingFamilyEventId){
-
-    const {
-      error
-    } =
-      await sb
-        .from('family_events')
-        .update({
-
-          repeat_end:
-            end
-
-        })
-        .eq(
-          'id',
-          editingFamilyEventId
-        );
+  if(editingFamilyEventId) {
 
 
-    if(error){
+    await sb
+      .from('family_events')
+      .update({
 
-      alert(
-        error.message
+        repeat_end:
+          end
+
+      })
+      .eq(
+        'id',
+        editingFamilyEventId
       );
-
-
-      return;
-
-    }
 
 
     await loadFamily();
 
   }
 
-  else{
+  else {
+
 
     const original =
       state.tasks
         .find(
           item =>
-            item.id ===
-            editingId
+            item.id === editingId
         );
 
 
@@ -12218,7 +12863,8 @@ async function deleteThisAndFuture(){
    ATTACHMENTS
 ========================================================= */
 
-async function uploadAttachment(file){
+
+async function uploadAttachment(file) {
 
   const extension =
     (
@@ -12252,8 +12898,10 @@ async function uploadAttachment(file){
       );
 
 
-  if(error){
+  if(error) {
+
     throw error;
+
   }
 
 
@@ -12279,11 +12927,11 @@ async function uploadAttachment(file){
 
 
 
-async function attachmentSignedUrl(path){
+async function attachmentSignedUrl(path) {
 
   if(
     attachmentUrls[path]
-  ){
+  ) {
 
     return attachmentUrls[path];
 
@@ -12304,7 +12952,7 @@ async function attachmentSignedUrl(path){
       );
 
 
-  if(error){
+  if(error) {
 
     return '';
 
@@ -12321,7 +12969,7 @@ async function attachmentSignedUrl(path){
 
 
 
-async function hydrateAttachmentUrls(){
+async function hydrateAttachmentUrls() {
 
   const attachments =
     state.tasks
@@ -12336,9 +12984,9 @@ async function hydrateAttachmentUrls(){
   for(
     const attachment
     of attachments
-  ){
+  ) {
 
-    if(attachment.path){
+    if(attachment.path) {
 
       await attachmentSignedUrl(
         attachment.path
@@ -12354,10 +13002,12 @@ async function hydrateAttachmentUrls(){
 
 async function deleteAttachmentFile(
   attachment
-){
+) {
 
-  if(!attachment.path){
+  if(!attachment.path) {
+
     return;
+
   }
 
 
@@ -12375,18 +13025,14 @@ async function deleteAttachmentFile(
 
 
 
-/* =========================================================
-   ATTACHMENT GRID
-========================================================= */
-
-async function renderAttachmentGrid(){
+async function renderAttachmentGrid() {
 
   const grid =
     document
       .getElementById('attachmentGrid');
 
 
-  if(!pendingAttachments.length){
+  if(!pendingAttachments.length) {
 
     grid.innerHTML = `
 
@@ -12415,7 +13061,8 @@ async function renderAttachmentGrid(){
   for(
     const attachment
     of pendingAttachments
-  ){
+  ) {
+
 
     const url =
       attachment.path
@@ -12504,18 +13151,15 @@ async function renderAttachmentGrid(){
 
 
 
-/* =========================================================
-   HANDLE CAMERA / FILES
-========================================================= */
-
-async function handleFiles(files){
+async function handleFiles(files) {
 
   for(
     const file
     of files
-  ){
+  ) {
 
-    try{
+    try {
+
 
       const uploaded =
         await uploadAttachment(
@@ -12530,7 +13174,7 @@ async function handleFiles(files){
 
     }
 
-    catch(error){
+    catch(error) {
 
       alert(
         `Could not upload ${file.name}: ${error.message}`
@@ -12547,23 +13191,24 @@ async function handleFiles(files){
 
 
 
-async function removePendingAttachment(id){
+async function removePendingAttachment(id) {
 
   const attachment =
     pendingAttachments
       .find(
         item =>
-          item.id ===
-          id
+          item.id === id
       );
 
 
-  if(!attachment){
+  if(!attachment) {
+
     return;
+
   }
 
 
-  if(attachment.path){
+  if(attachment.path) {
 
     await deleteAttachmentFile(
       attachment
@@ -12576,8 +13221,7 @@ async function removePendingAttachment(id){
     pendingAttachments
       .filter(
         item =>
-          item.id !==
-          id
+          item.id !== id
       );
 
 
@@ -12587,19 +13231,20 @@ async function removePendingAttachment(id){
 
 
 
-async function openAttachment(id){
+async function openAttachment(id) {
 
   const attachment =
     pendingAttachments
       .find(
         item =>
-          item.id ===
-          id
+          item.id === id
       );
 
 
-  if(!attachment){
+  if(!attachment) {
+
     return;
+
   }
 
 
@@ -12671,21 +13316,8 @@ async function openAttachment(id){
    MAPS
 ========================================================= */
 
-function mapsUrl(query){
 
-  return (
-    'https://www.google.com/maps/search/?api=1&query='
-    +
-    encodeURIComponent(
-      query
-    )
-  );
-
-}
-
-
-
-function openMapsForLocation(){
+function openMapsForLocation() {
 
   const query =
     document
@@ -12694,25 +13326,47 @@ function openMapsForLocation(){
       .trim();
 
 
-  if(query){
+  if(!query) {
 
-    window.open(
-      mapsUrl(query),
-      '_blank',
-      'noopener'
-    );
+    return;
 
   }
+
+
+  window.open(
+
+    'https://www.google.com/maps/search/?api=1&query='
+    +
+    encodeURIComponent(
+      query
+    ),
+
+    '_blank',
+
+    'noopener'
+
+  );
 
 }
 
 
 
 /* =========================================================
-   SETTINGS
+   SETTINGS RENDER
 ========================================================= */
 
-function renderSettings(){
+
+function renderSettings() {
+
+  /*
+     NEW SWITCH
+  */
+
+  document
+    .getElementById('disableClassesToggle')
+    .checked =
+      !classesEnabled();
+
 
   document
     .getElementById('themeGreen')
@@ -12731,11 +13385,6 @@ function renderSettings(){
     .value =
       state.theme.paper;
 
-
-
-  /*
-     CLASSES
-  */
 
   document
     .getElementById('classEditor')
@@ -12795,11 +13444,6 @@ function renderSettings(){
         .join('');
 
 
-
-  /*
-     EXTRACURRICULARS
-  */
-
   document
     .getElementById('extraEditor')
     .innerHTML =
@@ -12847,15 +13491,19 @@ function renderSettings(){
 
   renderFamilySettings();
 
+
+  renderClassMode();
+
 }
 
 
 
 /* =========================================================
-   COMMIT SETTINGS
+   SETTINGS SAVE
 ========================================================= */
 
-function commitSettings(){
+
+function commitSettings() {
 
   state.theme.green =
     document
@@ -12875,6 +13523,16 @@ function commitSettings(){
       .value;
 
 
+  /*
+     NEW CLASSES SETTING
+  */
+
+  state.settings.classesEnabled =
+    !document
+      .getElementById('disableClassesToggle')
+      .checked;
+
+
   document
     .querySelectorAll(
       '[data-setting-id]'
@@ -12888,11 +13546,8 @@ function commitSettings(){
 
 
         const list =
-          type ===
-          'class'
-
+          type === 'class'
             ? state.classes
-
             : state.extras;
 
 
@@ -12904,8 +13559,10 @@ function commitSettings(){
           );
 
 
-        if(!item){
+        if(!item) {
+
           return;
+
         }
 
 
@@ -12928,10 +13585,8 @@ function commitSettings(){
             .value;
 
 
-        if(
-          type ===
-          'class'
-        ){
+        if(type === 'class') {
+
 
           item.teacher =
             row
@@ -12950,10 +13605,6 @@ function commitSettings(){
               .value
               .trim();
 
-
-          /*
-             Once customized it becomes a normal class.
-          */
 
           item.tutorial =
             '';
@@ -12974,17 +13625,18 @@ function commitSettings(){
 
 
 /* =========================================================
-   FAMILY SETTINGS UI
+   FAMILY SETTINGS
 ========================================================= */
 
-function renderFamilySettings(){
+
+function renderFamilySettings() {
 
   const container =
     document
       .getElementById('familySettingsArea');
 
 
-  if(!family){
+  if(!family) {
 
     container.innerHTML = `
 
@@ -13101,8 +13753,7 @@ function renderFamilySettings(){
 
 
                 const self =
-                  member.user_id ===
-                  currentUser.id;
+                  member.user_id === currentUser.id;
 
 
                 return `
@@ -13161,11 +13812,8 @@ function renderFamilySettings(){
                               <option
                                 value="member"
                                 ${
-                                  member.role ===
-                                  'member'
-
+                                  member.role === 'member'
                                     ? 'selected'
-
                                     : ''
                                 }
                               >
@@ -13175,11 +13823,8 @@ function renderFamilySettings(){
                               <option
                                 value="owner"
                                 ${
-                                  member.role ===
-                                  'owner'
-
+                                  member.role === 'owner'
                                     ? 'selected'
-
                                     : ''
                                 }
                               >
@@ -13272,7 +13917,6 @@ function renderFamilySettings(){
 
       <div class="family-bottom-actions">
 
-
         <button
           class="btn btn-ghost btn-small"
           id="leaveFamilyButton"
@@ -13280,7 +13924,6 @@ function renderFamilySettings(){
         >
           Leave Family
         </button>
-
 
       </div>
 
@@ -13334,14 +13977,15 @@ function renderFamilySettings(){
    PENDING INVITES
 ========================================================= */
 
-function renderPendingInvites(){
+
+function renderPendingInvites() {
 
   const area =
     document
       .getElementById('pendingInvitesArea');
 
 
-  if(!pendingInvites.length){
+  if(!pendingInvites.length) {
 
     area.classList
       .add('hidden');
@@ -13428,12 +14072,56 @@ function renderPendingInvites(){
 
 /* =========================================================
    SIGN OUT
+
+   FIXED:
+   EVERY MODAL CLOSES BEFORE AUTH SCREEN APPEARS.
 ========================================================= */
 
-async function signOut(){
 
-  await sb.auth
-    .signOut();
+async function signOut() {
+
+  /*
+     Close Profile immediately so the user never sees
+     the Profile modal sitting over the Sign In screen.
+  */
+
+  closeAllModals();
+
+
+  editingId =
+    null;
+
+
+  editingFamilyEventId =
+    null;
+
+
+  editingOccurrenceDate =
+    null;
+
+
+  classModalId =
+    null;
+
+
+  pendingAttachments =
+    [];
+
+
+  const {
+    error
+  } =
+    await sb.auth
+      .signOut();
+
+
+  if(error) {
+
+    console.error(
+      error
+    );
+
+  }
 
 
   currentUser =
@@ -13462,7 +14150,22 @@ async function signOut(){
     [];
 
 
+  attachmentUrls =
+    {};
+
+
   showAuth();
+
+
+  setAuthMode(
+    'signin'
+  );
+
+
+  document
+    .getElementById('authPassword')
+    .value =
+      '';
 
 }
 
@@ -13472,7 +14175,8 @@ async function signOut(){
    DELETE ACCOUNT
 ========================================================= */
 
-async function deleteAccount(){
+
+async function deleteAccount() {
 
   const message =
     document
@@ -13487,7 +14191,7 @@ async function deleteAccount(){
     .remove('error');
 
 
-  try{
+  try {
 
 
     const {
@@ -13499,9 +14203,14 @@ async function deleteAccount(){
         );
 
 
-    if(error){
+    if(error) {
+
       throw error;
+
     }
+
+
+    closeAllModals();
 
 
     await sb.auth
@@ -13530,16 +14239,6 @@ async function deleteAccount(){
       [];
 
 
-    closeModal(
-      'deleteAccountModal'
-    );
-
-
-    closeModal(
-      'profileModal'
-    );
-
-
     showAuth();
 
 
@@ -13555,7 +14254,7 @@ async function deleteAccount(){
 
   }
 
-  catch(error){
+  catch(error) {
 
     message.textContent =
       error.message
@@ -13573,10 +14272,11 @@ async function deleteAccount(){
 
 
 /* =========================================================
-   RENDER EVERYTHING
+   RENDER ALL
 ========================================================= */
 
-function renderAll(){
+
+function renderAll() {
 
   applyTheme();
 
@@ -13587,10 +14287,17 @@ function renderAll(){
   renderSelects();
 
 
+  renderClassMode();
+
+
   renderDeadlines();
 
 
-  renderClasses();
+  if(classesEnabled()) {
+
+    renderClasses();
+
+  }
 
 
   renderTaskList();
@@ -13611,13 +14318,13 @@ function renderAll(){
   if(
     classModalId
     &&
+    classesEnabled()
+    &&
     document
       .getElementById('classModal')
       .classList
-      .contains(
-        'open'
-      )
-  ){
+      .contains('open')
+  ) {
 
     renderClassModal();
 
@@ -13630,6 +14337,7 @@ function renderAll(){
 /* =========================================================
    AUTH EVENTS
 ========================================================= */
+
 
 document
   .getElementById('signInTab')
@@ -13666,6 +14374,7 @@ document
 /* =========================================================
    PASSWORD EVENTS
 ========================================================= */
+
 
 document
   .getElementById('forgotPasswordButton')
@@ -13709,8 +14418,9 @@ document
 
 
 /* =========================================================
-   HEADER EVENTS
+   HEADER
 ========================================================= */
+
 
 document
   .getElementById('addButton')
@@ -13755,6 +14465,7 @@ document
 /* =========================================================
    PROFILE
 ========================================================= */
+
 
 document
   .getElementById('saveProfileButton')
@@ -13818,6 +14529,7 @@ document
    ITEM
 ========================================================= */
 
+
 document
   .getElementById('itemForm')
   .onsubmit =
@@ -13858,8 +14570,9 @@ document
 
 
 /* =========================================================
-   TYPE BUTTONS
+   ITEM TYPE
 ========================================================= */
+
 
 document
   .getElementById('typeToggle')
@@ -13874,7 +14587,7 @@ document
           );
 
 
-      if(button){
+      if(button) {
 
         setType(
           button.dataset.type
@@ -13887,8 +14600,9 @@ document
 
 
 /* =========================================================
-   VISIBILITY BUTTONS
+   VISIBILITY
 ========================================================= */
+
 
 document
   .querySelectorAll(
@@ -13910,8 +14624,9 @@ document
 
 
 /* =========================================================
-   TIMING / RECURRENCE
+   TIMING
 ========================================================= */
+
 
 document
   .getElementById('allDayToggle')
@@ -13938,7 +14653,7 @@ document
           );
 
 
-      if(button){
+      if(button) {
 
         button.classList
           .toggle(
@@ -13955,24 +14670,18 @@ document
    MAPS
 ========================================================= */
 
+
 document
   .getElementById('searchMapsButton')
   .onclick =
     openMapsForLocation;
 
 
-document
-  .getElementById('openMapsButton')
-  .onclick =
-    openMapsForLocation;
-
-
 
 /* =========================================================
-   TAKE PHOTO
-
-   ONLY ONE CAMERA FEATURE NOW.
+   CAMERA
 ========================================================= */
+
 
 document
   .getElementById('takePhotoButton')
@@ -13996,7 +14705,7 @@ document
       if(
         event.target.files
           ?.length
-      ){
+      ) {
 
         await handleFiles(
           event.target.files
@@ -14013,8 +14722,9 @@ document
 
 
 /* =========================================================
-   ADD FILE
+   FILE
 ========================================================= */
+
 
 document
   .getElementById('addFileButton')
@@ -14038,7 +14748,7 @@ document
       if(
         event.target.files
           ?.length
-      ){
+      ) {
 
         await handleFiles(
           event.target.files
@@ -14058,10 +14768,18 @@ document
    CLASS
 ========================================================= */
 
+
 document
   .getElementById('classAddButton')
   .onclick =
     () => {
+
+
+      if(!classesEnabled()) {
+
+        return;
+
+      }
 
 
       const id =
@@ -14076,11 +14794,8 @@ document
       openItem(
         null,
         {
-          type:
-            'assignment',
-
-          classId:
-            id
+          type:'assignment',
+          classId:id
         }
       );
 
@@ -14104,6 +14819,7 @@ document
    FILTER
 ========================================================= */
 
+
 document
   .getElementById('filterTabs')
   .onclick =
@@ -14117,8 +14833,10 @@ document
           );
 
 
-      if(!button){
+      if(!button) {
+
         return;
+
       }
 
 
@@ -14137,8 +14855,7 @@ document
             item.classList
               .toggle(
                 'active',
-                item ===
-                button
+                item === button
               );
 
           }
@@ -14152,8 +14869,9 @@ document
 
 
 /* =========================================================
-   MONTH NAVIGATION
+   CALENDAR NAV
 ========================================================= */
+
 
 document
   .getElementById('prevMonth')
@@ -14218,11 +14936,6 @@ document
     };
 
 
-
-/* =========================================================
-   WEEK NAVIGATION
-========================================================= */
-
 document
   .getElementById('prevWeek')
   .onclick =
@@ -14276,8 +14989,54 @@ document
 
 
 /* =========================================================
+   NEW DISABLE CLASSES TOGGLE
+
+   CHANGES IMMEDIATELY.
+========================================================= */
+
+
+document
+  .getElementById('disableClassesToggle')
+  .onchange =
+    event => {
+
+
+      state.settings.classesEnabled =
+        !event.target.checked;
+
+
+      queueSave();
+
+
+      /*
+         If a class modal happened to be open,
+         close it when classes are disabled.
+      */
+
+      if(!classesEnabled()) {
+
+        closeModal(
+          'classModal'
+        );
+
+
+        closeModal(
+          'classInfoModal'
+        );
+
+      }
+
+
+      renderAll();
+
+    };
+
+
+
+/* =========================================================
    ADD CLASS
 ========================================================= */
+
 
 document
   .getElementById('addClassButton')
@@ -14297,17 +15056,13 @@ document
           name:
             'New Class',
 
-          teacher:
-            '',
+          teacher:'',
 
-          room:
-            '',
+          room:'',
 
-          color:
-            '#5D7BA8',
+          color:'#5D7BA8',
 
-          tutorial:
-            ''
+          tutorial:''
 
         });
 
@@ -14326,9 +15081,8 @@ document
 
 /* =========================================================
    ADD EXTRACURRICULAR
-
-   AUTOMATICALLY CHOOSES AN UNUSED COLOR.
 ========================================================= */
+
 
 document
   .getElementById('addExtraButton')
@@ -14337,10 +15091,6 @@ document
 
 
       commitSettings();
-
-
-      const uniqueColor =
-        getUniqueExtracurricularColor();
 
 
       state.extras
@@ -14353,7 +15103,7 @@ document
             'New Extracurricular',
 
           color:
-            uniqueColor
+            getUniqueExtracurricularColor()
 
         });
 
@@ -14371,8 +15121,9 @@ document
 
 
 /* =========================================================
-   SAVE SETTINGS
+   SETTINGS DONE
 ========================================================= */
+
 
 document
   .getElementById('saveSettingsButton')
@@ -14392,8 +15143,9 @@ document
 
 
 /* =========================================================
-   LIVE THEME
+   THEME
 ========================================================= */
+
 
 [
   'themeGreen',
@@ -14438,8 +15190,9 @@ document
 
 
 /* =========================================================
-   CREATE / JOIN / INVITE FAMILY
+   FAMILY BUTTONS
 ========================================================= */
+
 
 document
   .getElementById('createFamilyButton')
@@ -14461,8 +15214,9 @@ document
 
 
 /* =========================================================
-   CONFIRMATION MODAL
+   CONFIRM
 ========================================================= */
+
 
 document
   .getElementById('confirmActionButton')
@@ -14489,18 +15243,15 @@ document
 
 
 /* =========================================================
-   GLOBAL CLICKS
+   GLOBAL CLICK
 ========================================================= */
+
 
 document
   .addEventListener(
     'click',
     async event => {
 
-
-      /* ---------------------------------------------
-         PLANNER / CALENDAR
-      --------------------------------------------- */
 
       const view =
         event.target
@@ -14509,7 +15260,8 @@ document
           );
 
 
-      if(view){
+      if(view) {
+
 
         document
           .querySelectorAll(
@@ -14522,8 +15274,7 @@ document
               button.classList
                 .toggle(
                   'active',
-                  button ===
-                  view
+                  button === view
                 );
 
             }
@@ -14535,8 +15286,7 @@ document
           .classList
           .toggle(
             'hidden',
-            view.dataset.view !==
-            'planner'
+            view.dataset.view !== 'planner'
           );
 
 
@@ -14545,17 +15295,12 @@ document
           .classList
           .toggle(
             'hidden',
-            view.dataset.view !==
-            'calendar'
+            view.dataset.view !== 'calendar'
           );
 
       }
 
 
-
-      /* ---------------------------------------------
-         MONTH / WEEK
-      --------------------------------------------- */
 
       const calendarViewButton =
         event.target
@@ -14564,7 +15309,8 @@ document
           );
 
 
-      if(calendarViewButton){
+      if(calendarViewButton) {
+
 
         calendarView =
           calendarViewButton
@@ -14583,8 +15329,7 @@ document
               button.classList
                 .toggle(
                   'active',
-                  button ===
-                  calendarViewButton
+                  button === calendarViewButton
                 );
 
             }
@@ -14596,8 +15341,7 @@ document
           .classList
           .toggle(
             'hidden',
-            calendarView !==
-            'month'
+            calendarView !== 'month'
           );
 
 
@@ -14606,15 +15350,11 @@ document
           .classList
           .toggle(
             'hidden',
-            calendarView !==
-            'week'
+            calendarView !== 'week'
           );
 
 
-        if(
-          calendarView ===
-          'week'
-        ){
+        if(calendarView === 'week') {
 
           renderWeek();
 
@@ -14624,10 +15364,6 @@ document
 
 
 
-      /* ---------------------------------------------
-         EDIT PERSONAL ITEM
-      --------------------------------------------- */
-
       const edit =
         event.target
           .closest(
@@ -14635,7 +15371,7 @@ document
           );
 
 
-      if(edit){
+      if(edit) {
 
         await openItem(
           edit.dataset.edit
@@ -14645,10 +15381,6 @@ document
 
 
 
-      /* ---------------------------------------------
-         CALENDAR ITEM
-      --------------------------------------------- */
-
       const calendarEdit =
         event.target
           .closest(
@@ -14656,7 +15388,7 @@ document
           );
 
 
-      if(calendarEdit){
+      if(calendarEdit) {
 
         await openItem(
           calendarEdit
@@ -14672,10 +15404,6 @@ document
 
 
 
-      /* ---------------------------------------------
-         COMPLETE
-      --------------------------------------------- */
-
       const complete =
         event.target
           .closest(
@@ -14683,7 +15411,7 @@ document
           );
 
 
-      if(complete){
+      if(complete) {
 
         event.stopPropagation();
 
@@ -14696,10 +15424,6 @@ document
 
 
 
-      /* ---------------------------------------------
-         CLASS CARD
-      --------------------------------------------- */
-
       const classButton =
         event.target
           .closest(
@@ -14707,7 +15431,11 @@ document
           );
 
 
-      if(classButton){
+      if(
+        classButton
+        &&
+        classesEnabled()
+      ) {
 
         openClassModal(
           classButton.dataset.class
@@ -14717,10 +15445,6 @@ document
 
 
 
-      /* ---------------------------------------------
-         CLOSE MODAL
-      --------------------------------------------- */
-
       const close =
         event.target
           .closest(
@@ -14728,7 +15452,7 @@ document
           );
 
 
-      if(close){
+      if(close) {
 
         closeModal(
           close.dataset.close
@@ -14738,10 +15462,6 @@ document
 
 
 
-      /* ---------------------------------------------
-         REMOVE ATTACHMENT
-      --------------------------------------------- */
-
       const removeAttachment =
         event.target
           .closest(
@@ -14749,7 +15469,7 @@ document
           );
 
 
-      if(removeAttachment){
+      if(removeAttachment) {
 
         await removePendingAttachment(
           removeAttachment
@@ -14761,10 +15481,6 @@ document
 
 
 
-      /* ---------------------------------------------
-         OPEN ATTACHMENT
-      --------------------------------------------- */
-
       const openAttachmentButton =
         event.target
           .closest(
@@ -14772,7 +15488,7 @@ document
           );
 
 
-      if(openAttachmentButton){
+      if(openAttachmentButton) {
 
         await openAttachment(
           openAttachmentButton
@@ -14784,10 +15500,6 @@ document
 
 
 
-      /* ---------------------------------------------
-         ACCEPT FAMILY INVITE
-      --------------------------------------------- */
-
       const acceptInvite =
         event.target
           .closest(
@@ -14795,7 +15507,7 @@ document
           );
 
 
-      if(acceptInvite){
+      if(acceptInvite) {
 
         await acceptFamilyInvite(
           acceptInvite
@@ -14807,10 +15519,6 @@ document
 
 
 
-      /* ---------------------------------------------
-         DECLINE FAMILY INVITE
-      --------------------------------------------- */
-
       const declineInvite =
         event.target
           .closest(
@@ -14818,7 +15526,7 @@ document
           );
 
 
-      if(declineInvite){
+      if(declineInvite) {
 
         await declineFamilyInvite(
           declineInvite
@@ -14830,10 +15538,6 @@ document
 
 
 
-      /* ---------------------------------------------
-         REMOVE CLASS / EXTRACURRICULAR
-      --------------------------------------------- */
-
       const removeSetting =
         event.target
           .closest(
@@ -14841,7 +15545,8 @@ document
           );
 
 
-      if(removeSetting){
+      if(removeSetting) {
+
 
         commitSettings();
 
@@ -14858,22 +15563,21 @@ document
             .removeType;
 
 
-        if(
-          type ===
-          'class'
-        ){
+        if(type === 'class') {
+
 
           const item =
             state.classes
               .find(
                 entry =>
-                  entry.id ===
-                  id
+                  entry.id === id
               );
 
 
-          if(!item){
+          if(!item) {
+
             return;
+
           }
 
 
@@ -14898,8 +15602,7 @@ document
                   state.classes
                     .filter(
                       item =>
-                        item.id !==
-                        id
+                        item.id !== id
                     );
 
 
@@ -14908,10 +15611,7 @@ document
                     task => {
 
 
-                      if(
-                        task.classId ===
-                        id
-                      ){
+                      if(task.classId === id) {
 
                         task.classId =
                           null;
@@ -14933,19 +15633,21 @@ document
 
         }
 
-        else{
+        else {
+
 
           const item =
             state.extras
               .find(
                 entry =>
-                  entry.id ===
-                  id
+                  entry.id === id
               );
 
 
-          if(!item){
+          if(!item) {
+
             return;
+
           }
 
 
@@ -14970,8 +15672,7 @@ document
                   state.extras
                     .filter(
                       item =>
-                        item.id !==
-                        id
+                        item.id !== id
                     );
 
 
@@ -14980,10 +15681,7 @@ document
                     task => {
 
 
-                      if(
-                        task.extraId ===
-                        id
-                      ){
+                      if(task.extraId === id) {
 
                         task.extraId =
                           null;
@@ -15009,14 +15707,11 @@ document
 
 
 
-      /* ---------------------------------------------
-         OPEN CREATE FAMILY
-      --------------------------------------------- */
-
       if(
         event.target.id ===
         'openCreateFamilyButton'
-      ){
+      ) {
+
 
         document
           .getElementById('newFamilyName')
@@ -15032,14 +15727,11 @@ document
 
 
 
-      /* ---------------------------------------------
-         OPEN JOIN FAMILY
-      --------------------------------------------- */
-
       if(
         event.target.id ===
         'openJoinFamilyButton'
-      ){
+      ) {
+
 
         document
           .getElementById('joinFamilyCode')
@@ -15061,14 +15753,11 @@ document
 
 
 
-      /* ---------------------------------------------
-         OPEN INVITE FAMILY
-      --------------------------------------------- */
-
       if(
         event.target.id ===
         'openInviteFamilyButton'
-      ){
+      ) {
+
 
         document
           .getElementById('inviteFamilyEmail')
@@ -15090,16 +15779,14 @@ document
 
 
 
-      /* ---------------------------------------------
-         COPY FAMILY CODE
-      --------------------------------------------- */
-
       if(
         event.target.id ===
         'copyFamilyCodeButton'
-      ){
+      ) {
 
-        try{
+
+        try {
+
 
           await navigator.clipboard
             .writeText(
@@ -15113,7 +15800,8 @@ document
 
         }
 
-        catch{
+        catch {
+
 
           alert(
             `Invite code: ${family.invite_code}`
@@ -15125,10 +15813,6 @@ document
 
 
 
-      /* ---------------------------------------------
-         REMOVE FAMILY MEMBER
-      --------------------------------------------- */
-
       const removeFamilyMember =
         event.target
           .closest(
@@ -15136,7 +15820,7 @@ document
           );
 
 
-      if(removeFamilyMember){
+      if(removeFamilyMember) {
 
         requestRemoveFamilyMember(
           removeFamilyMember
@@ -15148,14 +15832,10 @@ document
 
 
 
-      /* ---------------------------------------------
-         LEAVE FAMILY
-      --------------------------------------------- */
-
       if(
         event.target.id ===
         'leaveFamilyButton'
-      ){
+      ) {
 
         requestLeaveFamily();
 
@@ -15163,14 +15843,10 @@ document
 
 
 
-      /* ---------------------------------------------
-         DELETE FAMILY
-      --------------------------------------------- */
-
       if(
         event.target.id ===
         'deleteFamilyButton'
-      ){
+      ) {
 
         requestDeleteFamily();
 
@@ -15183,8 +15859,9 @@ document
 
 
 /* =========================================================
-   ROLE DROPDOWN CHANGE
+   FAMILY ROLE CHANGE
 ========================================================= */
+
 
 document
   .addEventListener(
@@ -15199,8 +15876,10 @@ document
           );
 
 
-      if(!roleSelect){
+      if(!roleSelect) {
+
         return;
+
       }
 
 
@@ -15220,20 +15899,13 @@ document
           .memberRole;
 
 
-      /*
-         Immediately return the visual dropdown to the
-         current saved role. It will change only after
-         the user confirms and Supabase succeeds.
-      */
-
       roleSelect.value =
         originalRole;
 
 
       if(
-        newRole !==
-        originalRole
-      ){
+        newRole !== originalRole
+      ) {
 
         requestFamilyRoleChange(
           memberId,
@@ -15251,6 +15923,7 @@ document
    MODAL BACKDROP
 ========================================================= */
 
+
 document
   .querySelectorAll(
     '.modal-overlay'
@@ -15264,9 +15937,8 @@ document
 
 
           if(
-            event.target ===
-            modal
-          ){
+            event.target === modal
+          ) {
 
             closeModal(
               modal.id
@@ -15282,8 +15954,9 @@ document
 
 
 /* =========================================================
-   ESCAPE
+   ESC
 ========================================================= */
+
 
 document
   .addEventListener(
@@ -15291,29 +15964,9 @@ document
     event => {
 
 
-      if(
-        event.key ===
-        'Escape'
-      ){
+      if(event.key === 'Escape') {
 
-        document
-          .querySelectorAll(
-            '.modal-overlay.open'
-          )
-          .forEach(
-            modal => {
-
-              modal.classList
-                .remove(
-                  'open'
-                );
-
-            }
-          );
-
-
-        pendingConfirmAction =
-          null;
+        closeAllModals();
 
       }
 
@@ -15323,8 +15976,14 @@ document
 
 
 /* =========================================================
-   SUPABASE AUTH EVENTS
+   AUTH STATE
+
+   SIGNED_OUT ALSO CLOSES ALL MODALS.
+
+   This catches sign-out events that happen outside the
+   normal Sign Out button too.
 ========================================================= */
+
 
 sb.auth
   .onAuthStateChange(
@@ -15334,14 +15993,11 @@ sb.auth
     ) => {
 
 
-      /*
-         Password reset email link.
-      */
-
       if(
         event ===
         'PASSWORD_RECOVERY'
-      ){
+      ) {
+
 
         currentUser =
           session?.user
@@ -15374,19 +16030,14 @@ sb.auth
       }
 
 
-      /*
-         Normal sign in.
-      */
 
       if(
-        event ===
-        'SIGNED_IN'
+        event === 'SIGNED_IN'
         &&
         session?.user
         &&
-        currentUser?.id !==
-        session.user.id
-      ){
+        currentUser?.id !== session.user.id
+      ) {
 
         await enterApp(
           session.user
@@ -15395,16 +16046,66 @@ sb.auth
       }
 
 
-      if(
-        event ===
-        'SIGNED_OUT'
-      ){
+
+      if(event === 'SIGNED_OUT') {
+
+
+        closeAllModals();
+
 
         currentUser =
           null;
 
 
+        family =
+          null;
+
+
+        familyMembers =
+          [];
+
+
+        familyEvents =
+          [];
+
+
+        pendingInvites =
+          [];
+
+
+        pendingAttachments =
+          [];
+
+
+        editingId =
+          null;
+
+
+        editingFamilyEventId =
+          null;
+
+
+        editingOccurrenceDate =
+          null;
+
+
+        classModalId =
+          null;
+
+
         showAuth();
+
+
+        setAuthMode(
+          'signin'
+        );
+
+
+        document.body
+          .classList
+          .remove(
+            'modal-open'
+          );
 
       }
 
@@ -15418,7 +16119,8 @@ sb.auth
    START
 ========================================================= */
 
-async function start(){
+
+async function start() {
 
   document
     .getElementById('todayLabel')
@@ -15434,7 +16136,7 @@ async function start(){
         );
 
 
-  try{
+  try {
 
 
     const result =
@@ -15472,9 +16174,7 @@ async function start(){
         ?.session;
 
 
-    if(
-      session?.user
-    ){
+    if(session?.user) {
 
       await enterApp(
         session.user
@@ -15482,7 +16182,7 @@ async function start(){
 
     }
 
-    else{
+    else {
 
       showAuth();
 
@@ -15491,7 +16191,8 @@ async function start(){
 
   }
 
-  catch(error){
+  catch(error) {
+
 
     console.warn(
       'Session restore failed:',
@@ -15514,4 +16215,5 @@ start();
 
 
 </body>
+
 </html>
