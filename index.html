@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
 <meta name="theme-color" content="#1F3D2B">
 
 <title>Homeroom</title>
@@ -23,9 +26,12 @@
 :root{
   --ink:#1C1B19;
   --ink-soft:#6B675D;
+
   --paper:#F5F3EE;
   --paper-deep:#EDEAE1;
+
   --card:#FFFFFF;
+
   --line:#DBD5C6;
 
   --green:#1F3D2B;
@@ -40,8 +46,8 @@
   --family:#7B5AA6;
   --family-pale:#EEE7F5;
 
-  --blue:#376E93;
-  --blue-pale:#E5EFF4;
+  --warning:#9A6A00;
+  --warning-pale:#FBF1C9;
 
   --radius-sm:9px;
   --radius-md:14px;
@@ -100,7 +106,7 @@ button{
 
 button:disabled{
   cursor:not-allowed;
-  opacity:.55;
+  opacity:.5;
 }
 
 .hidden{
@@ -365,11 +371,6 @@ button:disabled{
   color:white;
 }
 
-.btn-ai{
-  background:var(--green);
-  color:white;
-}
-
 .btn-ghost{
   background:transparent;
   color:var(--ink-soft);
@@ -458,11 +459,10 @@ main{
 }
 
 /* =========================================================
-   TODAY COMMAND CENTER
+   UPCOMING
 ========================================================= */
 
-.today-command{
-  margin-top:34px;
+.upcoming-shell{
   overflow:hidden;
   background:white;
   border:1px solid var(--line);
@@ -470,181 +470,87 @@ main{
   box-shadow:var(--shadow-card);
 }
 
-.today-command-head{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:20px;
-  padding:24px 24px 20px;
-  border-bottom:1px solid var(--line);
-}
-
-.today-eyebrow{
-  color:var(--green);
-  font:700 10px var(--font-mono);
-  letter-spacing:.08em;
-  text-transform:uppercase;
-}
-
-.today-command-title{
-  margin-top:3px;
-  font-family:var(--font-display);
-  font-size:32px;
-  font-weight:600;
-}
-
-.today-date{
-  margin-top:2px;
-  color:var(--ink-soft);
-  font-size:13px;
-}
-
-.today-summary{
-  margin-top:9px;
-  color:var(--ink-soft);
-  font-size:13px;
-}
-
-.daily-block{
-  padding:20px 24px;
-  border-bottom:1px solid var(--line);
-}
-
-.daily-block:last-child{
-  border-bottom:0;
-}
-
-.daily-block-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin-bottom:12px;
-}
-
-.daily-block-title{
-  font-family:var(--font-display);
-  font-size:19px;
-  font-weight:600;
-}
-
-.daily-block-sub{
-  margin-top:2px;
-  color:var(--ink-soft);
-  font-size:11px;
-}
-
-.priority-list{
+.upcoming-list{
   display:flex;
   flex-direction:column;
-  gap:8px;
 }
 
-.priority-item{
+.upcoming-item{
   width:100%;
   display:grid;
-  grid-template-columns:1fr auto;
+  grid-template-columns:70px 1fr auto;
   align-items:center;
-  gap:16px;
-  padding:12px 14px;
-  border:1px solid var(--line);
-  border-left:4px solid var(--accent,#8A8578);
-  border-radius:11px;
-  background:var(--paper);
+  gap:14px;
+  padding:14px 18px;
+  border:0;
+  border-bottom:1px solid var(--paper-deep);
+  background:white;
   color:var(--ink);
   text-align:left;
 }
 
-.priority-main{
-  min-width:0;
+.upcoming-item:last-child{
+  border-bottom:0;
 }
 
-.priority-title{
+.upcoming-item:hover{
+  background:#FAF9F6;
+}
+
+.upcoming-date{
+  color:var(--ink-soft);
+  font:10px var(--font-mono);
+  text-transform:uppercase;
+}
+
+.upcoming-title{
+  font-size:14px;
   font-weight:700;
-  font-size:13px;
 }
 
-.priority-meta{
+.upcoming-meta{
   margin-top:3px;
   color:var(--ink-soft);
   font:10px var(--font-mono);
 }
 
-.priority-time{
-  color:var(--green);
-  font-size:11px;
-  font-weight:700;
-  white-space:nowrap;
-}
-
-.schedule-row{
-  display:grid;
-  grid-template-columns:80px 1fr;
-  gap:14px;
-  padding:11px 0;
-  border-bottom:1px solid var(--paper-deep);
-}
-
-.schedule-row:last-child{
-  border-bottom:0;
-}
-
-.schedule-time{
+.upcoming-type{
+  padding:4px 8px;
+  border-radius:999px;
+  background:var(--paper-deep);
   color:var(--ink-soft);
-  font:10px var(--font-mono);
+  font:700 9px var(--font-mono);
+  text-transform:uppercase;
 }
 
-.schedule-title{
-  font-size:13px;
-  font-weight:700;
+.upcoming-type.family{
+  background:var(--family-pale);
+  color:var(--family);
 }
 
-.schedule-meta{
-  margin-top:2px;
-  color:var(--ink-soft);
-  font-size:11px;
-}
-
-.daily-total{
+.plan-strip{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:16px;
-  padding:15px 24px;
-  background:var(--green-pale);
-}
-
-.daily-total strong{
-  color:var(--green);
-}
-
-.ai-status{
-  color:var(--ink-soft);
-  font-size:11px;
-}
-
-/* =========================================================
-   OVERDUE
-========================================================= */
-
-.overdue-shell{
-  padding:16px;
+  gap:20px;
+  margin-top:14px;
+  padding:17px 18px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-md);
   background:white;
-  border:1px solid #E5C8C4;
-  border-radius:var(--radius-lg);
   box-shadow:var(--shadow-card);
 }
 
-.overdue-title{
-  color:var(--danger);
+.plan-strip-title{
+  font-family:var(--font-display);
+  font-size:17px;
+  font-weight:600;
 }
 
-.overdue-pill{
-  padding:4px 8px;
-  border-radius:999px;
-  background:var(--danger-pale);
-  color:var(--danger);
-  font:700 9px var(--font-mono);
+.plan-strip-copy{
+  margin-top:2px;
+  color:var(--ink-soft);
+  font-size:11px;
 }
 
 /* =========================================================
@@ -673,7 +579,6 @@ main{
 }
 
 .class-name{
-  color:var(--ink);
   font-family:var(--font-display);
   font-size:17px;
   font-weight:600;
@@ -763,7 +668,6 @@ main{
 }
 
 .task-title{
-  color:var(--ink);
   font-size:14.5px;
   font-weight:600;
 }
@@ -952,6 +856,7 @@ main{
   border-right:1px solid var(--line);
   border-bottom:1px solid var(--line);
   background:white;
+  cursor:pointer;
 }
 
 .day-cell:nth-child(7n){
@@ -960,6 +865,10 @@ main{
 
 .day-cell.other{
   background:#FAF9F6;
+}
+
+.day-cell:hover{
+  background:#FBFAF7;
 }
 
 .day-num{
@@ -1065,7 +974,7 @@ main{
 }
 
 .week-day-head.today .week-day-name{
-  color:rgba(255,255,255,.75);
+  color:rgba(255,255,255,.76);
 }
 
 .week-day-name{
@@ -1094,6 +1003,7 @@ main{
   padding:5px;
   border-right:1px solid var(--line);
   border-bottom:1px solid var(--line);
+  cursor:pointer;
 }
 
 .all-day-cell.today{
@@ -1115,6 +1025,11 @@ main{
   height:56px;
   border-right:1px solid var(--line);
   border-bottom:1px solid var(--line);
+  cursor:pointer;
+}
+
+.week-hour-cell:hover{
+  background:#FAF9F6;
 }
 
 .week-hour-cell.today{
@@ -1140,6 +1055,70 @@ main{
 
 .week-event.family{
   background:var(--family-pale);
+}
+
+/* =========================================================
+   MODALS
+========================================================= */
+
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(28,27,25,.55);
+  backdrop-filter:blur(3px);
+}
+
+.modal-overlay.open{
+  display:flex;
+}
+
+.modal-box{
+  position:relative;
+  width:100%;
+  max-width:540px;
+  max-height:88vh;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding:26px;
+  border-radius:var(--radius-lg);
+  background:white;
+  box-shadow:var(--shadow-modal);
+}
+
+.modal-box.wide{
+  max-width:760px;
+}
+
+.modal-close{
+  position:absolute;
+  top:16px;
+  right:16px;
+  width:30px;
+  height:30px;
+  display:grid;
+  place-items:center;
+  border:0;
+  border-radius:50%;
+  background:var(--paper-deep);
+  color:var(--ink-soft);
+}
+
+.modal-title{
+  padding-right:40px;
+  font-size:22px;
+}
+
+.modal-accent-bar{
+  width:52px;
+  height:6px;
+  margin:8px 0 18px;
+  border-radius:999px;
+  background:var(--green);
 }
 
 /* =========================================================
@@ -1194,6 +1173,10 @@ main{
   display:grid;
   grid-template-columns:repeat(5,1fr);
   gap:7px;
+}
+
+.type-toggle.calendar-only{
+  grid-template-columns:1fr 1fr;
 }
 
 .type-toggle button{
@@ -1334,71 +1317,139 @@ main{
 }
 
 /* =========================================================
-   MODALS
+   ADD MENU
 ========================================================= */
 
-.modal-overlay{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:rgba(28,27,25,.55);
-  backdrop-filter:blur(3px);
-}
-
-.modal-overlay.open{
-  display:flex;
-}
-
-.modal-box{
-  position:relative;
-  width:100%;
-  max-width:540px;
-  max-height:88vh;
-  overflow-y:auto;
-  overscroll-behavior:contain;
-  padding:26px;
-  border-radius:var(--radius-lg);
-  background:white;
-  box-shadow:var(--shadow-modal);
-}
-
-.modal-box.wide{
-  max-width:760px;
-}
-
-.modal-box.ai-wide{
-  max-width:850px;
-}
-
-.modal-close{
-  position:absolute;
-  top:16px;
-  right:16px;
-  width:30px;
-  height:30px;
+.add-menu-grid{
   display:grid;
-  place-items:center;
-  border:0;
-  border-radius:50%;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.add-choice{
+  padding:15px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--paper);
+  color:var(--ink);
+  text-align:left;
+}
+
+.add-choice:hover{
+  border-color:#BDB5A3;
+  background:#F9F7F1;
+}
+
+.add-choice strong{
+  display:block;
+  font-size:13px;
+}
+
+.add-choice span{
+  display:block;
+  margin-top:2px;
+  color:var(--ink-soft);
+  font-size:10px;
+}
+
+.add-scan{
+  grid-column:1/-1;
+  border-color:#C8D6CC;
+  background:var(--green-pale);
+}
+
+.add-divider{
+  grid-column:1/-1;
+  height:1px;
+  margin:3px 0;
+  background:var(--line);
+}
+
+/* =========================================================
+   DETAILS VIEW
+========================================================= */
+
+.detail-heading{
+  margin-bottom:4px;
+  color:var(--ink-soft);
+  font:700 10px var(--font-mono);
+  text-transform:uppercase;
+}
+
+.detail-title{
+  margin-bottom:8px;
+  font-family:var(--font-display);
+  font-size:28px;
+  line-height:1.15;
+  font-weight:600;
+}
+
+.detail-type{
+  display:inline-flex;
+  padding:4px 8px;
+  border-radius:999px;
   background:var(--paper-deep);
   color:var(--ink-soft);
+  font:700 9px var(--font-mono);
+  text-transform:uppercase;
 }
 
-.modal-title{
-  padding-right:40px;
-  font-size:22px;
+.detail-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:18px;
 }
 
-.modal-accent-bar{
-  width:52px;
-  height:6px;
-  margin:8px 0 18px;
-  border-radius:999px;
-  background:var(--green);
+.detail-card{
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:var(--paper);
+}
+
+.detail-card.full{
+  grid-column:1/-1;
+}
+
+.detail-label{
+  color:var(--ink-soft);
+  font:700 9px var(--font-mono);
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+
+.detail-value{
+  margin-top:4px;
+  font-size:13px;
+  font-weight:600;
+  white-space:pre-wrap;
+}
+
+.detail-actions{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:20px;
+  padding-top:16px;
+  border-top:1px solid var(--line);
+}
+
+.detail-attachments{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
+  gap:8px;
+  margin-top:8px;
+}
+
+.detail-attachment{
+  padding:9px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:white;
+  color:var(--ink);
+  text-align:left;
+  font-size:10px;
 }
 
 /* =========================================================
@@ -1753,17 +1804,68 @@ main{
 }
 
 /* =========================================================
-   AI SCAN
+   PLAN DAY
 ========================================================= */
 
-.ai-source-grid{
+.plan-summary{
+  padding:14px;
+  margin-bottom:14px;
+  border-radius:12px;
+  background:var(--green-pale);
+  color:var(--green);
+}
+
+.plan-group{
+  margin-top:20px;
+}
+
+.plan-group-title{
+  margin-bottom:8px;
+  font-family:var(--font-display);
+  font-size:17px;
+  font-weight:600;
+}
+
+.plan-block{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:12px;
+  align-items:center;
+  padding:11px 12px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--paper);
+  margin-bottom:7px;
+}
+
+.plan-title{
+  font-size:13px;
+  font-weight:700;
+}
+
+.plan-meta{
+  margin-top:2px;
+  color:var(--ink-soft);
+  font-size:10px;
+}
+
+.plan-time{
+  color:var(--green);
+  font-size:11px;
+  font-weight:700;
+}
+
+/* =========================================================
+   SCAN
+========================================================= */
+
+.scan-source-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:12px;
 }
 
-.ai-source-card{
-  width:100%;
+.scan-source{
   padding:18px;
   border:1px solid var(--line);
   border-radius:14px;
@@ -1772,154 +1874,80 @@ main{
   text-align:left;
 }
 
-.ai-source-icon{
-  font-size:24px;
+.scan-source strong{
+  display:block;
+  margin-top:8px;
 }
 
-.ai-source-title{
-  margin-top:9px;
-  font-weight:700;
-}
-
-.ai-source-copy{
+.scan-source span{
+  display:block;
   margin-top:3px;
   color:var(--ink-soft);
   font-size:11px;
 }
 
-.ai-loading{
-  padding:28px;
-  text-align:center;
-  color:var(--ink-soft);
+.scan-review-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
 
-.ai-spinner{
-  width:30px;
-  height:30px;
-  margin:0 auto 12px;
-  border:3px solid var(--paper-deep);
-  border-top-color:var(--green);
-  border-radius:50%;
-  animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-  to{
-    transform:rotate(360deg);
-  }
+.scan-review-card{
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--paper);
 }
 
 .scan-review-head{
   display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:14px;
-  margin-bottom:15px;
-}
-
-.scan-review-count{
-  padding:5px 9px;
-  border-radius:999px;
-  background:var(--green-pale);
-  color:var(--green);
-  font:700 10px var(--font-mono);
-}
-
-.scan-items{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-
-.scan-item-card{
-  padding:14px;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:var(--paper);
-}
-
-.scan-item-head{
-  display:flex;
-  align-items:center;
   justify-content:space-between;
   gap:10px;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
-.scan-confidence{
-  font:700 9px var(--font-mono);
-  text-transform:uppercase;
-}
-
-.scan-confidence.low{
-  color:#A66A00;
-}
-
-.scan-confidence.high{
-  color:var(--green);
-}
-
-.scan-remove{
-  border:0;
-  background:transparent;
-  color:var(--danger);
-  font-size:11px;
-  font-weight:700;
-}
-
-.scan-edit-grid{
+.scan-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
 }
 
-.scan-edit-grid .wide{
+.scan-grid .full{
   grid-column:1/-1;
 }
 
 /* =========================================================
-   PLAN DAY MODAL
+   CONFIRM EVENT POPOVER
 ========================================================= */
 
-.plan-summary{
+.calendar-confirm{
+  position:fixed;
+  z-index:150;
+  width:min(280px,calc(100vw - 30px));
   padding:14px;
-  border-radius:12px;
-  background:var(--green-pale);
-  color:var(--green);
-  margin-bottom:14px;
-}
-
-.plan-blocks{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.plan-block{
-  display:grid;
-  grid-template-columns:110px 1fr auto;
-  gap:12px;
-  align-items:center;
-  padding:12px;
   border:1px solid var(--line);
-  border-radius:11px;
-  background:var(--paper);
+  border-radius:13px;
+  background:white;
+  box-shadow:0 14px 45px rgba(28,27,25,.22);
 }
 
-.plan-time{
+.calendar-confirm-title{
+  font-family:var(--font-display);
+  font-size:16px;
+  font-weight:600;
+}
+
+.calendar-confirm-copy{
+  margin-top:4px;
   color:var(--ink-soft);
-  font:10px var(--font-mono);
-}
-
-.plan-title{
-  font-weight:700;
-  font-size:13px;
-}
-
-.plan-duration{
-  color:var(--green);
   font-size:11px;
-  font-weight:700;
+}
+
+.calendar-confirm-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:7px;
+  margin-top:12px;
 }
 
 /* =========================================================
@@ -1932,37 +1960,6 @@ main{
   border:1px solid #E4C3C0;
   border-radius:14px;
   background:#FFF9F8;
-}
-
-.choice-stack{
-  display:flex;
-  flex-direction:column;
-  gap:9px;
-  margin-top:16px;
-}
-
-.choice-btn{
-  width:100%;
-  padding:13px 14px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  background:var(--paper);
-  color:var(--ink);
-  text-align:left;
-  font-weight:700;
-}
-
-.choice-btn small{
-  display:block;
-  margin-top:2px;
-  color:var(--ink-soft);
-  font-weight:500;
-}
-
-.choice-btn.danger{
-  border-color:#E4C3C0;
-  background:var(--danger-pale);
-  color:var(--danger);
 }
 
 /* =========================================================
@@ -1994,7 +1991,7 @@ footer{
 }
 
 /* =========================================================
-   MOBILE
+   RESPONSIVE
 ========================================================= */
 
 @media(max-width:920px){
@@ -2031,7 +2028,7 @@ footer{
     display:none;
   }
 
-  .ai-source-grid{
+  .scan-source-grid{
     grid-template-columns:1fr;
   }
 }
@@ -2081,8 +2078,15 @@ footer{
   }
 
   .color-grid,
-  .class-info-panel{
+  .class-info-panel,
+  .detail-grid,
+  .scan-grid{
     grid-template-columns:1fr;
+  }
+
+  .detail-card.full,
+  .scan-grid .full{
+    grid-column:auto;
   }
 
   .day-cell{
@@ -2090,41 +2094,39 @@ footer{
     padding:4px;
   }
 
-  .today-command-head{
+  .upcoming-item{
+    grid-template-columns:58px 1fr;
+  }
+
+  .upcoming-type{
+    grid-column:2;
+    justify-self:start;
+  }
+
+  .plan-strip{
+    align-items:flex-start;
     flex-direction:column;
   }
 
-  .today-command-head .btn{
+  .plan-strip .btn{
     width:100%;
   }
 
-  .daily-block{
-    padding:17px;
-  }
-
-  .priority-item{
-    grid-template-columns:1fr;
-    gap:4px;
-  }
-
-  .schedule-row{
-    grid-template-columns:65px 1fr;
-  }
-
-  .scan-edit-grid{
+  .add-menu-grid{
     grid-template-columns:1fr;
   }
 
-  .scan-edit-grid .wide{
+  .add-scan,
+  .add-divider{
     grid-column:auto;
   }
 
-  .plan-block{
-    grid-template-columns:85px 1fr;
+  .detail-actions{
+    flex-direction:column-reverse;
   }
 
-  .plan-duration{
-    grid-column:2;
+  .detail-actions .btn{
+    width:100%;
   }
 }
 </style>
@@ -2145,6 +2147,7 @@ footer{
     </div>
 
     <div class="auth-hero-main">
+
       <h1>
         School,<br>
         organized.
@@ -2154,6 +2157,7 @@ footer{
         Assignments, activities, appointments and your calendar
         in one quiet place.
       </p>
+
     </div>
 
     <div class="auth-hero-foot">
@@ -2170,7 +2174,10 @@ footer{
         Welcome back
       </h2>
 
-      <div class="auth-subtitle" id="authSubtitle">
+      <div
+        class="auth-subtitle"
+        id="authSubtitle"
+      >
         Sign in to open your planner.
       </div>
 
@@ -2196,8 +2203,14 @@ footer{
 
       <form id="authForm">
 
-        <div class="field hidden" id="nameField">
-          <label>Name</label>
+        <div
+          class="field hidden"
+          id="nameField"
+        >
+
+          <label>
+            Name
+          </label>
 
           <input
             id="authName"
@@ -2205,10 +2218,14 @@ footer{
             autocomplete="name"
             placeholder="Your name"
           >
+
         </div>
 
         <div class="field">
-          <label>Email</label>
+
+          <label>
+            Email
+          </label>
 
           <input
             id="authEmail"
@@ -2217,10 +2234,14 @@ footer{
             required
             placeholder="you@example.com"
           >
+
         </div>
 
         <div class="field">
-          <label>Password</label>
+
+          <label>
+            Password
+          </label>
 
           <input
             id="authPassword"
@@ -2230,9 +2251,13 @@ footer{
             required
             placeholder="••••••••"
           >
+
         </div>
 
-        <div class="auth-message" id="authMessage"></div>
+        <div
+          class="auth-message"
+          id="authMessage"
+        ></div>
 
         <button
           class="btn btn-green auth-submit"
@@ -2245,6 +2270,7 @@ footer{
       </form>
 
       <div class="auth-foot">
+
         <button
           class="auth-link"
           id="forgotPasswordButton"
@@ -2252,6 +2278,7 @@ footer{
         >
           Forgot password?
         </button>
+
       </div>
 
     </div>
@@ -2264,20 +2291,28 @@ footer{
      APP
 ========================================================= -->
 
-<div class="hidden" id="app">
+<div
+  class="hidden"
+  id="app"
+>
 
 <header class="app-header">
 
   <div class="wrap">
 
     <div>
+
       <div class="brand-title">
         Homeroom
       </div>
 
-      <div class="brand-sub" id="todayLabel">
+      <div
+        class="brand-sub"
+        id="todayLabel"
+      >
         —
       </div>
+
     </div>
 
     <nav class="top-tabs">
@@ -2307,13 +2342,21 @@ footer{
         id="accountButton"
         type="button"
       >
-        <span class="avatar" id="headerAvatar">
+
+        <span
+          class="avatar"
+          id="headerAvatar"
+        >
           H
         </span>
 
-        <span class="account-name" id="headerName">
+        <span
+          class="account-name"
+          id="headerName"
+        >
           Account
         </span>
+
       </button>
 
       <button
@@ -2350,50 +2393,47 @@ footer{
 
 <div id="plannerView">
 
-  <div
-    id="pendingInvitesArea"
-    class="section hidden"
-  ></div>
+  <!-- UPCOMING -->
 
-  <!-- =======================================================
-       NEW TODAY COMMAND CENTER
-  ======================================================== -->
+  <section class="section">
 
-  <section class="today-command">
+    <div class="section-head">
 
-    <div class="today-command-head">
+      <h2 class="section-title">
+        Upcoming
+      </h2>
+
+      <div class="section-note">
+        Next 7 days
+      </div>
+
+    </div>
+
+    <div class="upcoming-shell">
+
+      <div
+        class="upcoming-list"
+        id="upcomingList"
+      ></div>
+
+    </div>
+
+    <div class="plan-strip">
 
       <div>
 
-        <div class="today-eyebrow">
-          Today
+        <div class="plan-strip-title">
+          Plan your day
         </div>
 
-        <div
-          class="today-command-title"
-          id="dailyTitle"
-        >
-          Wednesday
-        </div>
-
-        <div
-          class="today-date"
-          id="dailyDate"
-        >
-          August 12
-        </div>
-
-        <div
-          class="today-summary"
-          id="dailySummary"
-        >
-          Loading your day…
+        <div class="plan-strip-copy">
+          Prioritize what matters and estimate how much time to spend.
         </div>
 
       </div>
 
       <button
-        class="btn btn-ai"
+        class="btn btn-green"
         id="planMyDayButton"
         type="button"
       >
@@ -2402,131 +2442,9 @@ footer{
 
     </div>
 
-    <!-- FINISH FIRST -->
-
-    <div class="daily-block">
-
-      <div class="daily-block-head">
-
-        <div>
-          <div class="daily-block-title">
-            Finish First
-          </div>
-
-          <div class="daily-block-sub">
-            Overdue work and things due today or tomorrow.
-          </div>
-        </div>
-
-      </div>
-
-      <div
-        class="priority-list"
-        id="finishFirstList"
-      ></div>
-
-    </div>
-
-    <!-- CHIP AWAY -->
-
-    <div class="daily-block">
-
-      <div class="daily-block-head">
-
-        <div>
-          <div class="daily-block-title">
-            Chip Away
-          </div>
-
-          <div class="daily-block-sub">
-            Bigger work worth starting before it becomes urgent.
-          </div>
-        </div>
-
-      </div>
-
-      <div
-        class="priority-list"
-        id="chipAwayList"
-      ></div>
-
-    </div>
-
-    <!-- TODAY SCHEDULE -->
-
-    <div class="daily-block">
-
-      <div class="daily-block-head">
-
-        <div>
-          <div class="daily-block-title">
-            Today's Schedule
-          </div>
-
-          <div class="daily-block-sub">
-            Reminders, activities and appointments.
-          </div>
-        </div>
-
-      </div>
-
-      <div id="todayScheduleList"></div>
-
-    </div>
-
-    <div class="daily-total">
-
-      <span>
-        Estimated schoolwork today
-      </span>
-
-      <strong id="dailyTotalTime">
-        —
-      </strong>
-
-    </div>
-
   </section>
 
-  <!-- =======================================================
-       OVERDUE
-  ======================================================== -->
-
-  <section
-    class="section hidden"
-    id="overdueSection"
-  >
-
-    <div class="section-head">
-
-      <h2 class="section-title overdue-title">
-        Overdue
-      </h2>
-
-      <span
-        class="overdue-pill"
-        id="overdueCount"
-      >
-        0 ITEMS
-      </span>
-
-    </div>
-
-    <div class="overdue-shell">
-
-      <div
-        class="task-list"
-        id="overdueList"
-        style="margin-top:0"
-      ></div>
-
-    </div>
-
-  </section>
-
-  <!-- =======================================================
-       CLASSES
-  ======================================================== -->
+  <!-- CLASSES -->
 
   <section
     class="section"
@@ -2552,9 +2470,7 @@ footer{
 
   </section>
 
-  <!-- =======================================================
-       ALL TASKS
-  ======================================================== -->
+  <!-- ALL TASKS -->
 
   <section class="section">
 
@@ -2644,6 +2560,7 @@ footer{
   <div class="calendar-toolbar">
 
     <div>
+
       <h2 class="section-title">
         Calendar
       </h2>
@@ -2651,6 +2568,7 @@ footer{
       <div class="section-note">
         Personal + Family
       </div>
+
     </div>
 
     <div class="calendar-view-toggle">
@@ -2674,6 +2592,8 @@ footer{
     </div>
 
   </div>
+
+  <!-- MONTH -->
 
   <div id="monthCalendarWrap">
 
@@ -2742,6 +2662,8 @@ footer{
 
   </div>
 
+  <!-- WEEK -->
+
   <div
     class="hidden"
     id="weekCalendarWrap"
@@ -2789,10 +2711,12 @@ footer{
     </div>
 
     <div class="week-shell">
+
       <div
         class="week-grid"
         id="weekGrid"
       ></div>
+
     </div>
 
   </div>
@@ -2808,11 +2732,13 @@ footer{
   <span id="footerEmail"></span>
 
   <div class="sync-line">
+
     <span class="sync-dot"></span>
 
     <span id="syncStatus">
       Synced
     </span>
+
   </div>
 
 </footer>
@@ -2820,10 +2746,151 @@ footer{
 </div>
 
 <!-- =========================================================
+     ADD MENU
+========================================================= -->
+
+<div
+  class="modal-overlay"
+  id="addMenuModal"
+>
+
+<div class="modal-box">
+
+  <button
+    class="modal-close"
+    data-close="addMenuModal"
+    type="button"
+  >
+    ✕
+  </button>
+
+  <h3 class="modal-title">
+    Add New
+  </h3>
+
+  <div class="modal-accent-bar"></div>
+
+  <div class="add-menu-grid">
+
+    <button
+      class="add-choice"
+      data-quick-add="assignment"
+      type="button"
+    >
+      <strong>Assignment</strong>
+      <span>Homework, reading, projects and schoolwork.</span>
+    </button>
+
+    <button
+      class="add-choice"
+      data-quick-add="deadline"
+      type="button"
+    >
+      <strong>Deadline</strong>
+      <span>Tests, submissions and important due dates.</span>
+    </button>
+
+    <button
+      class="add-choice"
+      data-quick-add="reminder"
+      type="button"
+    >
+      <strong>Reminder</strong>
+      <span>Something you need to remember.</span>
+    </button>
+
+    <div class="add-divider"></div>
+
+    <button
+      class="add-choice"
+      data-quick-add="activity"
+      type="button"
+    >
+      <strong>Activity</strong>
+      <span>Sports, clubs, work or repeating events.</span>
+    </button>
+
+    <button
+      class="add-choice"
+      data-quick-add="appointment"
+      type="button"
+    >
+      <strong>Appointment</strong>
+      <span>A scheduled event with a place and time.</span>
+    </button>
+
+    <div class="add-divider"></div>
+
+    <button
+      class="add-choice add-scan"
+      id="openScanButton"
+      type="button"
+    >
+      <strong>📷 Scan Document</strong>
+      <span>
+        Take a photo of a whiteboard, assignment sheet or syllabus page.
+      </span>
+    </button>
+
+  </div>
+
+</div>
+
+</div>
+
+<!-- =========================================================
+     DETAILS VIEW
+========================================================= -->
+
+<div
+  class="modal-overlay"
+  id="detailModal"
+>
+
+<div class="modal-box wide">
+
+  <button
+    class="modal-close"
+    data-close="detailModal"
+    type="button"
+  >
+    ✕
+  </button>
+
+  <div id="detailContent"></div>
+
+  <div class="detail-actions">
+
+    <button
+      class="btn btn-danger"
+      id="detailDeleteButton"
+      type="button"
+    >
+      Delete
+    </button>
+
+    <button
+      class="btn btn-primary"
+      id="detailEditButton"
+      type="button"
+    >
+      Edit Item
+    </button>
+
+  </div>
+
+</div>
+
+</div>
+
+<!-- =========================================================
      ITEM MODAL
 ========================================================= -->
 
-<div class="modal-overlay" id="itemModal">
+<div
+  class="modal-overlay"
+  id="itemModal"
+>
 
 <div class="modal-box wide">
 
@@ -2897,10 +2964,6 @@ footer{
 
     </div>
 
-    <!--
-      FAMILY SHARING APPEARS ONLY FOR ACTIVITY/APPOINTMENT
-    -->
-
     <div
       class="field hidden"
       id="visibilityField"
@@ -2939,7 +3002,10 @@ footer{
 
     </div>
 
-    <div class="field" id="classField">
+    <div
+      class="field"
+      id="classField"
+    >
 
       <label>
         Class
@@ -2980,22 +3046,33 @@ footer{
     <div class="field-row">
 
       <div class="field">
-        <label>Date</label>
+
+        <label>
+          Date
+        </label>
 
         <input
           id="itemDate"
           type="date"
           required
         >
+
       </div>
 
-      <div class="field" id="dueTimeField">
-        <label>Time</label>
+      <div
+        class="field"
+        id="dueTimeField"
+      >
+
+        <label>
+          Time
+        </label>
 
         <input
           id="itemTime"
           type="time"
         >
+
       </div>
 
     </div>
@@ -3013,6 +3090,7 @@ footer{
         >
 
         <div class="toggle-copy">
+
           <strong>
             All-day event
           </strong>
@@ -3020,6 +3098,7 @@ footer{
           <span>
             Do not place this event at a specific time.
           </span>
+
         </div>
 
       </div>
@@ -3032,21 +3111,29 @@ footer{
     >
 
       <div class="field">
-        <label>Start time</label>
+
+        <label>
+          Start time
+        </label>
 
         <input
           id="startTime"
           type="time"
         >
+
       </div>
 
       <div class="field">
-        <label>End time</label>
+
+        <label>
+          End time
+        </label>
 
         <input
           id="endTime"
           type="time"
         >
+
       </div>
 
     </div>
@@ -3165,13 +3252,40 @@ footer{
 
     </div>
 
+    <div
+      class="field"
+      id="estimateField"
+    >
+
+      <label>
+        Estimated Work Time
+      </label>
+
+      <input
+        id="estimatedMinutes"
+        type="number"
+        min="0"
+        step="5"
+        placeholder="Minutes"
+      >
+
+      <div class="helper-text">
+        Optional. Plan My Day uses this when deciding workload.
+      </div>
+
+    </div>
+
     <div class="field">
-      <label>Notes</label>
+
+      <label>
+        Notes
+      </label>
 
       <textarea
         id="itemNotes"
         placeholder="Add notes"
       ></textarea>
+
     </div>
 
     <div
@@ -3268,10 +3382,176 @@ footer{
 </div>
 
 <!-- =========================================================
+     PLAN MY DAY
+========================================================= -->
+
+<div
+  class="modal-overlay"
+  id="planDayModal"
+>
+
+<div class="modal-box wide">
+
+  <button
+    class="modal-close"
+    data-close="planDayModal"
+    type="button"
+  >
+    ✕
+  </button>
+
+  <h3 class="modal-title">
+    ✨ Plan My Day
+  </h3>
+
+  <div class="modal-accent-bar"></div>
+
+  <div
+    class="plan-summary"
+    id="planSummary"
+  ></div>
+
+  <div id="planContent"></div>
+
+  <div
+    class="form-actions"
+    style="justify-content:flex-end;margin-top:20px"
+  >
+
+    <button
+      class="btn btn-primary"
+      data-close="planDayModal"
+      type="button"
+    >
+      Done
+    </button>
+
+  </div>
+
+</div>
+
+</div>
+
+<!-- =========================================================
+     SCAN DOCUMENT
+========================================================= -->
+
+<div
+  class="modal-overlay"
+  id="scanModal"
+>
+
+<div class="modal-box wide">
+
+  <button
+    class="modal-close"
+    data-close="scanModal"
+    type="button"
+  >
+    ✕
+  </button>
+
+  <h3 class="modal-title">
+    Scan Document
+  </h3>
+
+  <div class="modal-accent-bar"></div>
+
+  <div id="scanStart">
+
+    <div class="helper-text" style="margin-bottom:15px">
+      Scan a whiteboard, assignment sheet, worksheet or syllabus page.
+      You will always review items before they are added.
+    </div>
+
+    <div class="scan-source-grid">
+
+      <button
+        class="scan-source"
+        id="scanCameraButton"
+        type="button"
+      >
+        📷
+        <strong>Take Photo</strong>
+        <span>Use your camera for a whiteboard or paper.</span>
+      </button>
+
+      <button
+        class="scan-source"
+        id="scanUploadButton"
+        type="button"
+      >
+        📄
+        <strong>Upload Document</strong>
+        <span>Choose a photo or document from your device.</span>
+      </button>
+
+    </div>
+
+    <input
+      class="hidden"
+      id="scanCameraInput"
+      type="file"
+      accept="image/*"
+      capture="environment"
+    >
+
+    <input
+      class="hidden"
+      id="scanFileInput"
+      type="file"
+      accept="image/*,.pdf"
+    >
+
+  </div>
+
+  <div
+    class="hidden"
+    id="scanReview"
+  >
+
+    <div
+      class="scan-review-list"
+      id="scanReviewList"
+    ></div>
+
+    <div
+      class="form-actions"
+      style="margin-top:18px"
+    >
+
+      <button
+        class="btn btn-ghost"
+        id="scanAgainButton"
+        type="button"
+      >
+        Scan Another
+      </button>
+
+      <button
+        class="btn btn-primary"
+        id="addScanItemsButton"
+        type="button"
+      >
+        Add to Planner
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+</div>
+
+<!-- =========================================================
      CLASS MODAL
 ========================================================= -->
 
-<div class="modal-overlay" id="classModal">
+<div
+  class="modal-overlay"
+  id="classModal"
+>
 
 <div class="modal-box">
 
@@ -3363,10 +3643,13 @@ footer{
 </div>
 
 <!-- =========================================================
-     CLASS INFO
+     CLASS INFO MODAL
 ========================================================= -->
 
-<div class="modal-overlay" id="classInfoModal">
+<div
+  class="modal-overlay"
+  id="classInfoModal"
+>
 
 <div class="modal-box">
 
@@ -3385,41 +3668,57 @@ footer{
   <div class="modal-accent-bar"></div>
 
   <div class="field">
-    <label>Class Name</label>
+
+    <label>
+      Class Name
+    </label>
 
     <input
       id="classInfoName"
       type="text"
     >
+
   </div>
 
   <div class="field">
-    <label>Teacher</label>
+
+    <label>
+      Teacher
+    </label>
 
     <input
       id="classInfoTeacher"
       type="text"
       placeholder="Teacher name"
     >
+
   </div>
 
   <div class="field">
-    <label>Room Number</label>
+
+    <label>
+      Room Number
+    </label>
 
     <input
       id="classInfoRoom"
       type="text"
       placeholder="Room number"
     >
+
   </div>
 
   <div class="field">
-    <label>Color</label>
+
+    <label>
+      Color
+    </label>
 
     <input
       id="classInfoColor"
       type="color"
     >
+
   </div>
 
   <div
@@ -3429,8 +3728,8 @@ footer{
 
     <button
       class="btn btn-ghost"
-      type="button"
       data-close="classInfoModal"
+      type="button"
     >
       Cancel
     </button>
@@ -3453,7 +3752,10 @@ footer{
      SETTINGS
 ========================================================= -->
 
-<div class="modal-overlay" id="settingsModal">
+<div
+  class="modal-overlay"
+  id="settingsModal"
+>
 
 <div class="modal-box wide">
 
@@ -3491,7 +3793,7 @@ footer{
 
         <span>
           Hide classes and use Homeroom as a general task planner.
-          Your existing classes stay saved.
+          Existing class data stays saved.
         </span>
 
       </div>
@@ -3525,29 +3827,17 @@ footer{
 
       <div class="color-card">
         <label>Header</label>
-
-        <input
-          id="themeGreen"
-          type="color"
-        >
+        <input id="themeGreen" type="color">
       </div>
 
       <div class="color-card">
         <label>Accent</label>
-
-        <input
-          id="themeGold"
-          type="color"
-        >
+        <input id="themeGold" type="color">
       </div>
 
       <div class="color-card">
         <label>Background</label>
-
-        <input
-          id="themePaper"
-          type="color"
-        >
+        <input id="themePaper" type="color">
       </div>
 
     </div>
@@ -3564,7 +3854,7 @@ footer{
     </div>
 
     <div class="settings-copy">
-      Customize your classes, teachers and rooms.
+      Customize classes, teachers and rooms.
     </div>
 
     <div
@@ -3614,7 +3904,7 @@ footer{
     </div>
 
     <div class="settings-copy">
-      Family sharing applies to Activities and Appointments only.
+      Family sharing applies only to Activities and Appointments.
     </div>
 
     <div id="familySettingsArea"></div>
@@ -3644,7 +3934,10 @@ footer{
      PROFILE
 ========================================================= -->
 
-<div class="modal-overlay" id="profileModal">
+<div
+  class="modal-overlay"
+  id="profileModal"
+>
 
 <div class="modal-box">
 
@@ -3672,12 +3965,16 @@ footer{
   ></div>
 
   <div class="field">
-    <label>Display Name</label>
+
+    <label>
+      Display Name
+    </label>
 
     <input
       id="profileName"
       type="text"
     >
+
   </div>
 
   <div class="form-actions">
@@ -3728,260 +4025,13 @@ footer{
 </div>
 
 <!-- =========================================================
-     AI SCAN
-========================================================= -->
-
-<div class="modal-overlay" id="aiScanModal">
-
-<div class="modal-box ai-wide">
-
-  <button
-    class="modal-close"
-    data-close="aiScanModal"
-    type="button"
-  >
-    ✕
-  </button>
-
-  <h3 class="modal-title">
-    ✨ Scan with AI
-  </h3>
-
-  <div class="modal-accent-bar"></div>
-
-  <div id="aiScanSourceStep">
-
-    <p style="color:var(--ink-soft);margin-top:0">
-      Homeroom can look at a whiteboard, assignment sheet,
-      handout or syllabus and suggest planner items.
-    </p>
-
-    <div class="ai-source-grid">
-
-      <button
-        class="ai-source-card"
-        id="aiTakePhotoButton"
-        type="button"
-      >
-
-        <div class="ai-source-icon">
-          📷
-        </div>
-
-        <div class="ai-source-title">
-          Take Photo
-        </div>
-
-        <div class="ai-source-copy">
-          Whiteboard, worksheet, handout or assignment paper.
-        </div>
-
-      </button>
-
-      <button
-        class="ai-source-card"
-        id="aiUploadDocumentButton"
-        type="button"
-      >
-
-        <div class="ai-source-icon">
-          📄
-        </div>
-
-        <div class="ai-source-title">
-          Upload Document
-        </div>
-
-        <div class="ai-source-copy">
-          Photo, PDF or syllabus file.
-        </div>
-
-      </button>
-
-    </div>
-
-    <input
-      class="hidden"
-      id="aiCameraInput"
-      type="file"
-      accept="image/*"
-      capture="environment"
-    >
-
-    <input
-      class="hidden"
-      id="aiDocumentInput"
-      type="file"
-      accept="image/*,.pdf"
-    >
-
-  </div>
-
-  <div
-    class="hidden"
-    id="aiScanLoadingStep"
-  >
-
-    <div class="ai-loading">
-
-      <div class="ai-spinner"></div>
-
-      <strong>
-        Reading your document…
-      </strong>
-
-      <div style="margin-top:5px">
-        Looking for assignments, reminders and deadlines.
-      </div>
-
-    </div>
-
-  </div>
-
-  <div
-    class="hidden"
-    id="aiScanReviewStep"
-  >
-
-    <div class="scan-review-head">
-
-      <div>
-        <h3 style="font-size:20px">
-          Review what AI found
-        </h3>
-
-        <div
-          class="helper-text"
-          id="aiScanReviewMessage"
-        >
-          Edit anything before adding it.
-        </div>
-      </div>
-
-      <div
-        class="scan-review-count"
-        id="aiScanCount"
-      >
-        0 ITEMS
-      </div>
-
-    </div>
-
-    <div
-      class="scan-items"
-      id="aiScanItems"
-    ></div>
-
-    <div
-      class="form-actions"
-      style="margin-top:18px"
-    >
-
-      <button
-        class="btn btn-ghost"
-        id="aiScanBackButton"
-        type="button"
-      >
-        Scan Another
-      </button>
-
-      <button
-        class="btn btn-primary"
-        id="addScannedItemsButton"
-        type="button"
-      >
-        Add to Planner
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-</div>
-
-<!-- =========================================================
-     PLAN MY DAY
-========================================================= -->
-
-<div class="modal-overlay" id="planDayModal">
-
-<div class="modal-box wide">
-
-  <button
-    class="modal-close"
-    data-close="planDayModal"
-    type="button"
-  >
-    ✕
-  </button>
-
-  <h3 class="modal-title">
-    ✨ Plan My Day
-  </h3>
-
-  <div class="modal-accent-bar"></div>
-
-  <div id="planDayLoading">
-
-    <div class="ai-loading">
-
-      <div class="ai-spinner"></div>
-
-      <strong>
-        Planning your day…
-      </strong>
-
-      <div style="margin-top:5px">
-        Balancing due dates, workload and today's schedule.
-      </div>
-
-    </div>
-
-  </div>
-
-  <div
-    class="hidden"
-    id="planDayResult"
-  >
-
-    <div
-      class="plan-summary"
-      id="planDaySummary"
-    ></div>
-
-    <div
-      class="plan-blocks"
-      id="planDayBlocks"
-    ></div>
-
-    <div
-      class="form-actions"
-      style="justify-content:flex-end;margin-top:18px"
-    >
-
-      <button
-        class="btn btn-primary"
-        type="button"
-        data-close="planDayModal"
-      >
-        Done
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-</div>
-
-<!-- =========================================================
      CREATE FAMILY
 ========================================================= -->
 
-<div class="modal-overlay" id="createFamilyModal">
+<div
+  class="modal-overlay"
+  id="createFamilyModal"
+>
 
 <div class="modal-box">
 
@@ -4003,13 +4053,17 @@ footer{
   ></div>
 
   <div class="field">
-    <label>Family Name</label>
+
+    <label>
+      Family Name
+    </label>
 
     <input
       id="newFamilyName"
       type="text"
       placeholder="Family name"
     >
+
   </div>
 
   <div
@@ -4043,7 +4097,10 @@ footer{
      JOIN FAMILY
 ========================================================= -->
 
-<div class="modal-overlay" id="joinFamilyModal">
+<div
+  class="modal-overlay"
+  id="joinFamilyModal"
+>
 
 <div class="modal-box">
 
@@ -4065,13 +4122,17 @@ footer{
   ></div>
 
   <div class="field">
-    <label>Invite Code</label>
+
+    <label>
+      Invite Code
+    </label>
 
     <input
       id="joinFamilyCode"
       type="text"
       placeholder="HMRM-XXXXX"
     >
+
   </div>
 
   <div
@@ -4107,10 +4168,13 @@ footer{
 </div>
 
 <!-- =========================================================
-     CONFIRMATION
+     CONFIRM
 ========================================================= -->
 
-<div class="modal-overlay" id="confirmModal">
+<div
+  class="modal-overlay"
+  id="confirmModal"
+>
 
 <div class="modal-box">
 
@@ -4170,95 +4234,45 @@ footer{
 </div>
 
 <!-- =========================================================
-     FORGOT PASSWORD
+     CALENDAR CLICK CONFIRMATION
 ========================================================= -->
 
-<div class="modal-overlay" id="forgotModal">
+<div
+  class="calendar-confirm hidden"
+  id="calendarConfirm"
+>
 
-<div class="modal-box">
-
-  <button
-    class="modal-close"
-    data-close="forgotModal"
-    type="button"
+  <div
+    class="calendar-confirm-title"
+    id="calendarConfirmTitle"
   >
-    ✕
-  </button>
-
-  <h3 class="modal-title">
-    Reset Password
-  </h3>
-
-  <div class="modal-accent-bar"></div>
-
-  <div class="field">
-    <label>Email</label>
-
-    <input
-      id="forgotEmail"
-      type="email"
-      placeholder="you@example.com"
-    >
+    Add an event?
   </div>
 
   <div
-    class="auth-message"
-    id="forgotMessage"
+    class="calendar-confirm-copy"
+    id="calendarConfirmCopy"
   ></div>
 
-  <button
-    class="btn btn-primary"
-    id="sendResetButton"
-    type="button"
-  >
-    Send reset link
-  </button>
+  <div class="calendar-confirm-actions">
 
-</div>
+    <button
+      class="btn btn-ghost btn-small"
+      id="calendarConfirmNo"
+      type="button"
+    >
+      No
+    </button>
 
-</div>
+    <button
+      class="btn btn-primary btn-small"
+      id="calendarConfirmYes"
+      type="button"
+    >
+      Yes
+    </button>
 
-<!-- =========================================================
-     DELETE ACCOUNT
-========================================================= -->
-
-<div class="modal-overlay" id="deleteAccountModal">
-
-<div class="modal-box">
-
-  <button
-    class="modal-close"
-    data-close="deleteAccountModal"
-    type="button"
-  >
-    ✕
-  </button>
-
-  <h3
-    class="modal-title"
-    style="color:var(--danger)"
-  >
-    Delete your account?
-  </h3>
-
-  <div
-    class="modal-accent-bar"
-    style="background:var(--danger)"
-  ></div>
-
-  <p style="color:var(--ink-soft)">
-    Your Homeroom account and planner data will be permanently deleted.
-  </p>
-
-  <button
-    class="btn btn-danger-solid"
-    id="confirmDeleteAccountButton"
-    type="button"
-  >
-    Permanently Delete
-  </button>
-
-</div>
+  </div>
 
 </div>
 
@@ -4308,22 +4322,8 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
   'sb_publishable_7Q-NowkHHGHAGBZ64YwRaw_RL61UmJ-';
 
-const SITE_URL =
-  'https://kirenm.github.io/School-Planner/';
-
 const ATTACHMENT_BUCKET =
   'homeroom-attachments';
-
-/*
-  THIS EDGE FUNCTION WILL BE THE SECURE AI BACKEND.
-
-  We will build it next.
-
-  It will call OpenAI without exposing the secret API key
-  inside index.html.
-*/
-const AI_FUNCTION_NAME =
-  'homeroom-ai';
 
 const sb =
   window.supabase.createClient(
@@ -4369,7 +4369,7 @@ const EXTRACURRICULAR_COLORS = [
 
 const DEFAULT_STATE = {
 
-  version:13,
+  version:14,
 
   profile:{
     name:''
@@ -4394,54 +4394,49 @@ const DEFAULT_STATE = {
       room:'',
       color:'#1F8A78',
       tutorial:
-        'This is your planner. Let’s get it set up.'
+        'Use Settings to customize your planner and classes.'
     },
 
     {
-      id:'customize',
-      name:'Customize Your Classes',
+      id:'add-work',
+      name:'Add Your Work',
       teacher:'',
       room:'',
       color:'#3B6EA5',
       tutorial:
-        'Open Settings to rename, add or remove your classes.'
+        'Use the yellow + button to add assignments, reminders or deadlines.'
     },
 
     {
-      id:'first-assignment',
-      name:'Add Your First Assignment',
+      id:'calendar-help',
+      name:'Use Your Calendar',
       teacher:'',
       room:'',
       color:'#6B4FA0',
       tutorial:
-        'Tap + Add to create your first item.'
+        'Switch to Calendar for activities, appointments and a larger schedule view.'
     },
 
     {
-      id:'try-calendar',
-      name:'Try the Calendar',
+      id:'scan-help',
+      name:'Take a Photo',
       teacher:'',
       room:'',
       color:'#D97B3F',
       tutorial:
-        'Use Calendar for activities, appointments and your schedule.'
+        'Use Scan Document to capture a whiteboard, syllabus page or assignment sheet.'
     }
 
   ],
 
   extras:[],
 
-  tasks:[],
-
-  /*
-    AI planning suggestions are optional and can be regenerated.
-  */
-  aiPlan:null
+  tasks:[]
 
 };
 
 /* =========================================================
-   GLOBAL STATE
+   STATE
 ========================================================= */
 
 let state =
@@ -4471,6 +4466,15 @@ let editingFamilyEventId =
 let editingOccurrenceDate =
   null;
 
+let detailItemId =
+  null;
+
+let detailOccurrenceDate =
+  null;
+
+let calendarCreationMode =
+  false;
+
 let classModalId =
   null;
 
@@ -4496,9 +4500,6 @@ let familyMembers =
 let familyEvents =
   [];
 
-let pendingInvites =
-  [];
-
 let pendingAttachments =
   [];
 
@@ -4508,11 +4509,11 @@ let attachmentUrls =
 let pendingConfirmAction =
   null;
 
-let aiScanResults =
-  [];
-
-let aiPlanResult =
+let pendingCalendarCreate =
   null;
+
+let scanResults =
+  [];
 
 /* =========================================================
    HELPERS
@@ -4552,15 +4553,15 @@ function pad(number){
 
 function todayStr(){
 
-  const date =
+  const d =
     new Date();
 
   return (
-    `${date.getFullYear()}-`
+    `${d.getFullYear()}-`
     +
-    `${pad(date.getMonth()+1)}-`
+    `${pad(d.getMonth()+1)}-`
     +
-    `${pad(date.getDate())}`
+    `${pad(d.getDate())}`
   );
 
 }
@@ -4610,6 +4611,21 @@ function niceDate(value){
 
 }
 
+function fullDate(value){
+
+  return parseDate(value)
+    .toLocaleDateString(
+      undefined,
+      {
+        weekday:'long',
+        month:'long',
+        day:'numeric',
+        year:'numeric'
+      }
+    );
+
+}
+
 function niceTime(value){
 
   if(!value){
@@ -4648,24 +4664,6 @@ function daysBetween(a,b){
 
 }
 
-function esc(value){
-
-  return String(
-    value ?? ''
-  )
-  .replace(
-    /[&<>"']/g,
-    character => ({
-      '&':'&amp;',
-      '<':'&lt;',
-      '>':'&gt;',
-      '"':'&quot;',
-      "'":'&#39;'
-    })[character]
-  );
-
-}
-
 function addDays(date,days){
 
   const copy =
@@ -4693,15 +4691,14 @@ function mondayFor(date){
   const day =
     d.getDay();
 
-  const difference =
-    day === 0
-      ? -6
-      : 1-day;
-
   d.setDate(
     d.getDate()
     +
-    difference
+    (
+      day === 0
+        ? -6
+        : 1-day
+    )
   );
 
   return d;
@@ -4715,64 +4712,77 @@ function timeToMinutes(value){
   }
 
   const [
-    hour,
-    minute
+    h,
+    m
   ] =
     value
       .split(':')
       .map(Number);
 
   return (
-    hour*60
+    h*60
     +
-    minute
+    m
   );
 
 }
 
-function minutesToText(minutes){
+function minutesText(minutes){
 
-  if(!minutes){
-    return '—';
+  const value =
+    Number(minutes || 0);
+
+  if(!value){
+    return '';
   }
 
-  if(minutes < 60){
-    return `${minutes} min`;
+  if(value < 60){
+    return `${value} min`;
   }
 
-  const hours =
+  const h =
     Math.floor(
-      minutes/60
+      value/60
     );
 
-  const remaining =
-    minutes%60;
+  const m =
+    value%60;
 
-  if(!remaining){
-    return `${hours} hr`;
+  return m
+    ? `${h} hr ${m} min`
+    : `${h} hr`;
+
+}
+
+function esc(value){
+
+  return String(
+    value ?? ''
+  )
+  .replace(
+    /[&<>"']/g,
+    char => ({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      '"':'&quot;',
+      "'":'&#39;'
+    })[char]
+  );
+
+}
+
+function capitalize(value){
+
+  if(!value){
+    return '';
   }
 
-  return `${hours} hr ${remaining} min`;
-
-}
-
-function classById(id){
-
-  return state.classes
-    .find(
-      item =>
-        item.id === id
-    );
-
-}
-
-function extraById(id){
-
-  return state.extras
-    .find(
-      item =>
-        item.id === id
-    );
+  return (
+    value.charAt(0).toUpperCase()
+    +
+    value.slice(1)
+  );
 
 }
 
@@ -4787,22 +4797,30 @@ function classesEnabled(){
 
 }
 
+function classById(id){
+
+  return state.classes.find(
+    item =>
+      item.id === id
+  );
+
+}
+
+function extraById(id){
+
+  return state.extras.find(
+    item =>
+      item.id === id
+  );
+
+}
+
 function timedType(type){
 
   return (
     type === 'activity'
     ||
     type === 'appointment'
-  );
-
-}
-
-function checkable(task){
-
-  return (
-    task.type === 'assignment'
-    ||
-    task.type === 'deadline'
   );
 
 }
@@ -4815,6 +4833,16 @@ function academicType(type){
     type === 'deadline'
     ||
     type === 'reminder'
+  );
+
+}
+
+function checkable(task){
+
+  return (
+    task.type === 'assignment'
+    ||
+    task.type === 'deadline'
   );
 
 }
@@ -4839,16 +4867,6 @@ function isException(task,date){
     []
   )
   .includes(date);
-
-}
-
-function taskEstimate(task){
-
-  return Number(
-    task.estimatedMinutes
-    ||
-    0
-  );
 
 }
 
@@ -4879,24 +4897,23 @@ function sourceFor(task){
     return 'Appointment';
   }
 
-  if(!classesEnabled()){
+  if(
+    academicType(task.type)
+    &&
+    classesEnabled()
+  ){
 
     return (
-      task.type
-        ?.charAt(0)
-        .toUpperCase()
-      +
-      task.type
-        ?.slice(1)
+      classById(task.classId)
+        ?.name
+      ||
+      'General'
     );
 
   }
 
-  return (
-    classById(task.classId)
-      ?.name
-    ||
-    'General'
+  return capitalize(
+    task.type
   );
 
 }
@@ -4906,8 +4923,6 @@ function itemColor(task){
   if(task.visibility === 'family'){
 
     return (
-      task.color
-      ||
       family?.color
       ||
       '#7B5AA6'
@@ -4936,75 +4951,6 @@ function itemColor(task){
     ||
     '#8A8578'
   );
-
-}
-
-/* =========================================================
-   EXTRACURRICULAR COLORS
-========================================================= */
-
-function normalizeColor(color){
-
-  return String(
-    color ||
-    ''
-  )
-  .trim()
-  .toLowerCase();
-
-}
-
-function getUniqueExtracurricularColor(){
-
-  const used =
-    new Set();
-
-  state.classes.forEach(
-    item =>
-      used.add(
-        normalizeColor(
-          item.color
-        )
-      )
-  );
-
-  state.extras.forEach(
-    item =>
-      used.add(
-        normalizeColor(
-          item.color
-        )
-      )
-  );
-
-  const available =
-    EXTRACURRICULAR_COLORS
-      .filter(
-        color =>
-          !used.has(
-            normalizeColor(color)
-          )
-      );
-
-  if(available.length){
-
-    return available[
-      Math.floor(
-        Math.random()
-        *
-        available.length
-      )
-    ];
-
-  }
-
-  return EXTRACURRICULAR_COLORS[
-    Math.floor(
-      Math.random()
-      *
-      EXTRACURRICULAR_COLORS.length
-    )
-  ];
 
 }
 
@@ -5063,10 +5009,16 @@ function closeAllModals(){
     .classList
     .remove('modal-open');
 
+  hideCalendarConfirmation();
+
   pendingConfirmAction =
     null;
 
 }
+
+/* =========================================================
+   AUTH
+========================================================= */
 
 function showAuth(){
 
@@ -5098,38 +5050,24 @@ function showApp(){
 
 }
 
-function setSyncStatus(text){
-
-  document
-    .getElementById('syncStatus')
-    .textContent =
-      text;
-
-}
-
-/* =========================================================
-   AUTH
-========================================================= */
-
 function authMessage(
   message,
   error=false
 ){
 
-  const element =
+  const el =
     document
       .getElementById(
         'authMessage'
       );
 
-  element.textContent =
+  el.textContent =
     message;
 
-  element.classList
-    .toggle(
-      'error',
-      error
-    );
+  el.classList.toggle(
+    'error',
+    error
+  );
 
 }
 
@@ -5253,6 +5191,7 @@ async function handleAuthSubmit(){
         );
 
         return;
+
       }
 
       setAuthMode(
@@ -5264,6 +5203,7 @@ async function handleAuthSubmit(){
       );
 
       return;
+
     }
 
     const {
@@ -5307,8 +5247,8 @@ async function handleAuthSubmit(){
 async function signOut(){
 
   /*
-    FIX:
-    modal disappears BEFORE auth page appears.
+    IMPORTANT:
+    Close every UI layer BEFORE switching back to sign in.
   */
 
   closeAllModals();
@@ -5322,13 +5262,17 @@ async function signOut(){
   editingOccurrenceDate =
     null;
 
+  detailItemId =
+    null;
+
   classModalId =
     null;
 
   pendingAttachments =
     [];
 
-  await sb.auth.signOut();
+  await sb.auth
+    .signOut();
 
   currentUser =
     null;
@@ -5345,20 +5289,31 @@ async function signOut(){
   familyEvents =
     [];
 
-  pendingInvites =
-    [];
-
   showAuth();
 
   setAuthMode(
     'signin'
   );
 
+  document
+    .getElementById('authPassword')
+    .value =
+      '';
+
 }
 
 /* =========================================================
-   CLOUD DATA
+   CLOUD STATE
 ========================================================= */
+
+function setSyncStatus(text){
+
+  document
+    .getElementById('syncStatus')
+    .textContent =
+      text;
+
+}
 
 async function loadCloudData(){
 
@@ -5391,9 +5346,7 @@ async function loadCloudData(){
 
     state = {
 
-      ...clone(
-        DEFAULT_STATE
-      ),
+      ...clone(DEFAULT_STATE),
 
       ...data.data,
 
@@ -5448,6 +5401,16 @@ async function loadCloudData(){
               task.visibility
               ||
               'personal',
+
+            recurrence:
+              task.recurrence
+              ||
+              'none',
+
+            repeatDays:
+              task.repeatDays
+              ||
+              [],
 
             exceptionDates:
               task.exceptionDates
@@ -5529,6 +5492,7 @@ async function saveCloudData(){
     );
 
     return;
+
   }
 
   setSyncStatus(
@@ -5580,24 +5544,12 @@ function isFamilyOwner(){
 
 }
 
-function familyMemberName(member){
-
-  return (
-    member.display_name
-    ||
-    member.email
-    ||
-    'Family member'
-  );
-
-}
-
 function randomInviteCode(){
 
-  const characters =
+  const chars =
     'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 
-  let result =
+  let code =
     'HMRM-';
 
   for(
@@ -5606,18 +5558,18 @@ function randomInviteCode(){
     i++
   ){
 
-    result +=
-      characters[
+    code +=
+      chars[
         Math.floor(
           Math.random()
           *
-          characters.length
+          chars.length
         )
       ];
 
   }
 
-  return result;
+  return code;
 
 }
 
@@ -5630,9 +5582,6 @@ async function loadFamily(){
     [];
 
   familyEvents =
-    [];
-
-  pendingInvites =
     [];
 
   if(!currentUser){
@@ -5716,10 +5665,10 @@ async function loadFamily(){
 
             visibility:'family',
 
-            exceptionDates:
-              event.exception_dates
+            recurrence:
+              event.recurrence
               ||
-              [],
+              'none',
 
             repeatDays:
               event.repeat_days
@@ -5730,6 +5679,11 @@ async function loadFamily(){
               event.repeat_end
               ||
               '',
+
+            exceptionDates:
+              event.exception_dates
+              ||
+              [],
 
             allDay:
               Boolean(
@@ -5771,7 +5725,9 @@ async function createFamily(){
 
   const name =
     document
-      .getElementById('newFamilyName')
+      .getElementById(
+        'newFamilyName'
+      )
       .value
       .trim();
 
@@ -5805,6 +5761,7 @@ async function createFamily(){
     alert(error.message);
 
     return;
+
   }
 
   await sb
@@ -5842,7 +5799,9 @@ async function joinFamilyByCode(){
 
   const code =
     document
-      .getElementById('joinFamilyCode')
+      .getElementById(
+        'joinFamilyCode'
+      )
       .value
       .trim()
       .toUpperCase();
@@ -5854,8 +5813,7 @@ async function joinFamilyByCode(){
       );
 
   const {
-    data:foundFamily,
-    error
+    data:foundFamily
   } =
     await sb
       .from('families')
@@ -5866,20 +5824,17 @@ async function joinFamilyByCode(){
       )
       .maybeSingle();
 
-  if(
-    error
-    ||
-    !foundFamily
-  ){
+  if(!foundFamily){
 
     message.textContent =
       'That invite code could not be used.';
 
     return;
+
   }
 
   const {
-    error:joinError
+    error
   } =
     await sb
       .from('family_members')
@@ -5902,12 +5857,13 @@ async function joinFamilyByCode(){
           currentUser.email
       });
 
-  if(joinError){
+  if(error){
 
     message.textContent =
-      joinError.message;
+      error.message;
 
     return;
+
   }
 
   closeModal(
@@ -5934,7 +5890,7 @@ function requestLeaveFamily(){
       `Leave ${family.name}?`,
 
     text:
-      'You will lose access to shared Family calendar events. Your personal Homeroom data will stay.',
+      'Shared Family events will disappear from your calendar. Your personal Homeroom data will stay.',
 
     confirmText:
       'Leave Family',
@@ -5977,7 +5933,7 @@ function requestDeleteFamily(){
       `Delete ${family.name}?`,
 
     text:
-      'This permanently deletes the Family, memberships and all shared Family events. Personal planner data is not deleted.',
+      'This permanently deletes the Family and shared events. Personal planner data is not deleted.',
 
     confirmText:
       'Delete Family',
@@ -6001,6 +5957,7 @@ function requestDeleteFamily(){
           alert(error.message);
 
           return;
+
         }
 
         family =
@@ -6020,62 +5977,7 @@ function requestDeleteFamily(){
 }
 
 /* =========================================================
-   CONFIRMATION
-========================================================= */
-
-function showConfirmation({
-  title,
-  text,
-  confirmText='Confirm',
-  onConfirm
-}){
-
-  document
-    .getElementById('confirmTitle')
-    .textContent =
-      title;
-
-  document
-    .getElementById('confirmText')
-    .textContent =
-      text;
-
-  document
-    .getElementById(
-      'confirmActionButton'
-    )
-    .textContent =
-      confirmText;
-
-  pendingConfirmAction =
-    onConfirm;
-
-  openModal(
-    'confirmModal'
-  );
-
-}
-
-async function runConfirmedAction(){
-
-  const action =
-    pendingConfirmAction;
-
-  pendingConfirmAction =
-    null;
-
-  closeModal(
-    'confirmModal'
-  );
-
-  if(action){
-    await action();
-  }
-
-}
-
-/* =========================================================
-   ACCOUNT / THEME
+   THEME + ACCOUNT
 ========================================================= */
 
 function applyTheme(){
@@ -6122,71 +6024,45 @@ function renderAccount(){
     fallback;
 
   document
-    .getElementById('headerName')
+    .getElementById(
+      'headerName'
+    )
     .textContent =
       name;
 
   document
-    .getElementById('headerAvatar')
+    .getElementById(
+      'headerAvatar'
+    )
     .textContent =
       name
         .charAt(0)
         .toUpperCase();
 
   document
-    .getElementById('profileName')
+    .getElementById(
+      'profileName'
+    )
     .value =
       name;
 
   document
-    .getElementById('profileEmail')
+    .getElementById(
+      'profileEmail'
+    )
     .textContent =
       currentUser?.email
       ||
       '';
 
   document
-    .getElementById('footerEmail')
+    .getElementById(
+      'footerEmail'
+    )
     .textContent =
       currentUser?.email
       ||
       '';
-
-}
-
-/* =========================================================
-   CLASS MODE
-========================================================= */
-
-function renderClassMode(){
-
-  const enabled =
-    classesEnabled();
-
-  document
-    .getElementById('classesSection')
-    .classList
-    .toggle(
-      'hidden',
-      !enabled
-    );
-
-  document
-    .getElementById(
-      'classSettingsSection'
-    )
-    .classList
-    .toggle(
-      'hidden',
-      !enabled
-    );
-
-  document
-    .getElementById(
-      'disableClassesToggle'
-    )
-    .checked =
-      !enabled;
 
 }
 
@@ -6235,7 +6111,7 @@ function renderSelects(){
 }
 
 /* =========================================================
-   FAMILY EVENTS
+   FAMILY ITEMS
 ========================================================= */
 
 function familyEventToTask(item){
@@ -6272,370 +6148,210 @@ function allItems(){
 
 }
 
-/* =========================================================
-   AI CLIENT
-========================================================= */
+function findAnyItem(id){
 
-async function callHomeroomAI(
-  action,
-  payload
-){
+  if(
+    String(id)
+      .startsWith(
+        'family:'
+      )
+  ){
 
-  const {
-    data,
-    error
-  } =
-    await sb.functions.invoke(
-      AI_FUNCTION_NAME,
-      {
-        body:{
-          action,
-          payload
-        }
-      }
-    );
+    const familyId =
+      String(id)
+        .replace(
+          'family:',
+          ''
+        );
 
-  if(error){
-    throw error;
+    const raw =
+      familyEvents.find(
+        item =>
+          String(item.id)
+          ===
+          familyId
+      );
+
+    return raw
+      ? familyEventToTask(raw)
+      : null;
+
   }
 
-  if(!data){
-    throw new Error(
-      'AI returned no result.'
-    );
-  }
-
-  return data;
+  return state.tasks.find(
+    item =>
+      item.id === id
+  );
 
 }
 
 /* =========================================================
-   DAILY HEURISTIC FALLBACK
-
-   Homeroom still works before AI backend is added.
+   UPCOMING
 ========================================================= */
 
-function localDailyPlan(){
+function renderUpcoming(){
 
   const today =
     todayStr();
 
-  const tomorrow =
+  const end =
     dateStr(
       addDays(
         new Date(),
-        1
+        7
       )
     );
 
-  const unfinished =
-    state.tasks.filter(
-      task =>
-        !task.done
-        &&
-        academicType(
-          task.type
-        )
-    );
-
-  const finishFirst =
-    unfinished
+  const items =
+    allItems()
       .filter(
-        task =>
-          task.date <= tomorrow
-      )
-      .sort(
-        (a,b) =>
-          a.date.localeCompare(
-            b.date
-          )
-      )
-      .slice(
-        0,
-        5
-      )
-      .map(
-        task => ({
-          taskId:
-            task.id,
-
-          minutes:
-            task.estimatedMinutes
-            ||
-            (
-              task.type === 'assignment'
-                ? 35
-                : 15
-            )
-        })
-      );
-
-  const urgentIds =
-    new Set(
-      finishFirst.map(
         item =>
-          item.taskId
-      )
-    );
-
-  const chipAway =
-    unfinished
-      .filter(
-        task =>
-          task.date > tomorrow
+          !item.done
           &&
-          !urgentIds.has(
-            task.id
-          )
+          item.date
+          &&
+          item.date >= today
+          &&
+          item.date <= end
       )
       .sort(
-        (a,b) =>
-          a.date.localeCompare(
-            b.date
-          )
+        (
+          a,
+          b
+        ) => {
+
+          if(a.date !== b.date){
+
+            return a.date.localeCompare(
+              b.date
+            );
+
+          }
+
+          const aTime =
+            a.startTime
+            ||
+            a.time
+            ||
+            '23:59';
+
+          const bTime =
+            b.startTime
+            ||
+            b.time
+            ||
+            '23:59';
+
+          return aTime.localeCompare(
+            bTime
+          );
+
+        }
       )
       .slice(
         0,
-        3
-      )
-      .map(
-        task => ({
-          taskId:
-            task.id,
-
-          minutes:
-            task.estimatedMinutes
-            ||
-            (
-              task.type === 'assignment'
-                ? 25
-                : 15
-            )
-        })
+        10
       );
 
-  const totalMinutes =
-    [
-      ...finishFirst,
-      ...chipAway
-    ]
-    .reduce(
-      (
-        total,
-        item
-      ) =>
-        total
-        +
-        Number(
-          item.minutes
-          ||
-          0
-        ),
-      0
-    );
-
-  return {
-    summary:
-      finishFirst.length
-        ? `${finishFirst.length} item${finishFirst.length===1?'':'s'} deserve your attention first.`
-        : 'Nothing urgent is due today or tomorrow.',
-
-    finishFirst,
-
-    chipAway,
-
-    totalMinutes
-  };
-
-}
-
-/* =========================================================
-   TODAY COMMAND CENTER
-========================================================= */
-
-function getPlanTask(id){
-
-  return state.tasks.find(
-    task =>
-      task.id === id
-  );
-
-}
-
-function renderDailyCommand(){
-
-  const now =
-    new Date();
-
-  document
-    .getElementById('dailyTitle')
-    .textContent =
-      now.toLocaleDateString(
-        undefined,
-        {
-          weekday:'long'
-        }
-      );
-
-  document
-    .getElementById('dailyDate')
-    .textContent =
-      now.toLocaleDateString(
-        undefined,
-        {
-          month:'long',
-          day:'numeric'
-        }
-      );
-
-  const plan =
-    state.aiPlan
-    &&
-    state.aiPlan.date ===
-      todayStr()
-      ? state.aiPlan
-      : localDailyPlan();
-
-  document
-    .getElementById('dailySummary')
-    .textContent =
-      plan.summary
-      ||
-      'Here is what deserves your attention today.';
-
-  renderPrioritySection(
-    'finishFirstList',
-    plan.finishFirst
-    ||
-    [],
-    true
-  );
-
-  renderPrioritySection(
-    'chipAwayList',
-    plan.chipAway
-    ||
-    [],
-    false
-  );
-
-  renderTodaySchedule();
-
-  document
-    .getElementById('dailyTotalTime')
-    .textContent =
-      minutesToText(
-        plan.totalMinutes
-        ||
-        0
-      );
-
-}
-
-function renderPrioritySection(
-  elementId,
-  items,
-  urgent
-){
-
-  const element =
+  const list =
     document
       .getElementById(
-        elementId
+        'upcomingList'
       );
 
   if(!items.length){
 
-    element.innerHTML = `
-      <div
-        style="
-          color:var(--ink-soft);
-          font-size:12px;
-        "
-      >
-        ${
-          urgent
-            ? 'Nothing urgent here.'
-            : 'No major upcoming work needs attention yet.'
-        }
+    list.innerHTML = `
+      <div class="empty-state">
+        <strong>
+          Nothing coming up
+        </strong>
+
+        Your next 7 days are clear.
       </div>
     `;
 
     return;
+
   }
 
-  element.innerHTML =
+  list.innerHTML =
     items
       .map(
-        recommendation => {
-
-          const task =
-            getPlanTask(
-              recommendation.taskId
-            );
-
-          if(!task){
-            return '';
-          }
-
-          const today =
-            todayStr();
+        item => {
 
           const days =
             daysBetween(
               today,
-              task.date
+              item.date
             );
 
-          let dueText =
-            `Due ${niceDate(task.date)}`;
-
-          if(days < 0){
-            dueText =
-              'Overdue';
-          }
+          let dateLabel =
+            niceDate(
+              item.date
+            );
 
           if(days === 0){
-            dueText =
-              'Due today';
+            dateLabel = 'Today';
           }
 
           if(days === 1){
-            dueText =
-              'Due tomorrow';
+            dateLabel = 'Tomorrow';
           }
+
+          const time =
+            item.allDay
+              ? 'All day'
+              : item.startTime
+                ? niceTime(
+                    item.startTime
+                  )
+                : item.time
+                  ? niceTime(
+                      item.time
+                    )
+                  : '';
 
           return `
             <button
-              class="priority-item"
-              data-edit="${esc(task.id)}"
-              style="
-                --accent:${itemColor(task)}
-              "
+              class="upcoming-item"
+              data-view-item="${esc(item.id)}"
               type="button"
             >
 
-              <div class="priority-main">
+              <div class="upcoming-date">
+                ${esc(dateLabel)}
+              </div>
 
-                <div class="priority-title">
-                  ${esc(task.title)}
+              <div>
+
+                <div class="upcoming-title">
+                  ${esc(item.title)}
                 </div>
 
-                <div class="priority-meta">
-                  ${esc(sourceFor(task))}
-                  ·
-                  ${esc(dueText)}
+                <div class="upcoming-meta">
+                  ${esc(sourceFor(item))}
+                  ${
+                    time
+                      ? ` · ${esc(time)}`
+                      : ''
+                  }
                 </div>
 
               </div>
 
-              <div class="priority-time">
-                ${
-                  recommendation.minutes
-                    ? `${recommendation.minutes} min`
-                    : ''
-                }
-              </div>
+              <span
+                class="
+                  upcoming-type
+                  ${
+                    item.visibility === 'family'
+                      ? 'family'
+                      : ''
+                  }
+                "
+              >
+                ${esc(item.type)}
+              </span>
 
             </button>
           `;
@@ -6646,1378 +6362,43 @@ function renderPrioritySection(
 
 }
 
-function renderTodaySchedule(){
-
-  const today =
-    todayStr();
-
-  const items =
-    allItems()
-      .filter(
-        item =>
-          !item.done
-          &&
-          (
-            item.type === 'reminder'
-            ||
-            item.type === 'activity'
-            ||
-            item.type === 'appointment'
-          )
-      )
-      .filter(
-        item =>
-          occurrences(
-            item,
-            new Date().getFullYear(),
-            new Date().getMonth()
-          )
-          .includes(
-            today
-          )
-      )
-      .sort(
-        (
-          a,
-          b
-        ) => {
-
-          const aTime =
-            a.startTime
-            ||
-            a.time
-            ||
-            '00:00';
-
-          const bTime =
-            b.startTime
-            ||
-            b.time
-            ||
-            '00:00';
-
-          return aTime.localeCompare(
-            bTime
-          );
-
-        }
-      );
-
-  const element =
-    document
-      .getElementById(
-        'todayScheduleList'
-      );
-
-  if(!items.length){
-
-    element.innerHTML = `
-      <div
-        style="
-          color:var(--ink-soft);
-          font-size:12px;
-        "
-      >
-        No reminders, activities or appointments today.
-      </div>
-    `;
-
-    return;
-  }
-
-  element.innerHTML =
-    items
-      .map(
-        item => {
-
-          const time =
-            item.allDay
-              ? 'All day'
-              : niceTime(
-                  item.startTime
-                  ||
-                  item.time
-                )
-                ||
-                'Any time';
-
-          return `
-            <div class="schedule-row">
-
-              <div class="schedule-time">
-                ${esc(time)}
-              </div>
-
-              <div>
-
-                <div class="schedule-title">
-                  ${
-                    item.type === 'reminder'
-                      ? '🔔'
-                      : item.type === 'appointment'
-                        ? '📍'
-                        : '●'
-                  }
-                  ${esc(item.title)}
-                </div>
-
-                <div class="schedule-meta">
-                  ${
-                    esc(
-                      item.type
-                        .charAt(0)
-                        .toUpperCase()
-                      +
-                      item.type.slice(1)
-                    )
-                  }
-
-                  ${
-                    item.manualLocation
-                      ? ` · ${esc(item.manualLocation)}`
-                      : ''
-                  }
-                </div>
-
-              </div>
-
-            </div>
-          `;
-
-        }
-      )
-      .join('');
-
-}
-
-/* =========================================================
-   PLAN MY DAY AI
-========================================================= */
-
-function plannerAIContext(){
-
-  return {
-
-    today:
-      todayStr(),
-
-    classes:
-      state.classes.map(
-        item => ({
-          id:item.id,
-          name:item.name
-        })
-      ),
-
-    tasks:
-      state.tasks
-        .filter(
-          task =>
-            !task.done
-        )
-        .map(
-          task => ({
-            id:
-              task.id,
-
-            title:
-              task.title,
-
-            type:
-              task.type,
-
-            date:
-              task.date,
-
-            time:
-              task.time
-              ||
-              null,
-
-            estimatedMinutes:
-              task.estimatedMinutes
-              ||
-              null,
-
-            class:
-              classById(
-                task.classId
-              )
-              ?.name
-              ||
-              null
-          })
-        ),
-
-    calendar:
-      allItems()
-        .filter(
-          item =>
-            (
-              item.type === 'activity'
-              ||
-              item.type === 'appointment'
-              ||
-              item.type === 'reminder'
-            )
-        )
-        .map(
-          item => ({
-            title:
-              item.title,
-
-            type:
-              item.type,
-
-            date:
-              item.date,
-
-            startTime:
-              item.startTime
-              ||
-              item.time
-              ||
-              null,
-
-            endTime:
-              item.endTime
-              ||
-              null,
-
-            allDay:
-              Boolean(
-                item.allDay
-              )
-          })
-        )
-
-  };
-
-}
-
-async function planMyDay(){
-
-  openModal(
-    'planDayModal'
-  );
-
-  document
-    .getElementById(
-      'planDayLoading'
-    )
-    .classList
-    .remove('hidden');
-
-  document
-    .getElementById(
-      'planDayResult'
-    )
-    .classList
-    .add('hidden');
-
-  try{
-
-    const result =
-      await callHomeroomAI(
-        'plan_day',
-        plannerAIContext()
-      );
-
-    aiPlanResult =
-      result;
-
-    /*
-      Expect:
-      {
-        summary,
-        totalMinutes,
-        finishFirst:[
-          {taskId, minutes}
-        ],
-        chipAway:[
-          {taskId, minutes}
-        ],
-        schedule:[
-          {
-            timeLabel,
-            taskId,
-            title,
-            minutes,
-            kind
-          }
-        ]
-      }
-    */
-
-    state.aiPlan = {
-      ...result,
-      date:
-        todayStr()
-    };
-
-    queueSave();
-
-    renderPlanDayResult(
-      result
-    );
-
-    renderDailyCommand();
-
-  }
-  catch(error){
-
-    console.warn(
-      'AI plan unavailable. Using local planner.',
-      error
-    );
-
-    const fallback =
-      localDailyPlan();
-
-    aiPlanResult =
-      fallback;
-
-    renderPlanDayResult(
-      {
-        ...fallback,
-
-        summary:
-          `${fallback.summary} AI planning will activate once the Homeroom AI backend is connected.`,
-
-        schedule:
-          []
-      }
-    );
-
-  }
-
-}
-
-function renderPlanDayResult(
-  result
-){
-
-  document
-    .getElementById(
-      'planDayLoading'
-    )
-    .classList
-    .add('hidden');
-
-  document
-    .getElementById(
-      'planDayResult'
-    )
-    .classList
-    .remove('hidden');
-
-  document
-    .getElementById(
-      'planDaySummary'
-    )
-    .textContent =
-      result.summary
-      ||
-      'Here is a suggested plan for today.';
-
-  const blocks =
-    result.schedule
-    ||
-    [
-      ...(
-        result.finishFirst
-        ||
-        []
-      ),
-      ...(
-        result.chipAway
-        ||
-        []
-      )
-    ]
-    .map(
-      recommendation => {
-
-        const task =
-          getPlanTask(
-            recommendation.taskId
-          );
-
-        return {
-          timeLabel:
-            'Suggested',
-
-          title:
-            task?.title
-            ||
-            'Task',
-
-          minutes:
-            recommendation.minutes
-            ||
-            0
-        };
-
-      }
-    );
-
-  document
-    .getElementById(
-      'planDayBlocks'
-    )
-    .innerHTML =
-      blocks.length
-
-        ? blocks
-            .map(
-              block => `
-                <div class="plan-block">
-
-                  <div class="plan-time">
-                    ${esc(block.timeLabel || '')}
-                  </div>
-
-                  <div class="plan-title">
-                    ${esc(block.title || '')}
-                  </div>
-
-                  <div class="plan-duration">
-                    ${
-                      block.minutes
-                        ? `${block.minutes} min`
-                        : ''
-                    }
-                  </div>
-
-                </div>
-              `
-            )
-            .join('')
-
-        : `
-          <div class="empty-state">
-            <strong>
-              Your day is clear
-            </strong>
-
-            Nothing needs to be scheduled right now.
-          </div>
-        `;
-
-}
-
-/* =========================================================
-   AI SCAN
-========================================================= */
-
-function resetAIScan(){
-
-  aiScanResults =
-    [];
-
-  document
-    .getElementById(
-      'aiScanSourceStep'
-    )
-    .classList
-    .remove('hidden');
-
-  document
-    .getElementById(
-      'aiScanLoadingStep'
-    )
-    .classList
-    .add('hidden');
-
-  document
-    .getElementById(
-      'aiScanReviewStep'
-    )
-    .classList
-    .add('hidden');
-
-  document
-    .getElementById(
-      'aiScanItems'
-    )
-    .innerHTML =
-      '';
-
-}
-
-function openAIScan(){
-
-  resetAIScan();
-
-  openModal(
-    'aiScanModal'
-  );
-
-}
-
-async function fileToDataURL(
-  file
-){
-
-  return new Promise(
-    (
-      resolve,
-      reject
-    ) => {
-
-      const reader =
-        new FileReader();
-
-      reader.onload =
-        () =>
-          resolve(
-            reader.result
-          );
-
-      reader.onerror =
-        reject;
-
-      reader.readAsDataURL(
-        file
-      );
-
-    }
-  );
-
-}
-
-async function scanPlannerFile(
-  file
-){
-
-  if(!file){
-    return;
-  }
-
-  document
-    .getElementById(
-      'aiScanSourceStep'
-    )
-    .classList
-    .add('hidden');
-
-  document
-    .getElementById(
-      'aiScanLoadingStep'
-    )
-    .classList
-    .remove('hidden');
-
-  try{
-
-    const dataUrl =
-      await fileToDataURL(
-        file
-      );
-
-    const result =
-      await callHomeroomAI(
-        'scan_planner',
-        {
-          today:
-            todayStr(),
-
-          fileName:
-            file.name,
-
-          mimeType:
-            file.type,
-
-          dataUrl,
-
-          classes:
-            state.classes.map(
-              schoolClass => ({
-                id:
-                  schoolClass.id,
-
-                name:
-                  schoolClass.name,
-
-                teacher:
-                  schoolClass.teacher
-                  ||
-                  ''
-              })
-            )
-        }
-      );
-
-    aiScanResults =
-      (
-        result.items
-        ||
-        []
-      )
-      .map(
-        item => ({
-          id:
-            uid('scan'),
-
-          selected:
-            true,
-
-          type:
-            [
-              'assignment',
-              'deadline',
-              'reminder'
-            ]
-            .includes(
-              item.type
-            )
-              ? item.type
-              : 'assignment',
-
-          title:
-            item.title
-            ||
-            '',
-
-          classId:
-            item.classId
-            ||
-            '',
-
-          date:
-            item.date
-            ||
-            todayStr(),
-
-          time:
-            item.time
-            ||
-            '',
-
-          notes:
-            item.notes
-            ||
-            '',
-
-          estimatedMinutes:
-            Number(
-              item.estimatedMinutes
-              ||
-              0
-            ),
-
-          confidence:
-            item.confidence
-            ||
-            'high'
-        })
-      );
-
-    showAIScanReview();
-
-  }
-  catch(error){
-
-    console.error(
-      error
-    );
-
-    document
-      .getElementById(
-        'aiScanLoadingStep'
-      )
-      .classList
-      .add('hidden');
-
-    document
-      .getElementById(
-        'aiScanSourceStep'
-      )
-      .classList
-      .remove('hidden');
-
-    alert(
-      'AI Scan is ready in the interface, but the homeroom-ai Supabase Edge Function still needs to be installed.'
-    );
-
-  }
-
-}
-
-function showAIScanReview(){
-
-  document
-    .getElementById(
-      'aiScanLoadingStep'
-    )
-    .classList
-    .add('hidden');
-
-  document
-    .getElementById(
-      'aiScanReviewStep'
-    )
-    .classList
-    .remove('hidden');
-
-  renderAIScanItems();
-
-}
-
-function renderAIScanItems(){
-
-  const container =
-    document
-      .getElementById(
-        'aiScanItems'
-      );
-
-  const selectedCount =
-    aiScanResults.filter(
-      item =>
-        item.selected
-    )
-    .length;
-
-  document
-    .getElementById(
-      'aiScanCount'
-    )
-    .textContent =
-      `${selectedCount} ITEM${selectedCount===1?'':'S'}`;
-
-  if(!aiScanResults.length){
-
-    container.innerHTML = `
-      <div class="empty-state">
-
-        <strong>
-          Nothing was found
-        </strong>
-
-        Try another photo or document.
-
-      </div>
-    `;
-
-    return;
-  }
-
-  container.innerHTML =
-    aiScanResults
-      .map(
-        (
-          item,
-          index
-        ) => `
-
-          <div
-            class="scan-item-card"
-            data-scan-index="${index}"
-          >
-
-            <div class="scan-item-head">
-
-              <label
-                style="
-                  display:flex;
-                  align-items:center;
-                  gap:8px;
-                  font-size:12px;
-                  font-weight:700;
-                "
-              >
-
-                <input
-                  type="checkbox"
-                  data-scan-selected
-                  ${
-                    item.selected
-                      ? 'checked'
-                      : ''
-                  }
-                >
-
-                Include
-
-              </label>
-
-              <span
-                class="
-                  scan-confidence
-                  ${
-                    item.confidence === 'low'
-                      ? 'low'
-                      : 'high'
-                  }
-                "
-              >
-
-                ${
-                  item.confidence === 'low'
-                    ? '⚠ Check this'
-                    : 'AI Found'
-                }
-
-              </span>
-
-              <button
-                class="scan-remove"
-                data-remove-scan="${index}"
-                type="button"
-              >
-                Remove
-              </button>
-
-            </div>
-
-            <div class="scan-edit-grid">
-
-              <div class="field">
-
-                <label>
-                  Type
-                </label>
-
-                <select data-scan-type>
-
-                  <option
-                    value="assignment"
-                    ${
-                      item.type === 'assignment'
-                        ? 'selected'
-                        : ''
-                    }
-                  >
-                    Assignment
-                  </option>
-
-                  <option
-                    value="deadline"
-                    ${
-                      item.type === 'deadline'
-                        ? 'selected'
-                        : ''
-                    }
-                  >
-                    Deadline
-                  </option>
-
-                  <option
-                    value="reminder"
-                    ${
-                      item.type === 'reminder'
-                        ? 'selected'
-                        : ''
-                    }
-                  >
-                    Reminder
-                  </option>
-
-                </select>
-
-              </div>
-
-              <div class="field">
-
-                <label>
-                  Class
-                </label>
-
-                <select data-scan-class>
-
-                  <option value="">
-                    General
-                  </option>
-
-                  ${
-                    state.classes
-                      .map(
-                        schoolClass => `
-                          <option
-                            value="${esc(schoolClass.id)}"
-                            ${
-                              item.classId ===
-                              schoolClass.id
-                                ? 'selected'
-                                : ''
-                            }
-                          >
-                            ${esc(schoolClass.name)}
-                          </option>
-                        `
-                      )
-                      .join('')
-                  }
-
-                </select>
-
-              </div>
-
-              <div class="field wide">
-
-                <label>
-                  Title
-                </label>
-
-                <input
-                  type="text"
-                  data-scan-title
-                  value="${esc(item.title)}"
-                >
-
-              </div>
-
-              <div class="field">
-
-                <label>
-                  Date
-                </label>
-
-                <input
-                  type="date"
-                  data-scan-date
-                  value="${esc(item.date)}"
-                >
-
-              </div>
-
-              <div class="field">
-
-                <label>
-                  Time
-                </label>
-
-                <input
-                  type="time"
-                  data-scan-time
-                  value="${esc(item.time)}"
-                >
-
-              </div>
-
-              <div class="field">
-
-                <label>
-                  AI Time Estimate
-                </label>
-
-                <input
-                  type="number"
-                  min="0"
-                  step="5"
-                  data-scan-estimate
-                  value="${esc(item.estimatedMinutes || '')}"
-                  placeholder="Minutes"
-                >
-
-              </div>
-
-              <div class="field wide">
-
-                <label>
-                  Notes
-                </label>
-
-                <textarea
-                  data-scan-notes
-                >${esc(item.notes)}</textarea>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        `
-      )
-      .join('');
-
-}
-
-function syncAIScanEdits(){
-
-  document
-    .querySelectorAll(
-      '[data-scan-index]'
-    )
-    .forEach(
-      card => {
-
-        const index =
-          Number(
-            card.dataset.scanIndex
-          );
-
-        const item =
-          aiScanResults[index];
-
-        if(!item){
-          return;
-        }
-
-        item.selected =
-          card
-            .querySelector(
-              '[data-scan-selected]'
-            )
-            .checked;
-
-        item.type =
-          card
-            .querySelector(
-              '[data-scan-type]'
-            )
-            .value;
-
-        item.classId =
-          card
-            .querySelector(
-              '[data-scan-class]'
-            )
-            .value;
-
-        item.title =
-          card
-            .querySelector(
-              '[data-scan-title]'
-            )
-            .value
-            .trim();
-
-        item.date =
-          card
-            .querySelector(
-              '[data-scan-date]'
-            )
-            .value;
-
-        item.time =
-          card
-            .querySelector(
-              '[data-scan-time]'
-            )
-            .value;
-
-        item.estimatedMinutes =
-          Number(
-            card
-              .querySelector(
-                '[data-scan-estimate]'
-              )
-              .value
-            ||
-            0
-          );
-
-        item.notes =
-          card
-            .querySelector(
-              '[data-scan-notes]'
-            )
-            .value
-            .trim();
-
-      }
-    );
-
-}
-
-function addScannedItems(){
-
-  syncAIScanEdits();
-
-  const selected =
-    aiScanResults.filter(
-      item =>
-        item.selected
-        &&
-        item.title
-        &&
-        item.date
-    );
-
-  if(!selected.length){
-
-    alert(
-      'Select at least one item to add.'
-    );
-
-    return;
-  }
-
-  selected.forEach(
-    item => {
-
-      state.tasks.push({
-        id:
-          uid('t'),
-
-        type:
-          item.type,
-
-        title:
-          item.title,
-
-        date:
-          item.date,
-
-        time:
-          item.time,
-
-        notes:
-          item.notes,
-
-        classId:
-          classesEnabled()
-            ? (
-                item.classId
-                ||
-                null
-              )
-            : null,
-
-        extraId:
-          null,
-
-        visibility:
-          'personal',
-
-        done:
-          false,
-
-        recurrence:
-          'none',
-
-        repeatDays:
-          [],
-
-        repeatEnd:
-          '',
-
-        exceptionDates:
-          [],
-
-        attachments:
-          [],
-
-        estimatedMinutes:
-          item.estimatedMinutes,
-
-        createdAt:
-          Date.now(),
-
-        aiCreated:
-          true
-      });
-
-    }
-  );
-
-  state.aiPlan =
-    null;
-
-  queueSave();
-
-  closeModal(
-    'aiScanModal'
-  );
-
-  renderAll();
-
-}
-
-/* =========================================================
-   TASK ROW
-========================================================= */
-
-function taskRow(task){
-
-  const displayTime =
-    task.allDay
-      ? 'All day'
-      : task.startTime
-        ? niceTime(
-            task.startTime
-          )
-        : task.time
-          ? niceTime(
-              task.time
-            )
-          : '';
-
-  const metadata =
-    [
-      sourceFor(task),
-      niceDate(task.date),
-      displayTime,
-      task.manualLocation
-      ||
-      ''
-    ]
-    .filter(Boolean)
-    .join(' · ');
-
-  const left =
-    checkable(task)
-
-      ? `
-        <button
-          class="check"
-          data-complete="${esc(task.id)}"
-          type="button"
-        >
-
-          <svg
-            viewBox="0 0 14 14"
-            fill="none"
-          >
-            <path
-              d="M2 7l3.5 3.5L12 3"
-              stroke="#fff"
-              stroke-width="2.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-
-        </button>
-      `
-
-      : `
-        <span class="item-dot"></span>
-      `;
-
-  return `
-    <div
-      class="
-        task-row
-        ${task.done?'done':''}
-      "
-      style="
-        --accent:${itemColor(task)}
-      "
-    >
-
-      ${left}
-
-      <div
-        class="task-main"
-        data-edit="${esc(task.id)}"
-      >
-
-        <div class="task-title">
-          ${esc(task.title)}
-        </div>
-
-        <div class="task-meta">
-
-          ${esc(metadata)}
-
-          <span class="type-badge">
-            ${esc(task.type)}
-          </span>
-
-          ${
-            timedType(task.type)
-              ? `
-                <span
-                  class="
-                    visibility-badge
-                    ${task.visibility || 'personal'}
-                  "
-                >
-                  ${
-                    task.visibility === 'family'
-                      ? 'Family'
-                      : 'Personal'
-                  }
-                </span>
-              `
-              : ''
-          }
-
-        </div>
-
-      </div>
-
-      <button
-        class="icon-btn"
-        data-edit="${esc(task.id)}"
-        type="button"
-      >
-        •••
-      </button>
-
-    </div>
-  `;
-
-}
-
-/* =========================================================
-   OVERDUE
-========================================================= */
-
-function renderOverdue(){
-
-  const today =
-    todayStr();
-
-  const overdue =
-    state.tasks
-      .filter(
-        task =>
-          !task.done
-          &&
-          academicType(
-            task.type
-          )
-          &&
-          task.date < today
-      )
-      .sort(
-        (
-          a,
-          b
-        ) =>
-          a.date.localeCompare(
-            b.date
-          )
-      );
-
-  const section =
-    document
-      .getElementById(
-        'overdueSection'
-      );
-
-  section.classList
-    .toggle(
-      'hidden',
-      !overdue.length
-    );
-
-  document
-    .getElementById(
-      'overdueCount'
-    )
-    .textContent =
-      `${overdue.length} ITEM${overdue.length===1?'':'S'}`;
-
-  document
-    .getElementById(
-      'overdueList'
-    )
-    .innerHTML =
-      overdue
-        .map(taskRow)
-        .join('');
-
-}
-
 /* =========================================================
    CLASSES
 ========================================================= */
+
+function renderClassMode(){
+
+  const enabled =
+    classesEnabled();
+
+  document
+    .getElementById(
+      'classesSection'
+    )
+    .classList
+    .toggle(
+      'hidden',
+      !enabled
+    );
+
+  document
+    .getElementById(
+      'classSettingsSection'
+    )
+    .classList
+    .toggle(
+      'hidden',
+      !enabled
+    );
+
+  document
+    .getElementById(
+      'disableClassesToggle'
+    )
+    .checked =
+      !enabled;
+
+}
 
 function renderClasses(){
 
@@ -8034,17 +6415,15 @@ function renderClasses(){
         class="empty-state"
         style="grid-column:1/-1"
       >
-
         <strong>
           No classes
         </strong>
-
         Add one in Settings.
-
       </div>
     `;
 
     return;
+
   }
 
   grid.innerHTML =
@@ -8069,8 +6448,7 @@ function renderClasses(){
           const info =
             [
               schoolClass.teacher
-                ? schoolClass.teacher
-                : '',
+                || '',
 
               schoolClass.room
                 ? `Room ${schoolClass.room}`
@@ -8093,19 +6471,17 @@ function renderClasses(){
                 ${esc(schoolClass.name)}
               </div>
 
-              ${
-                schoolClass.tutorial
-                  ? `
-                    <div class="class-info-preview">
-                      ${esc(schoolClass.tutorial)}
-                    </div>
-                  `
-                  : `
-                    <div class="class-info-preview">
-                      ${esc(info || 'No teacher or room added')}
-                    </div>
-                  `
-              }
+              <div class="class-info-preview">
+                ${
+                  esc(
+                    schoolClass.tutorial
+                    ||
+                    info
+                    ||
+                    'No teacher or room added'
+                  )
+                }
+              </div>
 
               <div class="class-meta">
 
@@ -8199,12 +6575,8 @@ function renderClassModal(){
           task.classId ===
             classModalId
           &&
-          (
-            task.type === 'assignment'
-            ||
-            task.type === 'deadline'
-            ||
-            task.type === 'reminder'
+          academicType(
+            task.type
           )
       )
       .sort(
@@ -8231,15 +6603,134 @@ function renderClassModal(){
             <strong>
               No work here yet
             </strong>
-            Assignments, reminders and deadlines for this class will appear here.
+            Assignments, reminders and deadlines will appear here.
           </div>
         `;
 
 }
 
 /* =========================================================
-   ALL TASKS
+   TASK ROW
 ========================================================= */
+
+function taskRow(task){
+
+  const time =
+    task.allDay
+      ? 'All day'
+      : task.startTime
+        ? niceTime(
+            task.startTime
+          )
+        : task.time
+          ? niceTime(
+              task.time
+            )
+          : '';
+
+  const metadata =
+    [
+      sourceFor(task),
+      niceDate(task.date),
+      time,
+      task.manualLocation
+      ||
+      ''
+    ]
+    .filter(Boolean)
+    .join(' · ');
+
+  const left =
+    checkable(task)
+      ? `
+        <button
+          class="check"
+          data-complete="${esc(task.id)}"
+          type="button"
+        >
+          <svg
+            viewBox="0 0 14 14"
+            fill="none"
+          >
+            <path
+              d="M2 7l3.5 3.5L12 3"
+              stroke="#fff"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      `
+      : `
+        <span class="item-dot"></span>
+      `;
+
+  return `
+    <div
+      class="
+        task-row
+        ${task.done?'done':''}
+      "
+      style="
+        --accent:${itemColor(task)}
+      "
+    >
+
+      ${left}
+
+      <div
+        class="task-main"
+        data-view-item="${esc(task.id)}"
+      >
+
+        <div class="task-title">
+          ${esc(task.title)}
+        </div>
+
+        <div class="task-meta">
+
+          ${esc(metadata)}
+
+          <span class="type-badge">
+            ${esc(task.type)}
+          </span>
+
+          ${
+            timedType(task.type)
+              ? `
+                <span
+                  class="
+                    visibility-badge
+                    ${task.visibility || 'personal'}
+                  "
+                >
+                  ${
+                    task.visibility === 'family'
+                      ? 'Family'
+                      : 'Personal'
+                  }
+                </span>
+              `
+              : ''
+          }
+
+        </div>
+
+      </div>
+
+      <button
+        class="icon-btn"
+        data-view-item="${esc(task.id)}"
+        type="button"
+      >
+        •••
+      </button>
+
+    </div>
+  `;
+
+}
 
 function renderTaskList(){
 
@@ -8250,8 +6741,8 @@ function renderTaskList(){
 
     items =
       items.filter(
-        task =>
-          task.type ===
+        item =>
+          item.type ===
           activeFilter
       );
 
@@ -8291,11 +6782,9 @@ function renderTaskList(){
     )
     .innerHTML =
       items.length
-
         ? items
             .map(taskRow)
             .join('')
-
         : `
           <div class="empty-state">
             <strong>
@@ -8304,6 +6793,626 @@ function renderTaskList(){
             Add something to Homeroom.
           </div>
         `;
+
+}
+
+/* =========================================================
+   DETAILS VIEW
+========================================================= */
+
+async function openDetail(
+  id,
+  occurrenceDate=null
+){
+
+  detailItemId =
+    id;
+
+  detailOccurrenceDate =
+    occurrenceDate;
+
+  const item =
+    findAnyItem(id);
+
+  if(!item){
+    return;
+  }
+
+  const classItem =
+    classById(
+      item.classId
+    );
+
+  const cards =
+    [];
+
+  cards.push({
+    label:
+      timedType(item.type)
+        ? 'Date'
+        : 'Due',
+
+    value:
+      fullDate(
+        occurrenceDate
+        ||
+        item.date
+      )
+  });
+
+  const timeText =
+    item.allDay
+      ? 'All day'
+      : item.startTime
+        ? (
+            niceTime(
+              item.startTime
+            )
+            +
+            (
+              item.endTime
+                ? ` – ${niceTime(item.endTime)}`
+                : ''
+            )
+          )
+        : item.time
+          ? niceTime(
+              item.time
+            )
+          : '';
+
+  if(timeText){
+
+    cards.push({
+      label:'Time',
+      value:timeText
+    });
+
+  }
+
+  if(
+    classesEnabled()
+    &&
+    academicType(
+      item.type
+    )
+  ){
+
+    cards.push({
+      label:'Class',
+      value:
+        classItem?.name
+        ||
+        'General'
+    });
+
+  }
+
+  if(
+    item.type === 'activity'
+  ){
+
+    cards.push({
+      label:'Activity',
+      value:
+        extraById(
+          item.extraId
+        )
+        ?.name
+        ||
+        'General Activity'
+    });
+
+  }
+
+  if(
+    timedType(item.type)
+  ){
+
+    cards.push({
+      label:'Calendar',
+      value:
+        item.visibility === 'family'
+          ? (
+              family?.name
+              ||
+              'Family'
+            )
+          : 'Personal'
+    });
+
+  }
+
+  if(item.manualLocation){
+
+    cards.push({
+      label:'Location',
+      value:item.manualLocation
+    });
+
+  }
+
+  if(
+    Number(
+      item.estimatedMinutes
+      ||
+      0
+    )
+    > 0
+  ){
+
+    cards.push({
+      label:'Estimated Time',
+      value:
+        minutesText(
+          item.estimatedMinutes
+        )
+    });
+
+  }
+
+  if(
+    item.type === 'activity'
+    &&
+    item.recurrence
+    &&
+    item.recurrence !== 'none'
+  ){
+
+    let repeat =
+      capitalize(
+        item.recurrence
+      );
+
+    if(
+      item.recurrence ===
+      'weekly'
+    ){
+      repeat =
+        'Every week';
+    }
+
+    if(
+      item.recurrence ===
+      'monthly'
+    ){
+      repeat =
+        'Every month';
+    }
+
+    cards.push({
+      label:'Repeats',
+      value:repeat
+    });
+
+  }
+
+  if(item.notes){
+
+    cards.push({
+      label:'Notes',
+      value:item.notes,
+      full:true
+    });
+
+  }
+
+  let attachmentHTML =
+    '';
+
+  if(
+    item.attachments
+    &&
+    item.attachments.length
+  ){
+
+    const buttons =
+      item.attachments
+        .map(
+          attachment => `
+            <button
+              class="detail-attachment"
+              data-detail-attachment="${esc(attachment.id)}"
+              type="button"
+            >
+              📎 ${esc(attachment.name)}
+            </button>
+          `
+        )
+        .join('');
+
+    attachmentHTML = `
+      <div class="detail-card full">
+
+        <div class="detail-label">
+          Attachments
+        </div>
+
+        <div class="detail-attachments">
+          ${buttons}
+        </div>
+
+      </div>
+    `;
+
+  }
+
+  const source =
+    sourceFor(item);
+
+  document
+    .getElementById(
+      'detailContent'
+    )
+    .innerHTML = `
+
+      <div class="detail-heading">
+        ${esc(source)}
+      </div>
+
+      <div class="detail-title">
+        ${esc(item.title)}
+      </div>
+
+      <span class="detail-type">
+        ${esc(item.type)}
+      </span>
+
+      <div class="detail-grid">
+
+        ${
+          cards
+            .map(
+              card => `
+                <div
+                  class="
+                    detail-card
+                    ${card.full?'full':''}
+                  "
+                >
+
+                  <div class="detail-label">
+                    ${esc(card.label)}
+                  </div>
+
+                  <div class="detail-value">
+                    ${esc(card.value)}
+                  </div>
+
+                </div>
+              `
+            )
+            .join('')
+        }
+
+        ${attachmentHTML}
+
+      </div>
+    `;
+
+  document
+    .getElementById(
+      'detailEditButton'
+    )
+    .textContent =
+      `Edit ${capitalize(item.type)}`;
+
+  openModal(
+    'detailModal'
+  );
+
+}
+
+/* =========================================================
+   PLAN MY DAY
+========================================================= */
+
+function buildLocalPlan(){
+
+  const today =
+    todayStr();
+
+  const tomorrow =
+    dateStr(
+      addDays(
+        new Date(),
+        1
+      )
+    );
+
+  const academic =
+    state.tasks
+      .filter(
+        task =>
+          !task.done
+          &&
+          academicType(
+            task.type
+          )
+      );
+
+  const finishFirst =
+    academic
+      .filter(
+        task =>
+          task.date <=
+          tomorrow
+      )
+      .sort(
+        (
+          a,
+          b
+        ) =>
+          a.date.localeCompare(
+            b.date
+          )
+      )
+      .slice(
+        0,
+        5
+      );
+
+  const firstIds =
+    new Set(
+      finishFirst.map(
+        task =>
+          task.id
+      )
+    );
+
+  const chipAway =
+    academic
+      .filter(
+        task =>
+          task.date >
+          tomorrow
+          &&
+          !firstIds.has(
+            task.id
+          )
+      )
+      .sort(
+        (
+          a,
+          b
+        ) =>
+          a.date.localeCompare(
+            b.date
+          )
+      )
+      .slice(
+        0,
+        3
+      );
+
+  const estimate =
+    task => {
+
+      if(
+        Number(
+          task.estimatedMinutes
+          ||
+          0
+        )
+      ){
+
+        return Number(
+          task.estimatedMinutes
+        );
+
+      }
+
+      if(task.type === 'reminder'){
+        return 5;
+      }
+
+      if(task.type === 'deadline'){
+        return 20;
+      }
+
+      const days =
+        daysBetween(
+          today,
+          task.date
+        );
+
+      if(days <= 1){
+        return 40;
+      }
+
+      return 25;
+
+    };
+
+  return {
+    finishFirst:
+      finishFirst.map(
+        task => ({
+          task,
+          minutes:
+            estimate(task)
+        })
+      ),
+
+    chipAway:
+      chipAway.map(
+        task => ({
+          task,
+          minutes:
+            estimate(task)
+        })
+      )
+  };
+
+}
+
+function openPlanMyDay(){
+
+  const plan =
+    buildLocalPlan();
+
+  const total =
+    [
+      ...plan.finishFirst,
+      ...plan.chipAway
+    ]
+    .reduce(
+      (
+        total,
+        item
+      ) =>
+        total
+        +
+        item.minutes,
+      0
+    );
+
+  let summary =
+    'Your workload looks manageable today.';
+
+  if(
+    plan.finishFirst.length
+    >= 3
+  ){
+
+    summary =
+      `You have ${plan.finishFirst.length} higher-priority items. Finish those before adding extra work.`;
+
+  }
+  else if(
+    plan.finishFirst.length
+    === 0
+  ){
+
+    summary =
+      'Nothing urgent is due today or tomorrow. Use the extra time to get ahead.';
+
+  }
+
+  document
+    .getElementById(
+      'planSummary'
+    )
+    .innerHTML = `
+      ${esc(summary)}
+      ${
+        total
+          ? `<br><strong>Recommended schoolwork: ${esc(minutesText(total))}</strong>`
+          : ''
+      }
+    `;
+
+  const group =
+    (
+      title,
+      items
+    ) => {
+
+      if(!items.length){
+        return '';
+      }
+
+      return `
+        <div class="plan-group">
+
+          <div class="plan-group-title">
+            ${esc(title)}
+          </div>
+
+          ${
+            items
+              .map(
+                item => {
+
+                  const task =
+                    item.task;
+
+                  const days =
+                    daysBetween(
+                      todayStr(),
+                      task.date
+                    );
+
+                  let due =
+                    niceDate(
+                      task.date
+                    );
+
+                  if(days < 0){
+                    due = 'Overdue';
+                  }
+
+                  if(days === 0){
+                    due = 'Due today';
+                  }
+
+                  if(days === 1){
+                    due = 'Due tomorrow';
+                  }
+
+                  return `
+                    <div class="plan-block">
+
+                      <div>
+
+                        <div class="plan-title">
+                          ${esc(task.title)}
+                        </div>
+
+                        <div class="plan-meta">
+                          ${esc(sourceFor(task))}
+                          ·
+                          ${esc(due)}
+                        </div>
+
+                      </div>
+
+                      <div class="plan-time">
+                        ${esc(minutesText(item.minutes))}
+                      </div>
+
+                    </div>
+                  `;
+
+                }
+              )
+              .join('')
+          }
+
+        </div>
+      `;
+
+    };
+
+  document
+    .getElementById(
+      'planContent'
+    )
+    .innerHTML =
+      (
+        group(
+          'Finish First',
+          plan.finishFirst
+        )
+        +
+        group(
+          'Chip Away',
+          plan.chipAway
+        )
+      )
+      ||
+      `
+        <div class="empty-state">
+          <strong>
+            You're clear
+          </strong>
+          Nothing needs prioritizing right now.
+        </div>
+      `;
+
+  openModal(
+    'planDayModal'
+  );
 
 }
 
@@ -8339,9 +7448,9 @@ function occurrences(
   if(
     task.type !== 'activity'
     ||
-    task.recurrence === 'none'
-    ||
     !task.recurrence
+    ||
+    task.recurrence === 'none'
   ){
 
     return (
@@ -8378,7 +7487,10 @@ function occurrences(
   const output =
     [];
 
-  if(task.recurrence === 'weekly'){
+  if(
+    task.recurrence ===
+    'weekly'
+  ){
 
     let date =
       new Date(start);
@@ -8418,7 +7530,8 @@ function occurrences(
   }
 
   else if(
-    task.recurrence === 'custom'
+    task.recurrence ===
+    'custom'
   ){
 
     const days =
@@ -8464,7 +7577,8 @@ function occurrences(
   }
 
   else if(
-    task.recurrence === 'monthly'
+    task.recurrence ===
+    'monthly'
   ){
 
     const date =
@@ -8510,13 +7624,17 @@ function occurrences(
 function renderCalendar(){
 
   const year =
-    calendarCursor.getFullYear();
+    calendarCursor
+      .getFullYear();
 
   const month =
-    calendarCursor.getMonth();
+    calendarCursor
+      .getMonth();
 
   document
-    .getElementById('monthTitle')
+    .getElementById(
+      'monthTitle'
+    )
     .textContent =
       calendarCursor
         .toLocaleDateString(
@@ -8532,14 +7650,14 @@ function renderCalendar(){
 
   allItems()
     .filter(
-      task =>
-        !task.done
+      item =>
+        !item.done
     )
     .forEach(
-      task => {
+      item => {
 
         occurrences(
-          task,
+          item,
           year,
           month
         )
@@ -8551,7 +7669,7 @@ function renderCalendar(){
             }
 
             map[day].push(
-              task
+              item
             );
 
           }
@@ -8581,9 +7699,9 @@ function renderCalendar(){
     '';
 
   for(
-    let index=0;
-    index<42;
-    index++
+    let i=0;
+    i<42;
+    i++
   ){
 
     const date =
@@ -8592,7 +7710,7 @@ function renderCalendar(){
     date.setDate(
       start.getDate()
       +
-      index
+      i
     );
 
     const key =
@@ -8632,33 +7750,33 @@ function renderCalendar(){
         3
       )
       .forEach(
-        task => {
+        item => {
 
           html += `
             <button
               class="
                 cal-event
                 ${
-                  task.visibility === 'family'
+                  item.visibility === 'family'
                     ? 'family'
                     : ''
                 }
               "
-              data-calendar-edit="${esc(task.id)}"
+              data-calendar-item="${esc(item.id)}"
               data-occurrence="${key}"
               style="
-                --event-color:${itemColor(task)}
+                --event-color:${itemColor(item)}
               "
               type="button"
             >
               ${
-                task.startTime
-                ? niceTime(task.startTime) + ' · '
-                : task.time
-                  ? niceTime(task.time) + ' · '
-                  : ''
+                item.startTime
+                  ? `${niceTime(item.startTime)} · `
+                  : item.time
+                    ? `${niceTime(item.time)} · `
+                    : ''
               }
-              ${esc(task.title)}
+              ${esc(item.title)}
             </button>
           `;
 
@@ -8745,11 +7863,11 @@ function renderWeek(){
       },
       (
         _,
-        index
+        i
       ) =>
         addDays(
           monday,
-          index
+          i
         )
     );
 
@@ -8814,6 +7932,19 @@ function renderWeek(){
             const key =
               dateStr(day);
 
+            const allDay =
+              itemsForDate(day)
+                .filter(
+                  item =>
+                    item.allDay
+                    ||
+                    (
+                      !item.startTime
+                      &&
+                      !item.time
+                    )
+                );
+
             return `
               <div
                 class="
@@ -8826,6 +7957,31 @@ function renderWeek(){
                 "
                 data-week-all-day="${key}"
               >
+
+                ${
+                  allDay
+                    .slice(
+                      0,
+                      4
+                    )
+                    .map(
+                      item => `
+                        <button
+                          class="cal-event"
+                          data-calendar-item="${esc(item.id)}"
+                          data-occurrence="${key}"
+                          style="
+                            --event-color:${itemColor(item)}
+                          "
+                          type="button"
+                        >
+                          ${esc(item.title)}
+                        </button>
+                      `
+                    )
+                    .join('')
+                }
+
               </div>
             `;
 
@@ -8835,15 +7991,9 @@ function renderWeek(){
     }
   `;
 
-  const startHour =
-    6;
-
-  const endHour =
-    23;
-
   for(
-    let hour=startHour;
-    hour<=endHour;
+    let hour=6;
+    hour<=23;
     hour++
   ){
 
@@ -8951,7 +8101,7 @@ function renderWeek(){
                               : ''
                           }
                         "
-                        data-calendar-edit="${esc(item.id)}"
+                        data-calendar-item="${esc(item.id)}"
                         data-occurrence="${key}"
                         style="
                           --event-color:${itemColor(item)};
@@ -9030,9 +8180,7 @@ function renderCalendarLegend(){
   if(family){
 
     items.push({
-      name:
-        family.name,
-
+      name:family.name,
       color:
         family.color
         ||
@@ -9068,7 +8216,104 @@ function renderCalendarLegend(){
 }
 
 /* =========================================================
-   ITEM FORM
+   CALENDAR ADD CONFIRMATION
+========================================================= */
+
+function showCalendarConfirmation(
+  event,
+  preset
+){
+
+  const box =
+    document
+      .getElementById(
+        'calendarConfirm'
+      );
+
+  pendingCalendarCreate =
+    preset;
+
+  const date =
+    fullDate(
+      preset.date
+    );
+
+  document
+    .getElementById(
+      'calendarConfirmTitle'
+    )
+    .textContent =
+      'Add an event?';
+
+  document
+    .getElementById(
+      'calendarConfirmCopy'
+    )
+    .textContent =
+      preset.startTime
+        ? `${date} at ${niceTime(preset.startTime)}`
+        : date;
+
+  const rect =
+    event.currentTarget
+      ?.getBoundingClientRect?.()
+    ||
+    event.target
+      ?.getBoundingClientRect?.();
+
+  let left =
+    event.clientX
+    ||
+    rect?.left
+    ||
+    20;
+
+  let top =
+    event.clientY
+    ||
+    rect?.top
+    ||
+    20;
+
+  left =
+    Math.min(
+      left,
+      window.innerWidth-300
+    );
+
+  top =
+    Math.min(
+      top+10,
+      window.innerHeight-190
+    );
+
+  box.style.left =
+    `${Math.max(15,left)}px`;
+
+  box.style.top =
+    `${Math.max(15,top)}px`;
+
+  box.classList
+    .remove('hidden');
+
+}
+
+function hideCalendarConfirmation(){
+
+  document
+    .getElementById(
+      'calendarConfirm'
+    )
+    ?.classList
+    .add('hidden');
+
+  pendingCalendarCreate =
+    null;
+
+}
+
+/* =========================================================
+   ITEM TYPE
 ========================================================= */
 
 function setVisibility(value){
@@ -9084,6 +8329,7 @@ function setVisibility(value){
     );
 
     return;
+
   }
 
   activeVisibility =
@@ -9102,9 +8348,62 @@ function setVisibility(value){
         )
     );
 
+  document
+    .getElementById(
+      'visibilityHelp'
+    )
+    .textContent =
+      value === 'family'
+        ? `Everyone in ${family?.name || 'your Family'} can see this event.`
+        : 'Personal events are visible only to you.';
+
+}
+
+function updateRepeatUI(){
+
+  const repeat =
+    document
+      .getElementById(
+        'itemRepeat'
+      )
+      .value;
+
+  document
+    .getElementById(
+      'repeatEndField'
+    )
+    .classList
+    .toggle(
+      'hidden',
+      repeat === 'none'
+    );
+
+  document
+    .getElementById(
+      'weekdayField'
+    )
+    .classList
+    .toggle(
+      'hidden',
+      repeat !== 'custom'
+    );
+
 }
 
 function setType(type){
+
+  /*
+    If item came from direct calendar creation,
+    only Activity / Appointment are allowed.
+  */
+
+  if(
+    calendarCreationMode
+    &&
+    !timedType(type)
+  ){
+    return;
+  }
 
   activeType =
     type;
@@ -9129,7 +8428,9 @@ function setType(type){
     timedType(type);
 
   document
-    .getElementById('classField')
+    .getElementById(
+      'classField'
+    )
     .classList
     .toggle(
       'hidden',
@@ -9139,7 +8440,9 @@ function setType(type){
     );
 
   document
-    .getElementById('extraField')
+    .getElementById(
+      'extraField'
+    )
     .classList
     .toggle(
       'hidden',
@@ -9214,6 +8517,16 @@ function setType(type){
 
   document
     .getElementById(
+      'estimateField'
+    )
+    .classList
+    .toggle(
+      'hidden',
+      timed
+    );
+
+  document
+    .getElementById(
       'attachmentsField'
     )
     .classList
@@ -9223,18 +8536,27 @@ function setType(type){
     );
 
   /*
-    Academic planner items are always private.
+    Family sharing only exists for calendar items.
   */
+
   if(!timed){
-    activeVisibility = 'personal';
+
+    activeVisibility =
+      'personal';
+
   }
 
 }
 
+/* =========================================================
+   OPEN / SAVE ITEM
+========================================================= */
+
 async function openItem(
   id=null,
   preset={},
-  occurrenceDate=null
+  occurrenceDate=null,
+  fromCalendar=false
 ){
 
   editingId =
@@ -9246,16 +8568,36 @@ async function openItem(
   editingOccurrenceDate =
     occurrenceDate;
 
+  calendarCreationMode =
+    Boolean(
+      fromCalendar
+      &&
+      !id
+    );
+
   pendingAttachments =
     [];
 
   document
-    .getElementById('itemForm')
+    .getElementById(
+      'itemForm'
+    )
     .reset();
+
+  document
+    .querySelectorAll(
+      '#weekdayPicker button'
+    )
+    .forEach(
+      button =>
+        button.classList.remove(
+          'active'
+        )
+    );
 
   renderSelects();
 
-  let task =
+  let item =
     null;
 
   if(
@@ -9274,20 +8616,8 @@ async function openItem(
           ''
         );
 
-    const raw =
-      familyEvents.find(
-        item =>
-          String(item.id)
-          ===
-          editingFamilyEventId
-      );
-
-    if(raw){
-
-      task =
-        familyEventToTask(raw);
-
-    }
+    item =
+      findAnyItem(id);
 
   }
   else if(id){
@@ -9295,26 +8625,77 @@ async function openItem(
     editingId =
       id;
 
-    task =
-      state.tasks.find(
-        item =>
-          item.id === id
-      );
+    item =
+      findAnyItem(id);
 
   }
 
+  document
+    .getElementById(
+      'itemModalTitle'
+    )
+    .textContent =
+      item
+        ? `Edit ${capitalize(item.type)}`
+        : (
+            calendarCreationMode
+              ? 'Add Event'
+              : 'Add to your planner'
+          );
+
+  /*
+    Calendar direct creation only exposes
+    Activity + Appointment visually.
+  */
+
+  document
+    .getElementById(
+      'typeToggle'
+    )
+    .classList
+    .toggle(
+      'calendar-only',
+      calendarCreationMode
+    );
+
+  document
+    .querySelectorAll(
+      '#typeToggle [data-type]'
+    )
+    .forEach(
+      button => {
+
+        const hide =
+          calendarCreationMode
+          &&
+          !timedType(
+            button.dataset.type
+          );
+
+        button.classList.toggle(
+          'hidden',
+          hide
+        );
+
+      }
+    );
+
   setType(
-    task?.type
+    item?.type
     ||
     preset.type
     ||
-    'assignment'
+    (
+      calendarCreationMode
+        ? 'activity'
+        : 'assignment'
+    )
   );
 
   if(timedType(activeType)){
 
     setVisibility(
-      task?.visibility
+      item?.visibility
       ||
       preset.visibility
       ||
@@ -9324,105 +8705,156 @@ async function openItem(
   }
 
   document
-    .getElementById('itemTitle')
+    .getElementById(
+      'itemTitle'
+    )
     .value =
-      task?.title
+      item?.title
       ||
       '';
 
   document
-    .getElementById('itemDate')
+    .getElementById(
+      'itemDate'
+    )
     .value =
       occurrenceDate
       ||
-      task?.date
+      item?.date
       ||
       preset.date
       ||
       todayStr();
 
   document
-    .getElementById('itemTime')
+    .getElementById(
+      'itemTime'
+    )
     .value =
-      task?.time
+      item?.time
       ||
       '';
 
   document
-    .getElementById('itemClass')
+    .getElementById(
+      'itemClass'
+    )
     .value =
-      task?.classId
+      item?.classId
       ||
       preset.classId
       ||
       '';
 
   document
-    .getElementById('itemExtra')
+    .getElementById(
+      'itemExtra'
+    )
     .value =
-      task?.extraId
+      item?.extraId
       ||
       '';
 
   document
-    .getElementById('startTime')
+    .getElementById(
+      'allDayToggle'
+    )
+    .checked =
+      Boolean(
+        item?.allDay
+        ||
+        preset.allDay
+      );
+
+  document
+    .getElementById(
+      'startTime'
+    )
     .value =
-      task?.startTime
+      item?.startTime
       ||
       preset.startTime
       ||
       '';
 
   document
-    .getElementById('endTime')
+    .getElementById(
+      'endTime'
+    )
     .value =
-      task?.endTime
+      item?.endTime
       ||
       '';
 
   document
-    .getElementById('allDayToggle')
-    .checked =
-      Boolean(
-        task?.allDay
-        ||
-        preset.allDay
-      );
-
-  document
-    .getElementById('manualLocation')
+    .getElementById(
+      'manualLocation'
+    )
     .value =
-      task?.manualLocation
+      item?.manualLocation
       ||
       '';
 
   document
-    .getElementById('itemRepeat')
+    .getElementById(
+      'itemRepeat'
+    )
     .value =
-      task?.recurrence
+      item?.recurrence
       ||
       'none';
 
   document
-    .getElementById('repeatEnd')
+    .getElementById(
+      'repeatEnd'
+    )
     .value =
-      task?.repeatEnd
+      item?.repeatEnd
       ||
       '';
 
   document
-    .getElementById('itemNotes')
+    .getElementById(
+      'estimatedMinutes'
+    )
     .value =
-      task?.notes
+      item?.estimatedMinutes
+      ||
+      '';
+
+  document
+    .getElementById(
+      'itemNotes'
+    )
+    .value =
+      item?.notes
       ||
       '';
 
   pendingAttachments =
     clone(
-      task?.attachments
+      item?.attachments
       ||
       []
     );
+
+  (
+    item?.repeatDays
+    ||
+    []
+  )
+  .forEach(
+    day => {
+
+      document
+        .querySelector(
+          `#weekdayPicker [data-day="${day}"]`
+        )
+        ?.classList
+        .add('active');
+
+    }
+  );
 
   document
     .getElementById(
@@ -9431,8 +8863,14 @@ async function openItem(
     .classList
     .toggle(
       'hidden',
-      !task
+      !item
     );
+
+  updateRepeatUI();
+
+  setType(
+    activeType
+  );
 
   await renderAttachmentGrid();
 
@@ -9446,13 +8884,17 @@ async function saveItem(){
 
   const title =
     document
-      .getElementById('itemTitle')
+      .getElementById(
+        'itemTitle'
+      )
       .value
       .trim();
 
   const date =
     document
-      .getElementById('itemDate')
+      .getElementById(
+        'itemDate'
+      )
       .value;
 
   if(
@@ -9460,13 +8902,70 @@ async function saveItem(){
     ||
     !date
   ){
+
     return;
+
   }
 
   const timed =
     timedType(
       activeType
     );
+
+  const repeatDays =
+    [
+      ...document
+        .querySelectorAll(
+          '#weekdayPicker button.active'
+        )
+    ]
+    .map(
+      button =>
+        Number(
+          button.dataset.day
+        )
+    );
+
+  const original =
+    editingId
+      ? state.tasks.find(
+          task =>
+            task.id ===
+            editingId
+        )
+      : null;
+
+  let classId =
+    null;
+
+  if(!timed){
+
+    if(classesEnabled()){
+
+      classId =
+        document
+          .getElementById(
+            'itemClass'
+          )
+          .value
+        ||
+        null;
+
+    }
+    else if(original){
+
+      /*
+        Preserve old class relationship when classes are hidden.
+      */
+
+      classId =
+        original.classId
+        ||
+        null;
+
+    }
+
+  }
 
   const payload = {
 
@@ -9477,66 +8976,61 @@ async function saveItem(){
 
     date,
 
-    notes:
-      document
-        .getElementById('itemNotes')
-        .value
-        .trim(),
-
     time:
       timed
         ? ''
         : document
-            .getElementById('itemTime')
+            .getElementById(
+              'itemTime'
+            )
             .value,
 
     startTime:
       timed
         ? document
-            .getElementById('startTime')
+            .getElementById(
+              'startTime'
+            )
             .value
         : '',
 
     endTime:
       timed
         ? document
-            .getElementById('endTime')
+            .getElementById(
+              'endTime'
+            )
             .value
         : '',
 
     allDay:
       timed
         ? document
-            .getElementById('allDayToggle')
+            .getElementById(
+              'allDayToggle'
+            )
             .checked
         : false,
 
     manualLocation:
       timed
         ? document
-            .getElementById('manualLocation')
+            .getElementById(
+              'manualLocation'
+            )
             .value
             .trim()
         : '',
 
-    classId:
-      !timed
-      &&
-      classesEnabled()
-        ? (
-            document
-              .getElementById('itemClass')
-              .value
-            ||
-            null
-          )
-        : null,
+    classId,
 
     extraId:
       activeType === 'activity'
         ? (
             document
-              .getElementById('itemExtra')
+              .getElementById(
+                'itemExtra'
+              )
               .value
             ||
             null
@@ -9546,20 +9040,52 @@ async function saveItem(){
     recurrence:
       activeType === 'activity'
         ? document
-            .getElementById('itemRepeat')
+            .getElementById(
+              'itemRepeat'
+            )
             .value
         : 'none',
 
-    repeatDays:[],
+    repeatDays:
+      activeType === 'activity'
+        ? repeatDays
+        : [],
 
     repeatEnd:
       activeType === 'activity'
         ? document
-            .getElementById('repeatEnd')
+            .getElementById(
+              'repeatEnd'
+            )
             .value
         : '',
 
-    exceptionDates:[],
+    exceptionDates:
+      original
+        ?.exceptionDates
+      ||
+      [],
+
+    estimatedMinutes:
+      timed
+        ? 0
+        : Number(
+            document
+              .getElementById(
+                'estimatedMinutes'
+              )
+              .value
+            ||
+            0
+          ),
+
+    notes:
+      document
+        .getElementById(
+          'itemNotes'
+        )
+        .value
+        .trim(),
 
     attachments:
       activeType === 'assignment'
@@ -9572,14 +9098,11 @@ async function saveItem(){
         : 'personal'
   };
 
-  /*
-    FAMILY EVENTS ONLY ACTIVITY/APPOINTMENT
-  */
-
   if(
     timed
     &&
-    activeVisibility === 'family'
+    activeVisibility ===
+    'family'
   ){
 
     if(!family){
@@ -9589,6 +9112,7 @@ async function saveItem(){
       );
 
       return;
+
     }
 
     const familyPayload = {
@@ -9647,24 +9171,46 @@ async function saveItem(){
 
     if(editingFamilyEventId){
 
-      await sb
-        .from('family_events')
-        .update(
-          familyPayload
-        )
-        .eq(
-          'id',
-          editingFamilyEventId
-        );
+      const {
+        error
+      } =
+        await sb
+          .from('family_events')
+          .update(
+            familyPayload
+          )
+          .eq(
+            'id',
+            editingFamilyEventId
+          );
+
+      if(error){
+
+        alert(error.message);
+
+        return;
+
+      }
 
     }
     else{
 
-      await sb
-        .from('family_events')
-        .insert(
-          familyPayload
-        );
+      const {
+        error
+      } =
+        await sb
+          .from('family_events')
+          .insert(
+            familyPayload
+          );
+
+      if(error){
+
+        alert(error.message);
+
+        return;
+
+      }
 
     }
 
@@ -9683,10 +9229,14 @@ async function saveItem(){
               editingId
           );
 
-      state.tasks[index] = {
-        ...state.tasks[index],
-        ...payload
-      };
+      if(index >= 0){
+
+        state.tasks[index] = {
+          ...state.tasks[index],
+          ...payload
+        };
+
+      }
 
     }
     else{
@@ -9699,20 +9249,11 @@ async function saveItem(){
 
         done:false,
 
-        estimatedMinutes:
-          0,
-
         createdAt:
           Date.now()
       });
 
     }
-
-    /*
-      Data changed, so AI priorities should regenerate.
-    */
-    state.aiPlan =
-      null;
 
     queueSave();
 
@@ -9722,12 +9263,15 @@ async function saveItem(){
     'itemModal'
   );
 
+  calendarCreationMode =
+    false;
+
   renderAll();
 
 }
 
 /* =========================================================
-   COMPLETE / DELETE
+   DELETE / COMPLETE
 ========================================================= */
 
 function toggleComplete(id){
@@ -9736,7 +9280,7 @@ function toggleComplete(id){
     state.tasks.find(
       item =>
         item.id === id
-    );
+  );
 
   if(!task){
     return;
@@ -9744,9 +9288,6 @@ function toggleComplete(id){
 
   task.done =
     !task.done;
-
-  state.aiPlan =
-    null;
 
   queueSave();
 
@@ -9758,13 +9299,24 @@ async function deleteCurrentItem(){
 
   if(editingFamilyEventId){
 
-    await sb
-      .from('family_events')
-      .delete()
-      .eq(
-        'id',
-        editingFamilyEventId
-      );
+    const {
+      error
+    } =
+      await sb
+        .from('family_events')
+        .delete()
+        .eq(
+          'id',
+          editingFamilyEventId
+        );
+
+    if(error){
+
+      alert(error.message);
+
+      return;
+
+    }
 
     await loadFamily();
 
@@ -9778,9 +9330,6 @@ async function deleteCurrentItem(){
           editingId
       );
 
-    state.aiPlan =
-      null;
-
     queueSave();
 
   }
@@ -9793,13 +9342,101 @@ async function deleteCurrentItem(){
 
 }
 
+async function deleteDetailItem(){
+
+  const item =
+    findAnyItem(
+      detailItemId
+    );
+
+  if(!item){
+    return;
+  }
+
+  closeModal(
+    'detailModal'
+  );
+
+  showConfirmation({
+    title:
+      `Delete ${item.title}?`,
+
+    text:
+      'This item will be permanently removed.',
+
+    confirmText:
+      `Delete ${capitalize(item.type)}`,
+
+    onConfirm:
+      async () => {
+
+        if(
+          String(
+            detailItemId
+          )
+          .startsWith(
+            'family:'
+          )
+        ){
+
+          const rawId =
+            String(
+              detailItemId
+            )
+            .replace(
+              'family:',
+              ''
+            );
+
+          const {
+            error
+          } =
+            await sb
+              .from('family_events')
+              .delete()
+              .eq(
+                'id',
+                rawId
+              );
+
+          if(error){
+
+            alert(error.message);
+
+            return;
+
+          }
+
+          await loadFamily();
+
+        }
+        else{
+
+          state.tasks =
+            state.tasks.filter(
+              task =>
+                task.id !==
+                detailItemId
+            );
+
+          queueSave();
+
+        }
+
+        renderAll();
+
+      }
+  });
+
+}
+
 /* =========================================================
    ATTACHMENTS
 ========================================================= */
 
 async function uploadAttachment(file){
 
-  const extension =
+  const ext =
     (
       file.name
         .split('.')
@@ -9810,7 +9447,7 @@ async function uploadAttachment(file){
     .toLowerCase();
 
   const path =
-    `${currentUser.id}/${uid('a')}.${extension}`;
+    `${currentUser.id}/${uid('a')}.${ext}`;
 
   const {
     error
@@ -9858,7 +9495,8 @@ async function attachmentSignedUrl(path){
   }
 
   const {
-    data
+    data,
+    error
   } =
     await sb.storage
       .from(
@@ -9869,12 +9507,14 @@ async function attachmentSignedUrl(path){
         3600
       );
 
-  attachmentUrls[path] =
-    data?.signedUrl
-    ||
-    '';
+  if(error){
+    return '';
+  }
 
-  return attachmentUrls[path];
+  attachmentUrls[path] =
+    data.signedUrl;
+
+  return data.signedUrl;
 
 }
 
@@ -9914,13 +9554,10 @@ async function handleFiles(files){
 
     try{
 
-      const attachment =
+      pendingAttachments.push(
         await uploadAttachment(
           file
-        );
-
-      pendingAttachments.push(
-        attachment
+        )
       );
 
     }
@@ -9960,6 +9597,7 @@ async function renderAttachmentGrid(){
     `;
 
     return;
+
   }
 
   let html =
@@ -9977,14 +9615,36 @@ async function renderAttachmentGrid(){
           )
         : '';
 
+    const image =
+      attachment.type
+        ?.startsWith(
+          'image/'
+        );
+
     html += `
       <div class="attachment-card">
 
-        ${
-          attachment.type
-            ?.startsWith(
-              'image/'
-            )
+        <button
+          class="attachment-remove"
+          data-remove-attachment="${esc(attachment.id)}"
+          type="button"
+        >
+          ×
+        </button>
+
+        <button
+          data-open-attachment="${esc(attachment.id)}"
+          style="
+            width:100%;
+            border:0;
+            padding:0;
+            background:transparent;
+          "
+          type="button"
+        >
+
+          ${
+            image
               ? `
                 <img
                   class="attachment-preview"
@@ -9997,11 +9657,13 @@ async function renderAttachmentGrid(){
                   FILE
                 </div>
               `
-        }
+          }
 
-        <div class="attachment-name">
-          ${esc(attachment.name)}
-        </div>
+          <div class="attachment-name">
+            ${esc(attachment.name)}
+          </div>
+
+        </button>
 
       </div>
     `;
@@ -10013,9 +9675,705 @@ async function renderAttachmentGrid(){
 
 }
 
+async function openAttachmentObject(
+  attachment
+){
+
+  if(!attachment){
+    return;
+  }
+
+  const url =
+    attachment.path
+      ? await attachmentSignedUrl(
+          attachment.path
+        )
+      : '';
+
+  document
+    .getElementById(
+      'attachmentViewerTitle'
+    )
+    .textContent =
+      attachment.name;
+
+  document
+    .getElementById(
+      'attachmentViewerContent'
+    )
+    .innerHTML =
+      attachment.type
+        ?.startsWith(
+          'image/'
+        )
+        ? `
+          <img
+            src="${esc(url)}"
+            style="
+              display:block;
+              max-width:100%;
+              max-height:72vh;
+              margin:auto;
+            "
+          >
+        `
+        : `
+          <iframe
+            src="${esc(url)}"
+            style="
+              width:100%;
+              height:70vh;
+              border:0;
+            "
+          ></iframe>
+        `;
+
+  openModal(
+    'attachmentViewerModal'
+  );
+
+}
+
+/* =========================================================
+   SCAN DOCUMENT
+========================================================= */
+
+function resetScan(){
+
+  scanResults =
+    [];
+
+  document
+    .getElementById(
+      'scanStart'
+    )
+    .classList
+    .remove('hidden');
+
+  document
+    .getElementById(
+      'scanReview'
+    )
+    .classList
+    .add('hidden');
+
+}
+
+function openScan(){
+
+  resetScan();
+
+  openModal(
+    'scanModal'
+  );
+
+}
+
+/*
+  This is intentionally a front-end placeholder for now.
+
+  Once you choose an AI provider, only this function needs
+  to change. The entire review UI below can stay exactly
+  the same.
+*/
+
+async function processScanFile(file){
+
+  if(!file){
+    return;
+  }
+
+  /*
+    Temporary sample result so the workflow can be tested
+    without paying for an AI API.
+
+    Replace this section later with your AI call.
+  */
+
+  scanResults = [
+    {
+      id:uid('scan'),
+      selected:true,
+      type:'assignment',
+      title:'Review scanned document',
+      classId:'',
+      date:todayStr(),
+      time:'',
+      notes:
+        `Scanned from ${file.name}. Connect an AI document model later to automatically extract the real assignments, reminders and deadlines.`,
+      estimatedMinutes:20
+    }
+  ];
+
+  renderScanReview();
+
+}
+
+function renderScanReview(){
+
+  document
+    .getElementById(
+      'scanStart'
+    )
+    .classList
+    .add('hidden');
+
+  document
+    .getElementById(
+      'scanReview'
+    )
+    .classList
+    .remove('hidden');
+
+  document
+    .getElementById(
+      'scanReviewList'
+    )
+    .innerHTML =
+      scanResults
+        .map(
+          (
+            item,
+            index
+          ) => `
+            <div
+              class="scan-review-card"
+              data-scan-index="${index}"
+            >
+
+              <div class="scan-review-head">
+
+                <label
+                  style="
+                    display:flex;
+                    align-items:center;
+                    gap:7px;
+                    font-size:11px;
+                    font-weight:700;
+                  "
+                >
+                  <input
+                    type="checkbox"
+                    data-scan-selected
+                    ${
+                      item.selected
+                        ? 'checked'
+                        : ''
+                    }
+                  >
+                  Include
+                </label>
+
+                <button
+                  class="btn btn-danger btn-small"
+                  data-remove-scan="${index}"
+                  type="button"
+                >
+                  Remove
+                </button>
+
+              </div>
+
+              <div class="scan-grid">
+
+                <div class="field">
+
+                  <label>
+                    Type
+                  </label>
+
+                  <select data-scan-type>
+
+                    <option
+                      value="assignment"
+                      ${
+                        item.type === 'assignment'
+                          ? 'selected'
+                          : ''
+                      }
+                    >
+                      Assignment
+                    </option>
+
+                    <option
+                      value="deadline"
+                      ${
+                        item.type === 'deadline'
+                          ? 'selected'
+                          : ''
+                      }
+                    >
+                      Deadline
+                    </option>
+
+                    <option
+                      value="reminder"
+                      ${
+                        item.type === 'reminder'
+                          ? 'selected'
+                          : ''
+                      }
+                    >
+                      Reminder
+                    </option>
+
+                  </select>
+
+                </div>
+
+                <div class="field">
+
+                  <label>
+                    Class
+                  </label>
+
+                  <select data-scan-class>
+
+                    <option value="">
+                      General
+                    </option>
+
+                    ${
+                      state.classes
+                        .map(
+                          schoolClass => `
+                            <option
+                              value="${esc(schoolClass.id)}"
+                              ${
+                                item.classId ===
+                                schoolClass.id
+                                  ? 'selected'
+                                  : ''
+                              }
+                            >
+                              ${esc(schoolClass.name)}
+                            </option>
+                          `
+                        )
+                        .join('')
+                    }
+
+                  </select>
+
+                </div>
+
+                <div class="field full">
+
+                  <label>
+                    Title
+                  </label>
+
+                  <input
+                    type="text"
+                    data-scan-title
+                    value="${esc(item.title)}"
+                  >
+
+                </div>
+
+                <div class="field">
+
+                  <label>
+                    Date
+                  </label>
+
+                  <input
+                    type="date"
+                    data-scan-date
+                    value="${esc(item.date)}"
+                  >
+
+                </div>
+
+                <div class="field">
+
+                  <label>
+                    Time
+                  </label>
+
+                  <input
+                    type="time"
+                    data-scan-time
+                    value="${esc(item.time)}"
+                  >
+
+                </div>
+
+                <div class="field">
+
+                  <label>
+                    Estimated Minutes
+                  </label>
+
+                  <input
+                    type="number"
+                    min="0"
+                    step="5"
+                    data-scan-estimate
+                    value="${esc(item.estimatedMinutes || '')}"
+                  >
+
+                </div>
+
+                <div class="field full">
+
+                  <label>
+                    Notes
+                  </label>
+
+                  <textarea data-scan-notes>${esc(item.notes || '')}</textarea>
+
+                </div>
+
+              </div>
+
+            </div>
+          `
+        )
+        .join('');
+
+}
+
+function syncScanEdits(){
+
+  document
+    .querySelectorAll(
+      '[data-scan-index]'
+    )
+    .forEach(
+      card => {
+
+        const index =
+          Number(
+            card.dataset.scanIndex
+          );
+
+        const item =
+          scanResults[index];
+
+        if(!item){
+          return;
+        }
+
+        item.selected =
+          card
+            .querySelector(
+              '[data-scan-selected]'
+            )
+            .checked;
+
+        item.type =
+          card
+            .querySelector(
+              '[data-scan-type]'
+            )
+            .value;
+
+        item.classId =
+          card
+            .querySelector(
+              '[data-scan-class]'
+            )
+            .value;
+
+        item.title =
+          card
+            .querySelector(
+              '[data-scan-title]'
+            )
+            .value
+            .trim();
+
+        item.date =
+          card
+            .querySelector(
+              '[data-scan-date]'
+            )
+            .value;
+
+        item.time =
+          card
+            .querySelector(
+              '[data-scan-time]'
+            )
+            .value;
+
+        item.estimatedMinutes =
+          Number(
+            card
+              .querySelector(
+                '[data-scan-estimate]'
+              )
+              .value
+            ||
+            0
+          );
+
+        item.notes =
+          card
+            .querySelector(
+              '[data-scan-notes]'
+            )
+            .value
+            .trim();
+
+      }
+    );
+
+}
+
+function addScanItems(){
+
+  syncScanEdits();
+
+  const selected =
+    scanResults.filter(
+      item =>
+        item.selected
+        &&
+        item.title
+        &&
+        item.date
+    );
+
+  if(!selected.length){
+
+    alert(
+      'Select at least one item.'
+    );
+
+    return;
+
+  }
+
+  selected.forEach(
+    item => {
+
+      state.tasks.push({
+        id:uid('t'),
+
+        type:item.type,
+
+        title:item.title,
+
+        date:item.date,
+
+        time:item.time,
+
+        classId:
+          classesEnabled()
+            ? (
+                item.classId
+                ||
+                null
+              )
+            : null,
+
+        extraId:null,
+
+        visibility:'personal',
+
+        recurrence:'none',
+
+        repeatDays:[],
+
+        repeatEnd:'',
+
+        exceptionDates:[],
+
+        allDay:false,
+
+        startTime:'',
+
+        endTime:'',
+
+        manualLocation:'',
+
+        estimatedMinutes:
+          item.estimatedMinutes,
+
+        notes:item.notes,
+
+        attachments:[],
+
+        done:false,
+
+        createdAt:
+          Date.now()
+      });
+
+    }
+  );
+
+  queueSave();
+
+  closeModal(
+    'scanModal'
+  );
+
+  renderAll();
+
+}
+
+/* =========================================================
+   CLASS INFO
+========================================================= */
+
+function openClassInfoEditor(){
+
+  const item =
+    classById(
+      classModalId
+    );
+
+  if(!item){
+    return;
+  }
+
+  document
+    .getElementById(
+      'classInfoName'
+    )
+    .value =
+      item.name;
+
+  document
+    .getElementById(
+      'classInfoTeacher'
+    )
+    .value =
+      item.teacher
+      ||
+      '';
+
+  document
+    .getElementById(
+      'classInfoRoom'
+    )
+    .value =
+      item.room
+      ||
+      '';
+
+  document
+    .getElementById(
+      'classInfoColor'
+    )
+    .value =
+      item.color;
+
+  openModal(
+    'classInfoModal'
+  );
+
+}
+
+function saveClassInfo(){
+
+  const item =
+    classById(
+      classModalId
+    );
+
+  if(!item){
+    return;
+  }
+
+  item.name =
+    document
+      .getElementById(
+        'classInfoName'
+      )
+      .value
+      .trim()
+    ||
+    item.name;
+
+  item.teacher =
+    document
+      .getElementById(
+        'classInfoTeacher'
+      )
+      .value
+      .trim();
+
+  item.room =
+    document
+      .getElementById(
+        'classInfoRoom'
+      )
+      .value
+      .trim();
+
+  item.color =
+    document
+      .getElementById(
+        'classInfoColor'
+      )
+      .value;
+
+  item.tutorial =
+    '';
+
+  queueSave();
+
+  closeModal(
+    'classInfoModal'
+  );
+
+  renderAll();
+
+}
+
 /* =========================================================
    SETTINGS
 ========================================================= */
+
+function getUniqueExtracurricularColor(){
+
+  const used =
+    new Set(
+      [
+        ...state.classes,
+        ...state.extras
+      ]
+      .map(
+        item =>
+          String(
+            item.color
+            ||
+            ''
+          )
+          .toLowerCase()
+      )
+    );
+
+  const available =
+    EXTRACURRICULAR_COLORS
+      .filter(
+        color =>
+          !used.has(
+            color.toLowerCase()
+          )
+      );
+
+  return available.length
+    ? available[
+        Math.floor(
+          Math.random()
+          *
+          available.length
+        )
+      ]
+    : EXTRACURRICULAR_COLORS[
+        Math.floor(
+          Math.random()
+          *
+          EXTRACURRICULAR_COLORS.length
+        )
+      ];
+
+}
 
 function renderSettings(){
 
@@ -10027,17 +10385,23 @@ function renderSettings(){
       !classesEnabled();
 
   document
-    .getElementById('themeGreen')
+    .getElementById(
+      'themeGreen'
+    )
     .value =
       state.theme.green;
 
   document
-    .getElementById('themeGold')
+    .getElementById(
+      'themeGold'
+    )
     .value =
       state.theme.gold;
 
   document
-    .getElementById('themePaper')
+    .getElementById(
+      'themePaper'
+    )
     .value =
       state.theme.paper;
 
@@ -10150,17 +10514,23 @@ function commitSettings(){
 
   state.theme.green =
     document
-      .getElementById('themeGreen')
+      .getElementById(
+        'themeGreen'
+      )
       .value;
 
   state.theme.gold =
     document
-      .getElementById('themeGold')
+      .getElementById(
+        'themeGold'
+      )
       .value;
 
   state.theme.paper =
     document
-      .getElementById('themePaper')
+      .getElementById(
+        'themePaper'
+      )
       .value;
 
   state.settings.classesEnabled =
@@ -10268,13 +10638,14 @@ function renderFamilySettings(){
             font-size:12px;
           "
         >
-          Create a Family or join one with an invite code.
+          Create a shared Family or join one with an invite code.
         </p>
 
         <div
           style="
             display:flex;
             gap:8px;
+            flex-wrap:wrap;
           "
         >
 
@@ -10300,6 +10671,7 @@ function renderFamilySettings(){
     `;
 
     return;
+
   }
 
   container.innerHTML = `
@@ -10308,6 +10680,7 @@ function renderFamilySettings(){
       <div class="family-header">
 
         <div>
+
           <div class="family-name">
             ${esc(family.name)}
           </div>
@@ -10316,6 +10689,7 @@ function renderFamilySettings(){
             ${familyMembers.length}
             member${familyMembers.length===1?'':'s'}
           </div>
+
         </div>
 
       </div>
@@ -10331,7 +10705,15 @@ function renderFamilySettings(){
                   <div>
 
                     <div class="member-name">
-                      ${esc(familyMemberName(member))}
+                      ${
+                        esc(
+                          member.display_name
+                          ||
+                          member.email
+                          ||
+                          'Family member'
+                        )
+                      }
                       ${
                         member.user_id === currentUser.id
                           ? ' (You)'
@@ -10362,6 +10744,7 @@ function renderFamilySettings(){
       <div class="invite-code">
 
         <div>
+
           <div class="settings-copy">
             Invite Code
           </div>
@@ -10369,6 +10752,7 @@ function renderFamilySettings(){
           <strong>
             ${esc(family.invite_code)}
           </strong>
+
         </div>
 
       </div>
@@ -10409,100 +10793,63 @@ function renderFamilySettings(){
 }
 
 /* =========================================================
-   CLASS INFO
+   CONFIRMATION
 ========================================================= */
 
-function openClassInfoEditor(){
-
-  const item =
-    classById(
-      classModalId
-    );
-
-  if(!item){
-    return;
-  }
-
-  document
-    .getElementById('classInfoName')
-    .value =
-      item.name;
+function showConfirmation({
+  title,
+  text,
+  confirmText='Confirm',
+  onConfirm
+}){
 
   document
     .getElementById(
-      'classInfoTeacher'
+      'confirmTitle'
     )
-    .value =
-      item.teacher
-      ||
-      '';
+    .textContent =
+      title;
 
   document
-    .getElementById('classInfoRoom')
-    .value =
-      item.room
-      ||
-      '';
+    .getElementById(
+      'confirmText'
+    )
+    .textContent =
+      text;
 
   document
-    .getElementById('classInfoColor')
-    .value =
-      item.color;
+    .getElementById(
+      'confirmActionButton'
+    )
+    .textContent =
+      confirmText;
+
+  pendingConfirmAction =
+    onConfirm;
 
   openModal(
-    'classInfoModal'
+    'confirmModal'
   );
 
 }
 
-function saveClassInfo(){
+async function runConfirmedAction(){
 
-  const item =
-    classById(
-      classModalId
-    );
+  const action =
+    pendingConfirmAction;
 
-  if(!item){
-    return;
-  }
-
-  item.name =
-    document
-      .getElementById('classInfoName')
-      .value
-      .trim()
-    ||
-    item.name;
-
-  item.teacher =
-    document
-      .getElementById(
-        'classInfoTeacher'
-      )
-      .value
-      .trim();
-
-  item.room =
-    document
-      .getElementById('classInfoRoom')
-      .value
-      .trim();
-
-  item.color =
-    document
-      .getElementById('classInfoColor')
-      .value;
-
-  item.tutorial =
-    '';
-
-  queueSave();
+  pendingConfirmAction =
+    null;
 
   closeModal(
-    'classInfoModal'
+    'confirmModal'
   );
 
-  renderAll();
+  if(action){
+
+    await action();
+
+  }
 
 }
 
@@ -10520,12 +10867,12 @@ function renderAll(){
 
   renderClassMode();
 
-  renderDailyCommand();
-
-  renderOverdue();
+  renderUpcoming();
 
   if(classesEnabled()){
+
     renderClasses();
+
   }
 
   renderTaskList();
@@ -10578,7 +10925,9 @@ async function enterApp(user){
 /* AUTH */
 
 document
-  .getElementById('signInTab')
+  .getElementById(
+    'signInTab'
+  )
   .onclick =
     () =>
       setAuthMode(
@@ -10586,7 +10935,9 @@ document
       );
 
 document
-  .getElementById('signUpTab')
+  .getElementById(
+    'signUpTab'
+  )
   .onclick =
     () =>
       setAuthMode(
@@ -10594,7 +10945,9 @@ document
       );
 
 document
-  .getElementById('authForm')
+  .getElementById(
+    'authForm'
+  )
   .onsubmit =
     async event => {
 
@@ -10604,30 +10957,17 @@ document
 
     };
 
+/* HEADER */
+
 document
   .getElementById(
-    'forgotPasswordButton'
+    'addButton'
   )
   .onclick =
     () =>
       openModal(
-        'forgotModal'
+        'addMenuModal'
       );
-
-/* HEADER */
-
-document
-  .getElementById('addButton')
-  .onclick =
-    openAIScan;
-
-/*
-  NOTE:
-  For now + opens AI Scan because it is the newest flow.
-
-  If you want, next pass I can make + open a choice sheet:
-  Add manually / Scan with AI.
-*/
 
 document
   .getElementById(
@@ -10649,110 +10989,83 @@ document
     'accountButton'
   )
   .onclick =
-    () =>
+    () => {
+
+      renderAccount();
+
       openModal(
         'profileModal'
       );
 
-/* PLAN MY DAY */
+    };
+
+/* PLAN */
 
 document
   .getElementById(
     'planMyDayButton'
   )
   .onclick =
-    planMyDay;
+    openPlanMyDay;
 
-/* AI SCAN */
+/* DETAILS */
 
 document
   .getElementById(
-    'aiTakePhotoButton'
+    'detailEditButton'
   )
   .onclick =
-    () =>
-      document
-        .getElementById(
-          'aiCameraInput'
-        )
-        .click();
+    async () => {
 
-document
-  .getElementById(
-    'aiUploadDocumentButton'
-  )
-  .onclick =
-    () =>
-      document
-        .getElementById(
-          'aiDocumentInput'
-        )
-        .click();
+      const id =
+        detailItemId;
 
-document
-  .getElementById(
-    'aiCameraInput'
-  )
-  .onchange =
-    async event => {
+      const occurrence =
+        detailOccurrenceDate;
 
-      const file =
-        event.target.files?.[0];
+      closeModal(
+        'detailModal'
+      );
 
-      if(file){
-
-        await scanPlannerFile(
-          file
-        );
-
-      }
-
-      event.target.value =
-        '';
+      await openItem(
+        id,
+        {},
+        occurrence,
+        false
+      );
 
     };
 
 document
   .getElementById(
-    'aiDocumentInput'
+    'detailDeleteButton'
   )
-  .onchange =
-    async event => {
+  .onclick =
+    deleteDetailItem;
 
-      const file =
-        event.target.files?.[0];
+/* ADD MENU */
 
-      if(file){
+document
+  .getElementById(
+    'openScanButton'
+  )
+  .onclick =
+    () => {
 
-        await scanPlannerFile(
-          file
-        );
+      closeModal(
+        'addMenuModal'
+      );
 
-      }
-
-      event.target.value =
-        '';
+      openScan();
 
     };
-
-document
-  .getElementById(
-    'aiScanBackButton'
-  )
-  .onclick =
-    resetAIScan;
-
-document
-  .getElementById(
-    'addScannedItemsButton'
-  )
-  .onclick =
-    addScannedItems;
 
 /* ITEM */
 
 document
-  .getElementById('itemForm')
+  .getElementById(
+    'itemForm'
+  )
   .onsubmit =
     async event => {
 
@@ -10767,14 +11080,31 @@ document
     'deleteItemButton'
   )
   .onclick =
-    () =>
+    () => {
+
+      const item =
+        editingFamilyEventId
+          ? findAnyItem(
+              `family:${editingFamilyEventId}`
+            )
+          : findAnyItem(
+              editingId
+            );
+
       showConfirmation({
-        title:'Delete this item?',
-        text:'This item will be permanently removed.',
+        title:
+          `Delete ${item?.title || 'this item'}?`,
+
+        text:
+          'This item will be permanently removed.',
+
         confirmText:'Delete',
+
         onConfirm:
           deleteCurrentItem
       });
+
+    };
 
 document
   .getElementById(
@@ -10823,6 +11153,37 @@ document
       setType(
         activeType
       );
+
+document
+  .getElementById(
+    'itemRepeat'
+  )
+  .onchange =
+    updateRepeatUI;
+
+document
+  .getElementById(
+    'weekdayPicker'
+  )
+  .onclick =
+    event => {
+
+      const button =
+        event.target.closest(
+          '[data-day]'
+        );
+
+      if(button){
+
+        button.classList.toggle(
+          'active'
+        );
+
+      }
+
+    };
+
+/* ATTACHMENT INPUTS */
 
 document
   .getElementById(
@@ -10894,6 +11255,92 @@ document
 
     };
 
+/* SCAN */
+
+document
+  .getElementById(
+    'scanCameraButton'
+  )
+  .onclick =
+    () =>
+      document
+        .getElementById(
+          'scanCameraInput'
+        )
+        .click();
+
+document
+  .getElementById(
+    'scanUploadButton'
+  )
+  .onclick =
+    () =>
+      document
+        .getElementById(
+          'scanFileInput'
+        )
+        .click();
+
+document
+  .getElementById(
+    'scanCameraInput'
+  )
+  .onchange =
+    async event => {
+
+      const file =
+        event.target.files?.[0];
+
+      if(file){
+
+        await processScanFile(
+          file
+        );
+
+      }
+
+      event.target.value =
+        '';
+
+    };
+
+document
+  .getElementById(
+    'scanFileInput'
+  )
+  .onchange =
+    async event => {
+
+      const file =
+        event.target.files?.[0];
+
+      if(file){
+
+        await processScanFile(
+          file
+        );
+
+      }
+
+      event.target.value =
+        '';
+
+    };
+
+document
+  .getElementById(
+    'scanAgainButton'
+  )
+  .onclick =
+    resetScan;
+
+document
+  .getElementById(
+    'addScanItemsButton'
+  )
+  .onclick =
+    addScanItems;
+
 /* PROFILE */
 
 document
@@ -10928,16 +11375,6 @@ document
 
     };
 
-document
-  .getElementById(
-    'deleteAccountButton'
-  )
-  .onclick =
-    () =>
-      openModal(
-        'deleteAccountModal'
-      );
-
 /* CLASS */
 
 document
@@ -10961,7 +11398,7 @@ document
   .onclick =
     () => {
 
-      const id =
+      const classId =
         classModalId;
 
       closeModal(
@@ -10972,7 +11409,7 @@ document
         null,
         {
           type:'assignment',
-          classId:id
+          classId
         }
       );
 
@@ -11012,17 +11449,14 @@ document
         name:
           'New Class',
 
-        teacher:
-          '',
+        teacher:'',
 
-        room:
-          '',
+        room:'',
 
         color:
           '#5D7BA8',
 
-        tutorial:
-          ''
+        tutorial:''
       });
 
       queueSave();
@@ -11102,12 +11536,18 @@ document
     'confirmCancelButton'
   )
   .onclick =
-    () =>
+    () => {
+
+      pendingConfirmAction =
+        null;
+
       closeModal(
         'confirmModal'
       );
 
-/* FILTERS */
+    };
+
+/* FILTER */
 
 document
   .getElementById(
@@ -11144,10 +11584,12 @@ document
 
     };
 
-/* CALENDAR */
+/* MONTH NAV */
 
 document
-  .getElementById('prevMonth')
+  .getElementById(
+    'prevMonth'
+  )
   .onclick =
     () => {
 
@@ -11162,7 +11604,9 @@ document
     };
 
 document
-  .getElementById('nextMonth')
+  .getElementById(
+    'nextMonth'
+  )
   .onclick =
     () => {
 
@@ -11177,7 +11621,9 @@ document
     };
 
 document
-  .getElementById('todayButton')
+  .getElementById(
+    'todayButton'
+  )
   .onclick =
     () => {
 
@@ -11195,8 +11641,12 @@ document
 
     };
 
+/* WEEK NAV */
+
 document
-  .getElementById('prevWeek')
+  .getElementById(
+    'prevWeek'
+  )
   .onclick =
     () => {
 
@@ -11211,7 +11661,9 @@ document
     };
 
 document
-  .getElementById('nextWeek')
+  .getElementById(
+    'nextWeek'
+  )
   .onclick =
     () => {
 
@@ -11239,11 +11691,85 @@ document
 
     };
 
-/* GLOBAL CLICK */
+/* CALENDAR CONFIRM */
+
+document
+  .getElementById(
+    'calendarConfirmNo'
+  )
+  .onclick =
+    hideCalendarConfirmation;
+
+document
+  .getElementById(
+    'calendarConfirmYes'
+  )
+  .onclick =
+    async () => {
+
+      const preset =
+        pendingCalendarCreate;
+
+      hideCalendarConfirmation();
+
+      if(!preset){
+        return;
+      }
+
+      await openItem(
+        null,
+        {
+          ...preset,
+          type:'activity'
+        },
+        null,
+        true
+      );
+
+    };
+
+/* MAPS */
+
+document
+  .getElementById(
+    'searchMapsButton'
+  )
+  .onclick =
+    () => {
+
+      const query =
+        document
+          .getElementById(
+            'manualLocation'
+          )
+          .value
+          .trim();
+
+      if(!query){
+        return;
+      }
+
+      window.open(
+        'https://www.google.com/maps/search/?api=1&query='
+        +
+        encodeURIComponent(
+          query
+        ),
+        '_blank',
+        'noopener'
+      );
+
+    };
+
+/* =========================================================
+   GLOBAL CLICK
+========================================================= */
 
 document.addEventListener(
   'click',
   async event => {
+
+    /* TOP TABS */
 
     const view =
       event.target.closest(
@@ -11286,7 +11812,11 @@ document.addEventListener(
           'calendar'
         );
 
+      hideCalendarConfirmation();
+
     }
+
+    /* CALENDAR VIEW */
 
     const calendarMode =
       event.target.closest(
@@ -11331,7 +11861,37 @@ document.addEventListener(
           mode !== 'week'
         );
 
+      hideCalendarConfirmation();
+
     }
+
+    /* QUICK ADD */
+
+    const quickAdd =
+      event.target.closest(
+        '[data-quick-add]'
+      );
+
+    if(quickAdd){
+
+      closeModal(
+        'addMenuModal'
+      );
+
+      await openItem(
+        null,
+        {
+          type:
+            quickAdd.dataset
+              .quickAdd
+        }
+      );
+
+      return;
+
+    }
+
+    /* COMPLETE */
 
     const complete =
       event.target.closest(
@@ -11347,39 +11907,50 @@ document.addEventListener(
       );
 
       return;
+
     }
 
-    const edit =
+    /* READ-ONLY DETAIL */
+
+    const detail =
       event.target.closest(
-        '[data-edit]'
+        '[data-view-item]'
       );
 
-    if(edit){
+    if(detail){
 
-      await openItem(
-        edit.dataset.edit
+      await openDetail(
+        detail.dataset.viewItem
       );
 
       return;
+
     }
 
-    const calendarEdit =
+    /* CALENDAR EXISTING ITEM */
+
+    const calendarItem =
       event.target.closest(
-        '[data-calendar-edit]'
+        '[data-calendar-item]'
       );
 
-    if(calendarEdit){
+    if(calendarItem){
 
-      await openItem(
-        calendarEdit.dataset
-          .calendarEdit,
-        {},
-        calendarEdit.dataset
+      event.stopPropagation();
+
+      await openDetail(
+        calendarItem.dataset
+          .calendarItem,
+
+        calendarItem.dataset
           .occurrence
       );
 
       return;
+
     }
+
+    /* CLASS CARD */
 
     const classCard =
       event.target.closest(
@@ -11393,12 +11964,10 @@ document.addEventListener(
       );
 
       return;
+
     }
 
-    /*
-      MONTH CALENDAR:
-      clicking blank day creates Activity.
-    */
+    /* MONTH EMPTY DAY */
 
     const calendarDay =
       event.target.closest(
@@ -11409,14 +11978,13 @@ document.addEventListener(
       calendarDay
       &&
       !event.target.closest(
-        '[data-calendar-edit]'
+        '[data-calendar-item]'
       )
     ){
 
-      await openItem(
-        null,
+      showCalendarConfirmation(
+        event,
         {
-          type:'activity',
           date:
             calendarDay.dataset
               .calendarDay
@@ -11424,13 +11992,10 @@ document.addEventListener(
       );
 
       return;
+
     }
 
-    /*
-      WEEK CALENDAR:
-      clicking blank time creates Activity
-      with date + time filled.
-    */
+    /* WEEK EMPTY TIME */
 
     const weekCell =
       event.target.closest(
@@ -11441,7 +12006,7 @@ document.addEventListener(
       weekCell
       &&
       !event.target.closest(
-        '[data-calendar-edit]'
+        '[data-calendar-item]'
       )
     ){
 
@@ -11451,11 +12016,9 @@ document.addEventListener(
             .weekHour
         );
 
-      await openItem(
-        null,
+      showCalendarConfirmation(
+        event,
         {
-          type:'activity',
-
           date:
             weekCell.dataset
               .weekDate,
@@ -11466,22 +12029,29 @@ document.addEventListener(
       );
 
       return;
+
     }
 
-    const allDayCell =
+    /* WEEK ALL DAY */
+
+    const allDay =
       event.target.closest(
         '[data-week-all-day]'
       );
 
-    if(allDayCell){
+    if(
+      allDay
+      &&
+      !event.target.closest(
+        '[data-calendar-item]'
+      )
+    ){
 
-      await openItem(
-        null,
+      showCalendarConfirmation(
+        event,
         {
-          type:'activity',
-
           date:
-            allDayCell.dataset
+            allDay.dataset
               .weekAllDay,
 
           allDay:true
@@ -11489,20 +12059,114 @@ document.addEventListener(
       );
 
       return;
+
     }
 
-    const close =
+    /* OPEN ATTACHMENT FROM EDIT */
+
+    const openAttachment =
       event.target.closest(
-        '[data-close]'
+        '[data-open-attachment]'
       );
 
-    if(close){
+    if(openAttachment){
 
-      closeModal(
-        close.dataset.close
+      const attachment =
+        pendingAttachments.find(
+          item =>
+            item.id ===
+            openAttachment.dataset
+              .openAttachment
+        );
+
+      await openAttachmentObject(
+        attachment
       );
+
+      return;
 
     }
+
+    /* OPEN ATTACHMENT FROM DETAILS */
+
+    const detailAttachment =
+      event.target.closest(
+        '[data-detail-attachment]'
+      );
+
+    if(detailAttachment){
+
+      const item =
+        findAnyItem(
+          detailItemId
+        );
+
+      const attachment =
+        item?.attachments
+          ?.find(
+            att =>
+              att.id ===
+              detailAttachment.dataset
+                .detailAttachment
+          );
+
+      await openAttachmentObject(
+        attachment
+      );
+
+      return;
+
+    }
+
+    /* REMOVE ATTACHMENT */
+
+    const removeAttachment =
+      event.target.closest(
+        '[data-remove-attachment]'
+      );
+
+    if(removeAttachment){
+
+      pendingAttachments =
+        pendingAttachments.filter(
+          item =>
+            item.id !==
+            removeAttachment.dataset
+              .removeAttachment
+        );
+
+      await renderAttachmentGrid();
+
+      return;
+
+    }
+
+    /* REMOVE SCAN */
+
+    const removeScan =
+      event.target.closest(
+        '[data-remove-scan]'
+      );
+
+    if(removeScan){
+
+      syncScanEdits();
+
+      scanResults.splice(
+        Number(
+          removeScan.dataset
+            .removeScan
+        ),
+        1
+      );
+
+      renderScanReview();
+
+      return;
+
+    }
+
+    /* FAMILY BUTTONS */
 
     if(
       event.target.id ===
@@ -11544,24 +12208,21 @@ document.addEventListener(
 
     }
 
-    const removeScan =
+    /* CLOSE MODAL */
+
+    const close =
       event.target.closest(
-        '[data-remove-scan]'
+        '[data-close]'
       );
 
-    if(removeScan){
+    if(close){
 
-      syncAIScanEdits();
-
-      aiScanResults.splice(
-        Number(
-          removeScan.dataset
-            .removeScan
-        ),
-        1
+      closeModal(
+        close.dataset.close
       );
 
-      renderAIScanItems();
+      calendarCreationMode =
+        false;
 
     }
 
@@ -11569,39 +12230,54 @@ document.addEventListener(
 );
 
 /* =========================================================
-   MAPS
+   MODAL BACKDROP
 ========================================================= */
 
 document
-  .getElementById(
-    'searchMapsButton'
+  .querySelectorAll(
+    '.modal-overlay'
   )
-  .onclick =
-    () => {
+  .forEach(
+    modal => {
 
-      const query =
-        document
-          .getElementById(
-            'manualLocation'
-          )
-          .value
-          .trim();
+      modal.onmousedown =
+        event => {
 
-      if(!query){
-        return;
-      }
+          if(event.target === modal){
 
-      window.open(
-        'https://www.google.com/maps/search/?api=1&query='
-        +
-        encodeURIComponent(
-          query
-        ),
-        '_blank',
-        'noopener'
-      );
+            closeModal(
+              modal.id
+            );
 
-    };
+            calendarCreationMode =
+              false;
+
+          }
+
+        };
+
+    }
+  );
+
+/* =========================================================
+   ESCAPE
+========================================================= */
+
+document.addEventListener(
+  'keydown',
+  event => {
+
+    if(event.key === 'Escape'){
+
+      closeAllModals();
+
+      calendarCreationMode =
+        false;
+
+    }
+
+  }
+);
 
 /* =========================================================
    AUTH STATE
@@ -11628,10 +12304,14 @@ sb.auth.onAuthStateChange(
 
     }
 
-    if(event === 'SIGNED_OUT'){
+    if(
+      event === 'SIGNED_OUT'
+    ){
 
       /*
-        BACKUP SIGN-OUT FIX.
+        SECONDARY PROTECTION AGAINST
+        PROFILE/SETTINGS MODAL REMAINING
+        OVER THE LOGIN PAGE.
       */
 
       closeAllModals();
@@ -11647,6 +12327,24 @@ sb.auth.onAuthStateChange(
 
       familyEvents =
         [];
+
+      pendingAttachments =
+        [];
+
+      editingId =
+        null;
+
+      editingFamilyEventId =
+        null;
+
+      editingOccurrenceDate =
+        null;
+
+      detailItemId =
+        null;
+
+      classModalId =
+        null;
 
       showAuth();
 
